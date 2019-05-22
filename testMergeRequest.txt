@@ -1,0 +1,2 @@
+Hello! 
+This is test of merge request as a part of a task.
