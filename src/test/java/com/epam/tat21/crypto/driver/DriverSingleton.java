@@ -9,7 +9,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverSingleton {
 	private static WebDriver driver;
-	public static final String BROWSER = "browser";
 
 	private DriverSingleton() {
 	}
@@ -22,14 +21,17 @@ public class DriverSingleton {
 				WebDriverManager.firefoxdriver().setup();
 				driver = new FirefoxDriver();
 			}
+				break;
 			case "chrome": {
 				WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
 			}
+				break;
 			case "edge": {
 				WebDriverManager.edgedriver().setup();
 				driver = new EdgeDriver();
 			}
+				break;
 			default: {
 				WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
