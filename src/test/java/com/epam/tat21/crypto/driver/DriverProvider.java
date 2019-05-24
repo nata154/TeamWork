@@ -7,11 +7,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class DriverSingleton {
+public class DriverProvider {
     private static WebDriver driver;
-    public static final String BROWSER = "browser";
 
-    private DriverSingleton() {
+    private DriverProvider() {
     }
 
     public static WebDriver getDriver() {
@@ -21,19 +20,22 @@ public class DriverSingleton {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
-                } break;
+                }
+                break;
                 case "chrome": {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
-                } break;
+                }
+                break;
                 case "edge": {
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
-                } break;
+                }
+                break;
                 default: {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
-                } break;
+                }
             }
             driver.manage().window().maximize();
         }
