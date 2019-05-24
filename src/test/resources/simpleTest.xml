@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="suite01" parallel="classes" thread-count="4">
+<suite name="suite01" parallel="false">
     <test name="baseTest">
         <classes>
-            <class name="com.epam.tat21.crypto.tests.simpleRunTest"/>
+            <class name="com.epam.tat21.crypto.tests.VerifyApplicationTitleTest"/>
         </classes>
     </test>
 </suite>
