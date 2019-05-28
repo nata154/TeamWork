@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,13 +18,13 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    protected void waitForElementVisible(By locator) {
+    protected void waitForElementVisible(WebElement element) {
         new WebDriverWait(driver, WAIT_FOR_ELEMENT_SECONDS)
-                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+                .until(ExpectedConditions.visibilityOf(element));
     }
 
-    protected void waitForElementPresent(By locator) {
+    protected void waitForElementClicable(WebElement element) {
         new WebDriverWait(driver, WAIT_FOR_ELEMENT_SECONDS)
-                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+                .until(ExpectedConditions.elementToBeClickable(element));
     }
 }
