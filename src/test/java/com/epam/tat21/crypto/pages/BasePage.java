@@ -8,14 +8,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
 
-    private WebDriver driver;
+    protected WebDriver driver;
     private static final int WAIT_FOR_ELEMENT_SECONDS = 15;
 
     public abstract BasePage openPage();
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this );
+        PageFactory.initElements(driver, this);
     }
 
     protected void waitForElementVisible(By locator) {
