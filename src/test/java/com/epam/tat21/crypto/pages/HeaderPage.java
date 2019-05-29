@@ -34,7 +34,7 @@ public class HeaderPage extends BasePage {
     private WebElement logInLink;
 
     @FindBy (linkText = "My Portfolios")
-    private WebElement myPortfoliosLink;
+    private WebElement myPortfoliosLinkInPorfolioTab;
 
 
     public HeaderPage(WebDriver driver) {
@@ -74,5 +74,27 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
+    public CoinsPage goToCoinsPage(){
+        waitForElementClicable(coinsTabLink);
+        coinsTabLink.click();
+        return new CoinsPage(driver);
+    }
 
+    public ExchangesPage goToExchangesPage(){
+        waitForElementClicable(exchangesTabLink);
+        exchangesTabLink.click();
+        return new ExchangesPage(driver);
+    }
+
+    public PortfolioPage goToPortfolioPage(){
+        waitForElementClicable(portfolioTabLink);
+        portfolioTabLink.click();
+        return new PortfolioPage(driver);
+    }
+
+    public PortfolioPage goToMyPortfolioFromPortfolioTab(){
+        moveToPortfolioTab();
+        myPortfoliosLinkInPorfolioTab.click();
+        return new PortfolioPage(driver);
+    }
 }
