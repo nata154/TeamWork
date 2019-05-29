@@ -1,10 +1,11 @@
 package com.epam.tat21.crypto.pages;
 
+import com.epam.tat21.crypto.bo.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MainCryptoComparePage extends BasePage {
+public class MainCryptoComparePage extends HeaderPage {
 
     private final String BASE_URL = "https://www.cryptocompare.com/";
 
@@ -22,20 +23,27 @@ public class MainCryptoComparePage extends BasePage {
     }
 
     @Override
-    public BasePage openPage() {
+    public MainCryptoComparePage openPage() {
         driver.navigate().to(BASE_URL);
         return this;
     }
 
-    public MainCryptoComparePage fillLoginForm(String email, String password) {
+    public MainCryptoComparePage fillLoginForm(User user) {
         waitForElementVisible(emailField);
-        emailField.sendKeys(email);
-        passwordField.sendKeys(password);
+        emailField.sendKeys(user.getUserName());
+        passwordField.sendKeys(user.getUserPassword());
         return this;
     }
 
     public MainCryptoComparePage clickLoginButton() {
+        waitForElementVisible(loginButton);
         loginButton.click();
+        return this;
+    }
+
+    public MainCryptoComparePage login(User user) {
+        goToLoginForm();
+        fillLoginForm(user).clickLoginButton();
         return this;
     }
 }
