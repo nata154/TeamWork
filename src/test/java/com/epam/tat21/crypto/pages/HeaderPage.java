@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.pages;
 
+import com.epam.tat21.crypto.service.TestDataReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -7,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class HeaderPage extends BasePage {
 
-    private final String BASE_URL = "https://www.cryptocompare.com/";
+    private final String BASE_URL = TestDataReader.getApplicationUrl();
 
     @FindBy(xpath = "//a[@href='/coins/list/' and @class='uib-dropdown-toggle']")
     private WebElement coinsTabLink;
@@ -34,7 +35,7 @@ public class HeaderPage extends BasePage {
     private WebElement logInLink;
 
     @FindBy (linkText = "My Portfolios")
-    private WebElement myPortfoliosLink;
+    private WebElement myPortfoliosLinkInPorfolioTab;
 
 
     public HeaderPage(WebDriver driver) {
@@ -74,5 +75,27 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
+    public CoinsPage goToCoinsPage(){
+        waitForElementClicable(coinsTabLink);
+        coinsTabLink.click();
+        return new CoinsPage(driver);
+    }
 
+    public ExchangesPage goToExchangesPage(){
+        waitForElementClicable(exchangesTabLink);
+        exchangesTabLink.click();
+        return new ExchangesPage(driver);
+    }
+
+    public PortfolioPage goToPortfolioPage(){
+        waitForElementClicable(portfolioTabLink);
+        portfolioTabLink.click();
+        return new PortfolioPage(driver);
+    }
+
+    public PortfolioPage goToMyPortfolioFromPortfolioTab(){
+        moveToPortfolioTab();
+        myPortfoliosLinkInPorfolioTab.click();
+        return new PortfolioPage(driver);
+    }
 }

@@ -4,6 +4,9 @@ import com.epam.tat21.crypto.bo.User;
 
 public class UserCreator {
 
+    private UserCreator() {
+    }
+
     public static User withCredentialsFromProperty() {
         return new User(TestDataReader.getUserName(),
                 TestDataReader.getUserPassword());

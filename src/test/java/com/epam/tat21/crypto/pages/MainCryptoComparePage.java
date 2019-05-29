@@ -1,13 +1,14 @@
 package com.epam.tat21.crypto.pages;
 
 import com.epam.tat21.crypto.bo.User;
+import com.epam.tat21.crypto.service.TestDataReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class MainCryptoComparePage extends HeaderPage {
 
-    private final String BASE_URL = "https://www.cryptocompare.com/";
+    private final String BASE_URL = TestDataReader.getApplicationUrl();
 
     @FindBy(xpath = "//input[@name='email']")
     private WebElement emailField;
