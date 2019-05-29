@@ -1,10 +1,11 @@
 package com.epam.tat21.crypto.pages;
 
+import com.epam.tat21.crypto.service.TestDataReader;
 import org.openqa.selenium.WebDriver;
 
 public class ExchangesPage extends BasePage {
 
-    private final String BASE_URL = "https://www.cryptocompare.com/exchanges/";
+    private final String BASE_URL = TestDataReader.getApplicationUrl() + "exchanges/";
 
     public ExchangesPage(WebDriver driver) {
         super(driver);

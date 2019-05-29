@@ -1,10 +1,11 @@
 package com.epam.tat21.crypto.pages;
 
+import com.epam.tat21.crypto.service.TestDataReader;
 import org.openqa.selenium.WebDriver;
 
 public class PortfolioPage extends BasePage {
 
-    private final String BASE_URL = "https://www.cryptocompare.com/portfolio/";
+    private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
 
     public PortfolioPage(WebDriver driver) {
         super(driver);
