@@ -4,19 +4,16 @@ import com.epam.tat21.crypto.bo.User;
 
 public class UserCreator {
 
-    public static final String TESTDATA_USER_NAME = "testdata.user.name";
-    public static final String TESTDATA_USER_PASSWORD = "testdata.user.password";
-
     public static User withCredentialsFromProperty() {
-        return new User(TestDataReader.getUserName(TESTDATA_USER_NAME),
-                TestDataReader.getUserPassword(TESTDATA_USER_PASSWORD));
+        return new User(TestDataReader.getUserName(),
+                TestDataReader.getUserPassword());
     }
 
     public static User withEmptyUsername() {
-        return new User("", TestDataReader.getUserPassword(TESTDATA_USER_PASSWORD));
+        return new User("", TestDataReader.getUserPassword());
     }
 
     public static User withEmptyPassword() {
-        return new User(TestDataReader.getUserName(TESTDATA_USER_NAME), "");
+        return new User(TestDataReader.getUserName(), "");
     }
 }
