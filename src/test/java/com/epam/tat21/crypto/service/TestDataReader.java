@@ -3,11 +3,15 @@ package com.epam.tat21.crypto.service;
 import java.util.ResourceBundle;
 
 public class TestDataReader {
-    public static final String TESTDATA_USER_NAME = "testdata.user.name";
-    public static final String TESTDATA_USER_PASSWORD = "testdata.user.password";
+    private static final String TESTDATA_USER_NAME = "testdata.user.name";
+    private static final String TESTDATA_USER_PASSWORD = "testdata.user.password";
+    private static final String APPLICATION_URL = "application.url";
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(System.getProperty("environment"));
 
-    public static String getProperty(String key){
+    private TestDataReader() {
+    }
+
+    public static String getProperty(String key) {
         return resourceBundle.getString(key);
     }
 
@@ -17,5 +21,9 @@ public class TestDataReader {
 
     public static String getUserPassword() {
         return getProperty(TESTDATA_USER_PASSWORD);
+    }
+
+    public static String getApplicationUrl() {
+        return getProperty(APPLICATION_URL);
     }
 }
