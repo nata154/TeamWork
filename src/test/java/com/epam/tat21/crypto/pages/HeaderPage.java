@@ -34,9 +34,11 @@ public class HeaderPage extends BasePage {
     @FindBy(linkText = "Login")
     private WebElement logInLink;
 
-    @FindBy (linkText = "My Portfolios")
+    @FindBy(linkText = "My Portfolios")
     private WebElement myPortfoliosLinkInPorfolioTab;
 
+    @FindBy(xpath = "//li[@class='dropdown navbar-profile']/a")
+    private WebElement userLineInHeader;
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -48,54 +50,60 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
-    public HeaderPage goToLoginForm(){
+    public HeaderPage goToLoginForm() {
         waitForElementVisible(logInLink);
         logInLink.click();
         return this;
     }
 
-    public HeaderPage moveToCoinsTab(){
+    public HeaderPage moveToCoinsTab() {
         waitForElementVisible(coinsTabLink);
         Actions action = new Actions(driver);
         action.moveToElement(coinsTabLink).build().perform();
         return this;
     }
 
-    public HeaderPage moveToExchangesTab(){
+    public HeaderPage moveToExchangesTab() {
         waitForElementVisible(exchangesTabLink);
         Actions action = new Actions(driver);
         action.moveToElement(exchangesTabLink).build().perform();
         return this;
     }
 
-    public HeaderPage moveToPortfolioTab(){
+    public HeaderPage moveToPortfolioTab() {
         waitForElementVisible(portfolioTabLink);
         Actions action = new Actions(driver);
         action.moveToElement(portfolioTabLink).build().perform();
         return this;
     }
 
-    public CoinsPage goToCoinsPage(){
+    public CoinsPage goToCoinsPage() {
         waitForElementClicable(coinsTabLink);
         coinsTabLink.click();
         return new CoinsPage(driver);
     }
 
-    public ExchangesPage goToExchangesPage(){
+    public ExchangesPage goToExchangesPage() {
         waitForElementClicable(exchangesTabLink);
         exchangesTabLink.click();
         return new ExchangesPage(driver);
     }
 
-    public PortfolioPage goToPortfolioPage(){
+    public PortfolioPage goToPortfolioPage() {
         waitForElementClicable(portfolioTabLink);
         portfolioTabLink.click();
         return new PortfolioPage(driver);
     }
 
-    public PortfolioPage goToMyPortfolioFromPortfolioTab(){
+    public PortfolioPage goToMyPortfolioFromPortfolioTab() {
         moveToPortfolioTab();
         myPortfoliosLinkInPorfolioTab.click();
         return new PortfolioPage(driver);
+    }
+
+    public UserDropdownMenuInHeader getDropdownUserMenuInHeader() {
+        waitForElementClicable(userLineInHeader);
+        userLineInHeader.click();
+        return new UserDropdownMenuInHeader(driver);
     }
 }
