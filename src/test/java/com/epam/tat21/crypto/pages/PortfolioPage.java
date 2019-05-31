@@ -23,9 +23,9 @@ public class PortfolioPage extends BasePage {
 		return this;
 	}
 
-	public PortfolioCreationPage addPortfolioForm() {
+	public AddPortfolioForm addPortfolioForm() {
 		waitForElementClicable(buttonAddPortfolio);
 		buttonAddPortfolio.click();
-		return new PortfolioCreationPage(driver);
+		return new AddPortfolioForm(driver);
 	}
 }
