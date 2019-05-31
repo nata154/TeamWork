@@ -1,19 +1,31 @@
 package com.epam.tat21.crypto.pages;
 
-import com.epam.tat21.crypto.service.TestDataReader;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import com.epam.tat21.crypto.service.TestDataReader;
 
 public class PortfolioPage extends BasePage {
 
-    private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
+	private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
 
-    public PortfolioPage(WebDriver driver) {
-        super(driver);
-    }
+	@FindBy(xpath = "//button[@ng-click='addPortfolioDialog()']")
+	private WebElement buttonAddPortfolio;
 
-    @Override
-    public PortfolioPage openPage() {
-        driver.get(BASE_URL);
-        return this;
-    }
+	public PortfolioPage(WebDriver driver) {
+		super(driver);
+	}
+
+	@Override
+	public PortfolioPage openPage() {
+		driver.get(BASE_URL);
+		return this;
+	}
+
+	public PortfolioCreationPage addPortfolioForm() {
+		waitForElementClicable(buttonAddPortfolio);
+		buttonAddPortfolio.click();
+		return new PortfolioCreationPage(driver);
+	}
 }
