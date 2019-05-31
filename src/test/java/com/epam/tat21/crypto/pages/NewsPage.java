@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.pages;
 
+import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.service.TestDataReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,28 +15,7 @@ public class NewsPage extends HeaderPage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "news/";
 
-    private static final int COUNT_OF_NEWS = 50;
-
-    @FindBy(xpath = "//a[@href='/news/list/latest/?categories=BTC']")
-    private WebElement newsBitcoin;
-
-    @FindBy(xpath = "//a[@href='/news/list/latest/?categories=ETH']")
-    private WebElement newsEthereum;
-
-    @FindBy(xpath = "//a[@href='/news/list/latest/?categories=LTC']")
-    private WebElement newsLitecoin;
-
-    @FindBy(xpath = "//a[@href='/news/list/latest/?categories=XMR']")
-    private WebElement newsMonero;
-
-    @FindBy(xpath = "//a[@href='/news/list/latest/?categories=ZEC']")
-    private WebElement newsZCash;
-
-    @FindBy(xpath = "//a[@href='/news/list/latest/?categories=XRP']")
-    private WebElement newsXRP;
-
-    @FindBy(xpath = "//div[@class='loader-ccc-logo']")
-    private WebElement loaderIcon;
+    private final String COINS_NEWS_XPATH = "//a[@href='/news/list/latest/?categories=";
 
     @FindBy(xpath = "//div[@class='col-md-12 list-container ng-isolate-scope']")
     private WebElement containerOfNews;
@@ -50,124 +30,26 @@ public class NewsPage extends HeaderPage {
         return this;
     }
 
-    public NewsPage goToBitcoinNews() {
+    public NewsPage goToCoinNews(Coin coin) {
         moveToNewsTab();
-        waitForElementVisible(newsBitcoin);
-        newsBitcoin.click();
+        WebElement newsCoin = driver.findElement(By.xpath(COINS_NEWS_XPATH + coin.getAbbreviationCoin() + "']"));
+        waitForElementVisible(newsCoin);
+        newsCoin.click();
         return this;
     }
 
-    public NewsPage goToEthereumNews() {
-        moveToNewsTab();
-        waitForElementVisible(newsEthereum);
-        newsEthereum.click();
-        return this;
-    }
-
-    public NewsPage goToLitecoinNews() {
-        moveToNewsTab();
-        waitForElementVisible(newsLitecoin);
-        newsLitecoin.click();
-        return this;
-    }
-
-    public NewsPage goToMoneroNews() {
-        moveToNewsTab();
-        waitForElementVisible(newsMonero);
-        newsMonero.click();
-        return this;
-    }
-
-    public NewsPage goToZCashNews() {
-        moveToNewsTab();
-        waitForElementVisible(newsZCash);
-        newsZCash.click();
-        return this;
-    }
-
-    public NewsPage goToXRPNews() {
-        moveToNewsTab();
-        waitForElementVisible(newsXRP);
-        newsXRP.click();
-        return this;
-    }
-
-    public boolean checkCategoriesOfNewsBitcoin() {
+    public int getNumberOfNewsForCoin(Coin coin) {
         int currentCountOfNews = 0;
-        waitForNewsVisibility("BTC");
-        List<WebElement> newsBitcoin = containerOfNews.findElements(By.id("news_"));
-        for (WebElement news : newsBitcoin) {
-            waitForElementVisible(news);
-            if (news.findElement(By.xpath("//span[contains(text(),'BTC')]")).isEnabled()) {
+        waitForNewsVisibility(coin.getAbbreviationCoin());
+        List<WebElement> news = containerOfNews.findElements(By.id("news_"));
+        String xpathCategoriesOfNews = "//span[contains(text(),'";
+        for (WebElement item : news) {
+            waitForElementVisible(item);
+            if (item.findElement(By.xpath(xpathCategoriesOfNews + coin.getAbbreviationCoin() + "')]")).isEnabled()) {
                 currentCountOfNews++;
             }
         }
-        return currentCountOfNews == COUNT_OF_NEWS;
-    }
-
-    public boolean checkCategoriesOfNewsEthereum() {
-        int currentCountOfNews = 0;
-        waitForNewsVisibility("ETH");
-        List<WebElement> newsEthereum = containerOfNews.findElements(By.id("news_"));
-        for (WebElement news : newsEthereum) {
-            waitForElementVisible(news);
-            if (news.findElement(By.xpath("//span[contains(text(),'ETH')]")).isEnabled()) {
-                currentCountOfNews++;
-            }
-        }
-        return currentCountOfNews == COUNT_OF_NEWS;
-    }
-
-    public boolean checkCategoriesOfNewsLitecoin() {
-        int currentCountOfNews = 0;
-        waitForNewsVisibility("LTC");
-        List<WebElement> newsLitecoin = containerOfNews.findElements(By.id("news_"));
-        for (WebElement news : newsLitecoin) {
-            waitForElementVisible(news);
-            if (news.findElement(By.xpath("//span[contains(text(),'LTC')]")).isEnabled()) {
-                currentCountOfNews++;
-            }
-        }
-        return currentCountOfNews == COUNT_OF_NEWS;
-    }
-
-    public boolean checkCategoriesOfNewsMonero() {
-        int currentCountOfNews = 0;
-        waitForNewsVisibility("XMR");
-        List<WebElement> newsMonero = containerOfNews.findElements(By.id("news_"));
-        for (WebElement news : newsMonero) {
-            waitForElementVisible(news);
-            if (news.findElement(By.xpath("//span[contains(text(),'XMR')]")).isEnabled()) {
-                currentCountOfNews++;
-            }
-        }
-        return currentCountOfNews == COUNT_OF_NEWS;
-    }
-
-    public boolean checkCategoriesOfNewsZCash() {
-        int currentCountOfNews = 0;
-        waitForNewsVisibility("ZEC");
-        List<WebElement> newsZCash = containerOfNews.findElements(By.id("news_"));
-        for (WebElement news : newsZCash) {
-            waitForElementVisible(news);
-            if (news.findElement(By.xpath("//span[contains(text(),'ZEC')]")).isEnabled()) {
-                currentCountOfNews++;
-            }
-        }
-        return currentCountOfNews == COUNT_OF_NEWS;
-    }
-
-    public boolean checkCategoriesOfNewsXRP() {
-        int currentCountOfNews = 0;
-        waitForNewsVisibility("XRP");
-        List<WebElement> newsXRP = containerOfNews.findElements(By.id("news_"));
-        for (WebElement news : newsXRP) {
-            waitForElementVisible(news);
-            if (news.findElement(By.xpath("//span[contains(text(),'XRP')]")).isEnabled()) {
-                currentCountOfNews++;
-            }
-        }
-        return currentCountOfNews == COUNT_OF_NEWS;
+        return currentCountOfNews;
     }
 
     private void waitForNewsVisibility(String categories) {
