@@ -8,9 +8,8 @@ public class Steps {
 
     private WebDriver driver;
 
-    public void openBrowser(String url) {
+    public void openBrowser() {
         driver = DriverProvider.getDriver();
-        driver.get(url);
     }
 
     public void closeBrowser() {
@@ -18,27 +17,27 @@ public class Steps {
     }
 
     public boolean checkFilterNewsByBitcoin() {
-        return new NewsPage(driver).goToBitcoinNews().checkCategoriesOfNewsBitcoin();
+        return new NewsPage(driver).openPage().goToBitcoinNews().checkCategoriesOfNewsBitcoin();
     }
 
     public boolean checkFilterNewsByEthereum() {
-        return new NewsPage(driver).goToEthereumNews().checkCategoriesOfNewsEthereum();
+        return new NewsPage(driver).openPage().goToEthereumNews().checkCategoriesOfNewsEthereum();
     }
 
     public boolean checkFilterNewsByLitecoin() {
-        return new NewsPage(driver).goToLitecoinNews().checkCategoriesOfNewsLitecoin();
+        return new NewsPage(driver).openPage().goToLitecoinNews().checkCategoriesOfNewsLitecoin();
     }
 
     public boolean checkFilterNewsByMonero() {
-        return new NewsPage(driver).goToMoneroNews().checkCategoriesOfNewsMonero();
+        return new NewsPage(driver).openPage().goToMoneroNews().checkCategoriesOfNewsMonero();
     }
 
     public boolean checkFilterNewsByZCash() {
-        return new NewsPage(driver).goToZCashNews().checkCategoriesOfNewsZCash();
+        return new NewsPage(driver).openPage().goToZCashNews().checkCategoriesOfNewsZCash();
     }
 
     public boolean checkFilterNewsByXRP() {
-        return new NewsPage(driver).goToXRPNews().checkCategoriesOfNewsXRP();
+        return new NewsPage(driver).openPage().goToXRPNews().checkCategoriesOfNewsXRP();
     }
 
 }
