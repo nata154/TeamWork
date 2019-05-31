@@ -37,6 +37,8 @@ public class HeaderPage extends BasePage {
     @FindBy(linkText = "My Portfolios")
     private WebElement myPortfoliosLinkInPorfolioTab;
 
+    @FindBy(xpath = "//li[@class='dropdown navbar-profile']/a")
+    private WebElement userLineInHeader;
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -87,7 +89,7 @@ public class HeaderPage extends BasePage {
         newsTabLink.click();
         return new NewsPage(driver);
     }
-
+    
     public CoinsPage goToCoinsPage() {
         waitForElementClicable(coinsTabLink);
         coinsTabLink.click();
@@ -110,5 +112,11 @@ public class HeaderPage extends BasePage {
         moveToPortfolioTab();
         myPortfoliosLinkInPorfolioTab.click();
         return new PortfolioPage(driver);
+    }
+
+    public UserDropdownMenuInHeader getDropdownUserMenuInHeader() {
+        waitForElementClicable(userLineInHeader);
+        userLineInHeader.click();
+        return new UserDropdownMenuInHeader(driver);
     }
 }
