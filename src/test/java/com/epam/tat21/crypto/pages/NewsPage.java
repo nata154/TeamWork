@@ -38,7 +38,7 @@ public class NewsPage extends HeaderPage {
     private WebElement loaderIcon;
 
     @FindBy(xpath = "//div[@class='col-md-12 list-container ng-isolate-scope']")
-    private WebElement conteinerOfNews;
+    private WebElement containerOfNews;
 
     public NewsPage(WebDriver driver) {
         super(driver);
@@ -95,7 +95,7 @@ public class NewsPage extends HeaderPage {
     public boolean checkCategoriesOfNewsBitcoin() {
         int currentCountOfNews = 0;
         waitForNewsVisibility("BTC");
-        List<WebElement> newsBitcoin = conteinerOfNews.findElements(By.id("news_"));
+        List<WebElement> newsBitcoin = containerOfNews.findElements(By.id("news_"));
         for (WebElement news : newsBitcoin) {
             waitForElementVisible(news);
             if (news.findElement(By.xpath("//span[contains(text(),'BTC')]")).isEnabled()) {
@@ -108,7 +108,7 @@ public class NewsPage extends HeaderPage {
     public boolean checkCategoriesOfNewsEthereum() {
         int currentCountOfNews = 0;
         waitForNewsVisibility("ETH");
-        List<WebElement> newsEthereum = conteinerOfNews.findElements(By.id("news_"));
+        List<WebElement> newsEthereum = containerOfNews.findElements(By.id("news_"));
         for (WebElement news : newsEthereum) {
             waitForElementVisible(news);
             if (news.findElement(By.xpath("//span[contains(text(),'ETH')]")).isEnabled()) {
@@ -121,7 +121,7 @@ public class NewsPage extends HeaderPage {
     public boolean checkCategoriesOfNewsLitecoin() {
         int currentCountOfNews = 0;
         waitForNewsVisibility("LTC");
-        List<WebElement> newsLitecoin = conteinerOfNews.findElements(By.id("news_"));
+        List<WebElement> newsLitecoin = containerOfNews.findElements(By.id("news_"));
         for (WebElement news : newsLitecoin) {
             waitForElementVisible(news);
             if (news.findElement(By.xpath("//span[contains(text(),'LTC')]")).isEnabled()) {
@@ -134,7 +134,7 @@ public class NewsPage extends HeaderPage {
     public boolean checkCategoriesOfNewsMonero() {
         int currentCountOfNews = 0;
         waitForNewsVisibility("XMR");
-        List<WebElement> newsMonero = conteinerOfNews.findElements(By.id("news_"));
+        List<WebElement> newsMonero = containerOfNews.findElements(By.id("news_"));
         for (WebElement news : newsMonero) {
             waitForElementVisible(news);
             if (news.findElement(By.xpath("//span[contains(text(),'XMR')]")).isEnabled()) {
@@ -147,7 +147,7 @@ public class NewsPage extends HeaderPage {
     public boolean checkCategoriesOfNewsZCash() {
         int currentCountOfNews = 0;
         waitForNewsVisibility("ZEC");
-        List<WebElement> newsZCash = conteinerOfNews.findElements(By.id("news_"));
+        List<WebElement> newsZCash = containerOfNews.findElements(By.id("news_"));
         for (WebElement news : newsZCash) {
             waitForElementVisible(news);
             if (news.findElement(By.xpath("//span[contains(text(),'ZEC')]")).isEnabled()) {
@@ -160,7 +160,7 @@ public class NewsPage extends HeaderPage {
     public boolean checkCategoriesOfNewsXRP() {
         int currentCountOfNews = 0;
         waitForNewsVisibility("XRP");
-        List<WebElement> newsXRP = conteinerOfNews.findElements(By.id("news_"));
+        List<WebElement> newsXRP = containerOfNews.findElements(By.id("news_"));
         for (WebElement news : newsXRP) {
             waitForElementVisible(news);
             if (news.findElement(By.xpath("//span[contains(text(),'XRP')]")).isEnabled()) {
@@ -175,7 +175,7 @@ public class NewsPage extends HeaderPage {
             String xpathOfNewsCategories = "//span[contains(text(),'" + categories + "')]";
 
             public Boolean apply(WebDriver d) {
-                List<WebElement> newsBitcoin = conteinerOfNews.findElements(By.id("news_"));
+                List<WebElement> newsBitcoin = containerOfNews.findElements(By.id("news_"));
                 for (WebElement news : newsBitcoin) {
                     return news.findElement(By.xpath(xpathOfNewsCategories)).isEnabled();
                 }
