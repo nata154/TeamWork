@@ -75,14 +75,14 @@ public class HeaderPage extends BasePage {
         return this;
     }
 
-    public HeaderPage moveToNewsTab() {
+    public NewsPage moveToNewsTab() {
         waitForElementVisible(newsTabLink);
         Actions action = new Actions(driver);
         action.moveToElement(newsTabLink).build().perform();
-        return this;
+        return new NewsPage(driver);
     }
 
-    public HeaderPage goToNewsTab() {
+    public NewsPage goToNewsTab() {
         waitForElementClicable(newsTabLink);
         newsTabLink.click();
         return new NewsPage(driver);
