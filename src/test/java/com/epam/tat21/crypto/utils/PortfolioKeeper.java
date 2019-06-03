@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.utils;
 
+import com.epam.tat21.crypto.exceptions.NoSuchPortfolioException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,15 +40,15 @@ public class PortfolioKeeper {
         }
     }
 
-    public double getTotalValue(String portfolioName) {
+    public double getTotalValue(String portfolioName) throws NoSuchPortfolioException {
         double totalValue =0;
         for (int i=0;i<portfoliosList.size();++i) {
             if (portfolioName.equals(portfoliosList.get(i).getPortfolioName())) {
-                //System.out.println("PORTFOLIO "+ portfoliosList.get(i).getPortfolioName() + " HAS BEEN CHOOSES TO OPERATE ON POSITION "+(i+1));
+                //System.out.println("PORTFOLIO "+ portfoliosList.get(i).getPortfolioName() + " HAS BEEN CHOSEN TO OPERATE ON POSITION "+(i+1));
                     portfoliosList.get(i).getPortfolioLink().click();
                     portfoliosList.get(i).initiate(driver);
                     totalValue = portfoliosList.get(i).getTotalValue();
-            }
+            } else throw new NoSuchPortfolioException();
         }
 
         return totalValue;

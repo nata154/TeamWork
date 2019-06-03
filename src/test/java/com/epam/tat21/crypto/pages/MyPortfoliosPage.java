@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.pages;
 
+import com.epam.tat21.crypto.exceptions.NoSuchPortfolioException;
 import com.epam.tat21.crypto.utils.PortfolioKeeper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -50,9 +51,9 @@ public class MyPortfoliosPage {
 
     @Test
     public void myPortfoliosPageTest() {
-        loginAndProceedToMyPortfoliosPage();
-        portfolioKeeper.initiate(driver);
-        System.out.println("PORTFOLIO TOTAL VALUE - " + portfolioKeeper.getTotalValue(portfolioName));
+        //loginAndProceedToMyPortfoliosPage();
+        //portfolioKeeper.initiate(driver);
+        //System.out.println("PORTFOLIO TOTAL VALUE - " + portfolioKeeper.getTotalValue(portfolioName));
         Assert.assertEquals(0, 0);
     }
 
@@ -76,9 +77,15 @@ public class MyPortfoliosPage {
         //driver.get("https://www.cryptocompare.com/portfolio/");
     }
 
-    public double getTotalValue(String name) {
+    public double getPortfolioTotalValue(String name) {
+        double totalValue = 0;
         portfolioKeeper.initiate(driver);
-        return portfolioKeeper.getTotalValue(name);
+        try {
+            totalValue = portfolioKeeper.getTotalValue(name);
+        } catch (NoSuchPortfolioException e) {
+            System.out.println(e.getMessage());
+        }
+        return totalValue;
     }
 
     @AfterTest
