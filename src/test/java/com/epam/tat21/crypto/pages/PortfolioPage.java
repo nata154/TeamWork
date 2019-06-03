@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.epam.tat21.crypto.service.TestDataReader;
 
-public class PortfolioPage extends BasePage {
+public class PortfolioPage extends HeaderPage {
 
 	private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
 
