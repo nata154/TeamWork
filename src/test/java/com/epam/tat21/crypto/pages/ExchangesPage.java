@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.pages;
 
+import com.epam.tat21.crypto.bo.Countries;
 import com.epam.tat21.crypto.service.TestDataReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class ExchangesPage extends HeaderPage {
@@ -15,26 +17,18 @@ public class ExchangesPage extends HeaderPage {
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "exchanges/";
     private int numberOfExchangesInBadge;
 
-    @FindBy(xpath = "//button[@class='btn btn-default btn-filter btn-block dropdown-toggle ng-binding' and contains(text(),'Country')]")
+    @FindBy(xpath = "//div[@class='btn-group btn-block dropdown']/button[contains(text(), 'Country')]")
     private WebElement countryDropdownMenuLink;
 
-    @FindBy(xpath = "//button[@class='btn btn-default btn-filter btn-block dropdown-toggle ng-binding' and contains(text(),'Country')]/../ul")
+    @FindBy(xpath = "//div[@class='btn-group btn-block dropdown open']/button[contains(text(), 'Country')]/../ul")
     private WebElement countryDropdownMenu;
-
-    @FindBy(xpath = "//span[contains(text(), 'Denmark')]")
-    private WebElement denmarkLinkInDropdown;
-
-    @FindBy(xpath = "//span[@class='ng-binding' and contains(text(), 'Denmark')]")
-    private WebElement denmarkExchangeResultOnFilteredPage;
-
-    @FindBy(xpath = "//span[contains(text(), 'Denmark')]/../span[@class='badge badge-filter-count pull-right ng-binding']")
-    private WebElement numberExchangesOnBadgeInDropdown;
-
-    @FindBy(xpath = "//div[@class='feature-label' and contains(text(), 'Country')]")
-    private WebElement countryLabelOnFilteredPage;
 
     public ExchangesPage(WebDriver driver) {
         super(driver);
+    }
+
+    public int getNumberOfExchangesInBadge() {
+        return numberOfExchangesInBadge;
     }
 
     @Override
@@ -49,37 +43,35 @@ public class ExchangesPage extends HeaderPage {
         return this;
     }
 
-    public void getNumberOfExchangesInDenmarkFromBadge() {
+    public void getNumberOfExchangesFromBadge(Countries country) {
+        WebElement numberExchangesOnBadgeInDropdown = driver.
+                findElement(By.xpath("//span[contains(text(), '" + country.getNameOfCountry() +
+                        "')]/../span[@class='badge badge-filter-count pull-right ng-binding']"));
         numberOfExchangesInBadge = Integer.parseInt(numberExchangesOnBadgeInDropdown.getText());
     }
 
-    public ExchangesPage scrollToCountryInDropdown() {
-        waitForElementVisible(countryDropdownMenu);
+    public ExchangesPage scrollPage() {
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", countryDropdownMenu);
+        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
         return this;
     }
 
-    public ExchangesPage selectCountryInDropdown() {
-        waitForElementClicable(denmarkLinkInDropdown);
-        getNumberOfExchangesInDenmarkFromBadge();
-        denmarkLinkInDropdown.click();
+    public ExchangesPage selectCountryInDropdown(Countries country) {
+        WebElement countryLinkInDropdown = driver.
+                findElement(By.xpath("//span[contains(text(), '" + country.getNameOfCountry() + "')]"));
+        waitForElementClicable(countryLinkInDropdown);
+        getNumberOfExchangesFromBadge(country);
+        countryLinkInDropdown.click();
         return this;
     }
 
-    private List<WebElement> getAllResultsAfterClickingOnDenmarkFilter() {
-        return driver.findElements(By.xpath("//span[@class='ng-binding' and contains(text(), 'Denmark')]"));
+    public List<WebElement> getFromFilteredPageAllResultsWith(Countries country) {
+        return driver.findElements(By.xpath("//span[@class='ng-binding' and contains(text(), '" + country.getNameOfCountry() + "')]"));
     }
 
-    private List<WebElement> getAllCountryLabelsFromFilteredPage() {
+    public List<WebElement> getAllCountryLabelsFromFilteredPage() {
         return driver.findElements(By.xpath("//div[@class='feature-label' and contains(text(), 'Country')]"));
     }
 
-    public boolean isNumberExchangesOnFilteredPageCorrect() {
-        return (getAllResultsAfterClickingOnDenmarkFilter().size() == numberOfExchangesInBadge);
-    }
-
-    public boolean isNumberCountriesOnFilteredPageCorrect() {
-        return (getAllCountryLabelsFromFilteredPage().size() == numberOfExchangesInBadge);
-    }
 }
