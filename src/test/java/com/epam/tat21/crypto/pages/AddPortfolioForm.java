@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import com.epam.tat21.crypto.service.TestDataReader;
 
 public class AddPortfolioForm extends HeaderPage {
+
 	private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
 
 	@FindBy(xpath = " //input[@ng-model='newPortfolio.Name']")
@@ -57,5 +58,4 @@ public class AddPortfolioForm extends HeaderPage {
 		buttonCreate.click();
 		return this;
 	}
-
 }
