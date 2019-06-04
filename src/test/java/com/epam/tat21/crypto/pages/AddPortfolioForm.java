@@ -15,7 +15,7 @@ public class AddPortfolioForm extends HeaderPage {
 	@FindBy(xpath = " //input[@ng-model='newPortfolio.Name']")
 	private WebElement inputPortfolioName;
 
-	@FindBy(xpath = "(//span[contains(text(),'USD')])[2]")
+	@FindBy(xpath = "//md-select[@name='currency']//span")
 	private WebElement dropdownCurrency;
 
 	@FindBy(xpath = "//textarea[@ng-model='newPortfolio.Description']")
