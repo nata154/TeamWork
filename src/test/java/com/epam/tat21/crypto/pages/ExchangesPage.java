@@ -15,6 +15,10 @@ import java.util.concurrent.TimeUnit;
 public class ExchangesPage extends HeaderPage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "exchanges/";
+    private final String COUNTRY_LABEL_ON_PAGE_LOCATOR = "//div[@class='feature-label' and contains(text(), 'Country')]";
+    private final String COUNTRY_IN_BADGE_LOCATOR = "//span[contains(text(), '%s')]/../span[@class='badge badge-filter-count pull-right ng-binding']";
+    private final String COUNTRY_IN_DROPDOWN_LOCATOR = "//span[@class='pull-left ng-binding' and contains(text(), '%s')]";
+    private final String COUNTRY_ON_FILTERED_PAGE_LOCATOR = "//span[@class='ng-binding' and contains(text(), '%s')]";
     private int numberOfExchangesInBadge;
 
     @FindBy(xpath = "//div[@class='btn-group btn-block dropdown']/button[contains(text(), 'Country')]")
@@ -45,21 +49,20 @@ public class ExchangesPage extends HeaderPage {
 
     public void getNumberOfExchangesFromBadge(Countries country) {
         WebElement numberExchangesOnBadgeInDropdown = driver.
-                findElement(By.xpath("//span[contains(text(), '" + country.getNameOfCountry() +
-                        "')]/../span[@class='badge badge-filter-count pull-right ng-binding']"));
+                findElement(By.xpath(String.format(COUNTRY_IN_BADGE_LOCATOR, country.getNameOfCountry())));
         numberOfExchangesInBadge = Integer.parseInt(numberExchangesOnBadgeInDropdown.getText());
     }
 
     public ExchangesPage scrollPage() {
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         return this;
     }
 
     public ExchangesPage selectCountryInDropdown(Countries country) {
         WebElement countryLinkInDropdown = driver.
-                findElement(By.xpath("//span[contains(text(), '" + country.getNameOfCountry() + "')]"));
+                findElement(By.xpath(String.format(COUNTRY_IN_DROPDOWN_LOCATOR, country.getNameOfCountry())));
         waitForElementClicable(countryLinkInDropdown);
         getNumberOfExchangesFromBadge(country);
         countryLinkInDropdown.click();
@@ -67,11 +70,11 @@ public class ExchangesPage extends HeaderPage {
     }
 
     public List<WebElement> getFromFilteredPageAllResultsWith(Countries country) {
-        return driver.findElements(By.xpath("//span[@class='ng-binding' and contains(text(), '" + country.getNameOfCountry() + "')]"));
+        return driver.findElements(By.xpath(String.format(COUNTRY_ON_FILTERED_PAGE_LOCATOR, country.getNameOfCountry())));
     }
 
     public List<WebElement> getAllCountryLabelsFromFilteredPage() {
-        return driver.findElements(By.xpath("//div[@class='feature-label' and contains(text(), 'Country')]"));
+        return driver.findElements(By.xpath(COUNTRY_LABEL_ON_PAGE_LOCATOR));
     }
 
 }
