@@ -30,11 +30,11 @@ public class UserAccountPage extends HeaderPage {
 
     By genderLineInGeneralTabInUserAccount = By.xpath("//div[@class='ui-select']/select");
 
-    @FindBy(xpath = "//button/i[contains(text(), ' Save Changes ')]")
+    @FindBy(xpath = "//button[@class='btn btn-success btn-lg']")
     private WebElement buttonSaveChangesInGeneralTabInUserAccount;
 
     @FindBy(xpath = "//div[@class='toast-notifications']//div[@ng-bind-html='notification.Message']")
-    private WebElement popupWindowAfterSavingUpdatedInGeneralTabInUserAccount;
+    private WebElement popupWindowAfterSavingUpdatedInUserAccount;
 
     public UserAccountPage(WebDriver driver) {
         super(driver);
@@ -46,7 +46,7 @@ public class UserAccountPage extends HeaderPage {
         return this;
     }
 
-    public UserAccountPage enterNewFirstNameAndSurnameInTabGeneralInUserAccount(String firstName, String surname) {
+    public UserAccountPage enterNewFirstNameAndSurnameInUserAccount(String firstName, String surname) {
         waitForElementClicable(firstNameLineInGeneralTabInUserAccount);
         firstNameLineInGeneralTabInUserAccount.click();
         firstNameLineInGeneralTabInUserAccount.clear();
@@ -58,14 +58,15 @@ public class UserAccountPage extends HeaderPage {
         return this;
     }
 
-    public UserAccountPage clickButtonSaveChangesInGeneralTabInUserAccount() {
+    public UserAccountPage clickButtonSaveChangesInUserAccount() {
         waitForElementClicable(buttonSaveChangesInGeneralTabInUserAccount);
         buttonSaveChangesInGeneralTabInUserAccount.click();
         return this;
     }
 
-    public String getInfoFromPopupWindowAfterSavingChangesInUserGeneralTab() {
-        String textOnPopupWindowAfterSavingUpdated = popupWindowAfterSavingUpdatedInGeneralTabInUserAccount.getText();
+    public String getInfoFromPopupWindowAfterSavingChangesInUserAccount() {
+        waitForElementVisible(popupWindowAfterSavingUpdatedInUserAccount);
+        String textOnPopupWindowAfterSavingUpdated = popupWindowAfterSavingUpdatedInUserAccount.getText();
         return textOnPopupWindowAfterSavingUpdated;
     }
 }
