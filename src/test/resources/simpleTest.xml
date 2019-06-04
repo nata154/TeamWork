@@ -6,4 +6,9 @@
             <class name="com.epam.tat21.crypto.tests.FilterOfNewsTest"/>
         </classes>
     </test>
+    <test name="CountryFilterTestsOnExchangesPage">
+        <classes>
+            <class name="com.epam.tat21.crypto.tests.CountryFilterOnExchangePageTests"/>
+        </classes>
+    </test>
 </suite>
