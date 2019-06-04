@@ -76,16 +76,16 @@ public class PortfolioKeeper {
         // WebElement waitingStub = waitForElementBeClickableLocatedByXpath(driver,"//a[contains(.,'Read our guide: Portfolio FAQ')]");
 
         //List<WebElement> portfolioElements = driver.findElements(By.tagName(portfolioElementTagName));
-        // List<WebElement> portfolioElements = driver.findElements(By.xpath(portfolioElementXpath));
+        List<WebElement> portfolioElements = driver.findElements(By.xpath(portfolioElementXpath));
         //System.out.println("AMOUNT OF PORTFOLIOS: - " + portfolioElements.size());
 
         //System.out.println("Taking names.....");
 
 
         for (int i = 0; i < getAllPortfolioTabs().size(); ++i) {
-            SimplePortfolio portfolio = new SimplePortfolio(getAllPortfolioTabs().get(i).getText(), getAllPortfolioTabs().get(i));
+            SimplePortfolio portfolio = new SimplePortfolio(portfolioElements.get(i).getText(), portfolioElements.get(i));
             portfoliosList.add(portfolio);
-            System.out.println("-" + getAllPortfolioTabs().get(i).getText() + "-");
+            System.out.println("-" + portfolioElements.get(i).getText() + "-");
         }
     }
 
