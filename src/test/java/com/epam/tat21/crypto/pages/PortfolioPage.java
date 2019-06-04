@@ -9,6 +9,9 @@ public class PortfolioPage extends HeaderPage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
 
+    @FindBy(xpath = "//button[@ng-click='addPortfolioDialog()']")
+    private WebElement buttonAddPortfolio;
+
     @FindBy(xpath = "//span[@class='ng-scope' and contains(text(), 'Coin')]")
     private WebElement addCoinToPortfolioButton;
 
@@ -29,5 +32,11 @@ public class PortfolioPage extends HeaderPage {
         waitForElementClicable(addCoinToPortfolioButton);
         addCoinToPortfolioButton.click();
         return new AddCoinForm(driver);
+    }
+
+    public AddPortfolioForm addPortfolioForm() {
+        waitForElementClicable(buttonAddPortfolio);
+        buttonAddPortfolio.click();
+        return new AddPortfolioForm(driver);
     }
 }
