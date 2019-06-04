@@ -32,43 +32,43 @@ public class UserDropdownMenuInHeader extends HeaderPage {
     }
 
     public UserDropdownMenuInHeader clickQuizLine() {
-        waitForElementClicable(quizLine);
+        waitForElementClickable(quizLine);
         quizLine.click();
         return this;
     }
 
     public ProfilePage clickViewMyProfile() {
-        waitForElementClicable(viewMyProfileLine);
+        waitForElementClickable(viewMyProfileLine);
         viewMyProfileLine.click();
         return new ProfilePage(driver);
     }
 
     public UserDropdownMenuInHeader clickAccountLine() {
-        waitForElementClicable(accountLine);
+        waitForElementClickable(accountLine);
         accountLine.click();
         return this;
     }
 
     public UserDropdownMenuInHeader clickApiKeysLine() {
-        waitForElementClicable(apiKeysLine);
+        waitForElementClickable(apiKeysLine);
         apiKeysLine.click();
         return this;
     }
 
     public UserDropdownMenuInHeader clickBillingLine() {
-        waitForElementClicable(billingLine);
+        waitForElementClickable(billingLine);
         billingLine.click();
         return this;
     }
 
     public UserDropdownMenuInHeader clickTurnOffLine() {
-        waitForElementClicable(turnOffLine);
+        waitForElementClickable(turnOffLine);
         turnOffLine.click();
         return this;
     }
 
     public UserDropdownMenuInHeader clickLogOutLine() {
-        waitForElementClicable(logoutLine);
+        waitForElementClickable(logoutLine);
         logoutLine.click();
         return this;
     }

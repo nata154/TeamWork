@@ -85,25 +85,25 @@ public class HeaderPage extends BasePage {
     }
 
     public NewsPage goToNewsTab() {
-        waitForElementClicable(newsTabLink);
+        waitForElementClickable(newsTabLink);
         newsTabLink.click();
         return new NewsPage(driver);
     }
     
     public CoinsPage goToCoinsPage() {
-        waitForElementClicable(coinsTabLink);
+        waitForElementClickable(coinsTabLink);
         coinsTabLink.click();
         return new CoinsPage(driver);
     }
 
     public ExchangesPage goToExchangesPage() {
-        waitForElementClicable(exchangesTabLink);
+        waitForElementClickable(exchangesTabLink);
         exchangesTabLink.click();
         return new ExchangesPage(driver);
     }
 
     public PortfolioPage goToPortfolioPage() {
-        waitForElementClicable(portfolioTabLink);
+        waitForElementClickable(portfolioTabLink);
         portfolioTabLink.click();
         return new PortfolioPage(driver);
     }
@@ -115,7 +115,7 @@ public class HeaderPage extends BasePage {
     }
 
     public UserDropdownMenuInHeader getDropdownUserMenuInHeader() {
-        waitForElementClicable(userLineInHeader);
+        waitForElementClickable(userLineInHeader);
         userLineInHeader.click();
         return new UserDropdownMenuInHeader(driver);
     }

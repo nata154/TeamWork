@@ -20,4 +20,8 @@ public class Steps {
     public int checkFilterNewsByCoin(Coin coin) {
         return new NewsPage(driver).openPage().goToCoinNews(coin).getNumberOfNewsForCoin(coin);
     }
+
+    public WebDriver getDriver() {
+        return this.driver;
+    }
 }

@@ -23,7 +23,7 @@ public abstract class BasePage {
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
-    protected void waitForElementClicable(WebElement element) {
+    protected void waitForElementClickable(WebElement element) {
         new WebDriverWait(driver, WAIT_FOR_ELEMENT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
