@@ -6,14 +6,16 @@ import org.testng.annotations.DataProvider;
 public class CountriesDataProvider {
 
     @DataProvider(name = "countriesForTests")
-    public static Object[][] countryNameForFilter(){
-        return new Object[][] {
-                {Countries.BRAZIL},
-                {Countries.DENMARK},
-                {Countries.JAPAN},
-                {Countries.RUSSIA},
-                {Countries.SINGAPORE},
-                {Countries.UK}
-        };
+    public static Object[][] countryNameForFilter() {
+
+        Object[][] toReturn = new Object[Countries.values().length][];
+        int i = 0;
+        for (Countries country : Countries.values()) {
+            toReturn[i] = new Object[1];
+            toReturn[i][0] = country;
+            i++;
+        }
+        return toReturn;
     }
+
 }
