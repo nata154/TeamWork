@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.pages;
 
 import com.epam.tat21.crypto.service.TestDataReader;
-import org.openqa.selenium.By;
+import com.epam.tat21.crypto.utils.MyLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +32,7 @@ public class ProfilePage extends HeaderPage {
     @Override
     public ProfilePage openPage() {
         driver.navigate().to(BASE_URL);
+        MyLogger.info("ProfilePage was opened");
         return this;
     }
 
