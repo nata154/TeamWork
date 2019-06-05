@@ -15,7 +15,7 @@ public class CoinsPage extends HeaderPage {
     @Override
     public CoinsPage openPage() {
         driver.get(BASE_URL);
-        MyLogger.info("CoinsPage was started");
+        MyLogger.info("CoinsPage was opened");
         return this;
     }
 }

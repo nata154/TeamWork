@@ -32,7 +32,7 @@ public class ProfilePage extends HeaderPage {
     @Override
     public ProfilePage openPage() {
         driver.navigate().to(BASE_URL);
-        MyLogger.info("ProfilePage was started");
+        MyLogger.info("ProfilePage was opened");
         return this;
     }
 

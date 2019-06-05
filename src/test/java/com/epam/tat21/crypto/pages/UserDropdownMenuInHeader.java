@@ -35,7 +35,7 @@ public class UserDropdownMenuInHeader extends HeaderPage {
     public UserDropdownMenuInHeader clickQuizLine() {
         waitForElementClicable(quizLine);
         quizLine.click();
-        MyLogger.info("UserDropdownMenuInHeader was appearanced");
+        MyLogger.info("UserDropdownMenuInHeader was appeared");
         return this;
     }
 

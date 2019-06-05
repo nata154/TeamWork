@@ -28,7 +28,7 @@ public class NewsPage extends HeaderPage {
     @Override
     public NewsPage openPage() {
         driver.get(BASE_URL);
-        MyLogger.info("NewsPage was started");
+        MyLogger.info("NewsPage was opened");
         return this;
     }
 

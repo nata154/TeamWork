@@ -26,21 +26,21 @@ public class PortfolioPage extends HeaderPage {
     @Override
     public PortfolioPage openPage() {
         driver.get(BASE_URL);
-        MyLogger.info("PortfolioPage was started");
+        MyLogger.info("PortfolioPage was opened");
         return this;
     }
 
     public AddCoinForm getAddCoinForm() {
         waitForElementClicable(addCoinToPortfolioButton);
         addCoinToPortfolioButton.click();
-        MyLogger.info("AddCoinForm was appearanced");
+        MyLogger.info("AddCoinForm was appeared");
         return new AddCoinForm(driver);
     }
 
     public AddPortfolioForm addPortfolioForm() {
         waitForElementClicable(buttonAddPortfolio);
         buttonAddPortfolio.click();
-        MyLogger.info("AddPortfolioForm was appearanced");
+        MyLogger.info("AddPortfolioForm was appeared");
         return new AddPortfolioForm(driver);
     }
 }

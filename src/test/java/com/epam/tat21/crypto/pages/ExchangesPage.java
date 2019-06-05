@@ -39,7 +39,7 @@ public class ExchangesPage extends HeaderPage {
     @Override
     public ExchangesPage openPage() {
         driver.get(BASE_URL);
-        MyLogger.info("ExchangesPage was started");
+        MyLogger.info("ExchangesPage was opened");
         return this;
     }
 

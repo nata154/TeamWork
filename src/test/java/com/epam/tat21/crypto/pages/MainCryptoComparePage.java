@@ -27,7 +27,7 @@ public class MainCryptoComparePage extends HeaderPage {
     @Override
     public MainCryptoComparePage openPage() {
         driver.navigate().to(BASE_URL);
-        MyLogger.info("MainCryptoComparePage was started");
+        MyLogger.info("MainCryptoComparePage was opened");
         return this;
     }
 
