@@ -2,6 +2,7 @@ package com.epam.tat21.crypto.pages;
 
 import com.epam.tat21.crypto.bo.Countries;
 import com.epam.tat21.crypto.service.TestDataReader;
+import com.epam.tat21.crypto.utils.MyLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -38,6 +39,7 @@ public class ExchangesPage extends HeaderPage {
     @Override
     public ExchangesPage openPage() {
         driver.get(BASE_URL);
+        MyLogger.info("ExchangesPage was started");
         return this;
     }
 
@@ -66,6 +68,7 @@ public class ExchangesPage extends HeaderPage {
         waitForElementClicable(countryLinkInDropdown);
         getNumberOfExchangesFromBadge(country);
         countryLinkInDropdown.click();
+        MyLogger.info(country.getNameOfCountry() + " country was chosen");
         return this;
     }
 

@@ -2,6 +2,7 @@ package com.epam.tat21.crypto.pages;
 
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.service.TestDataReader;
+import com.epam.tat21.crypto.utils.MyLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +28,7 @@ public class NewsPage extends HeaderPage {
     @Override
     public NewsPage openPage() {
         driver.get(BASE_URL);
+        MyLogger.info("NewsPage was started");
         return this;
     }
 
@@ -34,6 +36,7 @@ public class NewsPage extends HeaderPage {
         moveToNewsTab();
         WebElement newsCoin = driver.findElement(By.xpath(COINS_NEWS_XPATH + coin.getAbbreviationCoin() + "']"));
         waitForElementVisible(newsCoin);
+        MyLogger.info(coin.getNameOfCoin() + " news was pressed");
         newsCoin.click();
         return this;
     }
