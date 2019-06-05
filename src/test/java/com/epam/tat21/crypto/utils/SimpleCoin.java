@@ -32,5 +32,4 @@ public class SimpleCoin {
         System.out.println("=========================================");
     }
 
-
 }

@@ -6,12 +6,14 @@ import com.epam.tat21.crypto.utils.PortfolioKeeper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PortfolioPage extends BasePage {
 
-    private String portfolioElementXpath = "//md-tab-item";
+
+    private String waitingStubElementXpath = "//md-icon[@aria-label='Add new coin to portfolio']";
+
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
     public PortfolioKeeper portfolioKeeper = new PortfolioKeeper();
 
@@ -26,18 +28,21 @@ public class PortfolioPage extends BasePage {
     }
 
     public double getPortfolioTotalValue(String name) {
+
         double totalValue = 0;
         portfolioKeeper.initiate(driver);
+
         try {
-            totalValue = portfolioKeeper.getTotalValue(name);
+            WebElement waitingStub = waitForElementBeClickableLocatedByXpath(driver, waitingStubElementXpath);
+            totalValue = portfolioKeeper.getTotalValue(name.toUpperCase());
         } catch (NoSuchPortfolioException e) {
             System.out.println(e.getMessage());
         }
         return totalValue;
     }
 
-    public List<WebElement> getAllPortfolioTabs() {
-        return driver.findElements(By.xpath(portfolioElementXpath));
+    protected static WebElement waitForElementBeClickableLocatedByXpath(WebDriver driver, String xPath) {
+        return new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath(xPath)));
     }
 
 }
