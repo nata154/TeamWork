@@ -36,17 +36,17 @@ public class Steps {
 
     public UserAccountPage goToUserAccountProfile() {
         new HeaderPage(driver).getDropdownUserMenuInHeader().clickAccountLine();
-        return new UserAccountPage(driver).clickTabGeneralInUserAccount();
+        return new UserAccountPage(driver).clickTabGeneral();
     }
 
     public UserAccountPage changeAndSaveFirstNameSurnameInUserAccount(String firstNameToChange, String surnameToChange) {
         return new UserAccountPage(driver)
-                .enterNewFirstNameAndSurnameInUserAccount(firstNameToChange, surnameToChange)
-                .clickButtonSaveChangesInUserAccount();
+                .enterNewFirstNameAndSurname(firstNameToChange, surnameToChange)
+                .clickButtonSaveChanges();
     }
 
     public String getInfoFromPopupWindowAfterSavingChangesInUserAccount() {
-        String textOnPopupWindowAfterSavingUpdated = new UserAccountPage(driver).getInfoFromPopupWindowAfterSavingChangesInUserAccount();
-        return textOnPopupWindowAfterSavingUpdated;
+        String textOnPopupWindowAfterSavingChanges = new UserAccountPage(driver).getInfoFromPopupWindow();
+        return textOnPopupWindowAfterSavingChanges;
     }
 }
