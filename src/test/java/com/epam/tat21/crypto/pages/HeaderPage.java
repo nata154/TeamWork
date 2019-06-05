@@ -110,6 +110,7 @@ public class HeaderPage extends BasePage {
 
     public PortfolioPage goToMyPortfolioFromPortfolioTab() {
         moveToPortfolioTab();
+        waitForElementClicable(myPortfoliosLinkInPorfolioTab);
         myPortfoliosLinkInPorfolioTab.click();
         return new PortfolioPage(driver);
     }
