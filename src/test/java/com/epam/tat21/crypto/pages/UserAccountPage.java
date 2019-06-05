@@ -8,65 +8,65 @@ import org.openqa.selenium.support.FindBy;
 public class UserAccountPage extends HeaderPage {
 
     @FindBy(xpath = "//span[contains(text(), 'General')]")
-    private WebElement tabGeneralInUserAccount;
+    private WebElement tabGeneral;
 
     @FindBy(xpath = "//span[contains(text(), 'Security')]")
-    private WebElement tabSecurityInUserAccount;
+    private WebElement tabSecurity;
 
     @FindBy(xpath = "//span[contains(text(), 'Email Notifications')]")
-    private WebElement tabEmailNotificationInUserAccount;
+    private WebElement tabEmailNotification;
 
     @FindBy(xpath = "//span[contains(text(), 'API Keys')]")
-    private WebElement tabApiKeysInUserAccount;
+    private WebElement tabApiKeys;
 
     @FindBy(xpath = "//span[contains(text(), 'Billing')]")
-    private WebElement tabBillingInUserAccount;
+    private WebElement tabBilling;
 
     @FindBy(xpath = "//input[@name='first_name']")
-    private WebElement firstNameLineInGeneralTabInUserAccount;
+    private WebElement firstNameLineInGeneralTab;
 
     @FindBy(xpath = "//input[@name='last_name']")
-    private WebElement surnameLineInGeneralTabInUserAccount;
+    private WebElement surnameLineInGeneralTab;
 
-    By genderLineInGeneralTabInUserAccount = By.xpath("//div[@class='ui-select']/select");
+    By genderLineInGeneralTab = By.xpath("//div[@class='ui-select']/select");
 
     @FindBy(xpath = "//button[@class='btn btn-success btn-lg']")
-    private WebElement buttonSaveChangesInGeneralTabInUserAccount;
+    private WebElement buttonSaveChangesInGeneralTab;
 
     @FindBy(xpath = "//div[@class='toast-notifications']//div[@ng-bind-html='notification.Message']")
-    private WebElement popupWindowAfterSavingUpdatedInUserAccount;
+    private WebElement popupWindowAfterSavingUpdates;
 
     public UserAccountPage(WebDriver driver) {
         super(driver);
     }
 
-    public UserAccountPage clickTabGeneralInUserAccount() {
-        waitForElementClicable(tabGeneralInUserAccount);
-        tabGeneralInUserAccount.click();
+    public UserAccountPage clickTabGeneral() {
+        waitForElementClicable(tabGeneral);
+        tabGeneral.click();
         return this;
     }
 
-    public UserAccountPage enterNewFirstNameAndSurnameInUserAccount(String firstName, String surname) {
-        waitForElementClicable(firstNameLineInGeneralTabInUserAccount);
-        firstNameLineInGeneralTabInUserAccount.click();
-        firstNameLineInGeneralTabInUserAccount.clear();
-        firstNameLineInGeneralTabInUserAccount.sendKeys(firstName);
-        waitForElementClicable(surnameLineInGeneralTabInUserAccount);
-        surnameLineInGeneralTabInUserAccount.click();
-        surnameLineInGeneralTabInUserAccount.clear();
-        surnameLineInGeneralTabInUserAccount.sendKeys(surname);
+    public UserAccountPage enterNewFirstNameAndSurname(String firstName, String surname) {
+        waitForElementClicable(firstNameLineInGeneralTab);
+        firstNameLineInGeneralTab.click();
+        firstNameLineInGeneralTab.clear();
+        firstNameLineInGeneralTab.sendKeys(firstName);
+        waitForElementClicable(surnameLineInGeneralTab);
+        surnameLineInGeneralTab.click();
+        surnameLineInGeneralTab.clear();
+        surnameLineInGeneralTab.sendKeys(surname);
         return this;
     }
 
-    public UserAccountPage clickButtonSaveChangesInUserAccount() {
-        waitForElementClicable(buttonSaveChangesInGeneralTabInUserAccount);
-        buttonSaveChangesInGeneralTabInUserAccount.click();
+    public UserAccountPage clickButtonSaveChanges() {
+        waitForElementClicable(buttonSaveChangesInGeneralTab);
+        buttonSaveChangesInGeneralTab.click();
         return this;
     }
 
-    public String getInfoFromPopupWindowAfterSavingChangesInUserAccount() {
-        waitForElementVisible(popupWindowAfterSavingUpdatedInUserAccount);
-        String textOnPopupWindowAfterSavingUpdated = popupWindowAfterSavingUpdatedInUserAccount.getText();
+    public String getInfoFromPopupWindow() {
+        waitForElementVisible(popupWindowAfterSavingUpdates);
+        String textOnPopupWindowAfterSavingUpdated = popupWindowAfterSavingUpdates.getText();
         return textOnPopupWindowAfterSavingUpdated;
     }
 }
