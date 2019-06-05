@@ -43,10 +43,10 @@ public class UserDropdownMenuInHeader extends HeaderPage {
         return new ProfilePage(driver);
     }
 
-    public UserDropdownMenuInHeader clickAccountLine() {
+    public UserAccountPage clickAccountLine() {
         waitForElementClicable(accountLine);
         accountLine.click();
-        return this;
+        return new UserAccountPage(driver);
     }
 
     public UserDropdownMenuInHeader clickApiKeysLine() {
