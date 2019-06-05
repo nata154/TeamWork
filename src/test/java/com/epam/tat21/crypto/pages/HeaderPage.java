@@ -22,7 +22,8 @@ public class HeaderPage extends BasePage {
     @FindBy(xpath = "//a[@href='/wallets/' and @class='uib-dropdown-toggle']")
     private WebElement walletsTabLink;
 
-    @FindBy(xpath = "//a[@href='/news/list/latest/' and @class='uib-dropdown-toggle']")
+    //@FindBy(xpath = "//a[@href='/news/list/latest/' and @class='uib-dropdown-toggle']")
+    @FindBy(xpath = "//a[@ng-href='/news/list/latest/' and @class='ng-binding']")
     private WebElement newsTabLink;
 
     @FindBy(xpath = "//a[@href='/portfolio/' and @class='uib-dropdown-toggle']")
@@ -39,6 +40,8 @@ public class HeaderPage extends BasePage {
 
     @FindBy(xpath = "//li[@class='dropdown navbar-profile']/a")
     private WebElement userLineInHeader;
+
+    //a[@href='/news/list/latest/' and @class='uib-dropdown-toggle'
 
     public HeaderPage(WebDriver driver) {
         super(driver);
