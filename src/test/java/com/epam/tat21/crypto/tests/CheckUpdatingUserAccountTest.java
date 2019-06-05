@@ -12,14 +12,14 @@ public class CheckUpdatingUserAccountTest extends CommonConditions {
     public void checkUpdatingUserAccountTest() {
         String firstNameToChange = RandomString.generateRandomUserFirstName(COUNT_OF_GENERATED_POSTFIX_LETTERS);
         String surnameToChange = RandomString.generateRandomUserSurname(COUNT_OF_GENERATED_POSTFIX_LETTERS);
-        String expectedInfoInPopupAfterSavingChangesInUserAccountWhenSuccessfully = "Successfully updated your details";
+        String expectedInfoInPopupWhenSuccessfully = "Successfully updated your details";
 
         steps.loginUser();
         steps.goToUserAccountProfile();
         steps.changeAndSaveFirstNameSurnameInUserAccount(firstNameToChange, surnameToChange);
-        String actualInfoInPopupAfterSavingChangesInUserGeneralTab = steps.getInfoFromPopupWindowAfterSavingChangesInUserAccount();
+        String infoInPopup = steps.getInfoFromPopupWindowAfterSavingChangesInUserAccount();
 
-        Assert.assertEquals(actualInfoInPopupAfterSavingChangesInUserGeneralTab, expectedInfoInPopupAfterSavingChangesInUserAccountWhenSuccessfully,
-                "Wrong text in pop-up after saving Changes In User General Tab");
+        Assert.assertEquals(infoInPopup, expectedInfoInPopupWhenSuccessfully,
+                "Wrong text in pop-up after saving changes in user general tab");
     }
 }
