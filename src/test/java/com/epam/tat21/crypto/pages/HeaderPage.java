@@ -29,7 +29,7 @@ public class HeaderPage extends BasePage {
     @FindBy(xpath = "//a[@href='/portfolio/' and @class='uib-dropdown-toggle']")
     private WebElement portfolioTabLink;
 
-    @FindBy(xpath = "//a[@href='https://min-api.cryptocompare.com' and @class='uib-dropdown-toggle']")
+    @FindBy(xpath = "//a[@href='https://min-api.cryptocompare.com' and @class='uib-dropdown-toggle']")//
     private WebElement apiTabLink;
 
     @FindBy(linkText = "Login")
