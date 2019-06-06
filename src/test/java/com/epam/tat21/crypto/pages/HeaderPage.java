@@ -1,6 +1,7 @@
 package com.epam.tat21.crypto.pages;
 
 import com.epam.tat21.crypto.service.TestDataReader;
+import com.epam.tat21.crypto.utils.MyLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -53,6 +54,7 @@ public class HeaderPage extends BasePage {
     public HeaderPage goToLoginForm() {
         waitForElementVisible(logInLink);
         logInLink.click();
+        MyLogger.info("Go to Login form");
         return this;
     }
 
@@ -89,7 +91,7 @@ public class HeaderPage extends BasePage {
         newsTabLink.click();
         return new NewsPage(driver);
     }
-    
+
     public CoinsPage goToCoinsPage() {
         waitForElementClicable(coinsTabLink);
         coinsTabLink.click();
@@ -110,6 +112,7 @@ public class HeaderPage extends BasePage {
 
     public PortfolioPage goToMyPortfolioFromPortfolioTab() {
         moveToPortfolioTab();
+        waitForElementClicable(myPortfoliosLinkInPorfolioTab);
         myPortfoliosLinkInPorfolioTab.click();
         return new PortfolioPage(driver);
     }

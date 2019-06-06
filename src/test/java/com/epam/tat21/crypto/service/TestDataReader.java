@@ -7,6 +7,7 @@ public class TestDataReader {
     private static final String TESTDATA_USER_PASSWORD = "testdata.user.password";
     private static final String APPLICATION_URL = "application.url";
     private static final String PROFILE_NAME = "profile.name";
+    private static final String SCREENSHOT_FOLDER = "screenshot.folder";
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(System.getProperty("environment"));
 
     private TestDataReader() {
@@ -30,5 +31,9 @@ public class TestDataReader {
 
     public static String getProfileName() {
         return getProperty(PROFILE_NAME);
+    }
+
+    public static String getScreenshotFolderPath() {
+        return getProperty(SCREENSHOT_FOLDER);
     }
 }
