@@ -23,13 +23,13 @@ public class HeaderPage extends BasePage {
     @FindBy(xpath = "//a[@href='/wallets/' and @class='uib-dropdown-toggle']")
     private WebElement walletsTabLink;
 
-    @FindBy(xpath = "//a[@ng-href='/news/list/latest/' and @class='ng-binding']")
+    @FindBy(xpath = "//a[@href='/news/list/latest/' and @class='uib-dropdown-toggle']")
     private WebElement newsTabLink;
 
     @FindBy(xpath = "//a[@href='/portfolio/' and @class='uib-dropdown-toggle']")
     private WebElement portfolioTabLink;
 
-    @FindBy(xpath = "//a[@href='https://min-api.cryptocompare.com' and @class='uib-dropdown-toggle']")//
+    @FindBy(xpath = "//a[@href='https://min-api.cryptocompare.com' and @class='uib-dropdown-toggle']")
     private WebElement apiTabLink;
 
     @FindBy(linkText = "Login")
