@@ -13,45 +13,46 @@ import java.util.List;
 public class PortfolioKeeper {
 
     private WebDriver driver;
-
-    private String portfolioElementTagName = "md-tab-item";
+    private String portfolioElementXpath = "//md-tab-item";
 
     public PortfolioKeeper() {}
 
     private ArrayList<SimplePortfolio>portfoliosList = new ArrayList<>();
 
     public void initiate(WebDriver driver) {
-
         this.driver = driver;
+        List<WebElement> portfolioElements = driver.findElements(By.xpath(portfolioElementXpath));
 
-        //System.out.println("Portfolio Keeper initiated....");
-
-        WebElement waitingStub = waitForElementBeClickableLocatedByXpath(driver,"//a[contains(.,'Read our guide: Portfolio FAQ')]");
-
-        List<WebElement> portfolioElements = driver.findElements(By.tagName(portfolioElementTagName));
-        //System.out.println("AMOUNT OF PORTFOLIOS: - "+portfolioElements.size());
-
-        //System.out.println("Taking names.....");
-
-        for (int i=0;i<portfolioElements.size();++i) {
-            SimplePortfolio portfolio = new SimplePortfolio(portfolioElements.get(i).getText(),portfolioElements.get(i));
+        for (int i = 0; i < portfolioElements.size(); ++i) {
+            SimplePortfolio portfolio = new SimplePortfolio(portfolioElements.get(i).getText(), portfolioElements.get(i));
             portfoliosList.add(portfolio);
-            //System.out.println(portfolioElements.get(i).getText());
         }
     }
 
     public double getTotalValue(String portfolioName) throws NoSuchPortfolioException {
-        double totalValue =0;
-        for (int i=0;i<portfoliosList.size();++i) {
-            if (portfolioName.equals(portfoliosList.get(i).getPortfolioName())) {
-                //System.out.println("PORTFOLIO "+ portfoliosList.get(i).getPortfolioName() + " HAS BEEN CHOSEN TO OPERATE ON POSITION "+(i+1));
+        if (isCurrentPortfolioExists(portfolioName)) {
+            double totalValue = 0;
+            for (int i = 0; i < portfoliosList.size(); ++i) {
+                if (portfolioName.equals(portfoliosList.get(i).getPortfolioName())) {
                     portfoliosList.get(i).getPortfolioLink().click();
                     portfoliosList.get(i).initiate(driver);
                     totalValue = portfoliosList.get(i).getTotalValue();
-            } else throw new NoSuchPortfolioException();
-        }
+                }
+            }
+            return totalValue;
+        } else throw new NoSuchPortfolioException();
+    }
 
-        return totalValue;
+    private boolean isCurrentPortfolioExists(String currentPortfolioName) {
+        int matchesNumber = 0;
+        for (int i = 0; i < portfoliosList.size(); ++i) {
+            if (currentPortfolioName.equals(portfoliosList.get(i).getPortfolioName())) {
+                matchesNumber++;
+            }
+        }
+        if (matchesNumber > 0) {
+            return true;
+        } else return false;
     }
 
     protected static WebElement waitForElementBeClickableLocatedByXpath(WebDriver driver, String xPath) {

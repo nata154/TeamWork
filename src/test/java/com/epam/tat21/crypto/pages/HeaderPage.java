@@ -87,39 +87,42 @@ public class HeaderPage extends BasePage {
     }
 
     public NewsPage goToNewsTab() {
-        waitForElementClicable(newsTabLink);
+        waitForElementClickable(newsTabLink);
         newsTabLink.click();
         return new NewsPage(driver);
     }
 
     public CoinsPage goToCoinsPage() {
-        waitForElementClicable(coinsTabLink);
+        waitForElementClickable(coinsTabLink);
         coinsTabLink.click();
         return new CoinsPage(driver);
     }
 
     public ExchangesPage goToExchangesPage() {
-        waitForElementClicable(exchangesTabLink);
+        waitForElementClickable(exchangesTabLink);
         exchangesTabLink.click();
         return new ExchangesPage(driver);
     }
 
-    public PortfolioPage goToPortfolioPage() {
-        waitForElementClicable(portfolioTabLink);
+    public PortfolioPage goToPortfolioPage() throws InterruptedException {
+        //Thread.sleep(5000);
+        waitForElementClickable(portfolioTabLink);
         portfolioTabLink.click();
         return new PortfolioPage(driver);
     }
 
     public PortfolioPage goToMyPortfolioFromPortfolioTab() {
         moveToPortfolioTab();
-        waitForElementClicable(myPortfoliosLinkInPorfolioTab);
+        waitForElementClickable(myPortfoliosLinkInPorfolioTab);
         myPortfoliosLinkInPorfolioTab.click();
         return new PortfolioPage(driver);
     }
 
     public UserDropdownMenuInHeader getDropdownUserMenuInHeader() {
-        waitForElementClicable(userLineInHeader);
+        waitForElementClickable(userLineInHeader);
         userLineInHeader.click();
         return new UserDropdownMenuInHeader(driver);
     }
+
+
 }

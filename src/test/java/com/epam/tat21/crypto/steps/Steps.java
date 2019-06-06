@@ -26,6 +26,7 @@ public class Steps {
         return new NewsPage(driver).openPage().goToCoinNews(coin).getNumberOfNewsForCoin(coin);
     }
 
+
     public MainCryptoComparePage loginUser() {
         User user = UserCreator.withCredentialsFromProperty();
         return new MainCryptoComparePage(driver)
@@ -71,5 +72,6 @@ public class Steps {
 
     public int getNumberOfExchangesFromCountryBadge() {
         return exchangesPage.getNumberOfExchangesInBadge();
+
     }
 }

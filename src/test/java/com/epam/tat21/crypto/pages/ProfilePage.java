@@ -1,7 +1,10 @@
 package com.epam.tat21.crypto.pages;
 
 import com.epam.tat21.crypto.service.TestDataReader;
+<<<<<<< HEAD
 import com.epam.tat21.crypto.utils.MyLogger;
+=======
+>>>>>>> Posakhau
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,31 +40,31 @@ public class ProfilePage extends HeaderPage {
     }
 
     public ProfilePage clickActivityTabInUserProfile() {
-        waitForElementClicable(activityTabInUserProfile);
+        waitForElementClickable(activityTabInUserProfile);
         activityTabInUserProfile.click();
         return this;
     }
 
     public ProfilePage clickPostsTabInUserProfile() {
-        waitForElementClicable(postsTabInUserProfile);
+        waitForElementClickable(postsTabInUserProfile);
         postsTabInUserProfile.click();
         return this;
     }
 
     public ProfilePage clickReviewsTabInUserProfile() {
-        waitForElementClicable(reviewsTabInUserProfile);
+        waitForElementClickable(reviewsTabInUserProfile);
         reviewsTabInUserProfile.click();
         return this;
     }
 
     public ProfilePage clickFollowingTabInUserProfile() {
-        waitForElementClicable(followingTabInUserProfile);
+        waitForElementClickable(followingTabInUserProfile);
         followingTabInUserProfile.click();
         return this;
     }
 
     public ProfilePage clickFollowersTabInUserProfile() {
-        waitForElementClicable(followersTabInUserProfile);
+        waitForElementClickable(followersTabInUserProfile);
         followersTabInUserProfile.click();
         return this;
     }
