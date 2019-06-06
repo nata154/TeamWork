@@ -1,9 +1,12 @@
 package com.epam.tat21.crypto.tests;
 
 import com.epam.tat21.crypto.steps.Steps;
+import com.epam.tat21.crypto.utils.TestListener;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 
+@Listeners(TestListener.class)
 public class CommonConditions {
 
     protected Steps steps;

@@ -91,7 +91,7 @@ public class HeaderPage extends BasePage {
         newsTabLink.click();
         return new NewsPage(driver);
     }
-    
+
     public CoinsPage goToCoinsPage() {
         waitForElementClicable(coinsTabLink);
         coinsTabLink.click();

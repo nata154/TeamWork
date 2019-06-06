@@ -11,7 +11,7 @@
             <class name="com.epam.tat21.crypto.tests.CheckUpdatingUserAccountTest"/>
         </classes>
     </test>
-    <test name="CountryFilterTestsOnExchangesPage">
+    <test name="CountryFilterTestsOnExchangesPage" enabled="true">
         <classes>
             <class name="com.epam.tat21.crypto.tests.CountryFilterOnExchangePageTests"/>
         </classes>
