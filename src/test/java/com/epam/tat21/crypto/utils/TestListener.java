@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-//import com.epam.tat21.crypto.utils.MyLogger;
-
 public class TestListener implements ITestListener {
 
     @Override
@@ -54,7 +52,7 @@ public class TestListener implements ITestListener {
                             + getCurrentTimeAsString() +
                             ".png"));
         } catch (IOException e) {
-//            MyLogger.error("Failed to save screenshot: " + e.getLocalizedMessage());
+            MyLogger.error("Failed to save screenshot: " + e.getLocalizedMessage());
         }
     }
 
