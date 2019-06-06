@@ -19,12 +19,8 @@ public class GetPortfolioTotalValueTest extends CommonConditions {
 
     @Test
     public void getPortfolioTotalValueTest() throws InterruptedException {
-        MainCryptoComparePage mainPage = new MainCryptoComparePage(steps.getDriver());
-        mainPage.openPage();
-        mainPage.login(UserCreator.withCredentialsFromProperty());
-        Thread.sleep(5000);
+        MainCryptoComparePage mainPage = new MainCryptoComparePage(steps.getDriver()).openPage().login(UserCreator.withCredentialsFromProperty());
         PortfolioPage portfolioPage = mainPage.goToPortfolioPage();
-        //Thread.sleep(2000);
         System.out.println("TOTAL VALUE OF PORTFOLIO - " + portfolioPage.getPortfolioTotalValue("bittrex"));
         Assert.assertEquals(0, 0);
     }

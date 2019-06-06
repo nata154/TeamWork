@@ -21,6 +21,7 @@ public class Steps {
         return new NewsPage(driver).openPage().goToCoinNews(coin).getNumberOfNewsForCoin(coin);
     }
 
+
     public WebDriver getDriver() {
         return this.driver;
     }

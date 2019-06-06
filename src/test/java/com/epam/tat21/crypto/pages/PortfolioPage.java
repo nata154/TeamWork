@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class PortfolioPage extends BasePage {
 
 
@@ -24,16 +26,18 @@ public class PortfolioPage extends BasePage {
     @Override
     public PortfolioPage openPage() {
         driver.get(BASE_URL);
+
         return this;
     }
 
     public double getPortfolioTotalValue(String name) {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         double totalValue = 0;
         portfolioKeeper.initiate(driver);
 
         try {
-            WebElement waitingStub = waitForElementBeClickableLocatedByXpath(driver, waitingStubElementXpath);
+
             totalValue = portfolioKeeper.getTotalValue(name.toUpperCase());
         } catch (NoSuchPortfolioException e) {
             System.out.println(e.getMessage());
