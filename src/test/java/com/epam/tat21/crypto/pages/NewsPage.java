@@ -16,7 +16,7 @@ public class NewsPage extends HeaderPage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "news/";
 
-    private final String COINS_NEWS_XPATH = "//a[@href='/news/list/latest/?categories=";
+    private final static String COINS_NEWS_XPATH = "//a[@href='/news/list/latest/?categories=";
 
     @FindBy(xpath = "//div[@class='col-md-12 list-container ng-isolate-scope']")
     private WebElement containerOfNews;

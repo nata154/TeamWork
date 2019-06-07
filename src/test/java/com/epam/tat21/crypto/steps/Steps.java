@@ -13,6 +13,7 @@ public class Steps {
     private WebDriver driver;
     private UserAccountPage userAccountPage;
     private ExchangesPage exchangesPage;
+    private NewsPage newsPage;
 
     public void openBrowser() {
         driver = DriverProvider.getDriver();
@@ -20,10 +21,6 @@ public class Steps {
 
     public void closeBrowser() {
         DriverProvider.closeDriver();
-    }
-
-    public int checkFilterNewsByCoin(Coin coin) {
-        return new NewsPage(driver).openPage().goToCoinNews(coin).getNumberOfNewsForCoin(coin);
     }
 
     public MainCryptoComparePage loginUser() {
@@ -71,5 +68,18 @@ public class Steps {
 
     public int getNumberOfExchangesFromCountryBadge() {
         return exchangesPage.getNumberOfExchangesInBadge();
+    }
+
+    public NewsPage openNewsPage() {
+        return newsPage = new NewsPage(driver).
+                openPage();
+    }
+
+    public NewsPage filterByCoin(Coin coin) {
+        return newsPage.goToCoinNews(coin);
+    }
+
+    public int getAllCoinNewsFromFilteredPage(Coin coin) {
+        return newsPage.getNumberOfNewsForCoin(coin);
     }
 }
