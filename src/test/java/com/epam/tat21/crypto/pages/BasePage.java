@@ -11,6 +11,7 @@ public abstract class BasePage {
     protected WebDriver driver;
     private static final int WAIT_FOR_ELEMENT_SECONDS = 15;
 
+
     public abstract BasePage openPage();
 
     public BasePage(WebDriver driver) {
@@ -27,4 +28,5 @@ public abstract class BasePage {
         new WebDriverWait(driver, WAIT_FOR_ELEMENT_SECONDS)
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
+
 }

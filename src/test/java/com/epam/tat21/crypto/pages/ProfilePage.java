@@ -1,10 +1,7 @@
 package com.epam.tat21.crypto.pages;
 
 import com.epam.tat21.crypto.service.TestDataReader;
-<<<<<<< HEAD
 import com.epam.tat21.crypto.utils.MyLogger;
-=======
->>>>>>> Posakhau
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

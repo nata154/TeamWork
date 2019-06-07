@@ -104,8 +104,7 @@ public class HeaderPage extends BasePage {
         return new ExchangesPage(driver);
     }
 
-    public PortfolioPage goToPortfolioPage() throws InterruptedException {
-        //Thread.sleep(5000);
+    public PortfolioPage goToPortfolioPage() {
         waitForElementClickable(portfolioTabLink);
         portfolioTabLink.click();
         return new PortfolioPage(driver);
