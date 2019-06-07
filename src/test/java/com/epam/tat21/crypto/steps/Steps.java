@@ -48,12 +48,6 @@ public class Steps {
         String textOnPopupWindowAfterSavingChanges = new UserAccountPage(driver).getInfoFromPopupWindow();
         return textOnPopupWindowAfterSavingChanges;
     }
-//
-//    public UserAccountPage changeGenderInUserAccount(String gender) {
-//        return new UserAccountPage(driver)
-//                .changeGenderAndSave(gender)
-//                .clickButtonSaveChanges();
-//    }
 
     public ExchangesPage openExchangePage() {
         return exchangesPage = new ExchangesPage(driver).

@@ -12,7 +12,6 @@ public class CheckUpdatingUserAccountTest extends CommonConditions {
     public void checkUpdatingUserAccountTest() {
         String firstNameToChange = RandomString.generateRandomUserFirstName(COUNT_OF_GENERATED_POSTFIX_LETTERS);
         String surnameToChange = RandomString.generateRandomUserSurname(COUNT_OF_GENERATED_POSTFIX_LETTERS);
-//        String genderChange = "Female";
         String expectedInfoInPopupWhenSuccessfully = "Successfully updated your details";
 
         steps.loginUser();
@@ -22,8 +21,5 @@ public class CheckUpdatingUserAccountTest extends CommonConditions {
 
         Assert.assertEquals(infoInPopup, expectedInfoInPopupWhenSuccessfully,
                 "Wrong text in pop-up after saving changes in user general tab");
-//
-//        steps.goToUserAccountProfile();
-//        steps.changeGenderInUserAccount(genderChange);
     }
 }

@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,10 +28,7 @@ public class UserAccountPage extends HeaderPage {
     @FindBy(xpath = "//input[@name='last_name']")
     private WebElement surnameLineInGeneralTab;
 
-//    @FindBy(xpath = "//div[@class='ui-select']/select")
-//    private WebElement genderLineInGeneralTab;
-//
-//    By moveToGenderList = By.xpath("/option");
+    By genderLineInGeneralTab = By.xpath("//div[@class='ui-select']/select");
 
     @FindBy(xpath = "//button[@class='btn btn-success btn-lg']")
     private WebElement buttonSaveChangesInGeneralTab;
@@ -71,15 +69,4 @@ public class UserAccountPage extends HeaderPage {
         String textOnPopupWindowAfterSavingUpdated = popupWindowAfterSavingUpdates.getText();
         return textOnPopupWindowAfterSavingUpdated;
     }
-//
-//    public UserAccountPage changeGenderAndSave(String gender) {
-//        waitForElementClicable(genderLineInGeneralTab);
-//        genderLineInGeneralTab.click();
-//        List<WebElement> genderInMenu = genderLineInGeneralTab.findElements(moveToGenderList);
-//        for (WebElement w : genderInMenu) {
-//            System.out.println(w);
-//        }
-//        buttonSaveChangesInGeneralTab.click();
-//        return this;
-//    }
 }
