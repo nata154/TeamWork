@@ -3,7 +3,7 @@
 <suite name="suite01" parallel="false">
     <test name="CryptoCompareTests">
         <packages>
-            <package name="com.epam.tat21.crypto.tests"></package>
+            <package name="com.epam.tat21.crypto.tests.*"></package>
         </packages>
     </test>
 </suite>
