@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="suite01" parallel="false">
-    <test name="TestOfNews" enabled="true">
-        <classes>
-            <class name="com.epam.tat21.crypto.tests.FilterOfNewsTest"/>
-        </classes>
-    </test>
-    <test name="TestOfUserAccount" enabled="true">
-        <classes>
-            <class name="com.epam.tat21.crypto.tests.CheckUpdatingUserAccountTest"/>
-        </classes>
-    </test>
-    <test name="CountryFilterTestsOnExchangesPage" enabled="true">
-        <classes>
-            <class name="com.epam.tat21.crypto.tests.CountryFilterOnExchangePageTests"/>
-        </classes>
+    <test name="CryptoCompareTests">
+        <packages>
+            <package name="com.epam.tat21.crypto.tests.*"></package>
+        </packages>
     </test>
 </suite>
