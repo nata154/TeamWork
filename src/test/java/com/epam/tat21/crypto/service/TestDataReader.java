@@ -8,6 +8,7 @@ public class TestDataReader {
     private static final String APPLICATION_URL = "application.url";
     private static final String PROFILE_NAME = "profile.name";
     private static final String SCREENSHOT_FOLDER = "screenshot.folder";
+    private static final String NODE_URL = "nodeURL";
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(System.getProperty("environment"));
 
     private TestDataReader() {
@@ -35,5 +36,9 @@ public class TestDataReader {
 
     public static String getScreenshotFolderPath() {
         return getProperty(SCREENSHOT_FOLDER);
+    }
+
+    public static String getNodeURL() {
+        return getProperty(NODE_URL);
     }
 }
