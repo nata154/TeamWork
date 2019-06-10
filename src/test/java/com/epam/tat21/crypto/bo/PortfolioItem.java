@@ -14,8 +14,6 @@ public class PortfolioItem extends HeaderPage {
     private final String COIN_NAME_LINK_LOCATOR = "//div[@class='table-col col-name']//a";
     private final String COIN_VALUE_LOCATOR = "//div[@class='responsive-value']/span";
 
-    private List<CoinItem> coinItemsList = new ArrayList<>();
-
     public PortfolioItem(WebDriver driver) {
         super(driver);
     }
@@ -28,17 +26,19 @@ public class PortfolioItem extends HeaderPage {
         return driver.findElements(By.xpath(COIN_VALUE_LOCATOR));
     }
 
+
     public double getTotalValue() {
         double totalValue = 0;
-        if (coinItemsList.size() > 0) {
-            for (int i = 0; i < coinItemsList.size(); ++i) {
-                totalValue += CoinValueParser.parseTotalCoinValue(coinItemsList.get(i).getCoinTotalValue());
+        if (getCoinItemsList().size() > 0) {
+            for (int i = 0; i < getCoinItemsList().size(); ++i) {
+                totalValue += CoinValueParser.parseTotalCoinValue(getCoinItemsList().get(i).getCoinTotalValue());
             }
         }
         return totalValue;
     }
 
-    public List<CoinItem> fillCoinItemsList() {
+    public List<CoinItem> getCoinItemsList() {
+        List<CoinItem> coinItemsList = new ArrayList<>();
         String coinName;
         String coinValue;
         for (int i = 0; i < getCoinNamesList().size() - 1; ++i) {
