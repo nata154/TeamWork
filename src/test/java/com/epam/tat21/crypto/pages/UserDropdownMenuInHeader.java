@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.pages;
 
+import com.epam.tat21.crypto.utils.MyLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +35,7 @@ public class UserDropdownMenuInHeader extends HeaderPage {
     public UserDropdownMenuInHeader clickQuizLine() {
         waitForElementClicable(quizLine);
         quizLine.click();
+        MyLogger.info("UserDropdownMenuInHeader was appeared");
         return this;
     }
 
