@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CoinItem {
 
+    Coin coinEnum;
+
     private String coinName;
     private String coinType;
     private String coinTotalValue;
