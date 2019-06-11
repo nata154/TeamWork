@@ -23,6 +23,8 @@ public class DriverProvider {
                 case "sauce":
                     driver = new RemoteDriverSauceLabs().getDriver();
                     break;
+                default:
+                    driver = new LocalDriver().getDriver();
             }
             driver.manage().window().maximize();
         }
