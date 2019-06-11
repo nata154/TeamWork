@@ -1,24 +1,25 @@
 package com.epam.tat21.crypto.bo;
 
-import org.apache.commons.lang3.StringUtils;
+import com.epam.tat21.crypto.exceptions.NotProperCoinTypeException;
+import com.epam.tat21.crypto.utils.MyLogger;
 
 public class CoinItem {
 
-    Coin coinEnum;
-
-    private String coinName;
-    private String coinType;
+    private Coin coinEnum;
     private String coinTotalValue;
 
-
     public CoinItem(String coinName, String coinTotalValue) {
-        this.coinName = coinName;
         this.coinTotalValue = coinTotalValue;
-        this.coinType = StringUtils.substringBetween(coinName, "(", ")");
+
+        try {
+            coinEnum = Coin.setProperCoinEnum(coinName);
+        } catch (NotProperCoinTypeException ex) {
+            MyLogger.error(ex.getMessage());
+        }
     }
 
     public String getCoinName() {
-        return coinName;
+        return coinEnum.getNameOfCoin();
     }
 
     public String getCoinTotalValue() {
@@ -26,6 +27,6 @@ public class CoinItem {
     }
 
     public String getCoinType() {
-        return coinType;
+        return coinEnum.getAbbreviationCoin();
     }
 }

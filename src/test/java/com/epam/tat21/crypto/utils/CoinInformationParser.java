@@ -1,8 +1,10 @@
 package com.epam.tat21.crypto.utils;
 
-public class CoinValueParser {
+import org.apache.commons.lang3.StringUtils;
 
-    private CoinValueParser() {
+public class CoinInformationParser {
+
+    private CoinInformationParser() {
     }
 
     public static double parseTotalCoinValue(String valueExpression) {
@@ -30,4 +32,10 @@ public class CoinValueParser {
 
         return finalValue;
     }
+
+    public static String parseStrictCoinName(String coinNameFromWebsite) {
+        return coinNameFromWebsite.substring(0, coinNameFromWebsite.length() -
+                (StringUtils.substringBetween(coinNameFromWebsite, "(", ")").length() + 3));
+    }
+
 }

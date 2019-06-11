@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.bo;
 
 import com.epam.tat21.crypto.pages.HeaderPage;
-import com.epam.tat21.crypto.utils.CoinValueParser;
+import com.epam.tat21.crypto.utils.CoinInformationParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,7 +31,7 @@ public class PortfolioItem extends HeaderPage {
         double totalValue = 0;
         if (getCoinItemsList().size() > 0) {
             for (int i = 0; i < getCoinItemsList().size(); ++i) {
-                totalValue += CoinValueParser.parseTotalCoinValue(getCoinItemsList().get(i).getCoinTotalValue());
+                totalValue += CoinInformationParser.parseTotalCoinValue(getCoinItemsList().get(i).getCoinTotalValue());
             }
         }
         return totalValue;
