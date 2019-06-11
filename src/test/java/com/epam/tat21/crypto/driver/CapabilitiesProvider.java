@@ -7,6 +7,9 @@ public class CapabilitiesProvider {
 
     private static DesiredCapabilities capabilities;
 
+    private CapabilitiesProvider() {
+    }
+
     public static DesiredCapabilities getCapabilities(String browser) {
         switch (browser) {
             case "firefox":
