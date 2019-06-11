@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.driver;
 
+import com.epam.tat21.crypto.utils.MyLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -12,8 +13,8 @@ import static com.epam.tat21.crypto.service.TestDataReader.getHubURL;
 public class RemoteDriver implements DriverFactory{
 
     private static WebDriver driver;
-    private static URL url;
-    private static DesiredCapabilities capabilities;
+    private URL url;
+    private DesiredCapabilities capabilities;
 
     public RemoteDriver() {
     }
@@ -29,7 +30,7 @@ public class RemoteDriver implements DriverFactory{
             try {
                 driver = new RemoteWebDriver(new URL(getHubURL()), CapabilitiesProvider.getCapabilities(System.getProperty("browser")));
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                MyLogger.error(e.getMessage());
             }
         }
         return driver;

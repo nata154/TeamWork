@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.driver;
 
+import com.epam.tat21.crypto.utils.MyLogger;
 import com.epam.tat21.crypto.utils.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -38,7 +39,7 @@ public class RemoteDriverSauceLabs implements DriverFactory {
                 driver = new RemoteWebDriver(new URL("http://" + getSauceUsername() + ":" +
                         getSauceAccessKey() + sauceURL), capabilities);
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                MyLogger.error(e.getMessage());
             }
         }
         return driver;
