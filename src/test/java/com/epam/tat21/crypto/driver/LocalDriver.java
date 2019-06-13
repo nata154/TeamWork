@@ -1,23 +1,22 @@
-
 package com.epam.tat21.crypto.driver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+public class LocalDriver implements DriverFactory {
 
-public class DriverProvider {
     private static WebDriver driver;
 
-    private DriverProvider() {
+    public LocalDriver() {
     }
 
-    public static WebDriver getDriver() {
+    @Override
+    public WebDriver getDriver() {
         if (driver == null) {
             switch (System.getProperty("browser")) {
-
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
@@ -38,12 +37,13 @@ public class DriverProvider {
                     driver = new ChromeDriver();
                 }
             }
-            driver.manage().window().maximize();
         }
+        driver.manage().window().maximize();
         return driver;
     }
 
-    public static void closeDriver() {
+    @Override
+    public void closeDriver() {
         driver.quit();
         driver = null;
     }
