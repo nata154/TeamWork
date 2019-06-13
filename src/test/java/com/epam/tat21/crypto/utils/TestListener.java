@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.utils;
 
-import com.epam.tat21.crypto.driver.DriverProvider;
 import com.epam.tat21.crypto.service.TestDataReader;
+import com.epam.tat21.crypto.steps.Steps;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -44,7 +44,7 @@ public class TestListener implements ITestListener {
     }
 
     private void saveScreenshot() {
-        File screenCapture = ((TakesScreenshot) DriverProvider.getDriver()).getScreenshotAs(OutputType.FILE);
+        File screenCapture = ((TakesScreenshot) new Steps().getFactory().getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(
                     TestDataReader.getScreenshotFolderPath()
