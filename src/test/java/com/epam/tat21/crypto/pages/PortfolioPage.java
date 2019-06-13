@@ -3,7 +3,7 @@ package com.epam.tat21.crypto.pages;
 import com.epam.tat21.crypto.bo.PortfolioItem;
 import com.epam.tat21.crypto.service.TestDataReader;
 import com.epam.tat21.crypto.utils.MyLogger;
-import com.epam.tat21.crypto.utils.Waiter;
+import com.epam.tat21.crypto.utils.WaitConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,7 +55,7 @@ public class PortfolioPage extends HeaderPage {
 
     public List<WebElement> getPortfolioItemLinkList() {
 
-        Waiter.waitForVisibilityOfAllElementsByXpath(driver, PORTFOLIO_ITEM_LINK_LOCATOR, 5);
+        WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, PORTFOLIO_ITEM_LINK_LOCATOR, 5);
 
         return driver.findElements(By.xpath(PORTFOLIO_ITEM_LINK_LOCATOR));
     }

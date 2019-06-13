@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PortfolioItem extends HeaderPage {
 
     private final String COIN_NAME_LINK_LOCATOR = "//div[@class='table-col col-name']//a";
