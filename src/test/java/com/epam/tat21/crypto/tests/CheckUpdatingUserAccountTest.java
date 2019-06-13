@@ -8,7 +8,7 @@ public class CheckUpdatingUserAccountTest extends CommonConditions {
 
     private static final int COUNT_OF_GENERATED_POSTFIX_LETTERS = 3;
 
-    @Test
+    @Test(description = "EPMFARMATS-9108")
     public void checkUpdatingUserAccountTest() {
         String firstNameToChange = RandomString.generateRandomUserFirstName(COUNT_OF_GENERATED_POSTFIX_LETTERS);
         String surnameToChange = RandomString.generateRandomUserSurname(COUNT_OF_GENERATED_POSTFIX_LETTERS);

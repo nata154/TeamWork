@@ -8,6 +8,9 @@ public class TestDataReader {
     private static final String APPLICATION_URL = "application.url";
     private static final String PROFILE_NAME = "profile.name";
     private static final String SCREENSHOT_FOLDER = "screenshot.folder";
+    private static final String HUB_URL = "hubURL";
+    private static final String SAUCE_USERNAME = "sauce.username";
+    private static final String SAUCE_ACCESS_KEY = "sause.access.key";
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(System.getProperty("environment"));
 
     private TestDataReader() {
@@ -35,5 +38,17 @@ public class TestDataReader {
 
     public static String getScreenshotFolderPath() {
         return getProperty(SCREENSHOT_FOLDER);
+    }
+
+    public static String getHubURL() {
+        return getProperty(HUB_URL);
+    }
+
+    public static String getSauceUsername() {
+        return getProperty(SAUCE_USERNAME);
+    }
+
+    public static String getSauceAccessKey() {
+        return getProperty(SAUCE_ACCESS_KEY);
     }
 }

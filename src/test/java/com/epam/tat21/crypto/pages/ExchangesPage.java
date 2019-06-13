@@ -16,10 +16,10 @@ import java.util.concurrent.TimeUnit;
 public class ExchangesPage extends HeaderPage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "exchanges/";
-    private final String COUNTRY_LABEL_ON_PAGE_LOCATOR = "//div[@class='feature-label' and contains(text(), 'Country')]";
+    private final String COUNTRY_LABEL_ON_PAGE_LOCATOR = "//td[@class='table-ranking-Country']";
     private final String COUNTRY_IN_BADGE_LOCATOR = "//span[contains(text(), '%s')]/../span[@class='badge badge-filter-count pull-right ng-binding']";
     private final String COUNTRY_IN_DROPDOWN_LOCATOR = "//span[@class='pull-left ng-binding' and contains(text(), '%s')]";
-    private final String COUNTRY_ON_FILTERED_PAGE_LOCATOR = "//span[@class='ng-binding' and contains(text(), '%s')]";
+    private final String COUNTRY_ON_FILTERED_PAGE_LOCATOR = "//td[@class='table-ranking-Country']/div[contains(text(), '%s')]";
     private int numberOfExchangesInBadge;
 
     @FindBy(xpath = "//div[@class='btn-group btn-block dropdown']/button[contains(text(), 'Country')]")
