@@ -33,6 +33,7 @@ public class RemoteDriver implements DriverFactory{
                 MyLogger.error(e.getMessage());
             }
         }
+        driver.manage().window().maximize();
         return driver;
     }
 

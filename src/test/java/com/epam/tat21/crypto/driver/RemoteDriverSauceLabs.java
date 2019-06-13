@@ -42,6 +42,7 @@ public class RemoteDriverSauceLabs implements DriverFactory {
                 MyLogger.error(e.getMessage());
             }
         }
+        driver.manage().window().maximize();
         return driver;
     }
 

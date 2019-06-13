@@ -38,6 +38,7 @@ public class LocalDriver implements DriverFactory {
                 }
             }
         }
+        driver.manage().window().maximize();
         return driver;
     }
 
