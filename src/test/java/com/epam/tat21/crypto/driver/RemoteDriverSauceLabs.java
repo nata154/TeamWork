@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.driver;
 
+import com.epam.tat21.crypto.utils.DateUtils;
 import com.epam.tat21.crypto.utils.MyLogger;
-import com.epam.tat21.crypto.utils.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -23,7 +23,7 @@ public class RemoteDriverSauceLabs implements DriverFactory {
         this.capabilities = CapabilitiesProvider.getCapabilities(System.getProperty("browser"));
         capabilities.setCapability("version", "latest");
         capabilities.setCapability("screen-resolution", "1600x1200");
-        capabilities.setCapability("name", "crypto-compare-test-" + TestListener.getCurrentTimeAsString());
+        capabilities.setCapability("name", "crypto-compare-test-" + DateUtils.getCurrentTimeAsString());
 
     }
 
