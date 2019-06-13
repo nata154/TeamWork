@@ -18,7 +18,7 @@ public class Steps {
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
 
-    public DriverFactory getFactory() {
+    public DriverFactory getWebDriverFactory() {
         if (driver == null) {
             switch (System.getProperty("driver")) {
                 case "local":
@@ -33,11 +33,11 @@ public class Steps {
     }
 
     public void openBrowser() {
-        driver = getFactory().getDriver();
+        driver = getWebDriverFactory().getDriver();
     }
 
     public void closeBrowser() {
-        getFactory().closeDriver();
+        getWebDriverFactory().closeDriver();
     }
 
     public MainCryptoComparePage loginUser() {
