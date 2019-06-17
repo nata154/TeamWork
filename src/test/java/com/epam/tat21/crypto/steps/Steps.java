@@ -10,6 +10,11 @@ import com.epam.tat21.crypto.driver.RemoteDriverSauceLabs;
 import com.epam.tat21.crypto.pages.*;
 import com.epam.tat21.crypto.service.UserCreator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 public class Steps {
 
@@ -98,5 +103,12 @@ public class Steps {
 
     public int getAllCoinNewsFromFilteredPage(Coin coin) {
         return newsPage.getNumberOfNewsForCoin(coin);
+    }
+
+    public String[] get50LatestNewsTitleItemsFromPage() {
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        List<WebElement> newsTitles = newsPage.getAllNewsArticleTitle();
+        //get the text from news titles and fill an array by them
+        return IntStream.range(0, 50).mapToObj(i -> newsTitles.get(i).getText()).toArray(String[]::new);
     }
 }
