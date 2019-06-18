@@ -41,17 +41,17 @@ public class UserAccountPage extends HeaderPage {
     }
 
     public UserAccountPage clickTabGeneral() {
-        waitForElementClicable(tabGeneral);
+        waitForElementClickable(tabGeneral);
         tabGeneral.click();
         return this;
     }
 
     public UserAccountPage enterNewFirstNameAndSurname(String firstName, String surname) {
-        waitForElementClicable(firstNameLineInGeneralTab);
+        waitForElementClickable(firstNameLineInGeneralTab);
         firstNameLineInGeneralTab.click();
         firstNameLineInGeneralTab.clear();
         firstNameLineInGeneralTab.sendKeys(firstName);
-        waitForElementClicable(surnameLineInGeneralTab);
+        waitForElementClickable(surnameLineInGeneralTab);
         surnameLineInGeneralTab.click();
         surnameLineInGeneralTab.clear();
         surnameLineInGeneralTab.sendKeys(surname);
@@ -59,7 +59,7 @@ public class UserAccountPage extends HeaderPage {
     }
 
     public UserAccountPage clickButtonSaveChanges() {
-        waitForElementClicable(buttonSaveChangesInGeneralTab);
+        waitForElementClickable(buttonSaveChangesInGeneralTab);
         buttonSaveChangesInGeneralTab.click();
         return this;
     }

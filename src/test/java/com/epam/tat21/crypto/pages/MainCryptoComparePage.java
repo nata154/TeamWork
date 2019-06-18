@@ -30,6 +30,8 @@ public class MainCryptoComparePage extends HeaderPage {
     @Override
     public MainCryptoComparePage openPage() {
         driver.navigate().to(BASE_URL);
+
+
         MyLogger.info("MainCryptoComparePage was opened");
         return this;
     }
@@ -56,4 +58,6 @@ public class MainCryptoComparePage extends HeaderPage {
         new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@modal-render]")));
         return this;
     }
+
+
 }

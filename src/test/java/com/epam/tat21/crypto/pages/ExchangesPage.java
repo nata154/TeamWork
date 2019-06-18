@@ -44,7 +44,7 @@ public class ExchangesPage extends HeaderPage {
     }
 
     public ExchangesPage clickOnCountryDropdown() {
-        waitForElementClicable(countryDropdownMenuLink);
+        waitForElementClickable(countryDropdownMenuLink);
         countryDropdownMenuLink.click();
         return this;
     }
@@ -65,7 +65,7 @@ public class ExchangesPage extends HeaderPage {
     public ExchangesPage selectCountryInDropdown(Countries country) {
         WebElement countryLinkInDropdown = driver.
                 findElement(By.xpath(String.format(COUNTRY_IN_DROPDOWN_LOCATOR, country.getNameOfCountry())));
-        waitForElementClicable(countryLinkInDropdown);
+        waitForElementClickable(countryLinkInDropdown);
         getNumberOfExchangesFromBadge(country);
         countryLinkInDropdown.click();
         MyLogger.info(country.getNameOfCountry() + " country was chosen");
