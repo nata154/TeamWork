@@ -105,10 +105,10 @@ public class Steps {
         return newsPage.getNumberOfNewsForCoin(coin);
     }
 
-    public String[] get50LatestNewsTitleItemsFromPage() {
+    public String[] getLatestNewsTitleItemsFromPage(int numberOfTitles) {
         driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         List<WebElement> newsTitles = newsPage.getAllNewsArticleTitle();
         //get the text from news titles and fill an array by them
-        return IntStream.range(0, 50).mapToObj(i -> newsTitles.get(i).getText()).toArray(String[]::new);
+        return IntStream.range(0, numberOfTitles).mapToObj(i -> newsTitles.get(i).getText()).toArray(String[]::new);
     }
 }
