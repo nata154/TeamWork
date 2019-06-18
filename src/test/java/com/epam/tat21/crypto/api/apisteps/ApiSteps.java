@@ -1,9 +1,9 @@
 package com.epam.tat21.crypto.api.apisteps;
 
+import com.epam.tat21.crypto.api.apiutils.ObjectCreatorFromResponse;
 import com.epam.tat21.crypto.api.model.LatestNews;
 import com.epam.tat21.crypto.service.TestDataReader;
 import com.epam.tat21.crypto.utils.MyLogger;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -12,26 +12,23 @@ import java.util.stream.IntStream;
 
 public class ApiSteps {
 
-    private Response response;
-    private LatestNews latestNews;
-
     public Response getResponseWithLatestNews() {
         RestAssured.baseURI = TestDataReader.getApiGetUrl() + "v2/news/";
         MyLogger.info("Getting response with latest news");
-        response = RestAssured.when().get().andReturn();
-        return response;
+        return RestAssured.when().get().andReturn();
     }
 
     public LatestNews getLatestNewsFromResponse() throws IOException {
         MyLogger.info("Filling model classes LatestNews -> NewsItem -> NewsItemSourceInfo");
+        Response response = getResponseWithLatestNews();
         //with Jackson library serialize a tree of model classes
-        latestNews = new ObjectMapper().readValue(response.getBody().asString(), LatestNews.class);
-        return latestNews;
+        return ObjectCreatorFromResponse.getObjectFromResponse(response, LatestNews.class);
     }
 
-    public String[] get50LatestNewsTitleItems() {
+    public String[] getLatestNewsTitleItems(int numberOfItems) throws IOException {
         MyLogger.info("Getting 50 latest news titles from the response");
-        //return subarray of 50 titles, cause the news page contains 50 news, while JSON can contain 100
-        return IntStream.range(0, 50).mapToObj(i -> latestNews.getData().get(i).getTitle()).toArray(String[]::new);
+        LatestNews latestNews = getLatestNewsFromResponse();
+        //return subarray of titles, cause the news page can contain 50 news, while JSON can contain 100
+        return IntStream.range(0, numberOfItems).mapToObj(i -> latestNews.getSortedData().get(i).getTitle()).toArray(String[]::new);
     }
 }
