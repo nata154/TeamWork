@@ -11,6 +11,7 @@ public class TestDataReader {
     private static final String HUB_URL = "hubURL";
     private static final String SAUCE_USERNAME = "sauce.username";
     private static final String SAUCE_ACCESS_KEY = "sause.access.key";
+    private static final String API_GET_URL = "api.get.url";
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(System.getProperty("environment"));
 
     private TestDataReader() {
@@ -50,5 +51,9 @@ public class TestDataReader {
 
     public static String getSauceAccessKey() {
         return getProperty(SAUCE_ACCESS_KEY);
+    }
+
+    public static String getApiGetUrl() {
+        return API_GET_URL;
     }
 }
