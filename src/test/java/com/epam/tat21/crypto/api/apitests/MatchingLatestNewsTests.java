@@ -12,10 +12,9 @@ public class MatchingLatestNewsTests extends CommonConditions {
     @Test
     public void matchingLatestNewsInResponseAndOnPageByTitleTest() throws IOException {
         steps.openNewsPage();
-        apiSteps.getResponseWithLatestNews();
-        apiSteps.getLatestNewsFromResponse();
-        String[] newsTitlesFromPage = steps.get50LatestNewsTitleItemsFromPage();
-        String[] newsTitlesFromResponse = apiSteps.get50LatestNewsTitleItems();
+        String[] newsTitlesFromResponse = apiSteps.getLatestNewsTitleItems(50);
+        String[] newsTitlesFromPage = steps.getLatestNewsTitleItemsFromPage(50);
         Assert.assertTrue(Arrays.equals(newsTitlesFromResponse, newsTitlesFromPage));
     }
+
 }
