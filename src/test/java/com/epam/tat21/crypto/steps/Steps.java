@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.steps;
 
+import com.epam.tat21.crypto.api.model.CurrencyForCoin;
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.bo.Countries;
 import com.epam.tat21.crypto.bo.User;
@@ -10,6 +11,9 @@ import com.epam.tat21.crypto.driver.RemoteDriverSauceLabs;
 import com.epam.tat21.crypto.pages.*;
 import com.epam.tat21.crypto.service.UserCreator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class Steps {
 
@@ -99,4 +103,11 @@ public class Steps {
     public int getAllCoinNewsFromFilteredPage(Coin coin) {
         return newsPage.getNumberOfNewsForCoin(coin);
     }
+
+    public String[] getActualCurreencyForCoin(Coin coin, List<CurrencyForCoin> currencyForCoins) {
+        List<WebElement> newsTitles = new CoinsPage(driver).openPage().getAllNewsArticleTitle();
+        //get the text from news titles and fill an array by them
+        return IntStream.range(0, 50).mapToObj(i -> newsTitles.get(i).getText()).toArray(String[]::new);
+    }
+
 }
