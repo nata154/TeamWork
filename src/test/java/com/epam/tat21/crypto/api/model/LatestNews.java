@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.api.model;
 
+import com.epam.tat21.crypto.api.apiutils.NewsItemComparator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -39,5 +40,10 @@ public class LatestNews {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public List<NewsItem> getSortedData() {
+        data.sort(new NewsItemComparator());
+        return data;
     }
 }
