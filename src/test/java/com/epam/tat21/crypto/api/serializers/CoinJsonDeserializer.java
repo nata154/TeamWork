@@ -12,36 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CoinJsonDeserializer { //extends JsonDeserializer<ResponceCoinWrapper> {
-
-//----------JACKSON--------------
-//    @Override
-//    public ResponceCoinWrapper deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-//        ObjectCodec oc = jp.getCodec();
-//        JsonNode node = oc.readTree(jp);
-//
-//        String response = node.get("Response").asText();
-//        System.out.println(response);
-//        String message = node.get("Message").asText();
-//        System.out.println(message);
-//        Iterator<Map.Entry<String,JsonNode>> mapOfCoins = node.get("Data").fields();
-//
-//        List<DataCoinModel> listOfCoins = new ArrayList<DataCoinModel>();
-//
-//        while(mapOfCoins.hasNext()) {
-//            DataCoinModel coin = new DataCoinModel();
-//            coin.setId(mapOfCoins.next().getValue().get("Id").asText());
-//            System.out.println(mapOfCoins.next().getValue().get("Id").asText());
-//            coin.setUrl(mapOfCoins.next().getValue().get("Url").asText());
-//            coin.setName(mapOfCoins.next().getValue().get("Name").asText());
-//            coin.setCoinName(mapOfCoins.next().getValue().get("CoinName").asText());
-//            coin.setFullName(mapOfCoins.next().getValue().get("FullName").asText());
-//            listOfCoins.add(coin);
-//        }
-//
-//        CoinModel coinModel = new CoinModel(listOfCoins);
-//        return new ResponceCoinWrapper(response, message, coinModel);
-//    }
+public class CoinJsonDeserializer {
 
     public ResponceCoinWrapper deserialize(Response response) {
         JSONParser parser = new JSONParser();
