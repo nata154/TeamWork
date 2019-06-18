@@ -2,10 +2,8 @@ package com.epam.tat21.crypto.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.io.Serializable;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NewsItem implements Serializable {
+public class NewsItem {
     private String id;
     private String guid;
     private Integer published_on;
