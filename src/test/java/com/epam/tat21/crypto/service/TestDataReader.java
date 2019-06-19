@@ -54,6 +54,6 @@ public class TestDataReader {
     }
 
     public static String getApiGetUrl() {
-        return API_GET_URL;
+        return getProperty(API_GET_URL);
     }
 }
