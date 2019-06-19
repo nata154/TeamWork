@@ -1,13 +1,17 @@
 package com.epam.tat21.crypto.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NewsItem {
+
     private String id;
     private String guid;
-    private Integer published_on;
-    private String imageurl;
+    @JsonProperty("published_on")
+    private Integer publishedOn;
+    @JsonProperty("imageurl")
+    private String imageUrl;
     private String title;
     private String url;
     private String source;
@@ -17,7 +21,8 @@ public class NewsItem {
     private String upvotes;
     private String downvotes;
     private String lang;
-    private NewsItemSourceInfo source_info;
+    @JsonProperty("source_info")
+    private NewsItemSourceInfo sourceInfo;
 
     public void setId(String id) {
         this.id = id;
@@ -27,12 +32,12 @@ public class NewsItem {
         this.guid = guid;
     }
 
-    public void setPublished_on(Integer published_on) {
-        this.published_on = published_on;
+    public void setPublishedOn(Integer publishedOn) {
+        this.publishedOn = publishedOn;
     }
 
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setTitle(String title) {
@@ -79,12 +84,12 @@ public class NewsItem {
         return guid;
     }
 
-    public Integer getPublished_on() {
-        return published_on;
+    public Integer getPublishedOn() {
+        return publishedOn;
     }
 
-    public String getImageurl() {
-        return imageurl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getTitle() {
@@ -123,11 +128,11 @@ public class NewsItem {
         return lang;
     }
 
-    public NewsItemSourceInfo getSource_info() {
-        return source_info;
+    public NewsItemSourceInfo getSourceInfo() {
+        return sourceInfo;
     }
 
-    public void setSource_info(NewsItemSourceInfo source_info) {
-        this.source_info = source_info;
+    public void setSourceInfo(NewsItemSourceInfo sourceInfo) {
+        this.sourceInfo = sourceInfo;
     }
 }
