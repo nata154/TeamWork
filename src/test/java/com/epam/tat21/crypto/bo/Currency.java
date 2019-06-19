@@ -15,11 +15,11 @@ public enum  Currency {
 
     private String nameCurrency;
 
-    Currency(String nameCoin) {
-        this.nameCurrency = nameCoin;
+    Currency(String nameCurrency) {
+        this.nameCurrency = nameCurrency;
     }
 
-    public String getNameOfCoin() {
+    public String getNameOfCurrency() {
         return nameCurrency;
     }
 }

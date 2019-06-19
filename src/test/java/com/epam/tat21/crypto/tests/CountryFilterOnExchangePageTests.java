@@ -2,9 +2,11 @@ package com.epam.tat21.crypto.tests;
 
 import com.epam.tat21.crypto.bo.Countries;
 import com.epam.tat21.crypto.data.CountriesDataProvider;
-import com.epam.tat21.crypto.utils.jira.JIRATestKey;
+import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+//import com.epam.tat21.crypto.utils.jira.JIRATestKey;
 
 public class CountryFilterOnExchangePageTests extends CommonConditions {
 

@@ -1,6 +1,5 @@
 package com.epam.tat21.crypto.steps;
 
-import com.epam.tat21.crypto.api.model.CurrencyForCoin;
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.bo.Countries;
 import com.epam.tat21.crypto.bo.User;
@@ -11,9 +10,6 @@ import com.epam.tat21.crypto.driver.RemoteDriverSauceLabs;
 import com.epam.tat21.crypto.pages.*;
 import com.epam.tat21.crypto.service.UserCreator;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class Steps {
 
@@ -21,6 +17,7 @@ public class Steps {
     private UserAccountPage userAccountPage;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
+    private CoinsPage coinsPage;
 
     public DriverFactory getWebDriverFactory() {
         if (driver == null) {
@@ -104,10 +101,19 @@ public class Steps {
         return newsPage.getNumberOfNewsForCoin(coin);
     }
 
-    public String[] getActualCurreencyForCoin(Coin coin, List<CurrencyForCoin> currencyForCoins) {
-        List<WebElement> newsTitles = new CoinsPage(driver).openPage().getAllNewsArticleTitle();
-        //get the text from news titles and fill an array by them
-        return IntStream.range(0, 50).mapToObj(i -> newsTitles.get(i).getText()).toArray(String[]::new);
+
+    public CoinsPage openCoinsPage() {
+        return coinsPage = new CoinsPage(driver).
+                openPage();
     }
+
+//    public String getActualCurrencyForCoin(List<Coin> coin, List<Currency> currency) {
+//////        List<WebElement> newsTitles = new CoinsPage(driver).openPage().getAllNewsArticleTitle();
+//////        //get the text from news titles and fill an array by them
+//////        return IntStream.range(0, 50).mapToObj(i -> newsTitles.get(i).getText()).toArray(String[]::new);
+//////        return new CoinsPage(driver).selectCurrency(currency)
+//////                .findCurrencyCostForCoin(coin, currency);
+////
+////    }
 
 }
