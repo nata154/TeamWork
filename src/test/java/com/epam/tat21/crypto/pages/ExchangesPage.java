@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class ExchangesPage extends HeaderPage {
@@ -58,7 +57,6 @@ public class ExchangesPage extends HeaderPage {
     public ExchangesPage scrollPage() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         return this;
     }
 
