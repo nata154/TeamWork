@@ -8,8 +8,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 
-//import com.epam.tat21.crypto.utils.jira.JIRATestNGListener;
-
 @Listeners({TestListener.class, JIRATestNGListener.class})
 public class CommonConditions {
 
