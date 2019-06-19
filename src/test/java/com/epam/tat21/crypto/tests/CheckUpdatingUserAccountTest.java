@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.tests;
 
 import com.epam.tat21.crypto.utils.RandomString;
-import com.epam.tat21.crypto.utils.jira.JIRATestKey;
+import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
