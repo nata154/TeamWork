@@ -3,6 +3,7 @@ package com.epam.tat21.crypto.api.serializers;
 import com.epam.tat21.crypto.api.model.CoinModel;
 import com.epam.tat21.crypto.api.model.DataCoinModel;
 import com.epam.tat21.crypto.api.model.ResponceCoinWrapper;
+import com.epam.tat21.crypto.utils.MyLogger;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,9 +15,9 @@ import java.util.List;
 
 public class CoinJsonDeserializer {
 
-    public ResponceCoinWrapper deserialize(Response response) {
-        JSONParser parser = new JSONParser();
+    public ResponceCoinWrapper deserialize(Response response) throws RuntimeException {
         try {
+            JSONParser parser = new JSONParser();
             Object obj = parser.parse(response.getBody().asString());
 
             JSONObject jsonObject = (JSONObject) obj;
@@ -43,9 +44,9 @@ public class CoinJsonDeserializer {
             ResponceCoinWrapper responceCoinWrapper = new ResponceCoinWrapper(resp, message, coinModel);
             return responceCoinWrapper;
         } catch (ParseException e) {
-            e.printStackTrace();
+            MyLogger.error(e.getMessage());
         }
-        return null;
+        throw new RuntimeException("Can't deserialize response \n<" + response.prettyPrint() + "\n>");
     }
 }
 
