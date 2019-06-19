@@ -15,8 +15,8 @@ import java.util.List;
 public class NewsPage extends HeaderPage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "news/";
-
     private final static String COINS_NEWS_XPATH = "//a[@href='/news/list/latest/?categories=";
+    private final static String ARTICLE_TITLE_LOCATOR = "//a[@rel and @class='ng-binding']";
 
     @FindBy(xpath = "//div[@class='col-md-12 list-container ng-isolate-scope']")
     private WebElement containerOfNews;
@@ -67,5 +67,10 @@ public class NewsPage extends HeaderPage {
                 return false;
             }
         });
+    }
+
+    public List<WebElement> getAllNewsArticleTitle() {
+        MyLogger.info("Getting all news titles from the news page");
+        return driver.findElements(By.xpath(ARTICLE_TITLE_LOCATOR));
     }
 }
