@@ -21,14 +21,10 @@ public class CoinJsonDeserializer {
 
             JSONObject jsonObject = (JSONObject) obj;
             String resp = (String) jsonObject.get("Response");
-            System.out.println(resp);
-
             String message = (String) jsonObject.get("Message");
-            System.out.println(message);
 
             JSONObject data = (JSONObject) jsonObject.get("Data");
             Collection<JSONObject> collectionData = data.values();
-
 
             List<DataCoinModel> listOfCoins = new ArrayList<>();
 
