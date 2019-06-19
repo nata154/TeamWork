@@ -8,13 +8,13 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CoinModel implements Serializable {
 
-    public List<DataCoinModel> mapOfCoins;
+    public List<DataCoinModel> listOfCoins;
 
-    public CoinModel(List<DataCoinModel> mapOfCoins) {
-        this.mapOfCoins = mapOfCoins;
+    public CoinModel(List<DataCoinModel> listOfCoins) {
+        this.listOfCoins = listOfCoins;
     }
 
-    public void setMapOfCoins(List<DataCoinModel> mapOfCoins) {
-        this.mapOfCoins = mapOfCoins;
+    public void setMapOfCoins(List<DataCoinModel> listOfCoins) {
+        this.listOfCoins = listOfCoins;
     }
 }
