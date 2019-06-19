@@ -3,13 +3,14 @@ package com.epam.tat21.crypto.tests;
 import com.epam.tat21.crypto.api.apisteps.ApiSteps;
 import com.epam.tat21.crypto.steps.Steps;
 import com.epam.tat21.crypto.utils.TestListener;
+import com.epam.testng.JIRATestNGListener;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 
 //import com.epam.tat21.crypto.utils.jira.JIRATestNGListener;
 
-@Listeners({TestListener.class})
+@Listeners({TestListener.class, JIRATestNGListener.class})
 public class CommonConditions {
 
     protected Steps steps;
