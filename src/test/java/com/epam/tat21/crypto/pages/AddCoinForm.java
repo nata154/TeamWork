@@ -31,35 +31,35 @@ public class AddCoinForm extends HeaderPage {
     }
 
     public AddCoinForm scrollToNeededCoin() {
-        waitForElementClicable(searchCoinField);
+        waitForElementClickable(searchCoinField);
         searchCoinField.click();
-        waitForElementClicable(coinsDropdown);
+        waitForElementClickable(coinsDropdown);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", coinsDropdown);
         return this;
     }
 
     public AddCoinForm selectCoinInDropdown() {
-        waitForElementClicable(firstCoinInDropdown);
+        waitForElementClickable(firstCoinInDropdown);
         firstCoinInDropdown.click();
         return this;
     }
 
     public AddCoinForm inputCoinInSearchField(Coin coin) {
-        waitForElementClicable(searchCoinField);
+        waitForElementClickable(searchCoinField);
         searchCoinField.sendKeys(coin.getNameOfCoin());
         selectCoinInDropdown();
         return this;
     }
 
     public AddCoinForm inputAmountOfCoinInField(String amount) {
-        waitForElementClicable(amountField);
+        waitForElementClickable(amountField);
         amountField.sendKeys(amount);
         return this;
     }
 
     public AddCoinForm inputbBuyPriceOfCoinInField(String price) {
-        waitForElementClicable(buyPriceField);
+        waitForElementClickable(buyPriceField);
         buyPriceField.sendKeys(price);
         return this;
     }
@@ -68,7 +68,7 @@ public class AddCoinForm extends HeaderPage {
         inputCoinInSearchField(coin)
                 .inputAmountOfCoinInField(amount)
                 .inputbBuyPriceOfCoinInField(price);
-        waitForElementClicable(addPortfolioButton);
+        waitForElementClickable(addPortfolioButton);
         addPortfolioButton.click();
         return this;
     }
