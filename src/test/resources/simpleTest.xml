@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="suite01" parallel="false">
 
-    <test name="1" enabled="false">
+    <test name="1" enabled="true">
         <classes>
             <class name="com.epam.tat21.crypto.api.apitests.MatchingCoinValueInCurrencyWithCommonCurrencyTest"></class>
         </classes>

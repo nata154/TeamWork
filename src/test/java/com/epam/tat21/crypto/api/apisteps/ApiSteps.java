@@ -1,6 +1,7 @@
 package com.epam.tat21.crypto.api.apisteps;
 
 import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
+import com.epam.tat21.crypto.api.model.CoinValueInCurrency;
 import com.epam.tat21.crypto.api.model.LatestNews;
 import com.epam.tat21.crypto.api.model.NewsItem;
 import com.epam.tat21.crypto.bo.Coin;
@@ -10,6 +11,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -46,5 +48,24 @@ public class ApiSteps {
         List<NewsItem> sortedNews = latestNews.getSortedData();
         //return subarray of titles, cause the news page can contain 50 news, while JSON can contain 100
         return IntStream.range(0, numberOfItems).mapToObj(i -> sortedNews.get(i).getTitle()).toArray(String[]::new);
+    }
+
+    public Response getResponseWithCoinCostInCurrency() {
+        MyLogger.info("Getting response with currency costs for coins");
+        return RestAssured.when().get(TestDataReader.getApiGetUrl() + "pricemulti?fsyms=LTC,BTC&tsyms=EUR,JPY").andReturn();//убрать хардкод
+    }
+
+    private CoinValueInCurrency getCoinsValueInCurrency(Response response) throws IOException {
+        MyLogger.info("Filling model classes CoinValueInCurrency -> CurrencyForCoin");
+        //with Jackson library serialize a tree of model classes
+        return ResponseUtils.getObjectFromResponse(response, CoinValueInCurrency.class);
+    }
+
+    public String[] getCoinsValueInCurrencyItemsAsArray() throws IOException {
+        MyLogger.info("Getting coin costs in currency");
+        CoinValueInCurrency coinsValueInCurrency = getCoinsValueInCurrency(getResponseWithCoinCostInCurrency());
+        List<CoinValueInCurrency> coinsValueInCurrencyItemsAsArray = Arrays.asList(coinsValueInCurrency);
+        //return subarray of titles, cause the news page can contain 50 news, while JSON can contain 100
+        return IntStream.range(0, 10).mapToObj(i -> coinsValueInCurrencyItemsAsArray.get(i)).toArray(String[]::new);
     }
 }
