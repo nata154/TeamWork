@@ -111,13 +111,13 @@
             <version>3.3.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>LATEST</version>
         </dependency>
 
+        <!--Jira-->
         <dependency>
             <groupId>com.epam.jira</groupId>
             <artifactId>adapter-java-core</artifactId>
