@@ -15,15 +15,22 @@ import java.util.stream.IntStream;
 
 public class ApiSteps {
 
+    private static final String NEWS_RELATIVE_PATH = "v2/news/";
+
+    public ApiSteps() {
+        RestAssured.baseURI = TestDataReader.getApiGetUrl();
+    }
+
     public Response getResponseWithLatestNews() {
         MyLogger.info("Getting response with latest news");
-        return RestAssured.when().get(TestDataReader.getApiGetUrl() + "v2/news/").andReturn();
+        return RestAssured.when().get(NEWS_RELATIVE_PATH).andReturn();
     }
 
     public Response getResponseWithNewsByCoin(Coin coin) {
-        MyLogger.info("Getting response with news by coin");
-        return RestAssured.when().get(TestDataReader.getApiGetUrl() +
-                "v2/news/?categories=" + coin.getAbbreviationCoin()).andReturn();
+        MyLogger.info("Getting response with news by coin: " + coin.getAbbreviationCoin());
+        return RestAssured.given().
+                queryParam("categories", coin.getAbbreviationCoin()).
+                when().get(NEWS_RELATIVE_PATH).andReturn();
     }
 
     private LatestNews getLatestNewsFromResponse(Response response) throws IOException {
