@@ -3,6 +3,8 @@ package com.epam.tat21.crypto.api.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponceCoinWrapper {
 
@@ -13,13 +15,7 @@ public class ResponceCoinWrapper {
     public String message;
 
     @JsonProperty("Data")
-    public CoinModel data;
-
-    public ResponceCoinWrapper(String response, String message, CoinModel data) {
-        this.response = response;
-        this.message = message;
-        this.data = data;
-    }
+    public Map<String, DataCoinModel> data;
 
     public String getResponse() {
         return response;
@@ -37,11 +33,11 @@ public class ResponceCoinWrapper {
         this.message = message;
     }
 
-    public CoinModel getData() {
+    public Map<String, DataCoinModel> getData() {
         return data;
     }
 
-    public void setData(CoinModel data) {
+    public void setData(Map<String, DataCoinModel> data) {
         this.data = data;
     }
 }
