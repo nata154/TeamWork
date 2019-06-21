@@ -1,6 +1,7 @@
 package com.epam.tat21.crypto.api.apisteps;
 
 import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
+import com.epam.tat21.crypto.api.model.FeedItem;
 import com.epam.tat21.crypto.api.model.LatestNews;
 import com.epam.tat21.crypto.api.model.NewsItem;
 import com.epam.tat21.crypto.bo.Coin;
@@ -16,6 +17,7 @@ import java.util.stream.IntStream;
 public class ApiSteps {
 
     private static final String NEWS_RELATIVE_PATH = "v2/news/";
+    private static final String FEEDS_RELATIVE_PATH = "news/feeds";
 
     public ApiSteps() {
         RestAssured.baseURI = TestDataReader.getApiGetUrl();
@@ -31,6 +33,11 @@ public class ApiSteps {
         return RestAssured.given().
                 queryParam("categories", coin.getAbbreviationCoin()).
                 when().get(NEWS_RELATIVE_PATH).andReturn();
+    }
+
+    public Response getResponseWithFeeds() {
+        MyLogger.info("Getting response with feeds");
+        return RestAssured.when().get(FEEDS_RELATIVE_PATH).andReturn();
     }
 
     private LatestNews getLatestNewsFromResponse(Response response) throws IOException {
@@ -53,5 +60,17 @@ public class ApiSteps {
         List<NewsItem> sortedNews = latestNews.getSortedData();
         //return subarray of titles, cause the news page can contain 50 news, while JSON can contain 100
         return IntStream.range(0, numberOfItems).mapToObj(i -> sortedNews.get(i).getTitle()).toArray(String[]::new);
+    }
+
+    private FeedItem[] getFeedsFromResponse() throws IOException {
+        MyLogger.info("Filling an array of model classes FeedItem");
+        //with Jackson library serialize a tree of model classes
+        return ResponseUtils.getObjectFromResponse(getResponseWithFeeds(), FeedItem[].class);
+    }
+
+    public String[] getFeedsNames() throws IOException {
+        MyLogger.info("Getting an array of feeds names from the array of model classes FeedItem");
+        FeedItem[] feedItems = getFeedsFromResponse();
+        return IntStream.range(0, feedItems.length).mapToObj(i -> feedItems[i].getName()).toArray(String[]::new);
     }
 }
