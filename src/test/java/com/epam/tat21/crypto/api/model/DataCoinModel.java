@@ -1,15 +1,24 @@
 package com.epam.tat21.crypto.api.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataCoinModel {
 
+    @JsonProperty("Id")
     public String id;
+
+    @JsonProperty("Url")
     public String url;
+
+    @JsonProperty("Name")
     public String name;
+
+    @JsonProperty("CoinName")
     public String coinName;
+
+    @JsonProperty("FullName")
     public String fullName;
 
     public String getId() {
@@ -52,14 +61,4 @@ public class DataCoinModel {
         this.fullName = fullName;
     }
 
-    @Override
-    public String toString() {
-        return "DataCoinModel{" +
-                "id='" + id + '\'' +
-                ", url='" + url + '\'' +
-                ", name='" + name + '\'' +
-                ", coinName='" + coinName + '\'' +
-                ", fullName='" + fullName + '\'' +
-                '}';
-    }
 }
