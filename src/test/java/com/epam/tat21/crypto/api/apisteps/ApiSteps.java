@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.IntStream;
 
-
 public class ApiSteps {
 
     private static final String NEWS_RELATIVE_PATH = "v2/news/";
