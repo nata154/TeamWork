@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ValidateJsonSchemaTest {
 
     private static final String JSON_URL_FROM_API = "http://jsonplaceholder.typicode.com/users";
-    private static final String SCHEMA_PATH = "jsonSchema.json";
+    private static final String SCHEMA_PATH = "src/test/resources/JsonSchemes/jsonSchema.json";
 
     @Test()
     public void jsonSchemaValidationTest() throws IOException {
