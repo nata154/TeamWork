@@ -8,8 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,37 +33,51 @@ public class CoinsPage extends HeaderPage {
         return this;
     }
 
-    Map<String, Map<Currency, String>> coinCurrencyMap = new HashMap<String, Map<Currency, String>>();
-    Map<Currency, String> currencyForEachCoinMap = new HashMap<>();
 
-    public Map<String, Map<Currency, String>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
-        for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for exmpl EUR
-            WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
-            waitForElementClickable(tabCurrency);
-            tabCurrency.click();
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            for (int j = 0; j < coins.size(); j++) {//here we find our lines with coins (at this currency tab) and get this sum
+    public Map<String, Map<String, String>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
+        Map<String, Map<String, String>> coinCurrencyMap = new LinkedHashMap<String, Map<String, String>>();
+
+        for (int j = 0; j < coins.size(); j++) {//here we find our lines with coins (at this currency tab) and get this sum
+            Map<String, String> currencyForEachCoinMap = new LinkedHashMap<String, String>();
+            for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for exmpl EUR
+                WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
+                waitForElementClickable(tabCurrency);
+                tabCurrency.click();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
                 waitForElementClickable(lineCoinFieldCost);
                 lineCoinFieldCost.click();
                 MyLogger.info("Currency line for coin " + coins.get(j).getAbbreviationCoin() + " was selected");
-                String currentCostOfCoin = lineCoinFieldCost.getText().substring(3);
+
+                String currentCostOfCoin = lineCoinFieldCost.getText().substring(2);
                 System.out.println(currentCostOfCoin);
-                currencyForEachCoinMap.put(currency.get(j), currentCostOfCoin);
+
+                currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), currentCostOfCoin);
             }
-            coinCurrencyMap.put(coins.get(i).getAbbreviationCoin(), currencyForEachCoinMap);
-        }
+            coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
+            }
+        System.out.println("-----/Result map------");
         printMap(coinCurrencyMap);
         return coinCurrencyMap;
+        }
+
+
+    public void printMap(Map<String, Map<String, String>> coinCurrencyMap) {
+        Iterator it = coinCurrencyMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+//            it.remove(); // avoids a ConcurrentModificationException
+        }
     }
 
-    public void printMap(Map<String, Map<Currency, String>> coinCurrencyMap) {
-        Iterator it = this.coinCurrencyMap.entrySet().iterator();
+    public void printMap2(Map<String, String> currencyForEachCoinMap) {
+        Iterator it = currencyForEachCoinMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
@@ -73,7 +87,7 @@ public class CoinsPage extends HeaderPage {
 
     public void generateStringArrayFromMap(Map<String, Map<Currency, String>> coinCurrencyMap) {
         String[] mapAsArray = new String[coinCurrencyMap.size()];
-        Iterator it = this.coinCurrencyMap.entrySet().iterator();
+        Iterator it = coinCurrencyMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             //  mapAsArray.
@@ -82,6 +96,68 @@ public class CoinsPage extends HeaderPage {
         }
     }
 
+//    public Map<String, Map<Currency, String>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
+//        for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for exmpl EUR
+//            WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
+//            waitForElementClickable(tabCurrency);
+//            tabCurrency.click();
+//            try {
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            for (int j = 0; j < coins.size(); j++) {//here we find our lines with coins (at this currency tab) and get this sum
+//                WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
+//                        coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
+//                waitForElementClickable(lineCoinFieldCost);
+//                lineCoinFieldCost.click();
+//                MyLogger.info("Currency line for coin " + coins.get(j).getAbbreviationCoin() + " was selected");
+//                String currentCostOfCoin = lineCoinFieldCost.getText().substring(2);
+//                System.out.println(currentCostOfCoin);
+//                currencyForEachCoinMap.put(currency.get(i), currentCostOfCoin);
+//                coinCurrencyMap.put(coins.get(i).getAbbreviationCoin(), currencyForEachCoinMap);
+//                //printMap(currencyForEachCoinMap);
+//                coinCurrencyMap.put(coins.get(i).getAbbreviationCoin(), currencyForEachCoinMap);
+//            }
+//            //coinCurrencyMap.put(coins.get(i).getAbbreviationCoin(), currencyForEachCoinMap);
+//        }
+//        printMap(coinCurrencyMap);
+//        return coinCurrencyMap;
+//    }
+
+
+//    public Map<String, Map<String, String>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
+//        Map<String, Map<String, String>> coinCurrencyMap = new LinkedHashMap<String, Map<String, String>>();
+//        Map<String, String> currencyForEachCoinMap;
+//        for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for exmpl EUR
+//
+//            WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
+//            waitForElementClickable(tabCurrency);
+//            tabCurrency.click();
+//            try {
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            for (int j = 0; j < coins.size(); j++) {//here we find our lines with coins (at this currency tab) and get this sum
+//                currencyForEachCoinMap = new LinkedHashMap<String, String>();
+//                // coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
+//                WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
+//                        coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
+//                waitForElementClickable(lineCoinFieldCost);
+//                lineCoinFieldCost.click();
+//                MyLogger.info("Currency line for coin " + coins.get(j).getAbbreviationCoin() + " was selected");
+//                String currentCostOfCoin = lineCoinFieldCost.getText().substring(2);
+//                System.out.println(currentCostOfCoin);
+//
+//                currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), currentCostOfCoin);
+//                coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
+//            }
+//        }
+//        System.out.println("-----/Result map------");
+//        printMap(coinCurrencyMap);
+//        return coinCurrencyMap;
+//    }
 }
 
 
