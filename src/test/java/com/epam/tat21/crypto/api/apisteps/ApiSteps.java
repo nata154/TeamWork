@@ -4,6 +4,7 @@ import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
 import com.epam.tat21.crypto.api.model.FeedItem;
 import com.epam.tat21.crypto.api.model.LatestNews;
 import com.epam.tat21.crypto.api.model.NewsItem;
+import com.epam.tat21.crypto.api.model.ResponceCoinWrapper;
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.service.TestDataReader;
 import com.epam.tat21.crypto.utils.MyLogger;
@@ -19,9 +20,21 @@ public class ApiSteps {
 
     private static final String NEWS_RELATIVE_PATH = "v2/news/";
     private static final String FEEDS_RELATIVE_PATH = "news/feeds";
+    private static final String COIN_LIST_RELATIVE_PATH = "/all/coinlist";
 
     public ApiSteps() {
         RestAssured.baseURI = TestDataReader.getApiGetUrl();
+    }
+
+    public Response getResponseWithCoinsInfo() {
+        MyLogger.info("Getting response with coins info");
+        return RestAssured.when().get(COIN_LIST_RELATIVE_PATH).andReturn();
+    }
+
+    public ResponceCoinWrapper getCoinInfo() throws IOException {
+        Response response = getResponseWithCoinsInfo();
+        MyLogger.info("Filling model classes ResponceWrapper -> CoinModel -> DataCoinModel");
+        return ResponseUtils.getObjectFromResponse(response, ResponceCoinWrapper.class);
     }
 
     public Response getResponseWithLatestNews() {
