@@ -3,6 +3,7 @@ package com.epam.tat21.crypto.pages;
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.bo.Currency;
 import com.epam.tat21.crypto.service.TestDataReader;
+import com.epam.tat21.crypto.utils.CoinInformationParser;
 import com.epam.tat21.crypto.utils.MyLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,11 +35,11 @@ public class CoinsPage extends HeaderPage {
     }
 
 
-    public Map<String, Map<String, String>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
-        Map<String, Map<String, String>> coinCurrencyMap = new LinkedHashMap<String, Map<String, String>>();
+    public Map<String, Map<String, Double>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
+        Map<String, Map<String, Double>> coinCurrencyMap = new LinkedHashMap<String, Map<String, Double>>();
 
-        for (int j = 0; j < coins.size(); j++) {//here we find our lines with coins (at this currency tab) and get this sum
-            Map<String, String> currencyForEachCoinMap = new LinkedHashMap<String, String>();
+        for (int j = 0; j < coins.size(); j++) {//for each coin
+            Map<String, Double> currencyForEachCoinMap = new LinkedHashMap<String, Double>();
             for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for exmpl EUR
                 WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
                 waitForElementClickable(tabCurrency);
@@ -50,14 +51,15 @@ public class CoinsPage extends HeaderPage {
                 }
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
-                waitForElementClickable(lineCoinFieldCost);
+                waitForElementClickable(lineCoinFieldCost);//here we click coin at tab of currency and get its value
                 lineCoinFieldCost.click();
                 MyLogger.info("Currency line for coin " + coins.get(j).getAbbreviationCoin() + " was selected");
 
-                String currentCostOfCoin = lineCoinFieldCost.getText().substring(2);
-                System.out.println(currentCostOfCoin);
+                String currentCostOfCoin = lineCoinFieldCost.getText();
+                Double parsedValueOfCoin = CoinInformationParser.parseCurrenciesForCoins(currentCostOfCoin);
+                System.out.println(parsedValueOfCoin);
 
-                currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), currentCostOfCoin);
+                currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), parsedValueOfCoin);
             }
             coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
             }
@@ -67,7 +69,7 @@ public class CoinsPage extends HeaderPage {
         }
 
 
-    public void printMap(Map<String, Map<String, String>> coinCurrencyMap) {
+    public void printMap(Map<String, Map<String, Double>> coinCurrencyMap) {
         Iterator it = coinCurrencyMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();

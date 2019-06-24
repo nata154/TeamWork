@@ -38,4 +38,24 @@ public class CoinInformationParser {
                 (StringUtils.substringBetween(coinNameFromWebsite, "(", ")").length() + 3));
     }
 
+    public static double parseCurrenciesForCoins(String coinValueInCurrency) {
+        double finalValue = 0;
+        if (!coinValueInCurrency.isEmpty()) {
+            // matches numbers like $ 8785.25
+            if (coinValueInCurrency.matches("(\\W{2}\\d*\\.\\d*)")) {
+                finalValue = (Double.parseDouble(coinValueInCurrency.substring(2, coinValueInCurrency.length())));
+                // matches numbers like $ 1,005.25
+            } else if (coinValueInCurrency.matches("(\\W{2}\\d*\\,\\d{3}\\.\\d*)")) {
+                finalValue = (Double.parseDouble((coinValueInCurrency.substring(2, coinValueInCurrency.length())).replace(",", "")));
+                // matches numbers like $ 1,157,005.25
+            } else if (coinValueInCurrency.matches("\\W{2}\\d*\\,\\d{3}\\,\\d{3}\\.\\d*")) {
+                finalValue = (Double.parseDouble((coinValueInCurrency.substring(2, coinValueInCurrency.length())).replace(",", "")));
+                // for numbers like $ 64.55
+            } else {
+                finalValue = Double.parseDouble(coinValueInCurrency.substring(2, coinValueInCurrency.length()));
+            }
+        }
+        return finalValue;
+    }
+
 }

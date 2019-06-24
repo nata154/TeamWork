@@ -1,11 +1,12 @@
 package com.epam.tat21.crypto.api.apisteps;
 
 import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
-import com.epam.tat21.crypto.api.model.CoinValueResponse;
+import com.epam.tat21.crypto.api.model.CoinValueInCurrency;
 import com.epam.tat21.crypto.api.model.LatestNews;
 import com.epam.tat21.crypto.api.model.NewsItem;
 import com.epam.tat21.crypto.api.model.ResponceCoinWrapper;
 import com.epam.tat21.crypto.bo.Coin;
+import com.epam.tat21.crypto.bo.Currency;
 import com.epam.tat21.crypto.service.TestDataReader;
 import com.epam.tat21.crypto.utils.MyLogger;
 import io.restassured.RestAssured;
@@ -70,15 +71,38 @@ public class ApiSteps {
     }
 
 
-    public Response getResponseWithCoinCostInCurrency() {
-        MyLogger.info("Getting response with currency costs for coins");
-        return RestAssured.when().get(TestDataReader.getApiGetUrl() + "pricemulti?fsyms=LTC,BTC&tsyms=EUR,JPY").andReturn();//убрать хардкод
+    public String getResultCoinsForQuery(List<Coin> coins) {
+        StringBuilder resultCoinsForQuery = new StringBuilder("");
+        for (Coin c : coins) {
+            resultCoinsForQuery.append("," + c.getAbbreviationCoin());
+        }
+        return resultCoinsForQuery.substring(1, resultCoinsForQuery.length());
     }
 
-    public CoinValueResponse getCoinsValueInCurrency(Response response) throws IOException {
+    public String getResultCurrenciesForQuery(List<Currency> currencies) {
+        StringBuilder resultCurrenciesForQuery = new StringBuilder("");
+        for (Currency c : currencies) {
+            resultCurrenciesForQuery.append("," + c.getNameOfCurrency());
+        }
+        return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
+    }
+
+    public String getQueryForMatchingCurrenciesOfCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
+        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
+        return resultQuery;
+    }
+
+
+    public Response getResponseWithCoinCostInCurrency(String request) {
+        MyLogger.info("Getting response with currency costs for coins");
+        return RestAssured.when().get(TestDataReader.getApiGetUrl() + request).andReturn();//убрать хардкод
+    }
+
+    public CoinValueInCurrency getCoinsValueInCurrency(Response response) throws IOException {
         MyLogger.info("Filling model classes CoinValueInCurrency -> CurrencyForCoin");
         //with Jackson library serialize a tree of model classes
-        return ResponseUtils.getObjectFromResponse(response, CoinValueResponse.class);
+        //return ResponseUtils.getObjectFromResponse(response, CoinValueResponse.class);
+        return ResponseUtils.getObjectFromResponse(response, CoinValueInCurrency.class);
     }
 
 //    public String[] getCoinsValueInCurrencyItemsAsArray() throws IOException {

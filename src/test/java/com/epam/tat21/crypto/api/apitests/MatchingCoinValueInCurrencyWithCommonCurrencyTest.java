@@ -19,16 +19,27 @@ public class MatchingCoinValueInCurrencyWithCommonCurrencyTest extends CommonCon
         List<Coin> coins = new ArrayList<Coin>();
         List<Currency> currencies = new ArrayList<Currency>();
         coins.add(Coin.LTC);
-        //coins.add(Coin.BTC);
+        coins.add(Coin.BTC);
+        coins.add(Coin.XRP);
         currencies.add(Currency.EUR);
         currencies.add(Currency.JPY);
+
+        String resultCoinsForQuery = apiSteps.getResultCoinsForQuery(coins);
+        String resultCurrenciesForQuery = apiSteps.getResultCurrenciesForQuery(currencies);
+        String query = apiSteps.getQueryForMatchingCurrenciesOfCoins(resultCoinsForQuery, resultCurrenciesForQuery);
+        System.out.println("---------------");
+        System.out.println(query);
+        System.out.println("---------------");
 
         steps.openCoinsPage();
         steps.getActualCurrencyForCoin(coins, currencies);
 
 
-        System.out.println(apiSteps.getCoinsValueInCurrency(apiSteps.getResponseWithCoinCostInCurrency()).getBtc().getEur() + "//////////////////");
-        System.out.println(apiSteps.getCoinsValueInCurrency(apiSteps.getResponseWithCoinCostInCurrency()).getBtc().getJpy() + "//////////////////");
+        //System.out.println(apiSteps.getCoinsValueInCurrency(apiSteps.getResponseWithCoinCostInCurrency(query)).getBtc().getEur() + "//////////////////");
+        System.out.println(apiSteps.getCoinsValueInCurrency(apiSteps
+                .getResponseWithCoinCostInCurrency(query))
+                .getCurrencyMap()
+                .get(Currency.EUR) + "//////////////////");
 
 
 //        apiSteps.getCoinsValueInCurrencyItemsAsArray();
@@ -40,4 +51,3 @@ public class MatchingCoinValueInCurrencyWithCommonCurrencyTest extends CommonCon
 
     }
 }
-
