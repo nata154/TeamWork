@@ -11,13 +11,14 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class NewsPage extends HeaderPage {
 
     private static final String BASE_URL = TestDataReader.getApplicationUrl() + "news/";
     private static final String COINS_NEWS_XPATH = "//a[@href='/news/list/latest/?categories=";
     private static final String ARTICLE_TITLE_LOCATOR = "//a[@rel and @class='ng-binding']";
-    private static final String FEED_LINK_LOCATOR = "//a[contains(text(), '%s')]";  /*"//img[contains(@ng-src, '%s')]/.." - xpath for image, if driver won't find element; //button[contains(text(), 'Feeds')]/../ul//a[contains(text()[position() = 2],'CryptoGlobe')]*/
+    private static final String FEED_LINK_LOCATOR = "//button[contains(text(), 'Feeds')]/../ul//a[contains(text()[position() = 2],'%s')]";
 
     @FindBy(xpath = "//div[@class='col-md-12 list-container ng-isolate-scope']")
     private WebElement containerOfNews;
@@ -74,7 +75,6 @@ public class NewsPage extends HeaderPage {
     }
 
     public List<WebElement> getAllNewsArticleTitle() {
-        MyLogger.info("Getting all news titles from the news page");
         return driver.findElements(By.xpath(ARTICLE_TITLE_LOCATOR));
     }
 
@@ -84,13 +84,10 @@ public class NewsPage extends HeaderPage {
         return this;
     }
 
-    public List<WebElement> getAllFeedLinksFromDropdown() {
-        return driver.findElements(By.xpath(FEED_LINK_LOCATOR));
-    }
-
     public NewsPage clickOnFeedLink(String linkText) {
         driver.findElement(By.xpath(String.
-                format(linkText, FEED_LINK_LOCATOR))).click();
+                format(FEED_LINK_LOCATOR, linkText))).click();
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         return this;
     }
 }

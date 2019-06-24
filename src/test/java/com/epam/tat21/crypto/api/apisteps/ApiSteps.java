@@ -11,6 +11,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -35,9 +36,15 @@ public class ApiSteps {
                 when().get(NEWS_RELATIVE_PATH).andReturn();
     }
 
-    public Response getResponseWithFeeds() {
+    public Response getResponseWithNewsByFeed(String queryKey) {
+        MyLogger.info("Getting response with news by " + queryKey + " feed");
+        return RestAssured.given().queryParam("feeds", queryKey).
+                when().get(NEWS_RELATIVE_PATH).andReturn();
+    }
+
+    public Response getResponseWithAllFeeds() {
         MyLogger.info("Getting response with feeds");
-        return RestAssured.when().get(FEEDS_RELATIVE_PATH).andReturn();
+        return RestAssured.given().when().get(FEEDS_RELATIVE_PATH).andReturn();
     }
 
     private LatestNews getLatestNewsFromResponse(Response response) throws IOException {
@@ -62,15 +69,30 @@ public class ApiSteps {
         return IntStream.range(0, numberOfItems).mapToObj(i -> sortedNews.get(i).getTitle()).toArray(String[]::new);
     }
 
-    private FeedItem[] getFeedsFromResponse() throws IOException {
+    public FeedItem[] getFeedsFromResponse() throws IOException {
         MyLogger.info("Filling an array of model classes FeedItem");
         //with Jackson library serialize a tree of model classes
-        return ResponseUtils.getObjectFromResponse(getResponseWithFeeds(), FeedItem[].class);
+        return ResponseUtils.getObjectFromResponse(getResponseWithAllFeeds(), FeedItem[].class);
     }
 
-    public String[] getFeedsNames() throws IOException {
+    public String[] getAllFeedsNames() throws IOException {
         MyLogger.info("Getting an array of feeds names from the array of model classes FeedItem");
         FeedItem[] feedItems = getFeedsFromResponse();
-        return IntStream.range(0, feedItems.length).mapToObj(i -> feedItems[i].getName()).toArray(String[]::new);
+        return Arrays.stream(feedItems).map(FeedItem::getName).toArray(String[]::new);
     }
+
+    public String[] getAllFeedsQueryKeys() throws IOException {
+        MyLogger.info("Getting an array of feeds keys for the query from the array of model classes FeedItem");
+        FeedItem[] feedItems = getFeedsFromResponse();
+        return Arrays.stream(feedItems).map(FeedItem::getKey).toArray(String[]::new);
+    }
+
+    public String[] getFeedsNewsTitleItems(String queryKey) throws IOException {
+        LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByFeed(queryKey));
+        List<NewsItem> sortedNews = latestNews.getSortedData();
+        MyLogger.info("Getting " + sortedNews.size() + " feeds news titles from the response");
+        //return an array of titles
+        return sortedNews.stream().map(NewsItem::getTitle).toArray(String[]::new);
+    }
+
 }
