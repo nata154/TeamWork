@@ -3,9 +3,12 @@ package com.epam.tat21.crypto.pages;
 import com.epam.tat21.crypto.bo.User;
 import com.epam.tat21.crypto.service.TestDataReader;
 import com.epam.tat21.crypto.utils.MyLogger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainCryptoComparePage extends HeaderPage {
 
@@ -27,6 +30,8 @@ public class MainCryptoComparePage extends HeaderPage {
     @Override
     public MainCryptoComparePage openPage() {
         driver.navigate().to(BASE_URL);
+
+
         MyLogger.info("MainCryptoComparePage was opened");
         return this;
     }
@@ -50,6 +55,9 @@ public class MainCryptoComparePage extends HeaderPage {
     public MainCryptoComparePage login(User user) {
         goToLoginForm();
         fillLoginForm(user).clickLoginButton();
+        new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@modal-render]")));
         return this;
     }
+
+
 }

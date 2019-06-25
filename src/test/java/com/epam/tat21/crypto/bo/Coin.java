@@ -1,5 +1,8 @@
 package com.epam.tat21.crypto.bo;
 
+import com.epam.tat21.crypto.exceptions.NotProperCoinTypeException;
+import com.epam.tat21.crypto.utils.CoinInformationParser;
+
 public enum Coin {
 
     BTC("Bitcoin", "BTC"),
@@ -23,5 +26,14 @@ public enum Coin {
 
     public String getAbbreviationCoin() {
         return abbreviationCoin;
+    }
+
+    public static Coin setProperCoinEnum(String coinName) throws NotProperCoinTypeException {
+        for (Coin currentCoinEnum : Coin.values()) {
+            if (CoinInformationParser.parseStrictCoinName(coinName).equals(currentCoinEnum.getNameOfCoin())) {
+                return currentCoinEnum;
+            }
+        }
+        throw new NotProperCoinTypeException();
     }
 }

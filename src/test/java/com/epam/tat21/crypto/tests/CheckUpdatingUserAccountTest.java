@@ -1,6 +1,7 @@
 package com.epam.tat21.crypto.tests;
 
 import com.epam.tat21.crypto.utils.RandomString;
+import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -8,6 +9,7 @@ public class CheckUpdatingUserAccountTest extends CommonConditions {
 
     private static final int COUNT_OF_GENERATED_POSTFIX_LETTERS = 3;
 
+    @JIRATestKey(key = "EPMFARMATS-9108")
     @Test
     public void checkUpdatingUserAccountTest() {
         String firstNameToChange = RandomString.generateRandomUserFirstName(COUNT_OF_GENERATED_POSTFIX_LETTERS);
