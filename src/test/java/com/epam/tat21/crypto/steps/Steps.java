@@ -1,5 +1,12 @@
 package com.epam.tat21.crypto.steps;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.bo.Countries;
 import com.epam.tat21.crypto.bo.User;
@@ -7,14 +14,13 @@ import com.epam.tat21.crypto.driver.DriverFactory;
 import com.epam.tat21.crypto.driver.LocalDriver;
 import com.epam.tat21.crypto.driver.RemoteDriver;
 import com.epam.tat21.crypto.driver.RemoteDriverSauceLabs;
-import com.epam.tat21.crypto.pages.*;
+import com.epam.tat21.crypto.pages.ExchangesPage;
+import com.epam.tat21.crypto.pages.HeaderPage;
+import com.epam.tat21.crypto.pages.MainCryptoComparePage;
+import com.epam.tat21.crypto.pages.NewsPage;
+import com.epam.tat21.crypto.pages.PortfolioPage;
+import com.epam.tat21.crypto.pages.UserAccountPage;
 import com.epam.tat21.crypto.service.UserCreator;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
 
 public class Steps {
 
@@ -22,6 +28,7 @@ public class Steps {
     private UserAccountPage userAccountPage;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
+    private PortfolioPage portfolioPage;
 
     public DriverFactory getWebDriverFactory() {
         if (driver == null) {
@@ -111,4 +118,11 @@ public class Steps {
         //get the text from news titles and fill an array by them
         return IntStream.range(0, numberOfTitles).mapToObj(i -> newsTitles.get(i).getText()).toArray(String[]::new);
     }
+    
+    public PortfolioPage createUserPortfolio(String name, String currency, String description) { 
+		  return portfolioPage = new HeaderPage(driver).
+				  goToMyPortfolioFromPortfolioTab().
+				  addPortfolioForm().
+				  createNewPortfolio(name, currency, description);
+	}
 }
