@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class NewsPage extends HeaderPage {
 
@@ -19,6 +18,7 @@ public class NewsPage extends HeaderPage {
     private static final String COINS_NEWS_XPATH = "//a[@href='/news/list/latest/?categories=";
     private static final String ARTICLE_TITLE_LOCATOR = "//a[@rel and @class='ng-binding']";
     private static final String FEED_LINK_LOCATOR = "//button[contains(text(), 'Feeds')]/../ul//a[contains(text()[position() = 2],'%s')]";
+    private static int indexCounter = 0;
 
     @FindBy(xpath = "//div[@class='col-md-12 list-container ng-isolate-scope']")
     private WebElement containerOfNews;
@@ -75,6 +75,7 @@ public class NewsPage extends HeaderPage {
     }
 
     public List<WebElement> getAllNewsArticleTitle() {
+        waitForElementClickable(feedsDropdownLink);
         return driver.findElements(By.xpath(ARTICLE_TITLE_LOCATOR));
     }
 
@@ -84,10 +85,22 @@ public class NewsPage extends HeaderPage {
         return this;
     }
 
+    /**
+     * Cause some of the feeds on the page has the same linkText,
+     * the method below use the list of WebElements and the static index counter
+     * for clicking on the correct link.
+     */
+
     public NewsPage clickOnFeedLink(String linkText) {
-        driver.findElement(By.xpath(String.
-                format(FEED_LINK_LOCATOR, linkText))).click();
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        List<WebElement> feedLinks = driver.findElements(By.xpath(String.
+                format(FEED_LINK_LOCATOR, linkText)));
+        if (feedLinks.size() == 1) {
+            feedLinks.get(0).click();
+            indexCounter = 0;
+        } else {
+            feedLinks.get(indexCounter).click();
+            indexCounter += 1;
+        }
         return this;
     }
 }
