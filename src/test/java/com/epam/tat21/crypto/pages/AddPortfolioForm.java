@@ -12,7 +12,7 @@ public class AddPortfolioForm extends HeaderPage {
 
 	private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
 
-	@FindBy(xpath = " //input[@ng-model='newPortfolio.Name']")
+	@FindBy(xpath = "//input[@ng-model='newPortfolio.Name']")
 	private WebElement inputPortfolioName;
 
 	@FindBy(xpath = "//md-select[@name='currency']//span")
@@ -32,6 +32,9 @@ public class AddPortfolioForm extends HeaderPage {
 
 	@FindBy(xpath = "//md-icon[@aria-label='Close dialog']")
 	private WebElement buttonCloseFormAddPortfolio;
+	
+	@FindBy(xpath = "//span[contains(text(), 'Update')]")
+	private WebElement buttonUpdatePortfolio;
 
 	public AddPortfolioForm(WebDriver driver) {
 		super(driver);
@@ -48,7 +51,7 @@ public class AddPortfolioForm extends HeaderPage {
 		return driver.findElement(By.xpath(xpathForGetCurrency));
 	}
 
-	public AddPortfolioForm createNewPortfolio(String name, String currency, String description) {
+	public PortfolioPage createNewPortfolio(String name, String currency, String description) {
 		waitForElementVisible(inputPortfolioName);
 		inputPortfolioName.sendKeys(name);
 		dropdownCurrency.click();
@@ -56,6 +59,14 @@ public class AddPortfolioForm extends HeaderPage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
 		textareaDiscription.sendKeys(description);
 		buttonCreate.click();
-		return this;
+		return new PortfolioPage(driver);
+	}
+	
+	public PortfolioPage editUserPortfolio(String name) {
+		waitForElementVisible(inputPortfolioName);
+		inputPortfolioName.sendKeys(name);
+		waitForElementClickable(buttonUpdatePortfolio);
+		buttonUpdatePortfolio.click();
+		return new PortfolioPage(driver);
 	}
 }
