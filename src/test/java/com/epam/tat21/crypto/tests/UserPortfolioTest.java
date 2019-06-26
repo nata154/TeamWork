@@ -27,7 +27,7 @@ public class UserPortfolioTest extends CommonConditions{
 	}
 	
 	@JIRATestKey(key = "EPMFARMATS-9266")
-	@Test
+	@Test(dependsOnMethods = { "portfolioCreationTest" })
 	public void portfolioEditingTest() {
 		 steps.changeUserPortfolioName(changedName);
 		 assertTrue(steps.isPortfolioPresent(changedName));
