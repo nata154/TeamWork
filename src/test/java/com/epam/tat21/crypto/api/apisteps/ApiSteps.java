@@ -14,7 +14,6 @@ import io.restassured.response.Response;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class ApiSteps {
 
@@ -66,20 +65,20 @@ public class ApiSteps {
         return ResponseUtils.getObjectFromResponse(response, LatestNews.class);
     }
 
-    public String[] getLatestNewsTitleItems(int numberOfItems) throws IOException {
-        MyLogger.info("Getting " + numberOfItems + " latest news titles from the response");
+    public String[] getLatestNewsTitleItems() throws IOException {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithLatestNews());
         List<NewsItem> sortedNews = latestNews.getSortedData();
-        //return subarray of titles, cause the news page can contain 50 news, while JSON can contain 100
-        return IntStream.range(0, numberOfItems).mapToObj(i -> sortedNews.get(i).getTitle()).toArray(String[]::new);
+        MyLogger.info("Getting " + sortedNews.size() + " latest news titles from the response");
+        //return an array of titles and replace from them two and more spaces and no-break spaces
+        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll("\\s{2,}|\\u00a0", " ")).toArray(String[]::new);
     }
 
-    public String[] getCoinNewsTitleItems(int numberOfItems, Coin coin) throws IOException {
-        MyLogger.info("Getting " + numberOfItems + " coin news titles from the response");
+    public String[] getCoinNewsTitleItems(Coin coin) throws IOException {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByCoin(coin));
         List<NewsItem> sortedNews = latestNews.getSortedData();
-        //return subarray of titles, cause the news page can contain 50 news, while JSON can contain 100
-        return IntStream.range(0, numberOfItems).mapToObj(i -> sortedNews.get(i).getTitle()).toArray(String[]::new);
+        MyLogger.info("Getting " + sortedNews.size() + " coin news titles from the response");
+        //return an array of titles and replace from them two and more spaces and no-break spaces
+        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll("\\s{2,}|\\u00a0", " ")).toArray(String[]::new);
     }
 
     public FeedItem[] getFeedsFromResponse() throws IOException {
@@ -102,10 +101,9 @@ public class ApiSteps {
 
     public String[] getFeedsNewsTitleItems(String queryKey) throws IOException {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByFeed(queryKey));
-        List<NewsItem> sortedNews = latestNews.getSortedData();
-        MyLogger.info("Getting " + sortedNews.size() + " feeds news titles from the response");
-        //return an array of titles
-        return sortedNews.stream().map(NewsItem::getTitle).toArray(String[]::new);
+        List<NewsItem> newsItems = latestNews.getData();
+        MyLogger.info("Getting " + newsItems.size() + " feeds news titles from the response");
+        //return an array of titles and replace from them two and more spaces and no-break spaces
+        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll("\\s{2,}|\\u00a0", " ")).toArray(String[]::new);
     }
-
 }
