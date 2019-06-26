@@ -75,4 +75,11 @@ public class PortfolioPage extends HeaderPage {
     			   .until(ExpectedConditions.elementToBeClickable(By.xpath(xpathForPortfolio)));
 	    return portfolio;
 	}
+    
+    public AddPortfolioForm getEditPortfolioForm() {
+    	waitForElementClickable(buttonEditOrDelete);
+	    buttonEditOrDelete.click();
+        MyLogger.info("EditPortfolioForm was appeared");
+    	return new AddPortfolioForm(driver);
+	}
 }
