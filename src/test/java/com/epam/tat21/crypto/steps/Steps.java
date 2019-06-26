@@ -131,4 +131,10 @@ public class Steps {
 				getElementPortfolio(name).
 				isEnabled();
 	}
+    
+    public PortfolioPage changeUserPortfolioName(String name) {
+		return portfolioPage.
+				getEditPortfolioForm().
+				editUserPortfolio(name);
+	}	
 }
