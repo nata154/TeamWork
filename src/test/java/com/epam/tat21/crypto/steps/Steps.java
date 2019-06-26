@@ -125,4 +125,10 @@ public class Steps {
 				  addPortfolioForm().
 				  createNewPortfolio(name, currency, description);
 	}
+    
+    public boolean isPortfolioPresent(String name) {
+		return new PortfolioPage(driver).
+				getElementPortfolio(name).
+				isEnabled();
+	}
 }
