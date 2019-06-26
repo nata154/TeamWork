@@ -1,15 +1,18 @@
 package com.epam.tat21.crypto.pages;
 
-import com.epam.tat21.crypto.bo.PortfolioItem;
-import com.epam.tat21.crypto.service.TestDataReader;
-import com.epam.tat21.crypto.utils.MyLogger;
-import com.epam.tat21.crypto.utils.WaitConditions;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
+import com.epam.tat21.crypto.bo.PortfolioItem;
+import com.epam.tat21.crypto.service.TestDataReader;
+import com.epam.tat21.crypto.utils.MyLogger;
+import com.epam.tat21.crypto.utils.WaitConditions;
 
 
 public class PortfolioPage extends HeaderPage {
@@ -25,6 +28,10 @@ public class PortfolioPage extends HeaderPage {
 
     @FindBy(xpath = "//div[@class='list-table list-portfolio padding-5']")
     private WebElement tableOfCoinsInPortfolio;
+    
+    @FindBy(xpath = "//md-tab-content[contains(@class,'active')]//button[@ng-click='editPortfolioDialog()']")
+    private WebElement buttonEditOrDelete;
+    
 
     public PortfolioPage(WebDriver driver) {
         super(driver);
@@ -52,11 +59,8 @@ public class PortfolioPage extends HeaderPage {
         return new AddPortfolioForm(driver);
     }
 
-
     public List<WebElement> getPortfolioItemLinkList() {
-
         WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, PORTFOLIO_ITEM_LINK_LOCATOR, 5);
-
         return driver.findElements(By.xpath(PORTFOLIO_ITEM_LINK_LOCATOR));
     }
 
@@ -64,6 +68,11 @@ public class PortfolioPage extends HeaderPage {
         getPortfolioItemLinkList().get(index).click();
         return new PortfolioItem(driver);
     }
-
-
+    
+    public WebElement getElementPortfolio(String name) {
+    	String xpathForPortfolio = "//span[contains(text(), '" + name + "')]";
+    	WebElement portfolio = (new WebDriverWait(driver, 10))
+    			   .until(ExpectedConditions.elementToBeClickable(By.xpath(xpathForPortfolio)));
+	    return portfolio;
+	}
 }
