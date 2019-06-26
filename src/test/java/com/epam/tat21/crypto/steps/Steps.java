@@ -39,6 +39,8 @@ public class Steps {
                     return new RemoteDriver();
                 case "sauce":
                     return new RemoteDriverSauceLabs();
+                default:
+                    return new LocalDriver();
             }
         }
         return new LocalDriver();
