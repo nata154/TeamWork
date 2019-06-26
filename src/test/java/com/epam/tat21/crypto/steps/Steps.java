@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 public class Steps {
@@ -113,16 +112,15 @@ public class Steps {
      */
 
     public String[] getLatestNewsTitleItemsFromPage() {
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
         List<WebElement> newsTitles = newsPage.getAllNewsArticleTitle();
         if (newsTitles.size() <= 50) {
             MyLogger.info("Getting " + newsTitles.size() + " news titles from page");
-            //get the text from news titles and fill an array by them
-            return newsTitles.stream().map(WebElement::getText).toArray(String[]::new);
+            //get the text from news titles, fill an array by them and replace from them two and more spaces and no-break spaces
+            return newsTitles.stream().map(newsTitle -> newsTitle.getText().replaceAll("\\s{2,}|\\u00a0", " ")).toArray(String[]::new);
         } else {
             MyLogger.info("Getting only 50 news titles from page, because the page contains " + newsTitles.size());
-            //get the text from news titles and fill an array by them
-            return IntStream.range(0, 50).mapToObj((i -> newsTitles.get(i).getText().replace(" ", ""))).toArray(String[]::new);
+            //get the text from news titles, fill a subarray by them and replace from them two and more spaces and no-break spaces
+            return IntStream.range(0, 50).mapToObj((i -> newsTitles.get(i).getText().replaceAll("\\s{2,}|\\u00a0", " "))).toArray(String[]::new);
         }
     }
 }
