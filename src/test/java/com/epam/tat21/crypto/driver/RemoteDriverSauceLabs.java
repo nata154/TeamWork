@@ -15,21 +15,14 @@ import static com.epam.tat21.crypto.service.TestDataReader.getSauceUsername;
 public class RemoteDriverSauceLabs implements DriverFactory {
 
     private static WebDriver driver;
-    private static URL url;
-    private static DesiredCapabilities capabilities;
+    private DesiredCapabilities capabilities;
     private static String sauceURL = "@ondemand.eu-central-1.saucelabs.com/wd/hub";
 
     public RemoteDriverSauceLabs() {
-        this.capabilities = CapabilitiesProvider.getCapabilities(System.getProperty("browser"));
+        capabilities = CapabilitiesProvider.getCapabilities(System.getProperty("browser"));
         capabilities.setCapability("version", "latest");
         capabilities.setCapability("screen-resolution", "1600x1200");
         capabilities.setCapability("name", "crypto-compare-test-" + DateUtils.getCurrentTimeAsString());
-
-    }
-
-    public RemoteDriverSauceLabs(URL url, DesiredCapabilities capabilities) {
-        this.url = url;
-        this.capabilities = capabilities;
     }
 
     @Override
