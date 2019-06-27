@@ -20,6 +20,7 @@ public class ApiSteps {
     private static final String NEWS_RELATIVE_PATH = "v2/news/";
     private static final String FEEDS_RELATIVE_PATH = "news/feeds";
     private static final String COIN_LIST_RELATIVE_PATH = "/all/coinlist";
+    private static final String REGEX_FOR_SPACES = "\\s{2,}|\\u00a0";
 
     public ApiSteps() {
         RestAssured.baseURI = TestDataReader.getApiGetUrl();
@@ -48,9 +49,9 @@ public class ApiSteps {
                 when().get(NEWS_RELATIVE_PATH).andReturn();
     }
 
-    public Response getResponseWithNewsByFeed(String queryKey) {
-        MyLogger.info("Getting response with news by " + queryKey + " feed");
-        return RestAssured.given().queryParam("feeds", queryKey).
+    public Response getResponseWithNewsByFeed(String feedId) {
+        MyLogger.info("Getting response with news by " + feedId + " feed");
+        return RestAssured.given().queryParam("feeds", feedId).
                 when().get(NEWS_RELATIVE_PATH).andReturn();
     }
 
@@ -70,7 +71,7 @@ public class ApiSteps {
         List<NewsItem> sortedNews = latestNews.getSortedData();
         MyLogger.info("Getting " + sortedNews.size() + " latest news titles from the response");
         //return an array of titles and replace from them two and more spaces and no-break spaces
-        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll("\\s{2,}|\\u00a0", " ")).toArray(String[]::new);
+        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
     }
 
     public String[] getCoinNewsTitleItems(Coin coin) throws IOException {
@@ -78,7 +79,7 @@ public class ApiSteps {
         List<NewsItem> sortedNews = latestNews.getSortedData();
         MyLogger.info("Getting " + sortedNews.size() + " coin news titles from the response");
         //return an array of titles and replace from them two and more spaces and no-break spaces
-        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll("\\s{2,}|\\u00a0", " ")).toArray(String[]::new);
+        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
     }
 
     public FeedItem[] getFeedsFromResponse() throws IOException {
@@ -93,17 +94,17 @@ public class ApiSteps {
         return Arrays.stream(feedItems).map(FeedItem::getName).toArray(String[]::new);
     }
 
-    public String[] getAllFeedsQueryKeys() throws IOException {
+    public String[] getAllFeedsId() throws IOException {
         MyLogger.info("Getting an array of feeds keys for the query from the array of model classes FeedItem");
         FeedItem[] feedItems = getFeedsFromResponse();
         return Arrays.stream(feedItems).map(FeedItem::getKey).toArray(String[]::new);
     }
 
-    public String[] getFeedsNewsTitleItems(String queryKey) throws IOException {
-        LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByFeed(queryKey));
+    public String[] getFeedsNewsTitleItems(String feedId) throws IOException {
+        LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByFeed(feedId));
         List<NewsItem> newsItems = latestNews.getData();
         MyLogger.info("Getting " + newsItems.size() + " feeds news titles from the response");
         //return an array of titles and replace from them two and more spaces and no-break spaces
-        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll("\\s{2,}|\\u00a0", " ")).toArray(String[]::new);
+        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
     }
 }
