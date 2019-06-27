@@ -16,6 +16,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static com.epam.tat21.crypto.service.GlobalConstants.REGEX_FOR_SPACES;
+
 public class Steps {
 
     private WebDriver driver;
@@ -119,11 +121,11 @@ public class Steps {
         if (newsTitles.size() <= 50) {
             MyLogger.info("Getting " + newsTitles.size() + " news titles from page");
             //get the text from news titles, fill an array by them and replace from them two and more spaces and no-break spaces
-            return newsTitles.stream().map(newsTitle -> newsTitle.getText().replaceAll("\\s{2,}|\\u00a0", " ")).toArray(String[]::new);
+            return newsTitles.stream().map(newsTitle -> newsTitle.getText().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
         } else {
             MyLogger.info("Getting only 50 news titles from page, because the page contains " + newsTitles.size());
             //get the text from news titles, fill a subarray by them and replace from them two and more spaces and no-break spaces
-            return IntStream.range(0, 50).mapToObj((i -> newsTitles.get(i).getText().replaceAll("\\s{2,}|\\u00a0", " "))).toArray(String[]::new);
+            return IntStream.range(0, 50).mapToObj((i -> newsTitles.get(i).getText().replaceAll(REGEX_FOR_SPACES, " "))).toArray(String[]::new);
         }
     }
 
