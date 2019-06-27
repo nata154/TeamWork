@@ -124,10 +124,9 @@ public class Steps {
         return new CoinsPage(driver);
     }
 
-//    public String[] generateStringArrayFromMap(List<Coin> coins, List<Currency> currency) {  //капец
-//        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-//       // List<WebElement> coinsValues = coinsPage.selectCurrencyAndGetCostForCoins(coins, currency);
-//        //get the text from news titles and fill an array by them
-//       // return IntStream.range(0, numberOfTitles).mapToObj(i -> newsTitles.get(i).getText()).toArray(String[]::new);
-//    }
+    public double getCoinCostInCurrencyFromPage(List<Coin> coins, List<Currency> currency, String keyCoin, String keyCurrency) {
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        double valueInCurrancy = coinsPage.selectCurrencyAndGetCostForCoins(coins, currency).get(keyCoin).get(keyCurrency);
+        return valueInCurrancy;
+    }
 }

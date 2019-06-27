@@ -9,9 +9,7 @@ public enum  Currency {
     EUR("EUR"),
     GBP("GBP"),
     JPY("JPY"),
-    KRW("KRW"),
-    BYN("BYN"),
-    RUR("RUR");
+    KRW("KRW");
 
     private String nameCurrency;
 

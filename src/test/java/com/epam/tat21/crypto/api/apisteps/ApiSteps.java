@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.api.apisteps;
 
 import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
-import com.epam.tat21.crypto.api.model.CoinValueInCurrency;
+import com.epam.tat21.crypto.api.model.CoinValueResponse1;
 import com.epam.tat21.crypto.api.model.LatestNews;
 import com.epam.tat21.crypto.api.model.NewsItem;
 import com.epam.tat21.crypto.api.model.ResponceCoinWrapper;
@@ -87,7 +87,28 @@ public class ApiSteps {
         return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
     }
 
+    public String getValuesFromEnum(Object[] objects) {
+        StringBuilder query = new StringBuilder("");
+        for (Object o : objects) {
+            query.append("," + o);
+        }
+        return query.substring(1, query.length());
+    }
+
+    public String getResultStringForQuery(List<Object> objects) {
+        StringBuilder query = new StringBuilder("");
+        for (Object o : objects) {
+            query.append("," + o);
+        }
+        return query.substring(1, query.length());
+    }
+
     public String getQueryForMatchingCurrenciesOfCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
+        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
+        return resultQuery;
+    }
+
+    public String getResultQueryForGettingCurrenciesForCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
         String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
         return resultQuery;
     }
@@ -98,18 +119,21 @@ public class ApiSteps {
         return RestAssured.when().get(TestDataReader.getApiGetUrl() + request).andReturn();//убрать хардкод
     }
 
-    public CoinValueInCurrency getCoinsValueInCurrency(Response response) throws IOException {
-        MyLogger.info("Filling model classes CoinValueInCurrency -> CurrencyForCoin");
+    public CoinValueResponse1 getCoinsValueInCurrency(Response response) throws IOException {
+        MyLogger.info("Filling model classes CoinValueInCurrency2 -> CurrencyForCoin");
         //with Jackson library serialize a tree of model classes
-        //return ResponseUtils.getObjectFromResponse(response, CoinValueResponse.class);
-        return ResponseUtils.getObjectFromResponse(response, CoinValueInCurrency.class);
+        return ResponseUtils.getObjectFromResponse(response, CoinValueResponse1.class);
+        //return ResponseUtils.getObjectFromResponse(response, CoinWithValueResponse.class);
+        //return ResponseUtils.getObjectFromResponse(response, CoinValueInCurrency2.class);
     }
 
-//    public String[] getCoinsValueInCurrencyItemsAsArray() throws IOException {
-//        MyLogger.info("Getting coin costs in currency");
-//        CoinValueInCurrency coinsValueInCurrency = getCoinsValueInCurrency(getResponseWithCoinCostInCurrency());
-//        List<CoinValueInCurrency> coinsValueInCurrencyItemsAsArray = Arrays.asList(coinsValueInCurrency);
-//        //return subarray of titles, cause the news page can contain 50 news, while JSON can contain 100
-//        return IntStream.range(0, 10).mapToObj(i -> coinsValueInCurrencyItemsAsArray.get(i)).toArray(String[]::new);
+
+//    public String[] getResponseWithCoinCostInCurrencyAsString(String query) throws IOException {
+//        MyLogger.info("Getting coins values from the response as string");
+//        CoinValueResponse1 coinsValueInCurrency = getCoinsValueInCurrency(getResponseWithCoinCostInCurrency(query));
+//        //return subarray of values
+//        // List<String> responseAsList = coinsValueInCurrency.
+//
+//       // return IntStream.range(0, 50).mapToObj(i -> coinsValueInCurrency.getBtc().getTitle()).toArray(String[]::new);
 //    }
 }

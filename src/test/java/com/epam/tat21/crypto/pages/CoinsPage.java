@@ -74,7 +74,6 @@ public class CoinsPage extends HeaderPage {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
-//            it.remove(); // avoids a ConcurrentModificationException
         }
     }
 
@@ -83,20 +82,9 @@ public class CoinsPage extends HeaderPage {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             System.out.println(pair.getKey() + " = " + pair.getValue());
-//            it.remove(); // avoids a ConcurrentModificationException
         }
     }
 
-    public void generateStringArrayFromMap(Map<String, Map<Currency, String>> coinCurrencyMap) {
-        String[] mapAsArray = new String[coinCurrencyMap.size()];
-        Iterator it = coinCurrencyMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            //  mapAsArray.
-            System.out.println(pair.getKey() + " = " + pair.getValue());
-//            it.remove(); // avoids a ConcurrentModificationException
-        }
-    }
 
 //    public Map<String, Map<Currency, String>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
 //        for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for exmpl EUR

@@ -13,9 +13,9 @@
     <!--<package name="com.epam.tat21.crypto.api.apitests.*"></package>-->
     <!--</packages>-->
     <!--</test>-->
-    <test name="2" enabled="true">
-        <classes>
-            <class name="com.epam.tat21.crypto.tests.CheckUpdatingUserAccountTest"></class>
-        </classes>
-    </test>
+    <!--<test name="2" enabled="true">-->
+    <!--<classes>-->
+    <!--<class name="com.epam.tat21.crypto.tests.CheckUpdatingUserAccountTest"></class>-->
+    <!--</classes>-->
+    <!--</test>-->
 </suite>
