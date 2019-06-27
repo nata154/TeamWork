@@ -14,12 +14,17 @@ import java.util.List;
 
 public class NewsPage extends HeaderPage {
 
-    private final String BASE_URL = TestDataReader.getApplicationUrl() + "news/";
+    private static final String BASE_URL = TestDataReader.getApplicationUrl() + "news/";
     private static final String COINS_NEWS_XPATH = "//a[@href='/news/list/latest/?categories=";
     private static final String ARTICLE_TITLE_LOCATOR = "//a[@rel and @class='ng-binding']";
+    private static final String FEED_LINK_LOCATOR = "//button[contains(text(), 'Feeds')]/../ul//a[contains(text()[position() = 2],'%s')]";
+    private static int indexCounter = 0;
 
     @FindBy(xpath = "//div[@class='col-md-12 list-container ng-isolate-scope']")
     private WebElement containerOfNews;
+
+    @FindBy(xpath = "//button[contains(text(), 'Feeds')]")
+    private WebElement feedsDropdownLink;
 
     public NewsPage(WebDriver driver) {
         super(driver);
@@ -70,7 +75,32 @@ public class NewsPage extends HeaderPage {
     }
 
     public List<WebElement> getAllNewsArticleTitle() {
-        MyLogger.info("Getting all news titles from the news page");
+        waitForElementClickable(feedsDropdownLink);
         return driver.findElements(By.xpath(ARTICLE_TITLE_LOCATOR));
+    }
+
+    public NewsPage clickOnFeedsDropdown() {
+        waitForElementClickable(feedsDropdownLink);
+        feedsDropdownLink.click();
+        return this;
+    }
+
+    /**
+     * Cause some of the feeds on the page has the same linkText,
+     * the method below use the list of WebElements and the static index counter
+     * for clicking on the correct link.
+     */
+
+    public NewsPage clickOnFeedLink(String linkText) {
+        List<WebElement> feedLinks = driver.findElements(By.xpath(String.
+                format(FEED_LINK_LOCATOR, linkText)));
+        if (feedLinks.size() == 1) {
+            feedLinks.get(0).click();
+            indexCounter = 0;
+        } else {
+            feedLinks.get(indexCounter).click();
+            indexCounter += 1;
+        }
+        return this;
     }
 }
