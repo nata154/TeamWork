@@ -10,9 +10,6 @@ public class LocalDriver implements DriverFactory {
 
     private static WebDriver driver;
 
-    public LocalDriver() {
-    }
-
     @Override
     public WebDriver getDriver() {
         if (driver == null) {

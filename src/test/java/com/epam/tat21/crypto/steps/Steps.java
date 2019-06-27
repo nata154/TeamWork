@@ -22,6 +22,7 @@ public class Steps {
     private UserAccountPage userAccountPage;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
+    private PortfolioPage portfolioPage;
 
     public DriverFactory getWebDriverFactory() {
         if (driver == null) {
@@ -32,6 +33,8 @@ public class Steps {
                     return new RemoteDriver();
                 case "sauce":
                     return new RemoteDriverSauceLabs();
+                default:
+                    return new LocalDriver();
             }
         }
         return new LocalDriver();
@@ -122,5 +125,24 @@ public class Steps {
             //get the text from news titles, fill a subarray by them and replace from them two and more spaces and no-break spaces
             return IntStream.range(0, 50).mapToObj((i -> newsTitles.get(i).getText().replaceAll("\\s{2,}|\\u00a0", " "))).toArray(String[]::new);
         }
+    }
+
+    public PortfolioPage createUserPortfolio(String name, String currency, String description) {
+        return portfolioPage = new HeaderPage(driver).
+                goToMyPortfolioFromPortfolioTab().
+                addPortfolioForm().
+                createNewPortfolio(name, currency, description);
+    }
+
+    public boolean isPortfolioPresent(String name) {
+        return new PortfolioPage(driver).
+                getElementPortfolio(name).
+                isEnabled();
+    }
+
+    public PortfolioPage changeUserPortfolioName(String name) {
+        return portfolioPage.
+                getEditPortfolioForm().
+                editUserPortfolio(name);
     }
 }
