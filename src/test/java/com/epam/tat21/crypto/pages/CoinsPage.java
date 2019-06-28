@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +22,8 @@ public class CoinsPage extends HeaderPage {
     private final static String CURRENCY_LINE_XPATH = "//ul[@class='nav nav-tabs nav-coinss']//a[contains(text(), '";
     private final static String COIN_IN_COLUMN_XPATH = "//tr[@class='ng-scope']/td[@data-href='/coins/";
 
-//    @FindBy(xpath = "//a[@class='btn btn-xs btn-switch ng-scope']")
-//    private WebElement nextPageAtCoin;
+    @FindBy(xpath = "//a[@class='btn btn-xs btn-switch ng-scope']")
+    private WebElement nextPageAtCoin;
 
     @FindBy(xpath = "//th[@class='ng-binding ng-scope price']")
     private WebElement priceColumn;
@@ -53,11 +52,13 @@ public class CoinsPage extends HeaderPage {
         for (int j = 0; j < coins.size(); j++) {//for each coin
             Map<String, Double> currencyForEachCoinMap = new LinkedHashMap<String, Double>();
             for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for exmpl EUR
+                waitForElementClickable(priceColumn);
                 WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
                 waitForElementClickable(tabCurrency);
                 scrollPage(tabCurrency);
                 tabCurrency.click();
 
+                //waitForElementClickable(nextPageAtCoin);
                 waitForElementClickable(priceColumn);
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
@@ -73,19 +74,19 @@ public class CoinsPage extends HeaderPage {
             }
             coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
             }
-        System.out.println("-----/Result map------");
-        printCoinsMap(coinCurrencyMap);
+//        System.out.println("-----/Result map------");
+//        printCoinsMap(coinCurrencyMap);
         return coinCurrencyMap;
     }    //этот работает
 
 
-    public void printCoinsMap(Map<String, Map<String, Double>> coinCurrencyMap) {
-        Iterator it = coinCurrencyMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            System.out.println(pair.getKey() + " = " + pair.getValue());
-        }
-    }
+//    public void printCoinsMap(Map<String, Map<String, Double>> coinCurrencyMap) {
+//        Iterator it = coinCurrencyMap.entrySet().iterator();
+//        while (it.hasNext()) {
+//            Map.Entry pair = (Map.Entry) it.next();
+//            System.out.println(pair.getKey() + " = " + pair.getValue());
+//        }
+//    }
 
 //    public Map<String, Map<String, Double>> selectCurrencyAndGetCostForCoins1(List<Coin> coins, List<Currency> currency) {
 //        Map<String, Map<String, Double>> coinCurrencyMap = new LinkedHashMap<>();
