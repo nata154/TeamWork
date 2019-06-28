@@ -109,7 +109,6 @@ public class ApiSteps {
         return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
     }
 
-
     public String getResultCoinsForQuery(List<Coin> coins) {
         StringBuilder resultCoinsForQuery = new StringBuilder("");
         for (Coin c : coins) {
@@ -125,12 +124,6 @@ public class ApiSteps {
         }
         return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
     }
-
-//    public String getResultQueryForGettingCurrenciesForCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
-//        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
-//        return resultQuery;
-//    }
-
 
     private Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
         MyLogger.info("Getting response with multiprice");
@@ -152,9 +145,9 @@ public class ApiSteps {
 
     public boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPageAsArray, Map<String, Map<String, Double>> multiPriceResponseAsArray, List<Coin> coins, List<Currency> currencies) {
         boolean resultCompareMaps = true;
-        double deltaExpected = 5;
-        for (int i = 1; i < coins.size() + 1; i++) {
-            for (int j = 1; j < currencies.size() + 1; j++) {
+        double deltaExpected = 1;
+        for (int i = 0; i < coins.size(); i++) {
+            for (int j = 0; j < currencies.size(); j++) {
                 double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get(coins.get(i).getAbbreviationCoin()).get(currencies.get(j).getNameOfCurrency());
                 double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get(coins.get(i).getAbbreviationCoin()).get(currencies.get(j).getNameOfCurrency());
                 double deltaActual = ((Math.abs(coinCostInCurrencyFromPage - coinCostInCurrencyFromResponse)) / coinCostInCurrencyFromPage) * 100;
@@ -165,52 +158,4 @@ public class ApiSteps {
         }
         return resultCompareMaps;
     }
-
-
-//    public String[] getCoinsMap(Map<String, Map<String, Double>> coinCurrencyMap) {
-//        Iterator it = coinCurrencyMap.entrySet().iterator();
-//        while (it.hasNext()) {
-//            Map.Entry pair = (Map.Entry) it.next();
-//            System.out.println(pair.getKey() + " = " + pair.getValue());
-//        }
-//    }
-
-
-//    public String getValuesFromEnum(Object[] objects) {
-//        StringBuilder query = new StringBuilder("");
-//        for (Object o : objects) {
-//            query.append("," + o);
-//        }
-//        return query.substring(1, query.length());
-//    }
-
-//    public String getResultStringForQuery(List<Object> objects) {
-//        StringBuilder query = new StringBuilder("");
-//        for (Object o : objects) {
-//            query.append("," + o);
-//        }
-//        return query.substring(1, query.length());
-//    }
-//
-//    public String getQueryForMatchingCurrenciesOfCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
-//        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
-//        return resultQuery;
-//    }
-
-
-//    public Response getResponseWithCoinCostInCurrency(String request) {
-//        MyLogger.info("Getting response with currency costs for coins");
-//        return RestAssured.when().get(TestDataReader.getApiGetUrl() + request).andReturn();//убрать хардкод
-//    }
-
-
-
-//    public String[] getResponseWithCoinCostInCurrencyAsString(String query) throws IOException {
-//        MyLogger.info("Getting coins values from the response as string");
-//        CoinValueResponse1 coinsValueInCurrency = getCoinsValueInCurrency(getResponseWithCoinCostInCurrency(query));
-//        //return subarray of values
-//        // List<String> responseAsList = coinsValueInCurrency.
-//
-//       // return IntStream.range(0, 50).mapToObj(i -> coinsValueInCurrency.getBtc().getTitle()).toArray(String[]::new);
-//    }
 }
