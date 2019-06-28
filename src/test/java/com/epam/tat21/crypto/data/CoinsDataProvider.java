@@ -5,6 +5,9 @@ import org.testng.annotations.DataProvider;
 
 public class CoinsDataProvider {
 
+    private CoinsDataProvider() {
+    }
+
     @DataProvider(name = "coinsForTests")
     public static Object[][] coinNameForFilter() {
 
