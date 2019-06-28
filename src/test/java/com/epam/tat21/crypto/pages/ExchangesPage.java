@@ -27,6 +27,9 @@ public class ExchangesPage extends HeaderPage {
     @FindBy(xpath = "//div[@class='btn-group btn-block dropdown open']/button[contains(text(), 'Country')]/../ul")
     private WebElement countryDropdownMenu;
 
+    @FindBy(xpath = "//span[@class='fa fa-close']")
+    WebElement resetFiltersButton;
+
     public ExchangesPage(WebDriver driver) {
         super(driver);
     }
@@ -67,6 +70,7 @@ public class ExchangesPage extends HeaderPage {
         getNumberOfExchangesFromBadge(country);
         countryLinkInDropdown.click();
         MyLogger.info(country.getNameOfCountry() + " country was chosen");
+        waitForElementClickable(resetFiltersButton);
         return this;
     }
 
