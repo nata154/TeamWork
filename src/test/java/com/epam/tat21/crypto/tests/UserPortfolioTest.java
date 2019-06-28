@@ -32,4 +32,11 @@ public class UserPortfolioTest extends CommonConditions{
 		 steps.changeUserPortfolioName(changedName);
 		 assertTrue(steps.isPortfolioPresent(changedName));
 	}
+	
+	@JIRATestKey(key = "EPMFARMATS-9264")
+	@Test(dependsOnMethods = { "portfolioEditingTest" })
+	private void portfolioDeletingTest() {
+		steps.deleteUserPortfolio();
+		assertTrue(steps.isPortfolioDelete());
+	}
 }
