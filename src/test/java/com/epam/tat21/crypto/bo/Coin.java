@@ -6,10 +6,10 @@ import com.epam.tat21.crypto.utils.CoinInformationParser;
 public enum Coin {
 
     BTC("Bitcoin", "BTC"),
-    //    ETH("Ethereum", "ETH"),
-//    LTC("Litecoin", "LTC"),
-//    XMR("Monero", "XMR"),
-//    ZEC("ZCash", "ZEC"),
+    ETH("Ethereum", "ETH"),
+    LTC("Litecoin", "LTC"),
+    XMR("Monero", "XMR"),
+    ZEC("ZCash", "ZEC"),
     XRP("XRP", "XRP");
 
     private String nameCoin;
