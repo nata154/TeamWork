@@ -5,6 +5,9 @@ import org.testng.annotations.DataProvider;
 
 public class CountriesDataProvider {
 
+    private CountriesDataProvider() {
+    }
+
     @DataProvider(name = "countriesForTests")
     public static Object[][] countryNameForFilter() {
 
