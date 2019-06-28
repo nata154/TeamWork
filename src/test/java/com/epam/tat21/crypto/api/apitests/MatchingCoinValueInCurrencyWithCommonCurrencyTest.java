@@ -4,19 +4,18 @@ import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.bo.Currency;
 import com.epam.tat21.crypto.tests.CommonConditions;
 import com.epam.testng.JIRATestKey;
-import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class MatchingCoinValueInCurrencyWithCommonCurrencyTest extends CommonConditions {
 
-
     @JIRATestKey(key = "EPMFARMATS-9340")
     @Test
-//            (dataProvider = "coinsForTests", dataProviderClass = CoinsDataProvider.class)
     public void matchingCoinValueInCurrencyWithCommonCurrencyTest() throws IOException {
 
 //        List<Coin> coins1 = new ArrayList<>();
@@ -44,27 +43,37 @@ public class MatchingCoinValueInCurrencyWithCommonCurrencyTest extends CommonCon
 //                .selectCurrencyAndGetCostForCoins1(coins, currencies);
 
 
-        steps.openCoinsPage()
+        Map<String, Map<String, Double>> multiPricesFromPageAsArray = steps.openCoinsPage()
                 .selectCurrencyAndGetCostForCoins(coins, currencies);
+
+        String coinAbbreviations = apiSteps.getResultCoinsForQuery(coins);
+        String currencyAbbreviations = apiSteps.getResultCurrenciesForQuery(currencies);
+        // String resultQueryForGettingCurrenciesForCoins = apiSteps.getResultQueryForGettingCurrenciesForCoins(resultCoinsForQuery, resultCurrenciesForQuery);
+
+        //Response response = apiSteps.getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations);
+        //apiSteps.getMultiPriceFromResponse(response);
+
+        Map<String, Map<String, Double>> multiPriceResponseAsArray = apiSteps.getMultiPriceResponseAsArray(coinAbbreviations, currencyAbbreviations).getPrices();
+
+        double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get("BTC").get("EUR");
+        double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get("BTC").get("EUR");
+
+
+        System.out.println("coinCostInCurrencyFromPage  - " + coinCostInCurrencyFromPage);
+        System.out.println("coinCostInCurrencyFromResponse  - " + coinCostInCurrencyFromResponse);
 //
-        String resultCoinsForQuery = apiSteps.getResultCoinsForQuery(coins);
-        String resultCurrenciesForQuery = apiSteps.getResultCurrenciesForQuery(currencies);
-        String resultQueryForGettingCurrenciesForCoins = apiSteps.getResultQueryForGettingCurrenciesForCoins(resultCoinsForQuery, resultCurrenciesForQuery);
+//        public void compareWithDelta(multiPricesFromPageAsArray, multiPriceResponseAsArray, ){
+//            double deltaExpected = 5;
+//            for (int i = 0; i<multiPriceResponseAsArray.size(); i++){
+//                double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get(coins.get(i)).get("EUR");
+//                double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get("BTC").get("EUR");
 //
-        Response response = apiSteps.getResponseWithCoinCostInCurrency(resultQueryForGettingCurrenciesForCoins);
-        apiSteps.getCoinsValueInCurrency(response);
-//
-        double coinCostInCurrencyFromResponse = apiSteps.getCoinsValueInCurrency(response).getBtc().getJpy();
-        //double coinCostInCurrencyFromPage = steps.getCoinCostInCurrencyFromPage(coins, currencies, "BTC", "JPY");
+//            double deltaActual = ((Math.abs(coinCostInCurrencyFromPage - coinCostInCurrencyFromResponse)) / coinCostInCurrencyFromPage) * 100;
+//        }
 
 //
-        System.out.println("coinCostInCurrencyFromResponse  - " + coinCostInCurrencyFromResponse);
-        // System.out.println("coinCostInCurrencyFromPage  - " + coinCostInCurrencyFromPage);
-//
-//        double delta = (Math.abs(coinCostInCurrencyFromPage - coinCostInCurrencyFromResponse)) / coinCostInCurrencyFromResponse * 100;
-//        System.out.println("delta - " + delta);
-//
-//        Assert.assertTrue(delta <= 0.5);
+        //Assert.assertTrue(delta <= 0.5);
+        Assert.assertEquals(multiPricesFromPageAsArray, multiPriceResponseAsArray);
 
 
 //        Map <String, Map<String, Double>> tempMap = new ObjectMapper().readValue(apiSteps.getResponseWithMultiPrice().getBody().asString(), Map.class);
