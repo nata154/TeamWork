@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.api.apitests;
 
+import com.epam.tat21.crypto.api.apidata.FeedsNamesAndIdProvider;
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.data.CoinsDataProvider;
 import com.epam.tat21.crypto.tests.CommonConditions;
@@ -16,9 +17,9 @@ public class MatchingLatestNewsTests extends CommonConditions {
     @Test
     public void matchingLatestNewsInResponseAndOnPageByTitleTest() throws IOException {
         steps.openNewsPage();
-        String[] newsTitlesFromResponse = apiSteps.getLatestNewsTitleItems(50);
-        String[] newsTitlesFromPage = steps.getLatestNewsTitleItemsFromPage(50);
-        Assert.assertTrue(Arrays.equals(newsTitlesFromResponse, newsTitlesFromPage));
+        String[] newsTitlesFromResponse = apiSteps.getLatestNewsTitleItems();
+        String[] newsTitlesFromPage = steps.getLatestNewsTitleItemsFromPage();
+        Assert.assertTrue(Arrays.equals(newsTitlesFromPage, newsTitlesFromResponse));
     }
 
     @JIRATestKey(key = "EPMFARMATS-9296")
@@ -26,9 +27,19 @@ public class MatchingLatestNewsTests extends CommonConditions {
     public void matchingNewsInResponseAndOnPageByCoinTest(Coin coin) throws IOException {
         steps.openNewsPage();
         steps.filterByCoin(coin);
-        String[] newsTitlesFromResponse = apiSteps.getCoinNewsTitleItems(50, coin);
-        String[] newsTitlesFromPage = steps.getLatestNewsTitleItemsFromPage(50);
-        Assert.assertTrue(Arrays.equals(newsTitlesFromResponse, newsTitlesFromPage));
+        String[] newsTitlesFromResponse = apiSteps.getCoinNewsTitleItems(coin);
+        String[] newsTitlesFromPage = steps.getLatestNewsTitleItemsFromPage();
+        Assert.assertTrue(Arrays.equals(newsTitlesFromPage, newsTitlesFromResponse));
     }
 
+    @JIRATestKey(key = "EPMFARMATS-9341")
+    @Test(dataProvider = "namesAndIdForFeedsTests", dataProviderClass = FeedsNamesAndIdProvider.class)
+    public void matchingNewsByFeedsTest(String feedId, String feedName) throws IOException {
+        steps.openNewsPage()
+                .clickOnFeedsDropdown()
+                .clickOnFeedLink(feedName);
+        String[] newsTitlesFromResponse = apiSteps.getFeedsNewsTitleItems(feedId);
+        String[] newsTitlesFromPage = steps.getLatestNewsTitleItemsFromPage();
+        Assert.assertTrue(Arrays.equals(newsTitlesFromPage, newsTitlesFromResponse));
+    }
 }
