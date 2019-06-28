@@ -12,6 +12,7 @@ import io.restassured.response.Response;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static com.epam.tat21.crypto.service.GlobalConstants.REGEX_FOR_SPACES;
 
@@ -131,7 +132,7 @@ public class ApiSteps {
 //    }
 
 
-    public Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
+    private Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
         MyLogger.info("Getting response with multiprice");
         return RestAssured.given().queryParam("fsyms", coinAbbreviations).
                 queryParam("tsyms", currencyAbbreviations).
@@ -147,6 +148,22 @@ public class ApiSteps {
         MyLogger.info("Getting prices for coins from the response");
         MultiPrice multiPrice = getMultiPriceFromResponse(getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations));
         return multiPrice;
+    }
+
+    public boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPageAsArray, Map<String, Map<String, Double>> multiPriceResponseAsArray, List<Coin> coins, List<Currency> currencies) {
+        boolean resultCompareMaps = true;
+        double deltaExpected = 5;
+        for (int i = 1; i < coins.size() + 1; i++) {
+            for (int j = 1; j < currencies.size() + 1; j++) {
+                double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get(coins.get(i).getAbbreviationCoin()).get(currencies.get(j).getNameOfCurrency());
+                double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get(coins.get(i).getAbbreviationCoin()).get(currencies.get(j).getNameOfCurrency());
+                double deltaActual = ((Math.abs(coinCostInCurrencyFromPage - coinCostInCurrencyFromResponse)) / coinCostInCurrencyFromPage) * 100;
+                if (deltaActual > deltaExpected) {
+                    resultCompareMaps = false;
+                }
+            }
+        }
+        return resultCompareMaps;
     }
 
 
@@ -181,18 +198,11 @@ public class ApiSteps {
 //    }
 
 
-    public Response getResponseWithCoinCostInCurrency(String request) {
-        MyLogger.info("Getting response with currency costs for coins");
-        return RestAssured.when().get(TestDataReader.getApiGetUrl() + request).andReturn();//убрать хардкод
-    }
+//    public Response getResponseWithCoinCostInCurrency(String request) {
+//        MyLogger.info("Getting response with currency costs for coins");
+//        return RestAssured.when().get(TestDataReader.getApiGetUrl() + request).andReturn();//убрать хардкод
+//    }
 
-    public CoinValueResponse1 getCoinsValueInCurrency(Response response) throws IOException {
-        MyLogger.info("Filling model classes CoinValueInCurrency2 -> CurrencyForCoin");
-        //with Jackson library serialize a tree of model classes
-        return ResponseUtils.getObjectFromResponse(response, CoinValueResponse1.class);
-        //return ResponseUtils.getObjectFromResponse(response, CoinWithValueResponse.class);
-        //return ResponseUtils.getObjectFromResponse(response, CoinValueInCurrency2.class);
-    }
 
 
 //    public String[] getResponseWithCoinCostInCurrencyAsString(String query) throws IOException {
