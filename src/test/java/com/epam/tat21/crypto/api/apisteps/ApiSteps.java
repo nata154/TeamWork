@@ -20,6 +20,7 @@ public class ApiSteps {
     private static final String NEWS_RELATIVE_PATH = "v2/news/";
     private static final String FEEDS_RELATIVE_PATH = "news/feeds";
     private static final String COIN_LIST_RELATIVE_PATH = "/all/coinlist";
+    private static final String MULTIPRICE_RELATIVE_PATH = "pricemulti";
 
     public ApiSteps() {
         RestAssured.baseURI = TestDataReader.getApiGetUrl();
@@ -124,6 +125,39 @@ public class ApiSteps {
         return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
     }
 
+//    public String getResultQueryForGettingCurrenciesForCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
+//        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
+//        return resultQuery;
+//    }
+
+
+    public Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
+        MyLogger.info("Getting response with multiprice");
+        return RestAssured.given().queryParam("fsyms", coinAbbreviations).
+                queryParam("tsyms", currencyAbbreviations).
+                when().get(MULTIPRICE_RELATIVE_PATH).andReturn();
+    }
+
+    private MultiPrice getMultiPriceFromResponse(Response response) throws IOException {
+        MyLogger.info("Filling MultiPrice model class");
+        return ResponseUtils.getObjectFromResponse(response, MultiPrice.class);
+    }
+
+    public MultiPrice getMultiPriceResponseAsArray(String coinAbbreviations, String currencyAbbreviations) throws IOException {
+        MyLogger.info("Getting prices for coins from the response");
+        MultiPrice multiPrice = getMultiPriceFromResponse(getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations));
+        return multiPrice;
+    }
+
+
+//    public String[] getCoinsMap(Map<String, Map<String, Double>> coinCurrencyMap) {
+//        Iterator it = coinCurrencyMap.entrySet().iterator();
+//        while (it.hasNext()) {
+//            Map.Entry pair = (Map.Entry) it.next();
+//            System.out.println(pair.getKey() + " = " + pair.getValue());
+//        }
+//    }
+
 
 //    public String getValuesFromEnum(Object[] objects) {
 //        StringBuilder query = new StringBuilder("");
@@ -145,11 +179,6 @@ public class ApiSteps {
 //        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
 //        return resultQuery;
 //    }
-
-    public String getResultQueryForGettingCurrenciesForCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
-        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
-        return resultQuery;
-    }
 
 
     public Response getResponseWithCoinCostInCurrency(String request) {
