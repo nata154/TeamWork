@@ -28,11 +28,6 @@ public class ApiSteps {
         RestAssured.baseURI = TestDataReader.getApiGetUrl();
     }
 
-    public Response getResponseWithMultiPrice() {
-        MyLogger.info("Getting response with multiprice");
-        return RestAssured.when().get("pricemulti?fsyms=BTC,ETH&tsyms=USD,EUR").andReturn();
-    }
-
     public Response getResponseWithCoinsInfo() {
         MyLogger.info("Getting response with coins info");
         return RestAssured.when().get(COIN_LIST_RELATIVE_PATH).andReturn();
