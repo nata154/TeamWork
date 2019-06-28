@@ -87,26 +87,27 @@ public class ApiSteps {
         return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
     }
 
-    public String getValuesFromEnum(Object[] objects) {
-        StringBuilder query = new StringBuilder("");
-        for (Object o : objects) {
-            query.append("," + o);
-        }
-        return query.substring(1, query.length());
-    }
 
-    public String getResultStringForQuery(List<Object> objects) {
-        StringBuilder query = new StringBuilder("");
-        for (Object o : objects) {
-            query.append("," + o);
-        }
-        return query.substring(1, query.length());
-    }
+//    public String getValuesFromEnum(Object[] objects) {
+//        StringBuilder query = new StringBuilder("");
+//        for (Object o : objects) {
+//            query.append("," + o);
+//        }
+//        return query.substring(1, query.length());
+//    }
 
-    public String getQueryForMatchingCurrenciesOfCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
-        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
-        return resultQuery;
-    }
+//    public String getResultStringForQuery(List<Object> objects) {
+//        StringBuilder query = new StringBuilder("");
+//        for (Object o : objects) {
+//            query.append("," + o);
+//        }
+//        return query.substring(1, query.length());
+//    }
+//
+//    public String getQueryForMatchingCurrenciesOfCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
+//        String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
+//        return resultQuery;
+//    }
 
     public String getResultQueryForGettingCurrenciesForCoins(String resultCoinsForQuery, String resultCurrenciesForQuery) {
         String resultQuery = "pricemulti?fsyms=" + resultCoinsForQuery + "&tsyms=" + resultCurrenciesForQuery;
