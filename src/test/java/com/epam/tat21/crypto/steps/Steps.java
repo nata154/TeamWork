@@ -1,5 +1,13 @@
 package com.epam.tat21.crypto.steps;
 
+import static com.epam.tat21.crypto.service.GlobalConstants.REGEX_FOR_SPACES;
+
+import java.util.List;
+import java.util.stream.IntStream;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.bo.Countries;
 import com.epam.tat21.crypto.bo.User;
@@ -7,16 +15,14 @@ import com.epam.tat21.crypto.driver.DriverFactory;
 import com.epam.tat21.crypto.driver.LocalDriver;
 import com.epam.tat21.crypto.driver.RemoteDriver;
 import com.epam.tat21.crypto.driver.RemoteDriverSauceLabs;
-import com.epam.tat21.crypto.pages.*;
+import com.epam.tat21.crypto.pages.ExchangesPage;
+import com.epam.tat21.crypto.pages.HeaderPage;
+import com.epam.tat21.crypto.pages.MainCryptoComparePage;
+import com.epam.tat21.crypto.pages.NewsPage;
+import com.epam.tat21.crypto.pages.PortfolioPage;
+import com.epam.tat21.crypto.pages.UserAccountPage;
 import com.epam.tat21.crypto.service.UserCreator;
 import com.epam.tat21.crypto.utils.MyLogger;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-import java.util.stream.IntStream;
-
-import static com.epam.tat21.crypto.service.GlobalConstants.REGEX_FOR_SPACES;
 
 public class Steps {
 
@@ -146,5 +152,17 @@ public class Steps {
         return portfolioPage.
                 getEditPortfolioForm().
                 editUserPortfolio(name);
+    }
+    
+    public PortfolioPage deleteUserPortfolio() {
+		return portfolioPage.
+				getEditPortfolioForm().
+				deleteUserPortfolio().
+				confirmDeletion();
+    }
+    
+    public boolean isPortfolioDelete() {
+        return portfolioPage.
+               isPortfolioDelete();
     }
 }

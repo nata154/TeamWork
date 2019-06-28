@@ -36,6 +36,9 @@ public class AddPortfolioForm extends HeaderPage {
 	@FindBy(xpath = "//span[contains(text(), 'Update')]")
 	private WebElement buttonUpdatePortfolio;
 
+	@FindBy(xpath = "//span[contains(text(), 'Delete')]")
+	private WebElement buttonDeletePortfolio;
+
 	public AddPortfolioForm(WebDriver driver) {
 		super(driver);
 	}
@@ -67,6 +70,12 @@ public class AddPortfolioForm extends HeaderPage {
 		inputPortfolioName.sendKeys(name);
 		waitForElementClickable(buttonUpdatePortfolio);
 		buttonUpdatePortfolio.click();
+		return new PortfolioPage(driver);
+	}
+	
+	public PortfolioPage deleteUserPortfolio() {
+		waitForElementClickable(buttonDeletePortfolio);
+		buttonDeletePortfolio.click();
 		return new PortfolioPage(driver);
 	}
 }

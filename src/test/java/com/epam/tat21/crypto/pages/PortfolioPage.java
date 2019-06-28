@@ -32,6 +32,14 @@ public class PortfolioPage extends HeaderPage {
     @FindBy(xpath = "//md-tab-content[contains(@class,'active')]//button[@ng-click='editPortfolioDialog()']")
     private WebElement buttonEditOrDelete;
     
+    @FindBy(xpath = "//*[contains(text(), 'Are you sure you want to delete')]")
+    private WebElement  consentForm;
+    
+    @FindBy(xpath = "//span[contains(text(), 'Yes, delete portfolio')]")
+    private WebElement buttonYesDeletePortfolio;
+    
+    @FindBy(xpath = "//div[contains(text(), 'Your portfolio has been successfully deleted!')]")
+    private WebElement popupSuccessfulDeleting ;
 
     public PortfolioPage(WebDriver driver) {
         super(driver);
@@ -81,5 +89,17 @@ public class PortfolioPage extends HeaderPage {
 	    buttonEditOrDelete.click();
         MyLogger.info("EditPortfolioForm was appeared");
     	return new AddPortfolioForm(driver);
+	}
+    
+    public PortfolioPage confirmDeletion() {
+		waitForElementVisible(consentForm);
+		waitForElementClickable(buttonYesDeletePortfolio);
+		buttonYesDeletePortfolio.click();
+		return this;
+	}
+
+    public boolean isPortfolioDelete() {
+    	waitForElementVisible(popupSuccessfulDeleting);
+		return popupSuccessfulDeleting.isDisplayed();
 	}
 }
