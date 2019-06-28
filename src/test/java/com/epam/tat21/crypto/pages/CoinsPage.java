@@ -23,13 +23,11 @@ public class CoinsPage extends HeaderPage {
     private final static String CURRENCY_LINE_XPATH = "//ul[@class='nav nav-tabs nav-coinss']//a[contains(text(), '";
     private final static String COIN_IN_COLUMN_XPATH = "//tr[@class='ng-scope']/td[@data-href='/coins/";
 
-    @FindBy(xpath = "//a[@class='btn btn-xs btn-switch ng-scope']")
-    private WebElement nextPageAtCoin;
+//    @FindBy(xpath = "//a[@class='btn btn-xs btn-switch ng-scope']")
+//    private WebElement nextPageAtCoin;
 
     @FindBy(xpath = "//th[@class='ng-binding ng-scope price']")
     private WebElement priceColumn;
-
-    private final static String NEXT_PAGE_AT_COINS_XPATH = "//a[@class='btn btn-xs btn-switch ng-scope']";
 
     public CoinsPage(WebDriver driver) {
         super(driver);
