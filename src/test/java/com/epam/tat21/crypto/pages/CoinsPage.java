@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class CoinsPage extends HeaderPage {
 
@@ -55,14 +56,16 @@ public class CoinsPage extends HeaderPage {
                 waitForElementClickable(tabCurrency);
                 scrollPage(tabCurrency);
                 tabCurrency.click();
+
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
                 waitForElementClickable(priceColumn);
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
                 waitForElementClickable(lineCoinFieldCost);//here we click coin at tab of currency and get its value
                 lineCoinFieldCost.click();
-                MyLogger.info("Currency line for coin " + coins.get(j).getAbbreviationCoin() + " was selected");
                 String currentCostOfCoin = lineCoinFieldCost.getText();
                 Double parsedValueOfCoin = CoinInformationParser.parseCurrenciesForCoins(currentCostOfCoin);
+                MyLogger.info("Currency " + currency.get(i).getNameOfCurrency() + " line for coin " + coins.get(j).getAbbreviationCoin() + " was selected and price is " + parsedValueOfCoin + ".");
                 currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), parsedValueOfCoin);
             }
             coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
