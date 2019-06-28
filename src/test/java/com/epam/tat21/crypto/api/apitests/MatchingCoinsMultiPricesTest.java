@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class MatchingCoinValueInCurrencyWithCommonCurrencyTest extends CommonConditions {
+public class MatchingCoinsMultiPricesTest extends CommonConditions {
 
     @JIRATestKey(key = "EPMFARMATS-9340")
     @Test
