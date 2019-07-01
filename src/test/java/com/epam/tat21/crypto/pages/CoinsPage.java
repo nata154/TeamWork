@@ -60,8 +60,8 @@ public class CoinsPage extends HeaderPage {
                 scrollPage(tabCurrency);
                 tabCurrency.click();
 
-                WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
-                waitForElementClickable(tabActiveCurrency);
+//                WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
+//                waitForElementClickable(tabActiveCurrency);
                 waitForElementVisible(bitcoinLineAtPage);
                 //waitForElementClickable(priceColumn);
                 //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
