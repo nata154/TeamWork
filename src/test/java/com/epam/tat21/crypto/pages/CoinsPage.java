@@ -62,11 +62,11 @@ public class CoinsPage extends HeaderPage {
                 WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
                 waitForElementClickable(tabActiveCurrency);
                 waitForElementClickable(priceColumn);
+                //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
-
-                waitForElementClickable(lineCoinFieldCost);//here we click coin at tab of currency and get its value
+                waitForElementClickable(lineCoinFieldCost);//click coin at tab of currency and get its value
                 lineCoinFieldCost.click();
                 String currentCostOfCoin = lineCoinFieldCost.getText();
                 Double parsedValueOfCoin = CoinInformationParser.parseTotalCoinValue(currentCostOfCoin);
