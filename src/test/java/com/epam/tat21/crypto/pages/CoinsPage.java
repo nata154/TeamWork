@@ -21,13 +21,6 @@ public class CoinsPage extends HeaderPage {
 
     private static final String CURRENCY_LINE_XPATH = "//ul[@class='nav nav-tabs nav-coinss']//a[contains(text(), '";
     private static final String COIN_IN_COLUMN_XPATH = "//tr[@class='ng-scope']/td[@data-href='/coins/";
-    private static final String ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH = "//li[@class='ng-scope active']/a[contains(text(), '";
-
-    @FindBy(xpath = "//a[@class='btn btn-xs btn-switch ng-scope']")
-    private WebElement nextPageAtCoin;
-
-    @FindBy(xpath = "//th[@class='ng-binding ng-scope price']")
-    private WebElement priceColumn;
 
     @FindBy(xpath = "//span[@class='mobile-name ng-binding' and contains(text(), 'BTC')]/..")
     private WebElement bitcoinLineAtPage;
@@ -54,17 +47,12 @@ public class CoinsPage extends HeaderPage {
         for (int j = 0; j < coins.size(); j++) {//for each coin
             Map<String, Double> currencyForEachCoinMap = new LinkedHashMap<>();
             for (int i = 0; i < currency.size(); i++) {//select tab currency, for example EUR
-                waitForElementClickable(priceColumn);
                 WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
                 waitForElementClickable(tabCurrency);
                 scrollPage(tabCurrency);
                 tabCurrency.click();
 
-//                WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
-//                waitForElementClickable(tabActiveCurrency);
                 waitForElementVisible(bitcoinLineAtPage);
-                //waitForElementClickable(priceColumn);
-                //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
@@ -75,7 +63,7 @@ public class CoinsPage extends HeaderPage {
                 currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), parsedValueOfCoin);
             }
             coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
-            }
+        }
         return coinCurrencyMap;
     }
 
