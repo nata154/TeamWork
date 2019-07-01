@@ -80,8 +80,7 @@ public class Steps {
     public ExchangesPage filterByCountry(Countries country) {
         return exchangesPage.
                 clickOnCountryDropdown().
-                selectCountryInDropdown(country).
-                scrollPage();
+                selectCountryInDropdown(country);
     }
 
     public int getFromFilteredPageNumberOfResultsWith(Countries country) {
@@ -147,8 +146,20 @@ public class Steps {
                 editUserPortfolio(name);
     }
 
+    public PortfolioPage deleteUserPortfolio() {
+        return portfolioPage.
+                getEditPortfolioForm().
+                deleteUserPortfolio().
+                confirmDeletion();
+    }
+
+    public boolean isPortfolioDelete() {
+        return portfolioPage.
+                isPortfolioDelete();
+    }
+
     public CoinsPage openCoinsPage() {
-        return new CoinsPage(driver).
+        return coinsPage = new CoinsPage(driver).
                 openPage();
     }
 }
