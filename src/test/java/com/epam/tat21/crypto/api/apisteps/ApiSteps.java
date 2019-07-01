@@ -143,7 +143,6 @@ public class ApiSteps {
         return getMultiPriceFromResponse(getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations));
     }
 
-
     public boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPageAsArray, Map<String, Map<String, Double>> multiPriceResponseAsArray, List<Coin> coins, List<Currency> currencies, double deltaExpected) {
         boolean resultCompareMaps = true;
         for (int i = 0; i < coins.size(); i++) {
