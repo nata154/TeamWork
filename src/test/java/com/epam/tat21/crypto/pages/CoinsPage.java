@@ -14,14 +14,15 @@ import org.openqa.selenium.support.FindBy;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class CoinsPage extends HeaderPage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "coins/list/";
 
-    private final static String CURRENCY_LINE_XPATH = "//ul[@class='nav nav-tabs nav-coinss']//a[contains(text(), '";
-    private final static String COIN_IN_COLUMN_XPATH = "//tr[@class='ng-scope']/td[@data-href='/coins/";
+    private static final String CURRENCY_LINE_XPATH = "//ul[@class='nav nav-tabs nav-coinss']//a[contains(text(), '";
+    private static final String COIN_IN_COLUMN_XPATH = "//tr[@class='ng-scope']/td[@data-href='/coins/";
+    private static final String ACTIVE_CURRANCIES_TAB_FOR_WAIT_XPATH = "//li[@class='ng-scope active']/a[contains(text(), '";
+
 
     @FindBy(xpath = "//a[@class='btn btn-xs btn-switch ng-scope']")
     private WebElement nextPageAtCoin;
@@ -47,9 +48,9 @@ public class CoinsPage extends HeaderPage {
     }
 
     public Map<String, Map<String, Double>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
-        Map<String, Map<String, Double>> coinCurrencyMap = new LinkedHashMap<String, Map<String, Double>>();
+        Map<String, Map<String, Double>> coinCurrencyMap = new LinkedHashMap<>();//String, Map<String, Double>
         for (int j = 0; j < coins.size(); j++) {//for each coin
-            Map<String, Double> currencyForEachCoinMap = new LinkedHashMap<String, Double>();
+            Map<String, Double> currencyForEachCoinMap = new LinkedHashMap<>();//String, Double
             for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for example EUR
                 waitForElementClickable(priceColumn);
                 WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
@@ -57,8 +58,11 @@ public class CoinsPage extends HeaderPage {
                 scrollPage(tabCurrency);
                 tabCurrency.click();
 
-                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                waitForElementClickable(priceColumn);
+                WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRANCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
+                waitForElementClickable(tabActiveCurrency);
+
+                //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                // waitForElementClickable(priceColumn);
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
                 waitForElementClickable(lineCoinFieldCost);//here we click coin at tab of currency and get its value
