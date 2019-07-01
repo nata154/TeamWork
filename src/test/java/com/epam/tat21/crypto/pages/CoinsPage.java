@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class CoinsPage extends HeaderPage {
 
@@ -21,8 +22,9 @@ public class CoinsPage extends HeaderPage {
 
     private static final String CURRENCY_LINE_XPATH = "//ul[@class='nav nav-tabs nav-coinss']//a[contains(text(), '";
     private static final String COIN_IN_COLUMN_XPATH = "//tr[@class='ng-scope']/td[@data-href='/coins/";
-    private static final String ACTIVE_CURRANCIES_TAB_FOR_WAIT_XPATH = "//li[@class='ng-scope active']/a[contains(text(), '";
-
+    private static final String ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH = "//li[@class='ng-scope active']/a[contains(text(), '";
+    private static final String BITCOIN_LINE_FOR_WAIT_XPATH = "//span[@class='mobile-name ng-binding' and contains(text(), '";
+//span[@class='mobile-name ng-binding' and contains(text(), 'BTC')]
 
     @FindBy(xpath = "//a[@class='btn btn-xs btn-switch ng-scope']")
     private WebElement nextPageAtCoin;
@@ -58,13 +60,21 @@ public class CoinsPage extends HeaderPage {
                 scrollPage(tabCurrency);
                 tabCurrency.click();
 
-                WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRANCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
+                WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
                 waitForElementClickable(tabActiveCurrency);
 
-                //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+//                WebElement tabLoadedBitcoin = driver.findElement(By.xpath(BITCOIN_LINE_FOR_WAIT_XPATH + coins.get(j).getAbbreviationCoin() + "')]"));// wait loading of name Bitcoin
+//                // waitForElementVisible(tabLoadedBitcoin);
+//                tabLoadedBitcoin.isDisplayed();
+
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
                 // waitForElementClickable(priceColumn);
+                //scrollPage(tabCurrency);
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
+                //tr[@class='ng-scope']/td[@data-href='/coins/xmr/overview/EUR']/../td[starts-with(@class, 'price')]/div
+                //scrollPage(lineCoinFieldCost);
+
                 waitForElementClickable(lineCoinFieldCost);//here we click coin at tab of currency and get its value
                 lineCoinFieldCost.click();
                 String currentCostOfCoin = lineCoinFieldCost.getText();
