@@ -61,20 +61,15 @@ public class CoinsPage extends HeaderPage {
 
                 WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
                 waitForElementClickable(tabActiveCurrency);
+                waitForElementClickable(priceColumn);
 
-                //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                // waitForElementClickable(priceColumn);
-                //scrollPage(tabCurrency);
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
                         coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
-                //tr[@class='ng-scope']/td[@data-href='/coins/xmr/overview/EUR']/../td[starts-with(@class, 'price')]/div
-                //scrollPage(lineCoinFieldCost);
 
                 waitForElementClickable(lineCoinFieldCost);//here we click coin at tab of currency and get its value
                 lineCoinFieldCost.click();
                 String currentCostOfCoin = lineCoinFieldCost.getText();
                 Double parsedValueOfCoin = CoinInformationParser.parseTotalCoinValue(currentCostOfCoin);
-                //MyLogger.info("Currency " + currency.get(i).getNameOfCurrency() + " line for coin " + coins.get(j).getAbbreviationCoin() + " was selected and price is " + parsedValueOfCoin + ".");
                 currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), parsedValueOfCoin);
             }
             coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
