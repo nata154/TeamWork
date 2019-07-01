@@ -22,14 +22,15 @@ public class CoinsPage extends HeaderPage {
     private static final String CURRENCY_LINE_XPATH = "//ul[@class='nav nav-tabs nav-coinss']//a[contains(text(), '";
     private static final String COIN_IN_COLUMN_XPATH = "//tr[@class='ng-scope']/td[@data-href='/coins/";
     private static final String ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH = "//li[@class='ng-scope active']/a[contains(text(), '";
-    private static final String BITCOIN_LINE_FOR_WAIT_XPATH = "//span[@class='mobile-name ng-binding' and contains(text(), '";
-//span[@class='mobile-name ng-binding' and contains(text(), 'BTC')]
 
     @FindBy(xpath = "//a[@class='btn btn-xs btn-switch ng-scope']")
     private WebElement nextPageAtCoin;
 
     @FindBy(xpath = "//th[@class='ng-binding ng-scope price']")
     private WebElement priceColumn;
+
+    @FindBy(xpath = "//span[@class='mobile-name ng-binding' and contains(text(), 'BTC')]/..")
+    private WebElement bitcoinLineAtPage;
 
     public CoinsPage(WebDriver driver) {
         super(driver);
@@ -61,7 +62,8 @@ public class CoinsPage extends HeaderPage {
 
                 WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
                 waitForElementClickable(tabActiveCurrency);
-                waitForElementClickable(priceColumn);
+                waitForElementVisible(bitcoinLineAtPage);
+                //waitForElementClickable(priceColumn);
                 //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
