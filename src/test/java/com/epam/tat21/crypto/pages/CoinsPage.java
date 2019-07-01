@@ -14,7 +14,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class CoinsPage extends HeaderPage {
 
@@ -50,10 +49,10 @@ public class CoinsPage extends HeaderPage {
     }
 
     public Map<String, Map<String, Double>> selectCurrencyAndGetCostForCoins(List<Coin> coins, List<Currency> currency) {
-        Map<String, Map<String, Double>> coinCurrencyMap = new LinkedHashMap<>();//String, Map<String, Double>
+        Map<String, Map<String, Double>> coinCurrencyMap = new LinkedHashMap<>();
         for (int j = 0; j < coins.size(); j++) {//for each coin
-            Map<String, Double> currencyForEachCoinMap = new LinkedHashMap<>();//String, Double
-            for (int i = 0; i < currency.size(); i++) {//here we select tab currency, for example EUR
+            Map<String, Double> currencyForEachCoinMap = new LinkedHashMap<>();
+            for (int i = 0; i < currency.size(); i++) {//select tab currency, for example EUR
                 waitForElementClickable(priceColumn);
                 WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
                 waitForElementClickable(tabCurrency);
@@ -63,11 +62,7 @@ public class CoinsPage extends HeaderPage {
                 WebElement tabActiveCurrency = driver.findElement(By.xpath(ACTIVE_CURRENCIES_TAB_FOR_WAIT_XPATH + currency.get(i).getNameOfCurrency() + "')]"));// wait loading of page
                 waitForElementClickable(tabActiveCurrency);
 
-//                WebElement tabLoadedBitcoin = driver.findElement(By.xpath(BITCOIN_LINE_FOR_WAIT_XPATH + coins.get(j).getAbbreviationCoin() + "')]"));// wait loading of name Bitcoin
-//                // waitForElementVisible(tabLoadedBitcoin);
-//                tabLoadedBitcoin.isDisplayed();
-
-                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
                 // waitForElementClickable(priceColumn);
                 //scrollPage(tabCurrency);
                 WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
@@ -78,8 +73,8 @@ public class CoinsPage extends HeaderPage {
                 waitForElementClickable(lineCoinFieldCost);//here we click coin at tab of currency and get its value
                 lineCoinFieldCost.click();
                 String currentCostOfCoin = lineCoinFieldCost.getText();
-                Double parsedValueOfCoin = CoinInformationParser.parseCurrenciesForCoins(currentCostOfCoin);
-                MyLogger.info("Currency " + currency.get(i).getNameOfCurrency() + " line for coin " + coins.get(j).getAbbreviationCoin() + " was selected and price is " + parsedValueOfCoin + ".");
+                Double parsedValueOfCoin = CoinInformationParser.parseTotalCoinValue(currentCostOfCoin);
+                //MyLogger.info("Currency " + currency.get(i).getNameOfCurrency() + " line for coin " + coins.get(j).getAbbreviationCoin() + " was selected and price is " + parsedValueOfCoin + ".");
                 currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), parsedValueOfCoin);
             }
             coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
