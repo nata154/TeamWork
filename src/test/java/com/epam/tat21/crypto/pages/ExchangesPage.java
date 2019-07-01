@@ -70,6 +70,7 @@ public class ExchangesPage extends HeaderPage {
         getNumberOfExchangesFromBadge(country);
         countryLinkInDropdown.click();
         MyLogger.info(country.getNameOfCountry() + " country was chosen");
+        scrollPage();
         waitForElementClickable(resetFiltersButton);
         return this;
     }
