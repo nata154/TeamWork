@@ -10,6 +10,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -109,7 +110,7 @@ public class ApiSteps {
         return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
     }
 
-    public String getResultCoinsForQuery(List<Coin> coins) {
+    public String getResultCoinsForQuery(List<Coin> coins) {//build result string from coins list for request
         StringBuilder resultCoinsForQuery = new StringBuilder("");
         for (Coin c : coins) {
             resultCoinsForQuery.append("," + c.getAbbreviationCoin());
@@ -117,7 +118,7 @@ public class ApiSteps {
         return resultCoinsForQuery.substring(1, resultCoinsForQuery.length());
     }
 
-    public String getResultCurrenciesForQuery(List<Currency> currencies) {
+    public String getResultCurrenciesForQuery(List<Currency> currencies) {//build result string from currencies list for request
         StringBuilder resultCurrenciesForQuery = new StringBuilder("");
         for (Currency c : currencies) {
             resultCurrenciesForQuery.append("," + c.getNameOfCurrency());
@@ -142,15 +143,21 @@ public class ApiSteps {
         return getMultiPriceFromResponse(getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations));
     }
 
-    public boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPageAsArray, Map<String, Map<String, Double>> multiPriceResponseAsArray, List<Coin> coins, List<Currency> currencies) {
+
+    public boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPageAsArray, Map<String, Map<String, Double>> multiPriceResponseAsArray, List<Coin> coins, List<Currency> currencies, double deltaExpected) {
         boolean resultCompareMaps = true;
-        double deltaExpected = 1;
         for (int i = 0; i < coins.size(); i++) {
             for (int j = 0; j < currencies.size(); j++) {
                 double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get(coins.get(i).getAbbreviationCoin()).get(currencies.get(j).getNameOfCurrency());
                 double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get(coins.get(i).getAbbreviationCoin()).get(currencies.get(j).getNameOfCurrency());
                 double deltaActual = ((Math.abs(coinCostInCurrencyFromPage - coinCostInCurrencyFromResponse)) / coinCostInCurrencyFromPage) * 100;
+
+                BigDecimal bigDecimal = new BigDecimal(deltaActual);
+                BigDecimal deltaActualRounded = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+                MyLogger.info("Difference between current and expected values for " + coins.get(i).getAbbreviationCoin() + " in currency " + currencies.get(j).getNameOfCurrency() + " is: " + deltaActualRounded + ".");
                 if (deltaActual > deltaExpected) {
+                    MyLogger.error("For " + coins.get(i).getAbbreviationCoin() + " in currency " + currencies.get(j).getNameOfCurrency() + " difference between current and expected values is: " + deltaActualRounded + ". But expected no more than " + deltaExpected + " %.");
                     resultCompareMaps = false;
                 }
             }
