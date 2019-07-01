@@ -23,7 +23,7 @@ public class MatchingCoinsMultiPricesTest extends CommonConditions {
 
         Map<String, Map<String, Double>> multiPricesFromPageAsArray = steps.openCoinsPage().selectCurrencyAndGetCostForCoins(coins, currencies);
 
-        String coinAbbreviationsForRequest = apiSteps.getResultCoinsForQuery(coins);//
+        String coinAbbreviationsForRequest = apiSteps.getResultCoinsForQuery(coins);
         String currencyAbbreviationsForRequest = apiSteps.getResultCurrenciesForQuery(currencies);
         Map<String, Map<String, Double>> multiPriceResponseAsArray = apiSteps.getMultiPriceResponseAsArray(coinAbbreviationsForRequest, currencyAbbreviationsForRequest).getPrices();
 
