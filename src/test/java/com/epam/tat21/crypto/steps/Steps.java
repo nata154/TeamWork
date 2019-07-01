@@ -2,7 +2,6 @@ package com.epam.tat21.crypto.steps;
 
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.bo.Countries;
-import com.epam.tat21.crypto.bo.Currency;
 import com.epam.tat21.crypto.bo.User;
 import com.epam.tat21.crypto.driver.DriverFactory;
 import com.epam.tat21.crypto.driver.LocalDriver;
@@ -15,7 +14,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static com.epam.tat21.crypto.service.GlobalConstants.REGEX_FOR_SPACES;
@@ -23,7 +21,6 @@ import static com.epam.tat21.crypto.service.GlobalConstants.REGEX_FOR_SPACES;
 public class Steps {
 
     private WebDriver driver;
-    private UserAccountPage userAccountPage;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
@@ -72,8 +69,7 @@ public class Steps {
     }
 
     public String getInfoFromPopupWindowAfterSavingChangesInUserAccount() {
-        String textOnPopupWindowAfterSavingChanges = new UserAccountPage(driver).getInfoFromPopupWindow();
-        return textOnPopupWindowAfterSavingChanges;
+        return new UserAccountPage(driver).getInfoFromPopupWindow();
     }
 
     public ExchangesPage openExchangePage() {
@@ -151,20 +147,8 @@ public class Steps {
                 editUserPortfolio(name);
     }
 
-
     public CoinsPage openCoinsPage() {
-        return coinsPage = new CoinsPage(driver).
+        return new CoinsPage(driver).
                 openPage();
-    }
-
-    public CoinsPage getActualCurrencyForCoin(List<Coin> coins, List<Currency> currency) {
-        new CoinsPage(driver).selectCurrencyAndGetCostForCoins(coins, currency);
-        return new CoinsPage(driver);
-    }
-
-    public double getCoinCostInCurrencyFromPage(List<Coin> coins, List<Currency> currency, String keyCoin, String keyCurrency) {
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-        double valueInCurrancy = coinsPage.selectCurrencyAndGetCostForCoins(coins, currency).get(keyCoin).get(keyCurrency);
-        return valueInCurrancy;
     }
 }

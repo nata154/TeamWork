@@ -6,8 +6,6 @@ import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-//import com.epam.tat21.crypto.utils.jira.JIRATestKey;
-
 public class CountryFilterOnExchangePageTests extends CommonConditions {
 
     @JIRATestKey(key = "EPMFARMATS-9116")

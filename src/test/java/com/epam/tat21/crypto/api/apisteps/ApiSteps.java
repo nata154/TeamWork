@@ -139,8 +139,7 @@ public class ApiSteps {
 
     public MultiPrice getMultiPriceResponseAsArray(String coinAbbreviations, String currencyAbbreviations) throws IOException {
         MyLogger.info("Getting prices for coins from the response");
-        MultiPrice multiPrice = getMultiPriceFromResponse(getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations));
-        return multiPrice;
+        return getMultiPriceFromResponse(getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations));
     }
 
     public boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPageAsArray, Map<String, Map<String, Double>> multiPriceResponseAsArray, List<Coin> coins, List<Currency> currencies) {

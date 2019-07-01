@@ -6,8 +6,6 @@ import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-//import com.epam.tat21.crypto.utils.jira.JIRATestKey;
-
 public class FilterOfNewsTest extends CommonConditions {
 
     private static final int COUNT_OF_NEWS = 50;
