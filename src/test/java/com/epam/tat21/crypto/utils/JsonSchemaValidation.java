@@ -18,6 +18,19 @@ public class JsonSchemaValidation {
         return validate(loadJsonObject(jsonUrlPath), loadJsonSchema(jsonSchemaPath));
     }
 
+    public static boolean validateJsonSchemaLocal(String jsonUrlPath, String jsonSchemaPath) {
+        return validate(loadJsonObjectLocal(jsonUrlPath), loadJsonSchema(jsonSchemaPath));
+    }
+
+
+    private static JsonNode loadJsonObjectLocal(String jsonUrlPath) {
+        try {
+            return JsonLoader.fromPath((new File(jsonUrlPath).getAbsolutePath()).replaceAll("//", File.separator));
+        } catch (IOException e) {
+            throw new JsonSchemaValidationException("Cannot load JSON object from current path");
+        }
+    }
+
     private static JsonNode loadJsonObject(String jsonUrlPath) {
         try {
             return JsonLoader.fromURL(new URL(jsonUrlPath));
