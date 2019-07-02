@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class DataVerification {
 
-    public static boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPageAsArray, Map<String, Map<String, Double>> multiPriceResponseAsArray, List<Coin> coins, List<Currency> currencies, double deltaExpected) {
+    public static boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPage, Map<String, Map<String, Double>> multiPriceResponse, List<Coin> coins, List<Currency> currencies, double deltaExpected) {
         boolean resultCompareMaps = true;
         for (Coin coin : coins) {
             for (Currency currency : currencies) {
                 String coinAbbreviation = coin.getAbbreviationCoin();
                 String currencyAbbreviation = currency.getNameOfCurrency();
 
-                double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get(coinAbbreviation).get(currencyAbbreviation);
-                double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get(coinAbbreviation).get(currencyAbbreviation);
+                double coinCostInCurrencyFromPage = multiPricesFromPage.get(coinAbbreviation).get(currencyAbbreviation);
+                double coinCostInCurrencyFromResponse = multiPriceResponse.get(coinAbbreviation).get(currencyAbbreviation);
                 double deltaActual = ((Math.abs(coinCostInCurrencyFromPage - coinCostInCurrencyFromResponse)) / coinCostInCurrencyFromPage) * 100;
 
                 BigDecimal deltaActualRounded = new BigDecimal(deltaActual).setScale(4, BigDecimal.ROUND_HALF_UP);

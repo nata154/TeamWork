@@ -22,13 +22,13 @@ public class MatchingCoinsMultiPricesTest extends CommonConditions {
         List<Coin> coins = Arrays.asList(Coin.values());
         List<Currency> currencies = Arrays.asList(Currency.values());
 
-        Map<String, Map<String, Double>> multiPricesFromPageAsArray = steps.openCoinsPage().selectCurrencyAndGetCostForCoins(coins, currencies);
+        Map<String, Map<String, Double>> multiPricesFromPage = steps.openCoinsPage().selectCurrencyAndGetCostForCoins(coins, currencies);
 
         String coinAbbreviationsForRequest = apiSteps.getResultCoinsForQuery(coins);
         String currencyAbbreviationsForRequest = apiSteps.getResultCurrenciesForQuery(currencies);
-        Map<String, Map<String, Double>> multiPriceResponseAsArray = apiSteps.getMultiPriceResponseAsArray(coinAbbreviationsForRequest, currencyAbbreviationsForRequest).getPrices();
+        Map<String, Map<String, Double>> multiPriceResponse = apiSteps.getMultiPriceResponseAsArray(coinAbbreviationsForRequest, currencyAbbreviationsForRequest).getPrices();
 
-        boolean areMapsEqualAccordingDelta = DataVerification.compareMultiPricesWithDelta(multiPricesFromPageAsArray, multiPriceResponseAsArray, coins, currencies, 2);
+        boolean areMapsEqualAccordingDelta = DataVerification.compareMultiPricesWithDelta(multiPricesFromPage, multiPriceResponse, coins, currencies, 2);
 
         Assert.assertTrue(areMapsEqualAccordingDelta, "Difference between current and expected values for one of the coins is unacceptable");
     }
