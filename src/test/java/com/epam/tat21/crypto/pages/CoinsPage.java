@@ -47,24 +47,26 @@ public class CoinsPage extends HeaderPage {
         for (int j = 0; j < coins.size(); j++) {//for each coin
             Map<String, Double> currencyForEachCoinMap = new LinkedHashMap<>();
             for (int i = 0; i < currency.size(); i++) {//select tab currency, for example EUR
-                WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.get(i).getNameOfCurrency() + "')]"));
-                waitForElementClickable(tabCurrency);
-                scrollPage(tabCurrency);
-                tabCurrency.click();
-
-                waitForElementVisible(bitcoinLineAtPage);
-
-                WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
-                        coins.get(j).getAbbreviationCoin().toLowerCase() + "/overview/" + currency.get(i).getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
-                waitForElementClickable(lineCoinFieldCost);//click coin at tab of currency and get its value
-                lineCoinFieldCost.click();
-                String currentCostOfCoin = lineCoinFieldCost.getText();
-                Double parsedValueOfCoin = CoinInformationParser.parseTotalCoinValue(currentCostOfCoin);
+                Double parsedValueOfCoin = readPriceOfCoin(coins.get(j), currency.get(i));
                 currencyForEachCoinMap.put(currency.get(i).getNameOfCurrency(), parsedValueOfCoin);
             }
             coinCurrencyMap.put(coins.get(j).getAbbreviationCoin(), currencyForEachCoinMap);
         }
         return coinCurrencyMap;
+    }
+
+    public Double readPriceOfCoin(Coin coin, Currency currency) {
+        WebElement tabCurrency = driver.findElement(By.xpath(CURRENCY_LINE_XPATH + currency.getNameOfCurrency() + "')]"));
+        waitForElementClickable(tabCurrency);
+        scrollPage(tabCurrency);
+        tabCurrency.click();
+        waitForElementVisible(bitcoinLineAtPage);//wait for loading page
+        WebElement lineCoinFieldCost = driver.findElement(By.xpath(COIN_IN_COLUMN_XPATH +
+                coin.getAbbreviationCoin().toLowerCase() + "/overview/" + currency.getNameOfCurrency() + "']/../td[starts-with(@class, 'price')]/div"));
+        waitForElementClickable(lineCoinFieldCost);
+        lineCoinFieldCost.click();//click coin at tab of currency and get its value
+        String currentCostOfCoin = lineCoinFieldCost.getText();
+        return CoinInformationParser.parseTotalCoinValue(currentCostOfCoin);
     }
 
 }
