@@ -17,6 +17,9 @@ import java.net.URL;
 
 public class JsonSchemaValidation {
 
+    private JsonSchemaValidation() {
+    }
+
     public static boolean validateJsonFromUrlBySchema(String jsonUrlPath, JsonSchemasNames jsonSchemaName) {
         return validate(loadJsonObjectFromUrl(jsonUrlPath), loadJsonSchema(jsonSchemaName.getSchemaName()));
     }
