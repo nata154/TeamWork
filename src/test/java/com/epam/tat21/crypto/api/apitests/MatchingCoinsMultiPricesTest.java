@@ -3,6 +3,7 @@ package com.epam.tat21.crypto.api.apitests;
 import com.epam.tat21.crypto.bo.Coin;
 import com.epam.tat21.crypto.bo.Currency;
 import com.epam.tat21.crypto.tests.CommonConditions;
+import com.epam.tat21.crypto.utils.DataVerification;
 import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -27,8 +28,8 @@ public class MatchingCoinsMultiPricesTest extends CommonConditions {
         String currencyAbbreviationsForRequest = apiSteps.getResultCurrenciesForQuery(currencies);
         Map<String, Map<String, Double>> multiPriceResponseAsArray = apiSteps.getMultiPriceResponseAsArray(coinAbbreviationsForRequest, currencyAbbreviationsForRequest).getPrices();
 
-        boolean resultCompareMaps = apiSteps.compareMultiPricesWithDelta(multiPricesFromPageAsArray, multiPriceResponseAsArray, coins, currencies, 1);
+        boolean areMapsEqualAccordingDelta = DataVerification.compareMultiPricesWithDelta(multiPricesFromPageAsArray, multiPriceResponseAsArray, coins, currencies, 2);
 
-        Assert.assertTrue(resultCompareMaps, "Difference between current and expected values for one of the coins is unacceptable");
+        Assert.assertTrue(areMapsEqualAccordingDelta, "Difference between current and expected values for one of the coins is unacceptable");
     }
 }
