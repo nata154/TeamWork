@@ -13,16 +13,18 @@ public class DataVerification {
         boolean resultCompareMaps = true;
         for (int i = 0; i < coins.size(); i++) {
             for (int j = 0; j < currencies.size(); j++) {
-                double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get(coins.get(i).getAbbreviationCoin()).get(currencies.get(j).getNameOfCurrency());
-                double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get(coins.get(i).getAbbreviationCoin()).get(currencies.get(j).getNameOfCurrency());
+                String coinAbbreviation = coins.get(i).getAbbreviationCoin();
+                String currencyAbbreviation = currencies.get(j).getNameOfCurrency();
+
+                double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get(coinAbbreviation).get(currencyAbbreviation);
+                double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get(coinAbbreviation).get(currencyAbbreviation);
                 double deltaActual = ((Math.abs(coinCostInCurrencyFromPage - coinCostInCurrencyFromResponse)) / coinCostInCurrencyFromPage) * 100;
 
-                BigDecimal bigDecimal = new BigDecimal(deltaActual);
-                BigDecimal deltaActualRounded = bigDecimal.setScale(4, BigDecimal.ROUND_HALF_UP);
+                BigDecimal deltaActualRounded = new BigDecimal(deltaActual).setScale(4, BigDecimal.ROUND_HALF_UP);
 
-                MyLogger.info("Difference between current and expected values for " + coins.get(i).getAbbreviationCoin() + " in currency " + currencies.get(j).getNameOfCurrency() + " is: " + deltaActualRounded + ".");
+                MyLogger.info("Difference between current and expected values for " + coinAbbreviation + " in currency " + currencyAbbreviation + " is: " + deltaActualRounded + ".");
                 if (deltaActual > deltaExpected) {
-                    MyLogger.error("For " + coins.get(i).getAbbreviationCoin() + " in currency " + currencies.get(j).getNameOfCurrency() + " difference between current and expected values is: " + deltaActualRounded + ". But expected no more than " + deltaExpected + " %.");
+                    MyLogger.error("For " + coinAbbreviation + " in currency " + currencyAbbreviation + " difference between current and expected values is: " + deltaActualRounded + ". But expected no more than " + deltaExpected + " %.");
                     resultCompareMaps = false;
                 }
             }
