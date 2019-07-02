@@ -113,7 +113,7 @@ public class ApiSteps {
     public String getResultCoinsForQuery(List<Coin> coins) {//build result string from coins list for request
         StringBuilder resultCoinsForQuery = new StringBuilder("");
         for (Coin c : coins) {
-            resultCoinsForQuery.append("," + c.getAbbreviationCoin());
+            resultCoinsForQuery.append(",").append(c.getAbbreviationCoin());
         }
         return resultCoinsForQuery.substring(1, resultCoinsForQuery.length());
     }
@@ -121,7 +121,7 @@ public class ApiSteps {
     public String getResultCurrenciesForQuery(List<Currency> currencies) {//build result string from currencies list for request
         StringBuilder resultCurrenciesForQuery = new StringBuilder("");
         for (Currency c : currencies) {
-            resultCurrenciesForQuery.append("," + c.getNameOfCurrency());
+            resultCurrenciesForQuery.append(",").append(c.getNameOfCurrency());
         }
         return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
     }
