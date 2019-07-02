@@ -11,10 +11,10 @@ public class DataVerification {
 
     public static boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPageAsArray, Map<String, Map<String, Double>> multiPriceResponseAsArray, List<Coin> coins, List<Currency> currencies, double deltaExpected) {
         boolean resultCompareMaps = true;
-        for (int i = 0; i < coins.size(); i++) {
-            for (int j = 0; j < currencies.size(); j++) {
-                String coinAbbreviation = coins.get(i).getAbbreviationCoin();
-                String currencyAbbreviation = currencies.get(j).getNameOfCurrency();
+        for (Coin coin : coins) {
+            for (Currency currency : currencies) {
+                String coinAbbreviation = coin.getAbbreviationCoin();
+                String currencyAbbreviation = currency.getNameOfCurrency();
 
                 double coinCostInCurrencyFromPage = multiPricesFromPageAsArray.get(coinAbbreviation).get(currencyAbbreviation);
                 double coinCostInCurrencyFromResponse = multiPriceResponseAsArray.get(coinAbbreviation).get(currencyAbbreviation);
