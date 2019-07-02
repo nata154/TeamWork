@@ -21,10 +21,10 @@ import static com.epam.tat21.crypto.service.GlobalConstants.REGEX_FOR_SPACES;
 public class Steps {
 
     private WebDriver driver;
-    private UserAccountPage userAccountPage;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
+    private CoinsPage coinsPage;
 
     public DriverFactory getWebDriverFactory() {
         if (driver == null) {
@@ -69,8 +69,7 @@ public class Steps {
     }
 
     public String getInfoFromPopupWindowAfterSavingChangesInUserAccount() {
-        String textOnPopupWindowAfterSavingChanges = new UserAccountPage(driver).getInfoFromPopupWindow();
-        return textOnPopupWindowAfterSavingChanges;
+        return new UserAccountPage(driver).getInfoFromPopupWindow();
     }
 
     public ExchangesPage openExchangePage() {
@@ -146,16 +145,21 @@ public class Steps {
                 getEditPortfolioForm().
                 editUserPortfolio(name);
     }
-    
+
     public PortfolioPage deleteUserPortfolio() {
-		return portfolioPage.
-				getEditPortfolioForm().
-				deleteUserPortfolio().
-				confirmDeletion();
+        return portfolioPage.
+                getEditPortfolioForm().
+                deleteUserPortfolio().
+                confirmDeletion();
     }
-    
+
     public boolean isPortfolioDelete() {
         return portfolioPage.
-               isPortfolioDelete();
+                isPortfolioDelete();
+    }
+
+    public CoinsPage openCoinsPage() {
+        return coinsPage = new CoinsPage(driver).
+                openPage();
     }
 }
