@@ -52,6 +52,22 @@
           "body": {
             "type": "string"
           },
+          "tags": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "string"
+          },
+          "upvotes": {
+            "type": "string"
+          },
+          "downvotes": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string",
+            "pattern": "[A-Z]"
+          },
           "source_info": {
             "type": "object",
             "properties": {
@@ -66,25 +82,38 @@
               }
             }
           }
-        }
-      },
-      "required": [
-        "id",
-        "guid",
-        "published_on",
-        "imageurl",
-        "title",
-        "url",
-        "source",
-        "body",
-        "source_info"
-      ]
+        },
+        "required": [
+          "id",
+          "guid",
+          "published_on",
+          "imageurl",
+          "title",
+          "url",
+          "source",
+          "body",
+          "tags",
+          "categories",
+          "upvotes",
+          "downvotes",
+          "lang",
+          "source_info"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "RateLimit": {},
+    "HasWarning": {
+      "type": "boolean"
     }
   },
   "required": [
     "Type",
     "Message",
     "Promoted",
-    "Data"
-  ]
+    "Data",
+    "RateLimit",
+    "HasWarning"
+  ],
+  "additionalProperties": false
 }
