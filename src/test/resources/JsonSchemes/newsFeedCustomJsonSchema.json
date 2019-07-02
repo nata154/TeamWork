@@ -1,0 +1,15 @@
+{"type": "object",
+
+  "properties": {
+    "key": { "type": "string" },
+    "name": { "type": "string" },
+    "lang": { "type": "string" },
+    "img": { "type": "string" }
+  }
+
+
+//   "key": "cryptocompare",
+//      "name": "CryptoCompare",
+//      "lang": "EN",
+//      "img": "https://images.cryptocompare.com/news/default/cryptocompare.png"
+}
