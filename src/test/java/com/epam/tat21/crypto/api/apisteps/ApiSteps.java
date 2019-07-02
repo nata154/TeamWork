@@ -68,18 +68,18 @@ public class ApiSteps {
 
     public String[] getLatestNewsTitleItems() throws IOException {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithLatestNews());
-        List<NewsItem> sortedNews = latestNews.getSortedData();
-        MyLogger.info("Getting " + sortedNews.size() + " latest news titles from the response");
-        //return an array of titles and replace from them two and more spaces and no-break spaces
-        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
+        List<NewsItem> newsItems = latestNews.getData();
+        MyLogger.info("Getting " + newsItems.size() + " latest news titles from the response");
+        //return a sorted array of titles and replace from them two and more spaces and no-break spaces
+        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).sorted().toArray(String[]::new);
     }
 
     public String[] getCoinNewsTitleItems(Coin coin) throws IOException {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByCoin(coin));
-        List<NewsItem> sortedNews = latestNews.getSortedData();
-        MyLogger.info("Getting " + sortedNews.size() + " coin news titles from the response");
-        //return an array of titles and replace from them two and more spaces and no-break spaces
-        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
+        List<NewsItem> newsItems = latestNews.getData();
+        MyLogger.info("Getting " + newsItems.size() + " coin news titles from the response");
+        //return a sorted array of titles and replace from them two and more spaces and no-break spaces
+        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).sorted().toArray(String[]::new);
     }
 
     public FeedItem[] getFeedsFromResponse() throws IOException {
@@ -104,8 +104,8 @@ public class ApiSteps {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByFeed(feedId));
         List<NewsItem> newsItems = latestNews.getData();
         MyLogger.info("Getting " + newsItems.size() + " feeds news titles from the response");
-        //return an array of titles and replace from them two and more spaces and no-break spaces
-        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
+        //return a sorted array of titles and replace from them two and more spaces and no-break spaces
+        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).sorted().toArray(String[]::new);
     }
 
     public String getResultCoinsForQuery(List<Coin> coins) {//build result string from coins list for request
