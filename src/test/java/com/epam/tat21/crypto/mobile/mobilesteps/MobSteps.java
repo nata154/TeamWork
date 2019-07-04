@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.mobile.mobilesteps;
 
-import com.epam.tat21.crypto.mobile.mobiledriver.MobileDriverEpamFarm;
 import com.epam.tat21.crypto.mobile.mobiledriver.MobileDriverFactory;
+import com.epam.tat21.crypto.mobile.mobiledriver.MobileDriverForFarm;
 import com.epam.tat21.crypto.mobile.mobiledriver.MobileLocalDriver;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -19,7 +19,7 @@ public class MobSteps {
                 case "local":
                     return new MobileLocalDriver();
                 case "farm":
-                    return new MobileDriverEpamFarm();
+                    return new MobileDriverForFarm();
                 default:
                     return new MobileLocalDriver();
             }
