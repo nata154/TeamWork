@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "comment": "The latest news endpoint schema",
+  "type": "object",
+  "properties": {
+    "Type": {
+      "type": "number",
+      "minimum": 100
+    },
+    "Message": {
+      "type": "string",
+      "pattern": "^([A-Za-z\\s])+$"
+    },
+    "Promoted": {
+      "type": "array",
+      "minItems": 0
+    },
+    "Data": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^([0-9])+$"
+          },
+          "guid": {
+            "type": "string",
+            "format": "uri"
+          },
+          "published_on": {
+            "type": "integer",
+            "minimum": 1560000000
+          },
+          "imageurl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "source": {
+            "type": "string",
+            "pattern": "[a-z\\.]"
+          },
+          "body": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "string"
+          },
+          "categories": {
+            "type": "string"
+          },
+          "upvotes": {
+            "type": "string"
+          },
+          "downvotes": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string",
+            "pattern": "[A-Z]"
+          },
+          "source_info": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "lang": {
+                "type": "string"
+              },
+              "img": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "guid",
+          "published_on",
+          "imageurl",
+          "title",
+          "url",
+          "source",
+          "body",
+          "tags",
+          "categories",
+          "upvotes",
+          "downvotes",
+          "lang",
+          "source_info"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "RateLimit": {},
+    "HasWarning": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "Type",
+    "Message",
+    "Promoted",
+    "Data",
+    "RateLimit",
+    "HasWarning"
+  ],
+  "additionalProperties": false
+}
