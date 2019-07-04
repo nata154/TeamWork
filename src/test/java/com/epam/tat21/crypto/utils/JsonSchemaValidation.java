@@ -15,35 +15,16 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public class JsonSchemaValidation {
 
+public class JsonSchemaValidation {
     private JsonSchemaValidation() {
     }
-
-
-    public static boolean validateJsonSchemaLocal(String jsonUrlPath, String jsonSchemaPath) {
-        return validate(loadJsonObjectLocal(jsonUrlPath), loadJsonSchema(jsonSchemaPath));
-    }
-
-
-    private static JsonNode loadJsonObjectLocal(String jsonUrlPath) {
-        try {
-            return JsonLoader.fromPath((new File(jsonUrlPath).getAbsolutePath()).replaceAll("//", File.separator));
-        } catch (IOException e) {
-            throw new JsonSchemaValidationException("Cannot load JSON object from current path");
-        }
-    }
-
-    private static JsonNode loadJsonObject(String jsonUrlPath) {
-
     public static boolean validateJsonFromUrlBySchema(String jsonUrlPath, JsonSchemasNames jsonSchemaName) {
         return validate(loadJsonObjectFromUrl(jsonUrlPath), loadJsonSchema(jsonSchemaName.getSchemaName()));
     }
-
     public static boolean validateJsonFromResponseBySchema(Response response, JsonSchemasNames jsonSchemaName) {
         return validate(loadJsonObjectFromResponse(response), loadJsonSchema(jsonSchemaName.getSchemaName()));
     }
-
 
     private static JsonNode loadJsonObjectFromUrl(String jsonUrlPath) {
         MyLogger.info("Loading JSON from URL: " + jsonUrlPath);
@@ -53,7 +34,6 @@ public class JsonSchemaValidation {
             throw new JsonSchemaValidationException("Cannot load JSON object from URL");
         }
     }
-
     private static JsonNode loadJsonObjectFromResponse(Response response) {
         MyLogger.info("Loading JSON from the string which was gotten from the response");
         String json = response.getBody().asString();
@@ -63,7 +43,6 @@ public class JsonSchemaValidation {
             throw new JsonSchemaValidationException("Cannot load JSON object from the following string: " + json);
         }
     }
-
     private static JsonNode loadJsonSchema(String jsonSchemaName) {
         String schemaPath = TestDataReader.getJsonSchemasLocation() + jsonSchemaName;
         MyLogger.info("Loading the JSON schema " + jsonSchemaName + " from the path: " + schemaPath);
@@ -73,7 +52,6 @@ public class JsonSchemaValidation {
             throw new JsonSchemaValidationException("Cannot load JSON Schema from current path");
         }
     }
-
     private static boolean validate(JsonNode jsonObject, JsonNode jsonSchema) {
         final JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
         JsonSchema schema;
@@ -88,7 +66,6 @@ public class JsonSchemaValidation {
         } catch (ProcessingException e) {
             throw new JsonSchemaValidationException("Error objects validation");
         }
-
         if (report.isSuccess()) {
             return true;
         } else {
@@ -97,3 +74,6 @@ public class JsonSchemaValidation {
         }
     }
 }
+
+
+
