@@ -22,8 +22,8 @@ public class PortfolioPage extends HeaderPage {
 
     @FindBy(xpath = "//button[@ng-click='addPortfolioDialog()']")
     private WebElement buttonAddPortfolio;
-
-    @FindBy(xpath = "//span[@class='ng-scope' and contains(text(), 'Coin')]")
+    
+    @FindBy(xpath = "(//md-tab-content[contains(@class,'active')]//span[contains(text(), 'Coin')])[1]")
     private WebElement addCoinToPortfolioButton;
 
     @FindBy(xpath = "//div[@class='list-table list-portfolio padding-5']")
@@ -32,14 +32,32 @@ public class PortfolioPage extends HeaderPage {
     @FindBy(xpath = "//md-tab-content[contains(@class,'active')]//button[@ng-click='editPortfolioDialog()']")
     private WebElement buttonEditOrDelete;
     
+    @FindBy(xpath = "//md-tab-content[contains(@class,'active')]//button[@ng-click='editPortfolioMemberDialog(portfolioMember)' and @uib-tooltip='Edit or delete']")
+    private WebElement buttonEditOrDeleteCoin;
+    
     @FindBy(xpath = "//*[contains(text(), 'Are you sure you want to delete')]")
     private WebElement  consentForm;
+
+    @FindBy(xpath = "//*[contains(text(), 'Are you sure you want to remove')]")
+    private WebElement  confirmCoinDeletingForm;
     
     @FindBy(xpath = "//span[contains(text(), 'Yes, delete portfolio')]")
     private WebElement buttonYesDeletePortfolio;
     
+    @FindBy(xpath = "//span[contains(text(), 'Yes, remove coin')]")
+    private WebElement buttonYesRemoveCoin;
+    
     @FindBy(xpath = "//div[contains(text(), 'Your portfolio has been successfully deleted!')]")
-    private WebElement popupSuccessfulDeleting ;
+    private WebElement popupSuccessfulDeleting;
+    
+    @FindBy(xpath = "//div[contains(text(), 'Your new coin has been successfully added!')]")
+    private WebElement popupSuccessfulAdding;
+    
+    @FindBy(xpath = "//div[contains(text(), 'Your portfolio member has been successfully updated!')]")
+    private WebElement popupSuccessfulCoinChanging;
+    
+    @FindBy(xpath = "//div[contains(text(), 'Your coin has been successfully removed!')]")
+    private WebElement popupSuccessfulCoinDeleting;
 
     public PortfolioPage(WebDriver driver) {
         super(driver);
@@ -48,12 +66,12 @@ public class PortfolioPage extends HeaderPage {
     @Override
     public PortfolioPage openPage() {
         driver.get(BASE_URL);
-
         MyLogger.info("PortfolioPage was opened");
         return this;
     }
 
     public AddCoinForm getAddCoinForm() {
+    	waitForElementVisible(addCoinToPortfolioButton);
         waitForElementClickable(addCoinToPortfolioButton);
         addCoinToPortfolioButton.click();
         MyLogger.info("AddCoinForm was appeared");
@@ -91,6 +109,14 @@ public class PortfolioPage extends HeaderPage {
     	return new AddPortfolioForm(driver);
 	}
     
+    public AddCoinForm getEditCoinForm() {
+    	//waitForElementVisible(buttonEditOrDeleteCoin);
+        waitForElementClickable(buttonEditOrDeleteCoin);
+        buttonEditOrDeleteCoin.click();
+        MyLogger.info("EditCoinForm was appeared");
+        return new AddCoinForm(driver);
+	}
+    
     public PortfolioPage confirmDeletion() {
 		waitForElementVisible(consentForm);
 		waitForElementClickable(buttonYesDeletePortfolio);
@@ -102,4 +128,26 @@ public class PortfolioPage extends HeaderPage {
     	waitForElementVisible(popupSuccessfulDeleting);
 		return popupSuccessfulDeleting.isDisplayed();
 	}
+    
+    public boolean isCoinAdded() {
+    	waitForElementVisible(popupSuccessfulAdding);
+		return popupSuccessfulAdding.isDisplayed();
+	}
+    
+    public boolean isAmountOfCoinChanged() {
+		waitForElementVisible(popupSuccessfulCoinChanging);
+		return popupSuccessfulCoinChanging.isDisplayed();
+	}
+    
+    public PortfolioPage confirmCoinDeletion() {
+		waitForElementVisible(confirmCoinDeletingForm);
+		waitForElementClickable(buttonYesRemoveCoin);
+		buttonYesRemoveCoin.click();
+		return this;
+	}
+    
+    public boolean isCoinDelete() {
+    	waitForElementVisible(popupSuccessfulCoinDeleting);
+		return popupSuccessfulCoinDeleting.isDisplayed();
+	}  
 }
