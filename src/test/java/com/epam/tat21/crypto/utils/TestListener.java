@@ -11,24 +11,22 @@ import org.testng.TestListenerAdapter;
 import java.io.File;
 import java.io.IOException;
 
-//public class TestListener implements ITestListener {
 public class TestListener extends TestListenerAdapter {
-
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        super.onTestFailure(iTestResult);
         saveScreenshot();
-        super.getFailedTests();
     }
 
-//    @Override
-//    public void onTestSkipped(ITestResult iTestResult) {
-//        super.getSkippedTests();
-//    }
+    @Override
+    public void onTestSkipped(ITestResult iTestResult) {
+        super.onTestSkipped(iTestResult);
+    }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        super.getPassedTests();
+        super.onTestSuccess(iTestResult);
     }
 
     private void saveScreenshot() {
@@ -42,6 +40,5 @@ public class TestListener extends TestListenerAdapter {
             MyLogger.error("Failed to save screenshot: " + e.getLocalizedMessage());
         }
     }
-
 
 }
