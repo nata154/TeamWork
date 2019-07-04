@@ -26,9 +26,9 @@ public class MatchingCoinsMultiPricesTest extends CommonConditions {
 
         String coinAbbreviationsForRequest = apiSteps.getResultCoinsForQuery(coins);
         String currencyAbbreviationsForRequest = apiSteps.getResultCurrenciesForQuery(currencies);
-        Map<String, Map<String, Double>> multiPriceResponse = apiSteps.getMultiPriceResponseAsArray(coinAbbreviationsForRequest, currencyAbbreviationsForRequest).getPrices();
+        Map<String, Map<String, Double>> multiPriceResponse = apiSteps.getCoinsMultiPriceByCurrency(coinAbbreviationsForRequest, currencyAbbreviationsForRequest).getPrices();
 
-        boolean areMapsEqualAccordingDelta = DataVerification.compareMultiPricesWithDelta(multiPricesFromPage, multiPriceResponse, coins, currencies, 0.2);
+        boolean areMapsEqualAccordingDelta = DataVerification.compareMultiPricesWithDelta(multiPricesFromPage, multiPriceResponse, coins, currencies, 2);
 
         Assert.assertTrue(areMapsEqualAccordingDelta, "Difference between current and expected values for one of the coins is unacceptable");
     }
