@@ -25,7 +25,7 @@ public class DataVerification {
 
                 BigDecimal deltaActualRounded = BigDecimal.valueOf(deltaActual).setScale(4, BigDecimal.ROUND_HALF_UP);
 
-                MyLogger.info("Difference between current and expected values for " + coinAbbreviation + " in currency " + currencyAbbreviation + " is: " + deltaActualRounded + ".");
+                MyLogger.info("Difference between current and expected values for " + coinAbbreviation + " in currency " + currencyAbbreviation + " is: " + deltaActualRounded + " %.");
                 if (deltaActual > deltaExpected) {
                     MyLogger.error("For " + coinAbbreviation + " in currency " + currencyAbbreviation + " difference between current and expected values is: " + deltaActualRounded + ". But expected no more than " + deltaExpected + " %.");
                     resultCompareMaps = false;
