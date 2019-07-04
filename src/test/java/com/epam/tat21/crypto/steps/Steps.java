@@ -24,7 +24,6 @@ public class Steps {
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
-    private CoinsPage coinsPage;
 
     public DriverFactory getWebDriverFactory() {
         if (driver == null) {
@@ -159,7 +158,7 @@ public class Steps {
     }
 
     public CoinsPage openCoinsPage() {
-        return coinsPage = new CoinsPage(driver).
+        return new CoinsPage(driver).
                 openPage();
     }
 }
