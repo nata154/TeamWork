@@ -1,10 +1,11 @@
 package com.epam.tat21.crypto.pages;
 
-import com.epam.tat21.crypto.bo.Coin;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import com.epam.tat21.crypto.bo.Coin;
 
 public class AddCoinForm extends HeaderPage {
 
@@ -25,6 +26,12 @@ public class AddCoinForm extends HeaderPage {
 
     @FindBy(xpath = "//ul[@class='md-autocomplete-suggestions autocomplete-custom-template']/li[1]")
     private WebElement firstCoinInDropdown;
+    
+    @FindBy(xpath = "//span[contains(text(), 'Update')]")
+	private WebElement buttonUpdateCoin;
+    
+    @FindBy(xpath = "//span[contains(text(), 'Delete')]")
+	private WebElement buttonDeleteCoin;
 
     public AddCoinForm(WebDriver driver) {
         super(driver);
@@ -64,12 +71,27 @@ public class AddCoinForm extends HeaderPage {
         return this;
     }
 
-    public AddCoinForm addCoinInPortfolio(Coin coin, String amount, String price) {
+    public PortfolioPage addCoinInPortfolio(Coin coin, String amount, String price) {
         inputCoinInSearchField(coin)
                 .inputAmountOfCoinInField(amount)
                 .inputbBuyPriceOfCoinInField(price);
         waitForElementClickable(addPortfolioButton);
         addPortfolioButton.click();
-        return this;
+        return new PortfolioPage(driver);
     }
+    
+    public PortfolioPage editAmountOfCoin(String amount) {
+		waitForElementVisible(amountField);
+		amountField.clear();
+		amountField.sendKeys(amount);
+		waitForElementClickable(buttonUpdateCoin);
+		buttonUpdateCoin.click();
+		return new PortfolioPage(driver);
+	}
+    
+    public PortfolioPage deleteCoinFromPortfolio() {
+		waitForElementClickable(buttonDeleteCoin);
+		buttonDeleteCoin.click();
+		return new PortfolioPage(driver);
+	}
 }
