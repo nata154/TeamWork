@@ -4,7 +4,7 @@ import com.epam.tat21.crypto.mobile.mobilesteps.MobSteps;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-public class PreConditions {
+public class PreConditionsOfMobileTest {
 
     protected MobSteps mobSteps;
 
