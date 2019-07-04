@@ -6,6 +6,9 @@ public class RandomString {
     private static final String ALFANUMERICAL_ALL_CAPS = "0123456789ABCDEFGHIJKLMOPQRSTUVWXYZ";
     private static Random random = new Random();
 
+    private RandomString() {
+    }
+
     public static String getRandomString(int stringLength){
         StringBuilder stringBuilder = new StringBuilder(stringLength);
         for (int i = 0; i < stringLength; i++)
