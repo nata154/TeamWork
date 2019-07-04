@@ -14,6 +14,11 @@ public class RandomString {
         }
         return stringBuilder.toString();
     }
+    
+    public static String getRandomNumber(int limit) {
+		int num = random.nextInt(limit);
+		return String.valueOf(num);
+	}
 
     public static String generateRandomUserFirstName(int postfixLength){
         return "userFirstName_".concat(getRandomString(postfixLength));
