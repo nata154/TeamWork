@@ -66,7 +66,6 @@ public class UserAccountPage extends HeaderPage {
 
     public String getInfoFromPopupWindow() {
         waitForElementVisible(popupWindowAfterSavingUpdates);
-        String textOnPopupWindowAfterSavingUpdated = popupWindowAfterSavingUpdates.getText();
-        return textOnPopupWindowAfterSavingUpdated;
+        return popupWindowAfterSavingUpdates.getText();
     }
 }

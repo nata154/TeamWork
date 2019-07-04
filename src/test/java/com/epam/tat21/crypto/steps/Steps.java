@@ -27,10 +27,10 @@ import com.epam.tat21.crypto.utils.MyLogger;
 public class Steps {
 
     private WebDriver driver;
-    private UserAccountPage userAccountPage;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
+    private CoinsPage coinsPage;
 
     public DriverFactory getWebDriverFactory() {
         if (driver == null) {
@@ -75,8 +75,7 @@ public class Steps {
     }
 
     public String getInfoFromPopupWindowAfterSavingChangesInUserAccount() {
-        String textOnPopupWindowAfterSavingChanges = new UserAccountPage(driver).getInfoFromPopupWindow();
-        return textOnPopupWindowAfterSavingChanges;
+        return new UserAccountPage(driver).getInfoFromPopupWindow();
     }
 
     public ExchangesPage openExchangePage() {
@@ -125,12 +124,12 @@ public class Steps {
         List<WebElement> newsTitles = newsPage.getAllNewsArticleTitle();
         if (newsTitles.size() <= 50) {
             MyLogger.info("Getting " + newsTitles.size() + " news titles from page");
-            //get the text from news titles, fill an array by them and replace from them two and more spaces and no-break spaces
-            return newsTitles.stream().map(newsTitle -> newsTitle.getText().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
+            //get the text from news titles, fill a sorted array by them and replace from them two and more spaces and no-break spaces
+            return newsTitles.stream().map(newsTitle -> newsTitle.getText().replaceAll(REGEX_FOR_SPACES, " ")).sorted().toArray(String[]::new);
         } else {
             MyLogger.info("Getting only 50 news titles from page, because the page contains " + newsTitles.size());
-            //get the text from news titles, fill a subarray by them and replace from them two and more spaces and no-break spaces
-            return IntStream.range(0, 50).mapToObj((i -> newsTitles.get(i).getText().replaceAll(REGEX_FOR_SPACES, " "))).toArray(String[]::new);
+            //get the text from news titles, fill a sorted subarray by them and replace from them two and more spaces and no-break spaces
+            return IntStream.range(0, 50).mapToObj((i -> newsTitles.get(i).getText().replaceAll(REGEX_FOR_SPACES, " "))).sorted().toArray(String[]::new);
         }
     }
 
@@ -152,17 +151,22 @@ public class Steps {
                 getEditPortfolioForm().
                 editUserPortfolio(name);
     }
-    
+
     public PortfolioPage deleteUserPortfolio() {
-		return portfolioPage.
-				getEditPortfolioForm().
-				deleteUserPortfolio().
-				confirmDeletion();
+        return portfolioPage.
+                getEditPortfolioForm().
+                deleteUserPortfolio().
+                confirmDeletion();
     }
-    
+
     public boolean isPortfolioDelete() {
         return portfolioPage.
-               isPortfolioDelete();
+                isPortfolioDelete();
+    }
+
+    public CoinsPage openCoinsPage() {
+        return coinsPage = new CoinsPage(driver).
+                openPage();
     }
     
     public PortfolioPage addCoinToUserPortfolio(Coin coin, String amount, String price) {

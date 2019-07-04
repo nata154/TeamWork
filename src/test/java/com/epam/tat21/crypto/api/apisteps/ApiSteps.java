@@ -7,11 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
-import com.epam.tat21.crypto.api.model.FeedItem;
-import com.epam.tat21.crypto.api.model.LatestNews;
-import com.epam.tat21.crypto.api.model.NewsItem;
-import com.epam.tat21.crypto.api.model.ResponceCoinWrapper;
+import com.epam.tat21.crypto.api.model.*;
 import com.epam.tat21.crypto.bo.Coin;
+import com.epam.tat21.crypto.bo.Currency;
 import com.epam.tat21.crypto.service.TestDataReader;
 import com.epam.tat21.crypto.utils.MyLogger;
 
@@ -23,6 +21,7 @@ public class ApiSteps {
     private static final String NEWS_RELATIVE_PATH = "v2/news/";
     private static final String FEEDS_RELATIVE_PATH = "news/feeds";
     private static final String COIN_LIST_RELATIVE_PATH = "/all/coinlist";
+    private static final String MULTIPRICE_RELATIVE_PATH = "pricemulti";
 
     public ApiSteps() {
         RestAssured.baseURI = TestDataReader.getApiGetUrl();
@@ -70,18 +69,18 @@ public class ApiSteps {
 
     public String[] getLatestNewsTitleItems() throws IOException {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithLatestNews());
-        List<NewsItem> sortedNews = latestNews.getSortedData();
-        MyLogger.info("Getting " + sortedNews.size() + " latest news titles from the response");
-        //return an array of titles and replace from them two and more spaces and no-break spaces
-        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
+        List<NewsItem> newsItems = latestNews.getData();
+        MyLogger.info("Getting " + newsItems.size() + " latest news titles from the response");
+        //return a sorted array of titles and replace from them two and more spaces and no-break spaces
+        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).sorted().toArray(String[]::new);
     }
 
     public String[] getCoinNewsTitleItems(Coin coin) throws IOException {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByCoin(coin));
-        List<NewsItem> sortedNews = latestNews.getSortedData();
-        MyLogger.info("Getting " + sortedNews.size() + " coin news titles from the response");
-        //return an array of titles and replace from them two and more spaces and no-break spaces
-        return sortedNews.stream().map(sortedNew -> sortedNew.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
+        List<NewsItem> newsItems = latestNews.getData();
+        MyLogger.info("Getting " + newsItems.size() + " coin news titles from the response");
+        //return a sorted array of titles and replace from them two and more spaces and no-break spaces
+        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).sorted().toArray(String[]::new);
     }
 
     public FeedItem[] getFeedsFromResponse() throws IOException {
@@ -106,7 +105,41 @@ public class ApiSteps {
         LatestNews latestNews = getLatestNewsFromResponse(getResponseWithNewsByFeed(feedId));
         List<NewsItem> newsItems = latestNews.getData();
         MyLogger.info("Getting " + newsItems.size() + " feeds news titles from the response");
-        //return an array of titles and replace from them two and more spaces and no-break spaces
-        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).toArray(String[]::new);
+        //return a sorted array of titles and replace from them two and more spaces and no-break spaces
+        return newsItems.stream().map(newsItem -> newsItem.getTitle().replaceAll(REGEX_FOR_SPACES, " ")).sorted().toArray(String[]::new);
     }
+
+    public String getResultCoinsForQuery(List<Coin> coins) {//build result string from coins list for request
+        StringBuilder resultCoinsForQuery = new StringBuilder("");
+        for (Coin c : coins) {
+            resultCoinsForQuery.append(",").append(c.getAbbreviationCoin());
+        }
+        return resultCoinsForQuery.substring(1, resultCoinsForQuery.length());
+    }
+
+    public String getResultCurrenciesForQuery(List<Currency> currencies) {//build result string from currencies list for request
+        StringBuilder resultCurrenciesForQuery = new StringBuilder("");
+        for (Currency c : currencies) {
+            resultCurrenciesForQuery.append(",").append(c.getNameOfCurrency());
+        }
+        return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
+    }
+
+    private Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
+        MyLogger.info("Getting response with multiprice");
+        return RestAssured.given().queryParam("fsyms", coinAbbreviations).
+                queryParam("tsyms", currencyAbbreviations).
+                when().get(MULTIPRICE_RELATIVE_PATH).andReturn();
+    }
+
+    private MultiPrice getMultiPriceFromResponse(Response response) throws IOException {
+        MyLogger.info("Filling MultiPrice model class");
+        return ResponseUtils.getObjectFromResponse(response, MultiPrice.class);
+    }
+
+    public MultiPrice getMultiPriceResponseAsArray(String coinAbbreviations, String currencyAbbreviations) throws IOException {
+        MyLogger.info("Getting prices for coins from the response");
+        return getMultiPriceFromResponse(getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations));
+    }
+
 }

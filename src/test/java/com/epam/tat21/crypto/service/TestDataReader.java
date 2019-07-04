@@ -12,6 +12,7 @@ public class TestDataReader {
     private static final String SAUCE_USERNAME = "sauce.username";
     private static final String SAUCE_ACCESS_KEY = "sause.access.key";
     private static final String API_GET_URL = "api.get.url";
+    private static final String JSON_SCHEMAS_LOCATION = "json.schemas.location";
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(System.getProperty("environment"));
 
     private TestDataReader() {
@@ -55,5 +56,9 @@ public class TestDataReader {
 
     public static String getApiGetUrl() {
         return getProperty(API_GET_URL);
+    }
+
+    public static String getJsonSchemasLocation() {
+        return getProperty(JSON_SCHEMAS_LOCATION);
     }
 }
