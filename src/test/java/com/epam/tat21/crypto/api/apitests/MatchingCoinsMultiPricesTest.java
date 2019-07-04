@@ -18,7 +18,6 @@ public class MatchingCoinsMultiPricesTest extends CommonConditions {
     @JIRATestKey(key = "EPMFARMATS-9340")
     @Test
     public void matchingCoinValueInCurrencyTest() throws IOException {
-
         List<Coin> coins = Arrays.asList(Coin.values());
         List<Currency> currencies = Arrays.asList(Currency.values());
 
