@@ -137,8 +137,8 @@ public class ApiSteps {
         return ResponseUtils.getObjectFromResponse(response, MultiPrice.class);
     }
 
-    public MultiPrice getMultiPriceResponseAsArray(String coinAbbreviations, String currencyAbbreviations) throws IOException {
-        MyLogger.info("Getting prices for coins from the response");
+    public MultiPrice getCoinsMultiPriceByCurrency(String coinAbbreviations, String currencyAbbreviations) throws IOException {
+        MyLogger.info("Getting prices for " + coinAbbreviations + " coins from the response in currencies " + currencyAbbreviations);
         return getMultiPriceFromResponse(getResponseWithMultiPrice(coinAbbreviations, currencyAbbreviations));
     }
 

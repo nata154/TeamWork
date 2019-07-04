@@ -1,6 +1,6 @@
 package com.epam.tat21.crypto.bo;
 
-public enum  Currency {
+public enum Currency {
 
     USD("USD"),
     USDT("USDT"),
