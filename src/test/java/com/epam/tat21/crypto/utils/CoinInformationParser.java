@@ -24,6 +24,10 @@ public class CoinInformationParser {
             } else if (valueExpression.matches("(\\W{2}\\d*\\,\\d{3}\\.\\d{2})")) {
                 finalValue = (Double.parseDouble((valueExpression.substring(2, valueExpression.length() - 1)).replace(",", "")));
 
+                // matches numbers like $ 1,005,500.25
+            } else if (valueExpression.matches("\\W{2}\\d*\\,\\d{3}\\,\\d{3}\\.\\d*")) {
+                finalValue = (Double.parseDouble((valueExpression.substring(2, valueExpression.length())).replace(",", "")));
+
                 // for numbers like $ 64.55
             } else {
                 finalValue = Double.parseDouble(valueExpression.substring(2, valueExpression.length() - 1));

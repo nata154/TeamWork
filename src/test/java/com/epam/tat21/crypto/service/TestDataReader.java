@@ -20,7 +20,7 @@ public class TestDataReader {
     private static final String MOBILE_DEVICE_NAME = "device.name";
     private static final String MOBILE_APP_PACKAGE = "mobile.app.package";
 
-
+    private static final String JSON_SCHEMAS_LOCATION = "json.schemas.location";
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(System.getProperty("environment"));
 
     private TestDataReader() {
@@ -66,7 +66,6 @@ public class TestDataReader {
         return getProperty(API_GET_URL);
     }
 
-
     public static String getMobileApp() {
         return getProperty(MOBILE_APP);
     }
@@ -89,5 +88,9 @@ public class TestDataReader {
 
     public static String getMobileLocalUrl() {
         return getProperty(MOBILE_LOCAL_URL);
+    }
+
+    public static String getJsonSchemasLocation() {
+        return getProperty(JSON_SCHEMAS_LOCATION);
     }
 }
