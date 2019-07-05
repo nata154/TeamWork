@@ -25,7 +25,7 @@ public class MobileLocalDriver implements MobileDriverFactory {
         capabilities = MobCapabilitiesProvider.getCapabilities();
         capabilities.setCapability(MobileCapabilityType.APPIUM_VERSION, System.getProperty("appium"));
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "7.1");
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, System.getProperty("device"));
     }
 
     @Override
