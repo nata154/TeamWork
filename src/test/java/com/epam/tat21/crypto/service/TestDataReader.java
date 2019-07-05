@@ -12,6 +12,14 @@ public class TestDataReader {
     private static final String SAUCE_USERNAME = "sauce.username";
     private static final String SAUCE_ACCESS_KEY = "sause.access.key";
     private static final String API_GET_URL = "api.get.url";
+
+    private static final String MOBILE_APP = "mobile.app";
+    private static final String MOBILE_FARM_URL = "mobile.farm.url";
+    private static final String MOBILE_LOCAL_URL = "mobile.local.url";
+    private static final String MOBILE_DEVICE_UUID = "serial.number.device";
+    private static final String MOBILE_DEVICE_NAME = "device.name";
+    private static final String MOBILE_APP_PACKAGE = "mobile.app.package";
+
     private static final String JSON_SCHEMAS_LOCATION = "json.schemas.location";
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(System.getProperty("environment"));
 
@@ -56,6 +64,30 @@ public class TestDataReader {
 
     public static String getApiGetUrl() {
         return getProperty(API_GET_URL);
+    }
+
+    public static String getMobileApp() {
+        return getProperty(MOBILE_APP);
+    }
+
+    public static String getMobileFarmUrl() {
+        return getProperty(MOBILE_FARM_URL);
+    }
+
+    public static String getMobileDeviceUuid() {
+        return getProperty(MOBILE_DEVICE_UUID);
+    }
+
+    public static String getMobileDeviceName() {
+        return getProperty(MOBILE_DEVICE_NAME);
+    }
+
+    public static String getMobileAppPackage() {
+        return getProperty(MOBILE_APP_PACKAGE);
+    }
+
+    public static String getMobileLocalUrl() {
+        return getProperty(MOBILE_LOCAL_URL);
     }
 
     public static String getJsonSchemasLocation() {
