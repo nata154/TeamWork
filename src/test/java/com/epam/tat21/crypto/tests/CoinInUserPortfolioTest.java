@@ -1,14 +1,14 @@
 package com.epam.tat21.crypto.tests;
 
-import static org.testng.Assert.assertTrue;
-
+import com.epam.tat21.crypto.bo.Coin;
+import com.epam.tat21.crypto.utils.MyLogger;
+import com.epam.tat21.crypto.utils.RandomString;
+import com.epam.testng.JIRATestKey;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.epam.tat21.crypto.bo.Coin;
-import com.epam.tat21.crypto.utils.RandomString;
-import com.epam.testng.JIRATestKey;
+import static org.testng.Assert.assertTrue;
 
 public class CoinInUserPortfolioTest extends CommonConditions {
 	
@@ -26,11 +26,13 @@ public class CoinInUserPortfolioTest extends CommonConditions {
 		String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 		steps.loginUser();
 		steps.createUserPortfolio(portfolioName, currency, description);
+		MyLogger.info("CoinInUserPortfolioTest before class");
 	}
 	
 	@AfterClass
     public void portfolioDeleting() {
 		steps.deleteUserPortfolio();
+		MyLogger.info("CoinInUserPortfolioTest after class");
     }
 	
 	@JIRATestKey(key = "EPMFARMATS-9267")
