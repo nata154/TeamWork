@@ -53,6 +53,7 @@ public class CoinInUserPortfolioTest extends CommonConditions {
 	@Test(dependsOnMethods = { "coinEditingTest" })
 	public void coinDeletingTest() {
 		steps.deleteCoinFromUserPortfolio();
+		MyLogger.info("coinDeletingTest test");
 		assertTrue(steps.isCoinDelete());
 	}
 }
