@@ -5,6 +5,8 @@ public enum JsonSchemasNames {
     LATEST_NEWS_SCHEMA("latestNewsSchema.json"),
     FEEDS_SCHEMA("newsFeedJsonSchema.json");
 
+    //MULTI_PRICE_SCHEMA("multiPriceJsonSchema.json");
+
     private String schemaName;
 
     JsonSchemasNames(String schemaName) {

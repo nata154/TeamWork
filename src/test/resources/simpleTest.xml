@@ -3,15 +3,21 @@
 <suite name="suite01" parallel="false">
     <test name="CryptoCompareTests">
         <packages>
-            <package name="com.epam.tat21.crypto.tests.*"></package>
-            <package name="com.epam.tat21.crypto.api.apitests.*"></package>
+            <package name="com.epam.tat21.crypto.tests.*"/>
+            <package name="com.epam.tat21.crypto.api.apitests.*"/>
         </packages>
     </test>
 
-    <test name="Mobile CryptoCompareTests" enabled="false">
-        <packages>
-            <package name="com.epam.tat21.crypto.mobile.mobiletests.*"></package>
-        </packages>
-    </test>
+    <!--<test name="Mobile CryptoCompareTests" enabled="false">-->
+    <!--<packages>-->
+    <!--<package name="com.epam.tat21.crypto.mobile.mobiletests.*"></package>-->
+    <!--</packages>-->
+    <!--</test>-->
+
+    <!--<test name="Halinouskaya">-->
+    <!--<classes>-->
+    <!--<class name="com.epam.tat21.crypto.tests.CoinInUserPortfolioTest"></class>-->
+    <!--</classes>-->
+    <!--</test>-->
 </suite>
 

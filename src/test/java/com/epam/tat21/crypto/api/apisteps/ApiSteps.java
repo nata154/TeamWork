@@ -21,6 +21,7 @@ public class ApiSteps {
     private static final String FEEDS_RELATIVE_PATH = "news/feeds";
     private static final String COIN_LIST_RELATIVE_PATH = "/all/coinlist";
     private static final String MULTIPRICE_RELATIVE_PATH = "pricemulti";
+    // https://min-api.cryptocompare.com/data/v2/news/
 
     public ApiSteps() {
         RestAssured.baseURI = TestDataReader.getApiGetUrl();
