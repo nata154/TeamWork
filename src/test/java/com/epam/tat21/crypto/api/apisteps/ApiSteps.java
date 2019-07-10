@@ -2,10 +2,10 @@ package com.epam.tat21.crypto.api.apisteps;
 
 import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
 import com.epam.tat21.crypto.api.model.*;
-import com.epam.tat21.crypto.bo.Coin;
-import com.epam.tat21.crypto.bo.Currency;
-import com.epam.tat21.crypto.service.TestDataReader;
-import com.epam.tat21.crypto.utils.MyLogger;
+import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.businessObjects.Currency;
+import com.epam.tat21.crypto.ui.service.TestDataReader;
+import com.epam.tat21.crypto.ui.utils.MyLogger;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.tat21.crypto.service.GlobalConstants.REGEX_FOR_SPACES;
+import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
 public class ApiSteps {
 
