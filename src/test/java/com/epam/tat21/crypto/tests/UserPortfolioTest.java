@@ -35,7 +35,7 @@ public class UserPortfolioTest extends CommonConditions{
 	
 	@JIRATestKey(key = "EPMFARMATS-9264")
 	@Test(dependsOnMethods = { "portfolioEditingTest" })
-	private void portfolioDeletingTest() {
+	public void portfolioDeletingTest() {
 		steps.deleteUserPortfolio();
 		assertTrue(steps.isPortfolioDelete());
 	}
