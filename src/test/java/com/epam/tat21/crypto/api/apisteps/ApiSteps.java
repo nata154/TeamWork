@@ -21,7 +21,7 @@ public class ApiSteps {
     private static final String FEEDS_RELATIVE_PATH = "news/feeds";
     private static final String COIN_LIST_RELATIVE_PATH = "/all/coinlist";
     private static final String MULTIPRICE_RELATIVE_PATH = "pricemulti";
-    // https://min-api.cryptocompare.com/data/v2/news/
+    // https://min-api.cryptocompare.com/data/news/feeds
 
     public ApiSteps() {
         RestAssured.baseURI = TestDataReader.getApiGetUrl();
@@ -125,7 +125,7 @@ public class ApiSteps {
         return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
     }
 
-    private Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
+    public Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
         MyLogger.info("Getting response with multiprice");
         return RestAssured.given().queryParam("fsyms", coinAbbreviations).
                 queryParam("tsyms", currencyAbbreviations).

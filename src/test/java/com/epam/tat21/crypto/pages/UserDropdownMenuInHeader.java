@@ -71,9 +71,9 @@ public class UserDropdownMenuInHeader extends HeaderPage {
         return this;
     }
 
-    public UserDropdownMenuInHeader clickLogOutLine() {
+    public MainCryptoComparePage clickLogOutLine() {
         waitForElementClickable(logoutLine);
         logoutLine.click();
-        return this;
+        return new MainCryptoComparePage(driver);
     }
 }

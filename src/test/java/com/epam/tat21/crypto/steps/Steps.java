@@ -195,4 +195,8 @@ public class Steps {
         return portfolioPage.
         		isCoinDelete();
     }
+
+    public MainCryptoComparePage clickLogOut() {
+        return portfolioPage.getDropdownUserMenuInHeader().clickLogOutLine();
+    }
 }

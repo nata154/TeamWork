@@ -3,105 +3,15 @@
   "comment": "The multi price endpoint schema",
   "type": "object",
   "properties": {
-    "Data": {
-      "type": "array",
-      "maxItems": 50,
-      "uniqueItems": true,
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "pattern": "^([0-9])+$"
-          },
-          "guid": {
-            "type": "string",
-            "format": "uri"
-          },
-          "published_on": {
-            "type": "integer",
-            "minimum": 1560000000
-          },
-          "imageurl": {
-            "type": "string",
-            "format": "uri"
-          },
-          "title": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string",
-            "format": "uri"
-          },
-          "source": {
-            "type": "string",
-            "pattern": "[a-z\\.]"
-          },
-          "body": {
-            "type": "string"
-          },
-          "tags": {
-            "type": "string"
-          },
-          "categories": {
-            "type": "string"
-          },
-          "upvotes": {
-            "type": "string"
-          },
-          "downvotes": {
-            "type": "string"
-          },
-          "lang": {
-            "type": "string",
-            "pattern": "[A-Z]"
-          },
-          "source_info": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "lang": {
-                "type": "string"
-              },
-              "img": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "required": [
-          "id",
-          "guid",
-          "published_on",
-          "imageurl",
-          "title",
-          "url",
-          "source",
-          "body",
-          "tags",
-          "categories",
-          "upvotes",
-          "downvotes",
-          "lang",
-          "source_info"
-        ],
-        "additionalProperties": false
+    "([A-Z]|[0-9]": {
+      "type": "object",
+      "properties": {
+        "([A-Z])": {
+          "type": "number",
+          "minimum": 0
+        }
       }
-    },
-    "RateLimit": {},
-    "HasWarning": {
-      "type": "boolean"
     }
-  },
-  "required": [
-    "Type",
-    "Message",
-    "Promoted",
-    "Data",
-    "RateLimit",
-    "HasWarning"
-  ],
-  "additionalProperties": false
+  }
 }
+
