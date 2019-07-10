@@ -183,36 +183,36 @@ public class Steps {
         return new CoinsPage(driver).
                 openPage();
     }
-    
+
     public PortfolioPage addCoinToUserPortfolio(Coin coin, String amount, String price) {
     	return portfolioPage.
     			getAddCoinForm().
     			addCoinInPortfolio(coin, amount, price);
 	}
-    
+
     public boolean isCoinAdded() {
 		return portfolioPage.
 				isCoinAdded();
 	}
-    
+
     public PortfolioPage changeAmountOfCoins(String amount) {
 		return portfolioPage.
 				getEditCoinForm().
-				editAmountOfCoin(amount);      
+				editAmountOfCoin(amount);
     }
-    
+
     public boolean isAmountOfCoinChanged() {
         return portfolioPage.
                isAmountOfCoinChanged();
     }
-    
+
     public PortfolioPage deleteCoinFromUserPortfolio() {
 		return portfolioPage.
 				getEditCoinForm().
 				deleteCoinFromPortfolio().
 				confirmCoinDeletion();
     }
-    
+
     public boolean isCoinDelete() {
         return portfolioPage.
         		isCoinDelete();
