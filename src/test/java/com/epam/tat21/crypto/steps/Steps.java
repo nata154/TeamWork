@@ -15,6 +15,7 @@ import com.epam.tat21.crypto.driver.DriverFactory;
 import com.epam.tat21.crypto.driver.LocalDriver;
 import com.epam.tat21.crypto.driver.RemoteDriver;
 import com.epam.tat21.crypto.driver.RemoteDriverSauceLabs;
+import com.epam.tat21.crypto.pages.CoinsPage;
 import com.epam.tat21.crypto.pages.ExchangesPage;
 import com.epam.tat21.crypto.pages.HeaderPage;
 import com.epam.tat21.crypto.pages.MainCryptoComparePage;

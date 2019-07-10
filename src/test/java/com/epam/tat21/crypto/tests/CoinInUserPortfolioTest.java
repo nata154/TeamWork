@@ -49,7 +49,7 @@ public class CoinInUserPortfolioTest extends CommonConditions {
 	
 	@JIRATestKey(key = "EPMFARMATS-9268")
 	@Test(dependsOnMethods = { "coinEditingTest" })
-	private void coinDeletingTest() {
+	public void coinDeletingTest() {
 		steps.deleteCoinFromUserPortfolio();
 		assertTrue(steps.isCoinDelete());
 	}
