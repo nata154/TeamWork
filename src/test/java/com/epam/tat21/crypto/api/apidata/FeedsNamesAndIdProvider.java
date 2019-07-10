@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.api.apidata;
 
 import com.epam.tat21.crypto.api.apisteps.ApiSteps;
-import com.epam.tat21.crypto.utils.MyLogger;
+import com.epam.tat21.crypto.ui.utils.MyLogger;
 import org.testng.annotations.DataProvider;
 
 import java.io.IOException;
