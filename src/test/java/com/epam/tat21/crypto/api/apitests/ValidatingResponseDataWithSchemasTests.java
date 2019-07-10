@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.api.apitests;
 
-import com.epam.tat21.crypto.tests.CommonConditions;
-import com.epam.tat21.crypto.utils.JsonSchemaValidation;
+import com.epam.tat21.crypto.ui.tests.CommonConditions;
+import com.epam.tat21.crypto.api.apiutils.JsonSchemaValidation;
 import com.epam.testng.JIRATestKey;
 import org.junit.Assert;
 import org.testng.annotations.Test;
