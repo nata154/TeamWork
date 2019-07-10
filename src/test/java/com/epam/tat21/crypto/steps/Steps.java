@@ -25,13 +25,17 @@ import com.epam.tat21.crypto.pages.UserAccountPage;
 import com.epam.tat21.crypto.service.UserCreator;
 import com.epam.tat21.crypto.utils.MyLogger;
 
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 public class Steps {
 
     private WebDriver driver;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
-    private CoinsPage coinsPage;
 
     public DriverFactory getWebDriverFactory() {
         if (driver == null) {
@@ -57,6 +61,7 @@ public class Steps {
         getWebDriverFactory().closeDriver();
     }
 
+    @Given("I login user")
     public MainCryptoComparePage loginUser() {
         User user = UserCreator.withCredentialsFromProperty();
         return new MainCryptoComparePage(driver)
@@ -64,53 +69,64 @@ public class Steps {
                 .login(user);
     }
 
+    @When("I go to User Account profile")
     public UserAccountPage goToUserAccountProfile() {
         new HeaderPage(driver).getDropdownUserMenuInHeader().clickAccountLine();
         return new UserAccountPage(driver).clickTabGeneral();
     }
 
+    @And("Change And save ([^\"]*) , ([^\"]*) in User Account")
     public UserAccountPage changeAndSaveFirstNameSurnameInUserAccount(String firstNameToChange, String surnameToChange) {
         return new UserAccountPage(driver)
                 .enterNewFirstNameAndSurname(firstNameToChange, surnameToChange)
                 .clickButtonSaveChanges();
     }
 
+    @And("Get info from in User Account")
     public String getInfoFromPopupWindowAfterSavingChangesInUserAccount() {
         return new UserAccountPage(driver).getInfoFromPopupWindow();
     }
 
+    @When("I open Exchange page")
     public ExchangesPage openExchangePage() {
         return exchangesPage = new ExchangesPage(driver).
                 openPage();
     }
 
+    @And("Filter news by country$")
     public ExchangesPage filterByCountry(Countries country) {
         return exchangesPage.
                 clickOnCountryDropdown().
                 selectCountryInDropdown(country);
     }
 
+    @And("Get from FilteredPage number of results$")
     public int getFromFilteredPageNumberOfResultsWith(Countries country) {
         return exchangesPage.getFromFilteredPageAllResultsWith(country).size();
     }
 
+    @And("Get all country labels from Filtered Page")
     public int getAllCountryLabelsFromFilteredPage() {
         return exchangesPage.getAllCountryLabelsFromFilteredPage().size();
     }
 
+    @And("Get number of Exchanges from country badge")
     public int getNumberOfExchangesFromCountryBadge() {
         return exchangesPage.getNumberOfExchangesInBadge();
     }
 
+    @When("I open News page")
     public NewsPage openNewsPage() {
         return newsPage = new NewsPage(driver).
                 openPage();
     }
 
+    @And("Filter news by coin$")
     public NewsPage filterByCoin(Coin coin) {
         return newsPage.goToCoinNews(coin);
     }
 
+    @And("Get all coin news from FilteredPage$")
     public int getAllCoinNewsFromFilteredPage(Coin coin) {
         return newsPage.getNumberOfNewsForCoin(coin);
     }
@@ -120,7 +136,7 @@ public class Steps {
      * returns a subarray of only 50 latest titles, because the api response
      * always contains only 50.
      */
-
+    @And("Get latest news title items from page")
     public String[] getLatestNewsTitleItemsFromPage() {
         List<WebElement> newsTitles = newsPage.getAllNewsArticleTitle();
         if (newsTitles.size() <= 50) {
@@ -134,6 +150,7 @@ public class Steps {
         }
     }
 
+    @When("Create User Portfolio ([^\"]*) , ([^\"]*) , ([^\"]*)")
     public PortfolioPage createUserPortfolio(String name, String currency, String description) {
         return portfolioPage = new HeaderPage(driver).
                 goToMyPortfolioFromPortfolioTab().
@@ -141,18 +158,21 @@ public class Steps {
                 createNewPortfolio(name, currency, description);
     }
 
+    @Then("([^\"]*) is Portfolio present")
     public boolean isPortfolioPresent(String name) {
         return new PortfolioPage(driver).
                 getElementPortfolio(name).
                 isEnabled();
     }
 
+    @When("Change User Portfolio name to ([^\"]*)")
     public PortfolioPage changeUserPortfolioName(String name) {
         return portfolioPage.
                 getEditPortfolioForm().
                 editUserPortfolio(name);
     }
 
+    @When("Delete User Portfolio")
     public PortfolioPage deleteUserPortfolio() {
         return portfolioPage.
                 getEditPortfolioForm().
@@ -160,13 +180,15 @@ public class Steps {
                 confirmDeletion();
     }
 
+    @Then("([^\"]*) is Portfolio delete")
     public boolean isPortfolioDelete() {
         return portfolioPage.
                 isPortfolioDelete();
     }
 
+    @When("I open Coins page")
     public CoinsPage openCoinsPage() {
-        return coinsPage = new CoinsPage(driver).
+        return new CoinsPage(driver).
                 openPage();
     }
     

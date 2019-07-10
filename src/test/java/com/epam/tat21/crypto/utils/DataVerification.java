@@ -9,6 +9,9 @@ import java.util.Map;
 
 public class DataVerification {
 
+    private DataVerification() {
+    }
+
     public static boolean compareMultiPricesWithDelta(Map<String, Map<String, Double>> multiPricesFromPage, Map<String, Map<String, Double>> multiPriceResponse, List<Coin> coins, List<Currency> currencies, double deltaExpected) {
         boolean resultCompareMaps = true;
         for (Coin coin : coins) {
@@ -20,9 +23,9 @@ public class DataVerification {
                 double coinCostInCurrencyFromResponse = multiPriceResponse.get(coinAbbreviation).get(currencyAbbreviation);
                 double deltaActual = ((Math.abs(coinCostInCurrencyFromPage - coinCostInCurrencyFromResponse)) / coinCostInCurrencyFromPage) * 100;
 
-                BigDecimal deltaActualRounded = new BigDecimal(deltaActual).setScale(4, BigDecimal.ROUND_HALF_UP);
+                BigDecimal deltaActualRounded = BigDecimal.valueOf(deltaActual).setScale(4, BigDecimal.ROUND_HALF_UP);
 
-                MyLogger.info("Difference between current and expected values for " + coinAbbreviation + " in currency " + currencyAbbreviation + " is: " + deltaActualRounded + ".");
+                MyLogger.info("Difference between current and expected values for " + coinAbbreviation + " in currency " + currencyAbbreviation + " is: " + deltaActualRounded + " %.");
                 if (deltaActual > deltaExpected) {
                     MyLogger.error("For " + coinAbbreviation + " in currency " + currencyAbbreviation + " difference between current and expected values is: " + deltaActualRounded + ". But expected no more than " + deltaExpected + " %.");
                     resultCompareMaps = false;

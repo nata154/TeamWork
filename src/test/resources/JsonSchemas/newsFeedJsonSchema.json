@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "required": [
+    "key",
+    "name",
+    "lang",
+    "img"
+  ],
+  "items": {
+    "properties": {
+      "key": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "lang": {
+        "type": "string"
+      },
+      "img": {
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  }
+}
+

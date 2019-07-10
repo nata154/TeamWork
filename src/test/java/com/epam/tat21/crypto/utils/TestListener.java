@@ -5,42 +5,28 @@ import com.epam.tat21.crypto.steps.Steps;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.TestListenerAdapter;
 
 import java.io.File;
 import java.io.IOException;
 
-public class TestListener implements ITestListener {
-
-    @Override
-    public void onTestStart(ITestResult iTestResult) {
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult iTestResult) {
-    }
+public class TestListener extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        super.onTestFailure(iTestResult);
         saveScreenshot();
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
+        super.onTestSkipped(iTestResult);
     }
 
     @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-    }
-
-    @Override
-    public void onStart(ITestContext iTestContext) {
-    }
-
-    @Override
-    public void onFinish(ITestContext iTestContext) {
+    public void onTestSuccess(ITestResult iTestResult) {
+        super.onTestSuccess(iTestResult);
     }
 
     private void saveScreenshot() {
@@ -54,6 +40,5 @@ public class TestListener implements ITestListener {
             MyLogger.error("Failed to save screenshot: " + e.getLocalizedMessage());
         }
     }
-
 
 }
