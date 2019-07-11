@@ -8,9 +8,9 @@
         </packages>
     </test>
     <test name="Mobile CryptoCompareTests" enabled="false">
-        <classes>
-            <class name="com.epam.tat21.crypto.mobile.mobiletests.PreConditionsOfMobileTest"></class>
-        </classes>
+        <packages>
+            <package name="com.epam.tat21.crypto.mobile.mobiletests.*"></package>
+        </packages>
     </test>
 </suite>
 
