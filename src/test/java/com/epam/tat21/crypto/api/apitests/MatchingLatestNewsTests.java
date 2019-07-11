@@ -1,9 +1,9 @@
 package com.epam.tat21.crypto.api.apitests;
 
 import com.epam.tat21.crypto.api.apidata.FeedsNamesAndIdProvider;
-import com.epam.tat21.crypto.bo.Coin;
-import com.epam.tat21.crypto.data.CoinsDataProvider;
-import com.epam.tat21.crypto.tests.CommonConditions;
+import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.data.CoinsDataProvider;
+import com.epam.tat21.crypto.ui.tests.CommonConditions;
 import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;

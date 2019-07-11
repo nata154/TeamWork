@@ -1,6 +1,6 @@
 package com.epam.tat21.crypto.mobile.mobiledriver;
 
-import com.epam.tat21.crypto.utils.MyLogger;
+import com.epam.tat21.crypto.ui.utils.MyLogger;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.tat21.crypto.service.TestDataReader.*;
+import static com.epam.tat21.crypto.ui.service.TestDataReader.*;
 
 public class MobileDriverForFarm implements MobileDriverFactory {
 

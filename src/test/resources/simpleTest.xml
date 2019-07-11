@@ -6,7 +6,7 @@
    </listeners>
     <test name="CryptoCompareTests">
         <packages>
-            <package name="com.epam.tat21.crypto.tests.*"></package>
+            <package name="com.epam.tat21.crypto.ui.tests.*"></package>
             <package name="com.epam.tat21.crypto.api.apitests.*"></package>
             <package name="com.epam.tat21.crypto.mobile.mobiletests.*"></package>
         </packages>
