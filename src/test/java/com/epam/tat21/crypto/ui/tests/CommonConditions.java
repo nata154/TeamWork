@@ -26,4 +26,3 @@ public class CommonConditions {
         steps.closeBrowser();
     }
 }
-
