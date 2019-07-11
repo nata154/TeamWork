@@ -3,7 +3,7 @@ package com.epam.tat21.crypto.ui.steps;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.businessObjects.User;
-import com.epam.tat21.crypto.ui.driver.*;
+import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.pages.*;
 import com.epam.tat21.crypto.ui.service.UserCreator;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
@@ -21,24 +21,17 @@ import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
 public class Steps {
 
-    public Steps() {
-    this.driver = new DriverManager().getWebDriverFactory().getDriver();
-    }
-
-
     private WebDriver driver;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
 
-
-    public WebDriver getDriver () {
-        return driver;
+    public Steps() {
+        this.driver = DriverManager.getWebDriverFactory().getDriver();
     }
 
     public void closeBrowser() {
-        driver.quit();
-        driver = null;
+        DriverManager.getWebDriverFactory().closeDriver();
     }
 
     @Given("I login user")
@@ -173,36 +166,36 @@ public class Steps {
     }
 
     public PortfolioPage addCoinToUserPortfolio(Coin coin, String amount, String price) {
-    	return portfolioPage.
-    			getAddCoinForm().
-    			addCoinInPortfolio(coin, amount, price);
-	}
+        return portfolioPage.
+                getAddCoinForm().
+                addCoinInPortfolio(coin, amount, price);
+    }
 
     public boolean isCoinAdded() {
-		return portfolioPage.
-				isCoinAdded();
-	}
+        return portfolioPage.
+                isCoinAdded();
+    }
 
     public PortfolioPage changeAmountOfCoins(String amount) {
-		return portfolioPage.
-				getEditCoinForm().
-				editAmountOfCoin(amount);
+        return portfolioPage.
+                getEditCoinForm().
+                editAmountOfCoin(amount);
     }
 
     public boolean isAmountOfCoinChanged() {
         return portfolioPage.
-               isAmountOfCoinChanged();
+                isAmountOfCoinChanged();
     }
 
     public PortfolioPage deleteCoinFromUserPortfolio() {
-		return portfolioPage.
-				getEditCoinForm().
-				deleteCoinFromPortfolio().
-				confirmCoinDeletion();
+        return portfolioPage.
+                getEditCoinForm().
+                deleteCoinFromPortfolio().
+                confirmCoinDeletion();
     }
 
     public boolean isCoinDelete() {
         return portfolioPage.
-        		isCoinDelete();
+                isCoinDelete();
     }
 }
