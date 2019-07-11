@@ -1,4 +1,4 @@
-package com.epam.tat21.crypto.api.apidata;
+package com.epam.tat21.crypto.api.data;
 
 public enum JsonSchemasNames {
 

@@ -1,4 +1,4 @@
-package com.epam.tat21.crypto.api.apitests;
+package com.epam.tat21.crypto.api.tests;
 
 import com.epam.tat21.crypto.ui.tests.CommonConditions;
 import org.testng.annotations.Test;

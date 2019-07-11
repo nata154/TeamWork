@@ -1,6 +1,6 @@
-package com.epam.tat21.crypto.mobile.mobiletests;
+package com.epam.tat21.crypto.mobile.tests;
 
-import com.epam.tat21.crypto.mobile.mobilesteps.MobSteps;
+import com.epam.tat21.crypto.mobile.steps.MobSteps;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 

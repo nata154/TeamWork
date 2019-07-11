@@ -30,7 +30,7 @@ public class TestListener extends TestListenerAdapter {
     }
 
     private void saveScreenshot() {
-        File screenCapture = ((TakesScreenshot) new Steps().getWebDriverFactory().getDriver()).getScreenshotAs(OutputType.FILE);
+        File screenCapture = ((TakesScreenshot) new Steps().getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(
                     TestDataReader.getScreenshotFolderPath()
