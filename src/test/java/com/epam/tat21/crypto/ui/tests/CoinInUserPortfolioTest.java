@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.ui.tests;
 
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
-import com.epam.tat21.crypto.ui.utils.MyLogger;
+import com.epam.tat21.crypto.ui.service.CommonConditions;
 import com.epam.tat21.crypto.ui.utils.RandomString;
 import com.epam.testng.JIRATestKey;
 import org.testng.annotations.AfterClass;
@@ -22,7 +22,7 @@ public class CoinInUserPortfolioTest extends CommonConditions {
 
     @AfterClass
     public void portfolioDeleting() {
-        MyLogger.info("AfterClass CoinInUserPortfolio");
+        steps.deleteUserPortfolio();
     }
 
     @JIRATestKey(key = "EPMFARMATS-9267")
