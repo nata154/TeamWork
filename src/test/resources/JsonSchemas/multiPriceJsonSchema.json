@@ -2,16 +2,17 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "comment": "The multi price endpoint schema",
   "type": "object",
-  "properties": {
-    "([A-Z]|[0-9]": {
+  "patternProperties": {
+    "([A-Z]|[0-9])": {
       "type": "object",
-      "properties": {
+      "patternProperties": {
         "([A-Z])": {
           "type": "number",
           "minimum": 0
         }
-      }
+      },
+      "additionalProperties": false
     }
-  }
+  },
+  "additionalProperties": false
 }
-
