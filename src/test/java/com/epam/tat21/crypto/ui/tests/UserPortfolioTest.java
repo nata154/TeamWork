@@ -1,6 +1,7 @@
 package com.epam.tat21.crypto.ui.tests;
 
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.service.CommonConditions;
 import com.epam.tat21.crypto.ui.utils.RandomString;
 import com.epam.testng.JIRATestKey;
 import org.testng.annotations.Test;
@@ -8,7 +9,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 
-public class UserPortfolioTest extends CommonConditions{
+public class UserPortfolioTest extends CommonConditions {
 
 	private static final int COUNT_OF_SYMBOLS = 5;
 	private String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
