@@ -1,4 +1,4 @@
-package com.epam.tat21.crypto.api.apisteps;
+package com.epam.tat21.crypto.api.steps;
 
 import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
+import com.epam.tat21.crypto.api.utils.ResponseUtils;
 import com.epam.tat21.crypto.api.model.*;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Currency;

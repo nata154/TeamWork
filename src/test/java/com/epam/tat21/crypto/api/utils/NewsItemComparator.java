@@ -1,4 +1,4 @@
-package com.epam.tat21.crypto.api.apiutils;
+package com.epam.tat21.crypto.api.utils;
 
 import com.epam.tat21.crypto.api.model.NewsItem;
 

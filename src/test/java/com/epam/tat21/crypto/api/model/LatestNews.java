@@ -1,6 +1,6 @@
 package com.epam.tat21.crypto.api.model;
 
-import com.epam.tat21.crypto.api.apiutils.NewsItemComparator;
+import com.epam.tat21.crypto.api.utils.NewsItemComparator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

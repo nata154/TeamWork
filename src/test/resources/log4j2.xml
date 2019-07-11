@@ -12,12 +12,17 @@
             <PatternLayout
                     pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
         </File>
+        <ReportPortalLog4j2Appender name="ReportPortalAppender">
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </ReportPortalLog4j2Appender>
     </Appenders>
 
     <Loggers>
         <Root level="info">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="File"/>
+            <AppenderRef ref="ReportPortalAppender"/>
         </Root>
     </Loggers>
 </Configuration>
