@@ -13,7 +13,8 @@ import java.util.List;
 
 import static com.epam.tat21.crypto.api.apidata.JsonSchemasNames.MULTI_PRICE_SCHEMA;
 
-public class ValidateMultiPriceJsonSchemaTest  extends CommonConditions {
+public class ValidateMultiPriceJsonSchemaTest extends CommonConditions {
+
     @JIRATestKey(key = "EPMFARMATS-9517")
     @Test()
     public void jsonSchemaValidationTest() {
