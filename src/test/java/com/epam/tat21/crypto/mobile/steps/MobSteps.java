@@ -1,8 +1,8 @@
-package com.epam.tat21.crypto.mobile.mobilesteps;
+package com.epam.tat21.crypto.mobile.steps;
 
-import com.epam.tat21.crypto.mobile.mobiledriver.MobileDriverFactory;
-import com.epam.tat21.crypto.mobile.mobiledriver.MobileDriverForFarm;
-import com.epam.tat21.crypto.mobile.mobiledriver.MobileLocalDriver;
+import com.epam.tat21.crypto.mobile.driver.MobileDriverFactory;
+import com.epam.tat21.crypto.mobile.driver.MobileDriverForFarm;
+import com.epam.tat21.crypto.mobile.driver.MobileLocalDriver;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;

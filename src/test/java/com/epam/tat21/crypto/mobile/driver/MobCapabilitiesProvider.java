@@ -1,4 +1,4 @@
-package com.epam.tat21.crypto.mobile.mobiledriver;
+package com.epam.tat21.crypto.mobile.driver;
 
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;

@@ -1,4 +1,4 @@
-package com.epam.tat21.crypto.mobile.mobiledriver;
+package com.epam.tat21.crypto.mobile.driver;
 
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import io.appium.java_client.AppiumDriver;

@@ -3,10 +3,7 @@ package com.epam.tat21.crypto.ui.steps;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.businessObjects.User;
-import com.epam.tat21.crypto.ui.driver.DriverFactory;
-import com.epam.tat21.crypto.ui.driver.LocalDriver;
-import com.epam.tat21.crypto.ui.driver.RemoteDriver;
-import com.epam.tat21.crypto.ui.driver.RemoteDriverSauceLabs;
+import com.epam.tat21.crypto.ui.driver.*;
 import com.epam.tat21.crypto.ui.pages.*;
 import com.epam.tat21.crypto.ui.service.UserCreator;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
@@ -24,33 +21,24 @@ import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
 public class Steps {
 
+    public Steps() {
+    this.driver = new DriverManager().getWebDriverFactory().getDriver();
+    }
+
+
     private WebDriver driver;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
 
-    public DriverFactory getWebDriverFactory() {
-        if (driver == null) {
-            switch (System.getProperty("driver")) {
-                case "local":
-                    return new LocalDriver();
-                case "remote":
-                    return new RemoteDriver();
-                case "sauce":
-                    return new RemoteDriverSauceLabs();
-                default:
-                    return new LocalDriver();
-            }
-        }
-        return new LocalDriver();
-    }
 
-    public void openBrowser() {
-        driver = getWebDriverFactory().getDriver();
+    public WebDriver getDriver () {
+        return driver;
     }
 
     public void closeBrowser() {
-        getWebDriverFactory().closeDriver();
+        driver.quit();
+        driver = null;
     }
 
     @Given("I login user")
