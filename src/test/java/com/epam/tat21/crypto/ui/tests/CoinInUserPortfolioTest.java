@@ -54,3 +54,4 @@ public class CoinInUserPortfolioTest extends CommonConditions {
 		assertTrue(steps.isCoinDelete());
 	}
 }
+

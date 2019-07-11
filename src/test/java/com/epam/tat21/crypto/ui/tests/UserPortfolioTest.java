@@ -40,3 +40,4 @@ public class UserPortfolioTest extends CommonConditions{
 		assertTrue(steps.isPortfolioDelete());
 	}
 }
+
