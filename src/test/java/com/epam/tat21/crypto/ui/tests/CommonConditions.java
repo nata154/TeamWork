@@ -1,6 +1,6 @@
 package com.epam.tat21.crypto.ui.tests;
 
-import com.epam.tat21.crypto.api.apisteps.ApiSteps;
+import com.epam.tat21.crypto.api.steps.ApiSteps;
 import com.epam.tat21.crypto.ui.steps.Steps;
 import com.epam.tat21.crypto.ui.utils.TestListener;
 import com.epam.testng.JIRATestNGListener;
@@ -18,7 +18,6 @@ public class CommonConditions {
     public void setUp() {
         steps = new Steps();
         apiSteps = new ApiSteps();
-        steps.openBrowser();
     }
 
     @AfterClass

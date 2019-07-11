@@ -1,7 +1,7 @@
-package com.epam.tat21.crypto.api.apisteps;
+package com.epam.tat21.crypto.api.steps;
 
-import com.epam.tat21.crypto.api.apiutils.ResponseUtils;
 import com.epam.tat21.crypto.api.model.*;
+import com.epam.tat21.crypto.api.utils.ResponseUtils;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Currency;
 import com.epam.tat21.crypto.ui.service.TestDataReader;

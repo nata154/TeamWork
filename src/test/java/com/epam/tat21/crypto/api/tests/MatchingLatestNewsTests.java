@@ -1,6 +1,6 @@
-package com.epam.tat21.crypto.api.apitests;
+package com.epam.tat21.crypto.api.tests;
 
-import com.epam.tat21.crypto.api.apidata.FeedsNamesAndIdProvider;
+import com.epam.tat21.crypto.api.data.FeedsNamesAndIdProvider;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.data.CoinsDataProvider;
 import com.epam.tat21.crypto.ui.tests.CommonConditions;
