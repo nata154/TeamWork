@@ -12,7 +12,7 @@ import static org.testng.Assert.assertTrue;
 public class UserPortfolioTest extends CommonConditions {
 
 	private static final int COUNT_OF_SYMBOLS = 5;
-	private String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+	//private String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 	private String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 	private Coin coin = Coin.BTC;
 	private String currency = coin.getAbbreviationCoin();
@@ -21,6 +21,7 @@ public class UserPortfolioTest extends CommonConditions {
 	@Test
 	public void portfolioCreationTest() {
 		String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+		String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 		steps.loginUser();
 		steps.createUserPortfolio(portfolioName, currency, description);
 		assertTrue(steps.isPortfolioPresent(portfolioName));
