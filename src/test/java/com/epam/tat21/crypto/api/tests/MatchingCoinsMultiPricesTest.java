@@ -2,7 +2,7 @@ package com.epam.tat21.crypto.api.tests;
 
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Currency;
-import com.epam.tat21.crypto.ui.service.CommonConditions;
+import com.epam.tat21.crypto.ui.tests.CommonConditions;
 import com.epam.tat21.crypto.ui.utils.DataVerification;
 import com.epam.testng.JIRATestKey;
 import org.testng.Assert;

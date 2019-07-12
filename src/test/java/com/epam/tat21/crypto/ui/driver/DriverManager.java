@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
 
-    private WebDriver driver;
+    private static WebDriver driver;
 
-    public DriverFactory getWebDriverFactory() {
+    public static DriverFactory getWebDriverFactory() {
         if (driver == null) {
             switch (System.getProperty("driver")) {
                 case "local":

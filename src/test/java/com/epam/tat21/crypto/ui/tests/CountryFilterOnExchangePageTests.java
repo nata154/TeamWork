@@ -2,7 +2,6 @@ package com.epam.tat21.crypto.ui.tests;
 
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.data.CountriesDataProvider;
-import com.epam.tat21.crypto.ui.service.CommonConditions;
 import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;

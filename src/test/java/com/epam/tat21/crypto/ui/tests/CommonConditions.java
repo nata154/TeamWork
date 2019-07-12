@@ -1,4 +1,4 @@
-package com.epam.tat21.crypto.ui.service;
+package com.epam.tat21.crypto.ui.tests;
 
 import com.epam.tat21.crypto.api.steps.ApiSteps;
 import com.epam.tat21.crypto.ui.steps.Steps;
