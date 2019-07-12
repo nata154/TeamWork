@@ -54,6 +54,12 @@ public class AddPortfolioForm extends HeaderPage {
 		return driver.findElement(By.xpath(xpathForGetCurrency));
 	}
 
+	public PortfolioPage scroll(WebElement element) {
+		Actions action = new Actions(driver);
+		action.moveToElement(element).build().perform();
+		return new PortfolioPage(driver);
+	}
+
 
 	public PortfolioPage createNewPortfolio(String name, String currency, String description) {
 		waitForElementVisible(inputPortfolioName);
@@ -63,8 +69,7 @@ public class AddPortfolioForm extends HeaderPage {
 		WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, xpathForGetCurrency, 10);
 		WebElement getCurrency = getElementCurrency(currency);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
-		Actions action = new Actions(driver);
-		action.moveToElement(getCurrency).build().perform();
+		scroll(getCurrency);
 		waitForElementClickable(getCurrency);
 		getCurrency.click();
 		textareaDiscription.sendKeys(description);
