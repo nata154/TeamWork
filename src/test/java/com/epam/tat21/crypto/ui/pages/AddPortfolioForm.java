@@ -1,12 +1,13 @@
 package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.service.TestDataReader;
-import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddPortfolioForm extends HeaderPage {
 
@@ -60,18 +61,23 @@ public class AddPortfolioForm extends HeaderPage {
 		return new PortfolioPage(driver);
 	}
 
+	private static final String PORTFOLIO_CURRENCY_LOCATOR = "(//md-option[@value='%s']/div[1]/span)[2]";
 
 	public PortfolioPage createNewPortfolio(String name, String currency, String description) {
 		waitForElementVisible(inputPortfolioName);
 		inputPortfolioName.sendKeys(name);
 		dropdownCurrency.click();
-		String xpathForGetCurrency = "(//md-option[@value='" + currency + "']/div[1]/span)[2]/../..";
-		WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, xpathForGetCurrency, 10);
-		WebElement getCurrency = getElementCurrency(currency);
-		//((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
-		scroll(getCurrency);
-		waitForElementVisible(getCurrency);
-		getCurrency.click();
+		new WebDriverWait(driver, 5)
+				.until(ExpectedConditions
+						.presenceOfElementLocated(By
+								.xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency))));
+		WebElement portfolioCurrency = driver.findElement(By
+				.xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency)));
+		Actions action = new Actions(driver);
+		action.moveToElement(portfolioCurrency).build().perform();
+//((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
+		waitForElementClickable(portfolioCurrency);
+		portfolioCurrency.click();
 		textareaDiscription.sendKeys(description);
 		waitForElementClickable(buttonCreate);
 		buttonCreate.click();
