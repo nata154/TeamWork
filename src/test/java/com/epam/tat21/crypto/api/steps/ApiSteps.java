@@ -1,20 +1,19 @@
 package com.epam.tat21.crypto.api.steps;
 
-import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
+import com.epam.tat21.crypto.api.model.*;
+import com.epam.tat21.crypto.api.utils.ResponseUtils;
+import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.businessObjects.Currency;
+import com.epam.tat21.crypto.ui.service.TestDataReader;
+import com.epam.tat21.crypto.ui.utils.MyLogger;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import com.epam.tat21.crypto.api.utils.ResponseUtils;
-import com.epam.tat21.crypto.api.model.*;
-import com.epam.tat21.crypto.ui.businessObjects.Coin;
-import com.epam.tat21.crypto.ui.businessObjects.Currency;
-import com.epam.tat21.crypto.ui.service.TestDataReader;
-import com.epam.tat21.crypto.ui.utils.MyLogger;
-
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
 public class ApiSteps {
 
@@ -125,7 +124,7 @@ public class ApiSteps {
         return resultCurrenciesForQuery.substring(1, resultCurrenciesForQuery.length());
     }
 
-    private Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
+    public Response getResponseWithMultiPrice(String coinAbbreviations, String currencyAbbreviations) {
         MyLogger.info("Getting response with multiprice");
         return RestAssured.given().queryParam("fsyms", coinAbbreviations).
                 queryParam("tsyms", currencyAbbreviations).
