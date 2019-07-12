@@ -63,21 +63,24 @@ public class AddPortfolioForm extends HeaderPage {
 
 	private static final String PORTFOLIO_CURRENCY_LOCATOR = "(//md-option[@value='%s']/div[1]/span)[2]";
 
+	@FindBy(xpath = "(//div[contains(@id,'select_container')])[2]")
+	private WebElement portfolioCurrencyDropdown;
+
 	public PortfolioPage createNewPortfolio(String name, String currency, String description) {
 		waitForElementVisible(inputPortfolioName);
 		inputPortfolioName.sendKeys(name);
+		System.out.println(portfolioCurrencyDropdown.getAttribute("class"));
 		dropdownCurrency.click();
-		new WebDriverWait(driver, 5)
-				.until(ExpectedConditions
-						.presenceOfElementLocated(By
-								.xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency))));
+		System.out.println(portfolioCurrencyDropdown.getAttribute("class"));
+		new WebDriverWait(driver, 5).until(ExpectedConditions
+				.attributeToBe(portfolioCurrencyDropdown, "class", "md-select-menu-container md-active md-clickable"));
 		WebElement portfolioCurrency = driver.findElement(By
 				.xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency)));
-		//scroll(portfolioCurrency);
+		Actions action = new Actions(driver);
+		action.moveToElement(portfolioCurrency).build().perform();
 //((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
 		waitForElementClickable(portfolioCurrency);
 		portfolioCurrency.click();
-		waitForElementVisible(textareaDiscription);
 		textareaDiscription.sendKeys(description);
 		waitForElementClickable(buttonCreate);
 		buttonCreate.click();
