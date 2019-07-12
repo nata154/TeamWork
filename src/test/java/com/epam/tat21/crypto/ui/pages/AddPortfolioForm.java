@@ -73,11 +73,11 @@ public class AddPortfolioForm extends HeaderPage {
 								.xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency))));
 		WebElement portfolioCurrency = driver.findElement(By
 				.xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency)));
-		Actions action = new Actions(driver);
-		action.moveToElement(portfolioCurrency).build().perform();
+		//scroll(portfolioCurrency);
 //((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
 		waitForElementClickable(portfolioCurrency);
 		portfolioCurrency.click();
+		waitForElementVisible(textareaDiscription);
 		textareaDiscription.sendKeys(description);
 		waitForElementClickable(buttonCreate);
 		buttonCreate.click();
