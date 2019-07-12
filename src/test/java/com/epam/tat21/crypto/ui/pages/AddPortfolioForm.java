@@ -70,7 +70,7 @@ public class AddPortfolioForm extends HeaderPage {
 		WebElement getCurrency = getElementCurrency(currency);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
 		scroll(getCurrency);
-		waitForElementClickable(getCurrency);
+		waitForElementVisible(getCurrency);
 		getCurrency.click();
 		textareaDiscription.sendKeys(description);
 		waitForElementClickable(buttonCreate);
