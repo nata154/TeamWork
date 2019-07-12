@@ -1,6 +1,7 @@
 package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.service.TestDataReader;
+import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,10 +59,13 @@ public class AddPortfolioForm extends HeaderPage {
 		waitForElementVisible(inputPortfolioName);
 		inputPortfolioName.sendKeys(name);
 		dropdownCurrency.click();
+		String xpathForGetCurrency = "(//md-option[@value='" + currency + "']/div[1]/span)[2]/../..";
+		WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, xpathForGetCurrency, 10);
 		WebElement getCurrency = getElementCurrency(currency);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
 		Actions action = new Actions(driver);
 		action.moveToElement(getCurrency).build().perform();
+		waitForElementClickable(getCurrency);
 		getCurrency.click();
 		textareaDiscription.sendKeys(description);
 		waitForElementClickable(buttonCreate);
