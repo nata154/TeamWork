@@ -1,6 +1,7 @@
 package com.epam.tat21.crypto.ui.tests;
 
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.service.CommonConditions;
 import com.epam.tat21.crypto.ui.utils.RandomString;
 import com.epam.testng.JIRATestKey;
 import org.testng.annotations.Test;
@@ -34,7 +35,7 @@ public class UserPortfolioTest extends CommonConditions {
 
 	@JIRATestKey(key = "EPMFARMATS-9264")
 	@Test(dependsOnMethods = { "portfolioEditingTest" })
-	private void portfolioDeletingTest() {
+	public void portfolioDeletingTest() {
 		steps.deleteUserPortfolio();
 		assertTrue(steps.isPortfolioDelete());
 	}

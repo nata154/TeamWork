@@ -21,17 +21,13 @@ import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
 public class Steps {
 
-    public Steps() {
-        this.driver = DriverManager.getWebDriverFactory().getDriver();
-    }
-
     private WebDriver driver;
     private ExchangesPage exchangesPage;
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
 
-    public WebDriver getDriver() {
-        return driver;
+    public Steps() {
+        this.driver = DriverManager.getWebDriverFactory().getDriver();
     }
 
     public void closeBrowser() {
@@ -201,9 +197,5 @@ public class Steps {
     public boolean isCoinDelete() {
         return portfolioPage.
                 isCoinDelete();
-    }
-
-    public MainCryptoComparePage clickLogOut() {
-        return portfolioPage.getDropdownUserMenuInHeader().clickLogOutLine();
     }
 }
