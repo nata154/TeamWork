@@ -2,7 +2,6 @@ package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -58,7 +57,8 @@ public class AddPortfolioForm extends HeaderPage {
 		inputPortfolioName.sendKeys(name);
 		dropdownCurrency.click();
 		WebElement getCurrency = getElementCurrency(currency);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
+		getCurrency.click();
 		textareaDiscription.sendKeys(description);
 		waitForElementClickable(buttonCreate);
 		buttonCreate.click();
