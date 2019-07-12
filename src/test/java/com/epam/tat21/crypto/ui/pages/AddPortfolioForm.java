@@ -49,7 +49,7 @@ public class AddPortfolioForm extends HeaderPage {
 	}
 
 	public WebElement getElementCurrency(String currency) {
-		String xpathForGetCurrency = "(//md-option[@value='" + currency + "']/div[1]/span)[2]";
+		String xpathForGetCurrency = "(//md-option[@value='" + currency + "']/div[1]/span)[2]/../..";
 		return driver.findElement(By.xpath(xpathForGetCurrency));
 	}
 
