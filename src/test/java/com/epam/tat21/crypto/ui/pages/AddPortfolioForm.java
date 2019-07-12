@@ -4,6 +4,7 @@ import com.epam.tat21.crypto.ui.service.TestDataReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class AddPortfolioForm extends HeaderPage {
@@ -52,12 +53,15 @@ public class AddPortfolioForm extends HeaderPage {
 		return driver.findElement(By.xpath(xpathForGetCurrency));
 	}
 
+
 	public PortfolioPage createNewPortfolio(String name, String currency, String description) {
 		waitForElementVisible(inputPortfolioName);
 		inputPortfolioName.sendKeys(name);
 		dropdownCurrency.click();
 		WebElement getCurrency = getElementCurrency(currency);
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click();", getCurrency);
+		Actions action = new Actions(driver);
+		action.moveToElement(getCurrency).build().perform();
 		getCurrency.click();
 		textareaDiscription.sendKeys(description);
 		waitForElementClickable(buttonCreate);
