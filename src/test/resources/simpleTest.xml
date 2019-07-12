@@ -7,7 +7,7 @@
     <test name="CryptoCompareTests" enabled="true">
         <packages>
             <package name="com.epam.tat21.crypto.ui.tests.*"></package>
-            <package name="com.epam.tat21.crypto.api.apitests.*"></package>
+            <package name="com.epam.tat21.crypto.api.tests.*"></package>
         </packages>
     </test>
     <test name="Mobile CryptoCompareTests" enabled="false">
