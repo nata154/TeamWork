@@ -80,12 +80,12 @@ public class AddPortfolioForm extends HeaderPage {
         if (actualName.equals(expectedName)) {
             MyLogger.info("Inputed name of portfolio is correct and contains all letters.");
         } else {
-            do {
+            while (!actualName.equals(expectedName)) {
                 MyLogger.info("Wrong portfolio name. Trying to reinput it.");
                 inputPortfolioName.clear();
                 Actions action = new Actions(driver);
                 action.sendKeys(inputPortfolioName, expectedName).build().perform();
-            } while (actualName.equals(expectedName));
+            }
         }
     }
 
