@@ -70,6 +70,13 @@ public class AddPortfolioForm extends HeaderPage {
 		waitForElementVisible(inputPortfolioName);
 		Actions action = new Actions(driver);
 		action.sendKeys(inputPortfolioName, name).build().perform();
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		dropdownCurrency.click();
 		new WebDriverWait(driver, 5).until(ExpectedConditions
 				.attributeToBe(portfolioCurrencyDropdown, "class", "md-select-menu-container md-active md-clickable"));
