@@ -2,6 +2,7 @@ package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -66,16 +67,27 @@ public class AddPortfolioForm extends HeaderPage {
 	@FindBy(xpath = "(//div[contains(@id,'select_container')])[2]")
 	private WebElement portfolioCurrencyDropdown;
 
+	private void getPortfolioName() {
+		waitForElementVisible(inputPortfolioName);
+		String actualClass = inputPortfolioName.getAttribute("class");
+		System.out.println("actualClass " + actualClass);
+		String actualID = inputPortfolioName.getAttribute("id");
+		System.out.println("actualID " + actualID);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String actualPortfolioName = String.valueOf(js.executeScript("document.getElementById('" + actualID + "')"));
+		System.out.println(actualPortfolioName);
+	}
+
 	public PortfolioPage createNewPortfolio(String name, String currency, String description) {
 		waitForElementVisible(inputPortfolioName);
 		Actions action = new Actions(driver);
 		action.sendKeys(inputPortfolioName, name).build().perform();
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		getPortfolioName();
+//		try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 
 		dropdownCurrency.click();
 		new WebDriverWait(driver, 5).until(ExpectedConditions
@@ -89,7 +101,8 @@ public class AddPortfolioForm extends HeaderPage {
 		buttonCreate.click();
 		return new PortfolioPage(driver);
 	}
-	
+
+
 	public PortfolioPage editUserPortfolio(String name) {
 		waitForElementVisible(inputPortfolioName);
 		inputPortfolioName.clear();
