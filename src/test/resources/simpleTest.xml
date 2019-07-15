@@ -4,12 +4,19 @@
     <listeners>
         <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
     </listeners>
-    <test name="CryptoCompareTests" enabled="true">
+    <test name="CryptoCompareTests" enabled="false">
         <packages>
             <package name="com.epam.tat21.crypto.ui.tests.*"></package>
-            <package name="com.epam.tat21.crypto.api.tests.*"></package>
+            <!--<package name="com.epam.tat21.crypto.api.tests.*"></package>-->
         </packages>
     </test>
+
+    <test name="UserPortfolio" enabled="true">
+        <classes>
+            <class name="com.epam.tat21.crypto.ui.tests.UserPortfolioTest"></class>
+        </classes>
+    </test>
+
     <test name="Mobile CryptoCompareTests" enabled="false">
         <packages>
             <package name="com.epam.tat21.crypto.mobile.tests.*"></package>

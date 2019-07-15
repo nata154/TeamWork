@@ -85,6 +85,7 @@ public class AddPortfolioForm extends HeaderPage {
 	
 	public PortfolioPage editUserPortfolio(String name) {
 		waitForElementVisible(inputPortfolioName);
+		inputPortfolioName.clear();
 		inputPortfolioName.sendKeys(name);
 		waitForElementClickable(buttonUpdatePortfolio);
 		buttonUpdatePortfolio.click();
