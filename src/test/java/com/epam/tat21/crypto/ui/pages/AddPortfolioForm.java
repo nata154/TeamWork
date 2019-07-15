@@ -72,7 +72,7 @@ public class AddPortfolioForm extends HeaderPage {
         waitForElementVisible(inputPortfolioName);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String actualPortfolioName = (String) js.executeScript("return arguments[0].value;", inputPortfolioName);
-        System.out.println("get name from line - " + js.executeScript("return arguments[0].value;", inputPortfolioName));
+        MyLogger.info("get inputed name from line - " + actualPortfolioName);
         return actualPortfolioName;
     }
 
