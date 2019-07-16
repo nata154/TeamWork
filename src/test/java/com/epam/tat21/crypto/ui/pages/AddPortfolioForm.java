@@ -2,14 +2,13 @@ package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
+import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddPortfolioForm extends HeaderPage {
 
@@ -68,12 +67,23 @@ public class AddPortfolioForm extends HeaderPage {
     @FindBy(xpath = "(//div[contains(@id,'select_container')])[2]")
     private WebElement portfolioCurrencyDropdown;
 
+    private String readValueForElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String jsRequest = "return arguments[0].value;";
+        String actualValue = (String) js.executeScript(jsRequest, element);
+        MyLogger.info("get inputed name from line - " + actualValue);
+        return actualValue;
+    }
+
+    private AddPortfolioForm actionSendKeys(WebElement element, String expectedName) {
+        Actions action = new Actions(driver);
+        action.sendKeys(inputPortfolioName, expectedName).build().perform();
+        return this;
+    }
+
     private String getPortfolioName() {
         waitForElementVisible(inputPortfolioName);
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        String actualPortfolioName = (String) js.executeScript("return arguments[0].value;", inputPortfolioName);
-        MyLogger.info("get inputed name from line - " + actualPortfolioName);
-        return actualPortfolioName;
+        return readValueForElement(inputPortfolioName);
     }
 
     private void assurePortfolioName(String actualName, String expectedName) {
@@ -83,8 +93,8 @@ public class AddPortfolioForm extends HeaderPage {
             if (!actualName.equals(expectedName)) {
                 MyLogger.info("Wrong portfolio name. Trying to reinput it.");
                 inputPortfolioName.clear();
-                Actions action = new Actions(driver);
-                action.sendKeys(inputPortfolioName, expectedName).build().perform();
+                actionSendKeys(inputPortfolioName, expectedName);
+                readValueForElement(inputPortfolioName);
             }
         }
     }
@@ -93,14 +103,10 @@ public class AddPortfolioForm extends HeaderPage {
         waitForElementVisible(inputPortfolioName);
         inputPortfolioName.click();
         inputPortfolioName.sendKeys(name);
-//        Actions action = new Actions(driver);
-//        action.sendKeys(inputPortfolioName, name).build().perform();
         assurePortfolioName(getPortfolioName(), name);
         dropdownCurrency.click();
-        new WebDriverWait(driver, 5).until(ExpectedConditions
-                .attributeToBe(portfolioCurrencyDropdown, "class", "md-select-menu-container md-active md-clickable"));
-        WebElement portfolioCurrency = driver.findElement(By
-                .xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency)));
+        WaitConditions.waitForAttributeToBe(driver, portfolioCurrencyDropdown, "class", "md-select-menu-container md-active md-clickable");
+        WebElement portfolioCurrency = driver.findElement(By.xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency)));
         waitForElementClickable(portfolioCurrency);
         portfolioCurrency.click();
         textareaDiscription.sendKeys(description);
@@ -123,6 +129,7 @@ public class AddPortfolioForm extends HeaderPage {
     public PortfolioPage deleteUserPortfolio() {
         waitForElementClickable(buttonDeletePortfolio);
         buttonDeletePortfolio.click();
+        MyLogger.info("Portfolio was deleted successfully.");
         return new PortfolioPage(driver);
     }
 }
