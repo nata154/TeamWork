@@ -12,8 +12,6 @@ import static org.testng.Assert.assertTrue;
 public class UserPortfolioTest extends CommonConditions {
 
 	private static final int COUNT_OF_SYMBOLS = 5;
-	//private String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
-	private String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 	private Coin coin = Coin.BTC;
 	private String currency = coin.getAbbreviationCoin();
 
@@ -30,6 +28,7 @@ public class UserPortfolioTest extends CommonConditions {
 	@JIRATestKey(key = "EPMFARMATS-9266")
 	@Test(dependsOnMethods = { "portfolioCreationTest" })
 	public void portfolioEditingTest() {
+		String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 		steps.changeUserPortfolioName(changedName);
 		assertTrue(steps.isPortfolioPresent(changedName));
 	}
