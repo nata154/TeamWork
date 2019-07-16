@@ -13,15 +13,19 @@ import org.openqa.selenium.support.FindBy;
 public class AddPortfolioForm extends HeaderPage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
+    private static final String PORTFOLIO_CURRENCY_LOCATOR = "(//md-option[@value='%s']/div[1]/span)[2]";
 
     @FindBy(xpath = "//input[@ng-model='newPortfolio.Name']")
     private WebElement inputPortfolioName;
+
+    @FindBy(xpath = "(//div[contains(@id,'select_container')])[2]")
+    private WebElement portfolioCurrencyDropdown;
 
     @FindBy(xpath = "//md-select[@name='currency']//span")
     private WebElement dropdownCurrency;
 
     @FindBy(xpath = "//textarea[@ng-model='newPortfolio.Description']")
-    private WebElement textareaDiscription;
+    private WebElement textAreaDescription;
 
     @FindBy(xpath = "//span[text()=' Private Portfolio ']")
     private WebElement radiobuttonPrivatePortfolio;
@@ -62,11 +66,6 @@ public class AddPortfolioForm extends HeaderPage {
         return new PortfolioPage(driver);
     }
 
-    private static final String PORTFOLIO_CURRENCY_LOCATOR = "(//md-option[@value='%s']/div[1]/span)[2]";
-
-    @FindBy(xpath = "(//div[contains(@id,'select_container')])[2]")
-    private WebElement portfolioCurrencyDropdown;
-
     private String readValueForElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String jsRequest = "return arguments[0].value;";
@@ -77,7 +76,7 @@ public class AddPortfolioForm extends HeaderPage {
 
     private AddPortfolioForm actionSendKeys(WebElement element, String expectedName) {
         Actions action = new Actions(driver);
-        action.sendKeys(inputPortfolioName, expectedName).build().perform();
+        action.sendKeys(element, expectedName).build().perform();
         return this;
     }
 
@@ -105,16 +104,16 @@ public class AddPortfolioForm extends HeaderPage {
         inputPortfolioName.sendKeys(name);
         assurePortfolioName(getPortfolioName(), name);
         dropdownCurrency.click();
+        //solving locating of dropdownMenu. waiting of special attribute.
         WaitConditions.waitForAttributeToBe(driver, portfolioCurrencyDropdown, "class", "md-select-menu-container md-active md-clickable");
         WebElement portfolioCurrency = driver.findElement(By.xpath(String.format(PORTFOLIO_CURRENCY_LOCATOR, currency)));
         waitForElementClickable(portfolioCurrency);
         portfolioCurrency.click();
-        textareaDiscription.sendKeys(description);
+        textAreaDescription.sendKeys(description);
         waitForElementClickable(buttonCreate);
         buttonCreate.click();
         return new PortfolioPage(driver);
     }
-
 
     public PortfolioPage editUserPortfolio(String name) {
         waitForElementVisible(inputPortfolioName);
