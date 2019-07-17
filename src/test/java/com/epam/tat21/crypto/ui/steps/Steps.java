@@ -1,5 +1,13 @@
 package com.epam.tat21.crypto.ui.steps;
 
+import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
+
+import java.util.List;
+import java.util.stream.IntStream;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.businessObjects.User;
@@ -7,20 +15,20 @@ import com.epam.tat21.crypto.ui.driver.DriverFactory;
 import com.epam.tat21.crypto.ui.driver.LocalDriver;
 import com.epam.tat21.crypto.ui.driver.RemoteDriver;
 import com.epam.tat21.crypto.ui.driver.RemoteDriverSauceLabs;
-import com.epam.tat21.crypto.ui.pages.*;
+import com.epam.tat21.crypto.ui.pages.CoinsPage;
+import com.epam.tat21.crypto.ui.pages.ExchangesPage;
+import com.epam.tat21.crypto.ui.pages.HeaderPage;
+import com.epam.tat21.crypto.ui.pages.MainCryptoComparePage;
+import com.epam.tat21.crypto.ui.pages.NewsPage;
+import com.epam.tat21.crypto.ui.pages.PortfolioPage;
+import com.epam.tat21.crypto.ui.pages.UserAccountPage;
 import com.epam.tat21.crypto.ui.service.UserCreator;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-import java.util.stream.IntStream;
-
-import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
 public class Steps {
 
