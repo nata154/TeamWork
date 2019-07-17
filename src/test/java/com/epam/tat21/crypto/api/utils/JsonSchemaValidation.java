@@ -1,6 +1,6 @@
-package com.epam.tat21.crypto.api.apiutils;
+package com.epam.tat21.crypto.api.utils;
 
-import com.epam.tat21.crypto.api.apidata.JsonSchemasNames;
+import com.epam.tat21.crypto.api.data.JsonSchemasNames;
 import com.epam.tat21.crypto.exceptions.JsonSchemaValidationException;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;

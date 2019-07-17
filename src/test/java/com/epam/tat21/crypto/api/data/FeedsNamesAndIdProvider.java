@@ -1,6 +1,6 @@
-package com.epam.tat21.crypto.api.apidata;
+package com.epam.tat21.crypto.api.data;
 
-import com.epam.tat21.crypto.api.apisteps.ApiSteps;
+import com.epam.tat21.crypto.api.steps.ApiSteps;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import org.testng.annotations.DataProvider;
 

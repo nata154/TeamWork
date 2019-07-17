@@ -1,12 +1,12 @@
-package com.epam.tat21.crypto.api.apitests;
+package com.epam.tat21.crypto.api.tests;
 
-import com.epam.tat21.crypto.ui.tests.CommonConditions;
-import com.epam.tat21.crypto.api.apiutils.JsonSchemaValidation;
+import com.epam.tat21.crypto.api.utils.JsonSchemaValidation;
+import com.epam.tat21.crypto.ui.service.CommonConditions;
 import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static com.epam.tat21.crypto.api.apidata.JsonSchemasNames.FEEDS_SCHEMA;
+import static com.epam.tat21.crypto.api.data.JsonSchemasNames.FEEDS_SCHEMA;
 
 public class ValidateNewsFeedJsonSchemaTest extends CommonConditions {
 

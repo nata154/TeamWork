@@ -11,10 +11,7 @@ import org.openqa.selenium.WebElement;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.businessObjects.User;
-import com.epam.tat21.crypto.ui.driver.DriverFactory;
-import com.epam.tat21.crypto.ui.driver.LocalDriver;
-import com.epam.tat21.crypto.ui.driver.RemoteDriver;
-import com.epam.tat21.crypto.ui.driver.RemoteDriverSauceLabs;
+import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.pages.CoinsPage;
 import com.epam.tat21.crypto.ui.pages.ExchangesPage;
 import com.epam.tat21.crypto.ui.pages.HeaderPage;
@@ -37,28 +34,12 @@ public class Steps {
     private NewsPage newsPage;
     private PortfolioPage portfolioPage;
 
-    public DriverFactory getWebDriverFactory() {
-        if (driver == null) {
-            switch (System.getProperty("driver")) {
-                case "local":
-                    return new LocalDriver();
-                case "remote":
-                    return new RemoteDriver();
-                case "sauce":
-                    return new RemoteDriverSauceLabs();
-                default:
-                    return new LocalDriver();
-            }
-        }
-        return new LocalDriver();
-    }
-
-    public void openBrowser() {
-        driver = getWebDriverFactory().getDriver();
+    public Steps() {
+        this.driver = DriverManager.getWebDriverFactory().getDriver();
     }
 
     public void closeBrowser() {
-        getWebDriverFactory().closeDriver();
+        DriverManager.getWebDriverFactory().closeDriver();
     }
 
     @Given("I login user")
@@ -191,38 +172,38 @@ public class Steps {
         return new CoinsPage(driver).
                 openPage();
     }
-    
+
     public PortfolioPage addCoinToUserPortfolio(Coin coin, String amount, String price) {
-    	return portfolioPage.
-    			getAddCoinForm().
-    			addCoinInPortfolio(coin, amount, price);
-	}
-    
-    public boolean isCoinAdded() {
-		return portfolioPage.
-				isCoinAdded();
-	}
-    
-    public PortfolioPage changeAmountOfCoins(String amount) {
-		return portfolioPage.
-				getEditCoinForm().
-				editAmountOfCoin(amount);      
+        return portfolioPage.
+                getAddCoinForm().
+                addCoinInPortfolio(coin, amount, price);
     }
-    
+
+    public boolean isCoinAdded() {
+        return portfolioPage.
+                isCoinAdded();
+    }
+
+    public PortfolioPage changeAmountOfCoins(String amount) {
+        return portfolioPage.
+                getEditCoinForm().
+                editAmountOfCoin(amount);
+    }
+
     public boolean isAmountOfCoinChanged() {
         return portfolioPage.
-               isAmountOfCoinChanged();
+                isAmountOfCoinChanged();
     }
-    
+
     public PortfolioPage deleteCoinFromUserPortfolio() {
-		return portfolioPage.
-				getEditCoinForm().
-				deleteCoinFromPortfolio().
-				confirmCoinDeletion();
+        return portfolioPage.
+                getEditCoinForm().
+                deleteCoinFromPortfolio().
+                confirmCoinDeletion();
     }
-    
+
     public boolean isCoinDelete() {
         return portfolioPage.
-        		isCoinDelete();
+                isCoinDelete();
     }
 }
