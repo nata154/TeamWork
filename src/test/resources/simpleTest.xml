@@ -10,6 +10,7 @@
             <package name="com.epam.tat21.crypto.api.tests.*"></package>
         </packages>
     </test>
+
     <test name="Mobile CryptoCompareTests" enabled="false">
         <packages>
             <package name="com.epam.tat21.crypto.mobile.tests.*"></package>
