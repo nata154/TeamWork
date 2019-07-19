@@ -1,6 +1,8 @@
 package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.businessObjects.PortfolioItem;
+import com.epam.tat21.crypto.ui.elements.AddCoinButton;
+import com.epam.tat21.crypto.ui.elements.AddPortfolioButton;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
@@ -20,11 +22,8 @@ public class PortfolioPage extends HeaderPage {
     private static final String PORTFOLIO_ITEM_LINK_LOCATOR = "//md-tab-item";
     private static final String POPUP_PORTFOLIO_CREATED = "//div[@class='toast-body ng-binding']";
 
-    @FindBy(xpath = "//button[@ng-click='addPortfolioDialog()']")
-    private WebElement buttonAddPortfolio;
-
-    @FindBy(xpath = "(//md-tab-content[contains(@class,'active')]//span[contains(text(), 'Coin')])[1]")
-    private WebElement addCoinToPortfolioButton;
+    private AddPortfolioButton addPortfolioButton;
+    private AddCoinButton addCoinButton;
 
     @FindBy(xpath = "//div[@class='list-table list-portfolio padding-5']")
     private WebElement tableOfCoinsInPortfolio;
@@ -74,15 +73,15 @@ public class PortfolioPage extends HeaderPage {
         if (driver.findElements(By.xpath(POPUP_PORTFOLIO_CREATED)).size() == 0) {
             WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, POPUP_PORTFOLIO_CREATED, 5);
         }
-        waitForElementClickable(addCoinToPortfolioButton);
-        addCoinToPortfolioButton.click();
+        waitForElementClickable(addCoinButton);
+        addCoinButton.click();
         MyLogger.info("AddCoinForm was appeared");
         return new AddCoinForm(driver);
     }
 
-    public AddPortfolioForm addPortfolioForm() {
-        waitForElementClickable(buttonAddPortfolio);
-        buttonAddPortfolio.click();
+    public AddPortfolioForm getAddPortfolioForm() {
+        waitForElementClickable(addPortfolioButton);
+        addPortfolioButton.click();
         MyLogger.info("AddPortfolioForm was appeared");
         return new AddPortfolioForm(driver);
     }
