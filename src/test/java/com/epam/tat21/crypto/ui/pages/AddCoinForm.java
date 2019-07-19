@@ -1,11 +1,10 @@
 package com.epam.tat21.crypto.ui.pages;
 
+import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.epam.tat21.crypto.ui.businessObjects.Coin;
 
 public class AddCoinForm extends HeaderPage {
 
@@ -18,7 +17,7 @@ public class AddCoinForm extends HeaderPage {
     @FindBy(xpath = "//input[@name='buyPrice']")
     private WebElement buyPriceField;
 
-    @FindBy(xpath = "//span[@class='ng-scope' and contains(text(), 'Add To Portfolio')]")
+    @FindBy(xpath = "//span[@class='ng-scope' and contains(text(), 'Add To Portfolio')]/..")
     private WebElement addPortfolioButton;
 
     @FindBy(className = "md-autocomplete-suggestions autocomplete-custom-template")
@@ -26,12 +25,12 @@ public class AddCoinForm extends HeaderPage {
 
     @FindBy(xpath = "//ul[@class='md-autocomplete-suggestions autocomplete-custom-template']/li[1]")
     private WebElement firstCoinInDropdown;
-    
+
     @FindBy(xpath = "//span[contains(text(), 'Update')]")
-	private WebElement buttonUpdateCoin;
-    
+    private WebElement buttonUpdateCoin;
+
     @FindBy(xpath = "//span[contains(text(), 'Delete')]")
-	private WebElement buttonDeleteCoin;
+    private WebElement buttonDeleteCoin;
 
     public AddCoinForm(WebDriver driver) {
         super(driver);
@@ -79,19 +78,19 @@ public class AddCoinForm extends HeaderPage {
         addPortfolioButton.click();
         return new PortfolioPage(driver);
     }
-    
+
     public PortfolioPage editAmountOfCoin(String amount) {
-		waitForElementVisible(amountField);
-		amountField.clear();
-		amountField.sendKeys(amount);
-		waitForElementClickable(buttonUpdateCoin);
-		buttonUpdateCoin.click();
-		return new PortfolioPage(driver);
-	}
-    
+        waitForElementVisible(amountField);
+        amountField.clear();
+        amountField.sendKeys(amount);
+        waitForElementClickable(buttonUpdateCoin);
+        buttonUpdateCoin.click();
+        return new PortfolioPage(driver);
+    }
+
     public PortfolioPage deleteCoinFromPortfolio() {
-		waitForElementClickable(buttonDeleteCoin);
-		buttonDeleteCoin.click();
-		return new PortfolioPage(driver);
-	}
+        waitForElementClickable(buttonDeleteCoin);
+        buttonDeleteCoin.click();
+        return new PortfolioPage(driver);
+    }
 }
