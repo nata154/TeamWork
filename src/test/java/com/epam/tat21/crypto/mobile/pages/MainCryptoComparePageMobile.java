@@ -12,10 +12,10 @@ public class MainCryptoComparePageMobile extends BasePageMobile {
         super(driver);
     }
 
-    public MainCryptoComparePageMobile clickUserIcon() {
+    public UserAccountPageMobile clickUserAccountIcon() {
         List<MobileElement> userImage = driver.findElements(By.className("android.view.ViewGroup"));
-        userImage.get(0).click();
-        return this;
+        userImage.get(4).click();
+        return new UserAccountPageMobile(driver);
     }
 }
 
