@@ -16,10 +16,10 @@ public class LoginPageMobile extends BasePageMobile{
     private WebElement loginFunction;
 
     @FindBy(xpath = "//android.widget.EditText[@text='Your e-mail']")
-    private WebElement loginFieldName;
+    private WebElement whileLoginFieldName;
 
     @FindBy(xpath = "//android.widget.EditText[@text='Password']")
-    private WebElement loginFieldPassword;
+    private WebElement whileLoginFieldPassword;
 
     public LoginPageMobile(AppiumDriver<MobileElement> driver) {
         super(driver);
@@ -37,10 +37,10 @@ public class LoginPageMobile extends BasePageMobile{
     }
 
     public LoginPageMobile fillLoginForm(User user) {
-        loginFieldName.click();
-        loginFieldName.sendKeys(user.getUserName());
-        loginFieldPassword.click();
-        loginFieldPassword.sendKeys(user.getUserPassword());
+        whileLoginFieldName.click();
+        whileLoginFieldName.sendKeys(user.getUserName());
+        whileLoginFieldPassword.click();
+        whileLoginFieldPassword.sendKeys(user.getUserPassword());
         return this;
     }
 
@@ -57,5 +57,13 @@ public class LoginPageMobile extends BasePageMobile{
         fillLoginForm(user);
         clickLoginButton();
         return new MainCryptoComparePageMobile(driver);
+    }
+
+    public boolean isFieldPasswordVisible() {
+        boolean fieldPassword = false;
+        if (whileLoginFieldPassword.isDisplayed()) {
+            fieldPassword = true;
+        }
+        return fieldPassword;
     }
 }
