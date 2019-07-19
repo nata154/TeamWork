@@ -43,8 +43,15 @@ public class MobSteps {
                 .login(user);
     }
 
-    public MainCryptoComparePageMobile clickUserAccount() {
+    public MainCryptoComparePageMobile clickUserAccountAndLogOut() {
         return new MainCryptoComparePageMobile(driver)
-                .clickUserIcon();
+                .clickUserAccountIcon()
+                .clickLogOutButton();
     }
+
+    public boolean checkLogout() {
+        return new LoginPageMobile(driver).isFieldPasswordVisible();
+    }
+
+
 }
