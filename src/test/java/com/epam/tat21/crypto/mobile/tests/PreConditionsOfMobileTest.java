@@ -12,7 +12,6 @@ public class PreConditionsOfMobileTest {
     public void setUp() {
         mobSteps = new MobSteps();
         mobSteps.startDevice();
-        mobSteps.previewApp();
     }
 
     @AfterSuite
