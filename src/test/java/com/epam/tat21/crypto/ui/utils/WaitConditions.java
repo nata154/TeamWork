@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitConditions {
 
-    public WaitConditions() {
+    private WaitConditions() {
     }
 
     public static void waitForVisibilityOfAllElementsByXpath(WebDriver driver, String xPath, int timeoutInSeconds) {
@@ -22,4 +22,17 @@ public class WaitConditions {
         new WebDriverWait(driver, 5).until(ExpectedConditions
                 .attributeToBe(element, attribute, valueOfAttribute));
     }
+
+    public static void waitForVisibilityOfElement(WebElement element, WebDriver driver, int timeoutInSeconds) {
+        new WebDriverWait(driver, timeoutInSeconds)
+                .until(ExpectedConditions
+                        .visibilityOf(element));
+    }
+
+    public static void waitForClickableOfElement(WebElement element, WebDriver driver, int timeoutInSeconds) {
+        new WebDriverWait(driver, timeoutInSeconds)
+                .until(ExpectedConditions
+                        .elementToBeClickable(element));
+    }
+
 }

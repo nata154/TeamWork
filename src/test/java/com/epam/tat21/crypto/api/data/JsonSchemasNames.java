@@ -4,7 +4,8 @@ public enum JsonSchemasNames {
 
     LATEST_NEWS_SCHEMA("latestNewsSchema.json"),
     FEEDS_SCHEMA("newsFeedJsonSchema.json"),
-    MULTI_PRICE_SCHEMA("multiPriceJsonSchema.json");
+    MULTI_PRICE_SCHEMA("multiPriceJsonSchema.json"),
+    ALL_COINLIST_SCHEMA("allCoinlistJsonSchema.json");
 
     private String schemaName;
 
