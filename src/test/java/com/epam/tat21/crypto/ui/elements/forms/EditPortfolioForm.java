@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.ui.elements.forms;
 
+import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
@@ -15,10 +16,10 @@ public class EditPortfolioForm extends HtmlElement {
     private WebElement inputPortfolioName;
 
     @FindBy(xpath = "//span[contains(text(), 'Update')]")
-    private WebElement updatePortfolioButton;
+    private BaseButton updatePortfolioButton;
 
     @FindBy(xpath = "//span[contains(text(), 'Delete')]")
-    private WebElement deletePortfolioButton;
+    private BaseButton deletePortfolioButton;
 
     public void changePortfolioName(WebDriver driver, String name) {
         WaitConditions.waitForVisibilityOfElement(inputPortfolioName, driver, 5);

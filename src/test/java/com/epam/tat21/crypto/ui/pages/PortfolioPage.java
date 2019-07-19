@@ -1,7 +1,7 @@
 package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.businessObjects.PortfolioItem;
-import com.epam.tat21.crypto.ui.elements.buttons.AddPortfolioButton;
+import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.elements.forms.AddPortfolioForm;
 import com.epam.tat21.crypto.ui.elements.forms.EditPortfolioForm;
 import com.epam.tat21.crypto.ui.elements.toolbars.PortfolioToolbar;
@@ -24,10 +24,12 @@ public class PortfolioPage extends HeaderPage {
     private static final String PORTFOLIO_ITEM_LINK_LOCATOR = "//md-tab-item";
     private static final String POPUP_PORTFOLIO_CREATED = "//div[@class='toast-body ng-binding']";
 
-    private AddPortfolioButton addPortfolioButton;
     private AddPortfolioForm addPortfolioForm;
     private EditPortfolioForm editPortfolioForm;
     private PortfolioToolbar portfolioToolbar;
+
+    @FindBy(xpath = "//button[@ng-click='addPortfolioDialog()']")
+    private BaseButton addPortfolioButton;
 
     @FindBy(xpath = "//md-tab-content[contains(@class,'active')]//button[@ng-click='editPortfolioMemberDialog(portfolioMember)' and @uib-tooltip='Edit or delete']")
     private WebElement buttonEditOrDeleteCoin;

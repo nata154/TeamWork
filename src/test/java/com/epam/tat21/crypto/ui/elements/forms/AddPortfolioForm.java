@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.ui.elements.forms;
 
+import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.elements.menus.MdSelectDropdown;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
@@ -23,7 +24,7 @@ public class AddPortfolioForm extends HtmlElement {
     private WebElement textAreaDescription;
 
     @FindBy(xpath = "//span[contains(text(), 'Create')]")
-    private WebElement createButton;
+    private BaseButton createButton;
 
 
     public void selectCurrency(WebDriver driver, String currencyAbbreviation){
