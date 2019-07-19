@@ -17,7 +17,7 @@ public class AddCoinForm extends HeaderPage {
     @FindBy(xpath = "//input[@name='buyPrice']")
     private WebElement buyPriceField;
 
-    @FindBy(xpath = "//span[@class='ng-scope' and contains(text(), 'Add To Portfolio')]/..")
+    @FindBy(xpath = "//span[@class='ng-scope' and contains(text(), 'Add To Portfolio')]")
     private WebElement addPortfolioButton;
 
     @FindBy(className = "md-autocomplete-suggestions autocomplete-custom-template")
