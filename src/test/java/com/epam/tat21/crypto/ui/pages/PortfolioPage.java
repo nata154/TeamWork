@@ -1,6 +1,10 @@
 package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.businessObjects.PortfolioItem;
+import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
+import com.epam.tat21.crypto.ui.elements.forms.AddPortfolioForm;
+import com.epam.tat21.crypto.ui.elements.forms.EditPortfolioForm;
+import com.epam.tat21.crypto.ui.elements.toolbars.PortfolioToolbar;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
@@ -20,17 +24,12 @@ public class PortfolioPage extends HeaderPage {
     private static final String PORTFOLIO_ITEM_LINK_LOCATOR = "//md-tab-item";
     private static final String POPUP_PORTFOLIO_CREATED = "//div[@class='toast-body ng-binding']";
 
+    private AddPortfolioForm addPortfolioForm;
+    private EditPortfolioForm editPortfolioForm;
+    private PortfolioToolbar portfolioToolbar;
+
     @FindBy(xpath = "//button[@ng-click='addPortfolioDialog()']")
-    private WebElement buttonAddPortfolio;
-
-    @FindBy(xpath = "(//md-tab-content[contains(@class,'active')]//span[contains(text(), 'Coin')])[1]")
-    private WebElement addCoinToPortfolioButton;
-
-    @FindBy(xpath = "//div[@class='list-table list-portfolio padding-5']")
-    private WebElement tableOfCoinsInPortfolio;
-
-    @FindBy(xpath = "//md-tab-content[contains(@class,'active')]//button[@ng-click='editPortfolioDialog()']")
-    private WebElement buttonEditOrDelete;
+    private BaseButton addPortfolioButton;
 
     @FindBy(xpath = "//md-tab-content[contains(@class,'active')]//button[@ng-click='editPortfolioMemberDialog(portfolioMember)' and @uib-tooltip='Edit or delete']")
     private WebElement buttonEditOrDeleteCoin;
@@ -74,17 +73,16 @@ public class PortfolioPage extends HeaderPage {
         if (driver.findElements(By.xpath(POPUP_PORTFOLIO_CREATED)).size() == 0) {
             WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, POPUP_PORTFOLIO_CREATED, 5);
         }
-        waitForElementClickable(addCoinToPortfolioButton);
-        addCoinToPortfolioButton.click();
+        portfolioToolbar.clickAddCoinButton(driver);
         MyLogger.info("AddCoinForm was appeared");
         return new AddCoinForm(driver);
     }
 
-    public AddPortfolioForm addPortfolioForm() {
-        waitForElementClickable(buttonAddPortfolio);
-        buttonAddPortfolio.click();
+    public PortfolioPage getAddPortfolioForm() {
+        waitForElementClickable(addPortfolioButton);
+        addPortfolioButton.click();
         MyLogger.info("AddPortfolioForm was appeared");
-        return new AddPortfolioForm(driver);
+        return this;
     }
 
     public List<WebElement> getPortfolioItemLinkList() {
@@ -104,11 +102,10 @@ public class PortfolioPage extends HeaderPage {
         return portfolio;
     }
 
-    public AddPortfolioForm getEditPortfolioForm() {
-        waitForElementClickable(buttonEditOrDelete);
-        buttonEditOrDelete.click();
+    public PortfolioPage getEditPortfolioForm() {
+        portfolioToolbar.clickEditPortfolioButton(driver);
         MyLogger.info("EditPortfolioForm was appeared");
-        return new AddPortfolioForm(driver);
+        return this;
     }
 
     public AddCoinForm getEditCoinForm() {
@@ -151,5 +148,24 @@ public class PortfolioPage extends HeaderPage {
     public boolean isCoinDelete() {
         waitForElementVisible(popupSuccessfulCoinDeleting);
         return popupSuccessfulCoinDeleting.isDisplayed();
+    }
+
+    public PortfolioPage createNewPortfolio(String name, String currency, String description) {
+        addPortfolioForm.inputPortfolioName(driver, name);
+        addPortfolioForm.selectCurrency(driver, currency);
+        addPortfolioForm.inputDescription(driver, description);
+        addPortfolioForm.clickCreateButton(driver);
+        return this;
+    }
+
+    public PortfolioPage editUserPortfolio(String name) {
+        editPortfolioForm.changePortfolioName(driver, name);
+        editPortfolioForm.clickUpdatePortfolioButton(driver);
+        return this;
+    }
+
+    public PortfolioPage deleteUserPortfolio() {
+        editPortfolioForm.clickDeletePortfolioButton(driver);
+        return this;
     }
 }

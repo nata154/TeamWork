@@ -135,7 +135,7 @@ public class Steps {
     public PortfolioPage createUserPortfolio(String name, String currency, String description) {
         return portfolioPage = new HeaderPage(driver).
                 goToMyPortfolioFromPortfolioTab().
-                addPortfolioForm().
+                getAddPortfolioForm().
                 createNewPortfolio(name, currency, description);
     }
 
