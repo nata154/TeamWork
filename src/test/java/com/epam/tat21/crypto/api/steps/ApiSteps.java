@@ -1,25 +1,30 @@
 package com.epam.tat21.crypto.api.steps;
 
-import com.epam.tat21.crypto.api.model.*;
-import com.epam.tat21.crypto.api.utils.ResponseUtils;
-import com.epam.tat21.crypto.ui.businessObjects.Coin;
-import com.epam.tat21.crypto.ui.businessObjects.Currency;
-import com.epam.tat21.crypto.ui.service.TestDataReader;
-import com.epam.tat21.crypto.ui.utils.MyLogger;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
+import com.epam.tat21.crypto.api.model.FeedItem;
+import com.epam.tat21.crypto.api.model.LatestNews;
+import com.epam.tat21.crypto.api.model.MultiPrice;
+import com.epam.tat21.crypto.api.model.NewsItem;
+import com.epam.tat21.crypto.api.model.ResponceCoinWrapper;
+import com.epam.tat21.crypto.api.utils.ResponseUtils;
+import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.businessObjects.Currency;
+import com.epam.tat21.crypto.ui.service.TestDataReader;
+import com.epam.tat21.crypto.ui.utils.MyLogger;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 public class ApiSteps {
 
     private static final String NEWS_RELATIVE_PATH = "v2/news/";
     private static final String FEEDS_RELATIVE_PATH = "news/feeds";
-    private static final String COIN_LIST_RELATIVE_PATH = "/all/coinlist";
+    private static final String COIN_LIST_RELATIVE_PATH = "all/coinlist";
     private static final String MULTIPRICE_RELATIVE_PATH = "pricemulti";
 
     public ApiSteps() {
