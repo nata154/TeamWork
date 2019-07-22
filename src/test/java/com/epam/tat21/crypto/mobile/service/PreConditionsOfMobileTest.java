@@ -11,7 +11,7 @@ public class PreConditionsOfMobileTest {
     @BeforeSuite
     public void setUp() {
         mobSteps = new MobSteps();
-        mobSteps.startDevice();
+//        mobSteps.startDevice();
     }
 
     @AfterSuite
