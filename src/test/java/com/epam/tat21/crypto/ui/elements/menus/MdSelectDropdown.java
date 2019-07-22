@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.ui.elements.menus;
 
+import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,7 +16,8 @@ public class MdSelectDropdown extends TypifiedElement {
         super(wrappedElement);
     }
 
-    public void selectByValue(String value, WebDriver driver) {
+    public void selectByValue(String value) {
+        WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
         WaitConditions.waitForClickableOfElement(getWrappedElement(), driver, 5);
         getWrappedElement().click();
         List<WebElement> options = getWrappedElement().findElements(By.xpath(
