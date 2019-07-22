@@ -1,8 +1,6 @@
 package com.epam.tat21.crypto.mobile.steps;
 
-import com.epam.tat21.crypto.mobile.driver.MobileDriverFactory;
-import com.epam.tat21.crypto.mobile.driver.MobileDriverForFarm;
-import com.epam.tat21.crypto.mobile.driver.MobileLocalDriver;
+import com.epam.tat21.crypto.mobile.driver.MobileDriverManager;
 import com.epam.tat21.crypto.mobile.pages.LoginPageMobile;
 import com.epam.tat21.crypto.mobile.pages.MainCryptoComparePageMobile;
 import com.epam.tat21.crypto.ui.businessObjects.User;
@@ -14,26 +12,12 @@ public class MobSteps {
 
     private AppiumDriver<MobileElement> driver;
 
-    public MobileDriverFactory getMobileDriverFactory() {
-        if (driver == null) {
-            switch (System.getProperty("mobile")) {
-                case "local":
-                    return new MobileLocalDriver();
-                case "farm":
-                    return new MobileDriverForFarm();
-                default:
-                    return new MobileLocalDriver();
-            }
-        }
-        return new MobileLocalDriver();
-    }
-
-    public void startDevice() {
-        driver = getMobileDriverFactory().getDriver();
+    public MobSteps() {
+        this.driver = MobileDriverManager.getMobileDriverFactory().getDriver();
     }
 
     public void closeDevice() {
-        getMobileDriverFactory().closeDriver();
+        MobileDriverManager.getMobileDriverFactory().closeDriver();
     }
 
     //@Given("I login user")
