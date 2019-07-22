@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.mobile.tests;
 
+import com.epam.tat21.crypto.mobile.service.PreConditionsOfMobileTest;
 import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
