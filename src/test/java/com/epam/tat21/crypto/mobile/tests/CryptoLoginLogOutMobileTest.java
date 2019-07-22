@@ -11,6 +11,6 @@ public class CryptoLoginLogOutMobileTest extends PreConditionsOfMobileTest {
     public void checkUpdatingUserAccountTest() {
         mobSteps.loginUser();
         mobSteps.clickUserAccountAndLogOut();
-        Assert.assertTrue(mobSteps.checkLogout());
+        Assert.assertTrue(mobSteps.checkLogout(), "Fault while log out user.");
     }
 }

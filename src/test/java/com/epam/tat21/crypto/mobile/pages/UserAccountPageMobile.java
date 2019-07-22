@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.mobile.pages;
 
+import com.epam.tat21.crypto.ui.utils.MyLogger;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class UserAccountPageMobile extends BasePageMobile {
 
     public MainCryptoComparePageMobile clickLogOutButton() {
         logOutButton.click();
+        MyLogger.info("Log out button was clicked.");
         return new MainCryptoComparePageMobile(driver);
     }
 }

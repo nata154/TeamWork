@@ -53,5 +53,4 @@ public class MobSteps {
         return new LoginPageMobile(driver).isFieldPasswordVisible();
     }
 
-
 }
