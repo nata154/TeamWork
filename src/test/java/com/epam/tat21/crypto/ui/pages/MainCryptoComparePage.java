@@ -1,27 +1,18 @@
 package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.businessObjects.User;
+import com.epam.tat21.crypto.ui.elements.forms.LoginForm;
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
-import org.openqa.selenium.By;
+import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainCryptoComparePage extends HeaderPage {
+public class MainCryptoComparePage extends BasePage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl();
-
-    @FindBy(xpath = "//input[@name='email']")
-    private WebElement emailField;
-
-    @FindBy(xpath = "//input[@name='password']")
-    private WebElement passwordField;
-
-    @FindBy(xpath = "//button[@value='Login']")
-    private WebElement loginButton;
+    private LoginForm loginForm;
+    private HeaderMenu headerMenu;
 
     public MainCryptoComparePage(WebDriver driver) {
         super(driver);
@@ -30,32 +21,36 @@ public class MainCryptoComparePage extends HeaderPage {
     @Override
     public MainCryptoComparePage openPage() {
         driver.navigate().to(BASE_URL);
-
-
         MyLogger.info("MainCryptoComparePage was opened");
         return this;
     }
 
+    public LoginForm getLoginForm() {
+        return loginForm;
+    }
+
+    public HeaderMenu getHeaderMenu() {
+        return headerMenu;
+    }
+
     public MainCryptoComparePage fillLoginForm(User user) {
-        waitForElementVisible(emailField);
-        emailField.sendKeys(user.getUserName());
+        loginForm.inputEmailInItsField(user.getUserName());
         MyLogger.info("Email on login form was filled");
-        passwordField.sendKeys(user.getUserPassword());
-        MyLogger.info("Password  on login form was filled");
+        loginForm.inputPasswordInItsField(user.getUserPassword());
+        MyLogger.info("Password on login form was filled");
         return this;
     }
 
     public MainCryptoComparePage clickLoginButton() {
-        waitForElementVisible(loginButton);
-        loginButton.click();
+        loginForm.clickLoginButton();
         MyLogger.info("Login button was pressed");
         return this;
     }
 
     public MainCryptoComparePage login(User user) {
-        goToLoginForm();
+        headerMenu.clickLogInLink();
         fillLoginForm(user).clickLoginButton();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@modal-render]")));
+        WaitConditions.waitForInvisibilityOfAllElementsByXpath(driver, "//div[@modal-render]");
         return this;
     }
 
