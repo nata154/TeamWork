@@ -18,7 +18,7 @@ public class MdSelectDropdown extends TypifiedElement {
 
     public void selectByValue(String value) {
         WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
-        WaitConditions.waitForClickableOfElement(getWrappedElement(), driver, 5);
+        WaitConditions.waitForClickableOfElement(getWrappedElement(), driver);
         getWrappedElement().click();
         List<WebElement> options = getWrappedElement().findElements(By.xpath(
                 "//md-option[@value = '" + value + "']"));
@@ -26,7 +26,7 @@ public class MdSelectDropdown extends TypifiedElement {
         boolean matched = false;
         for (WebElement option : options) {
             if (option.isDisplayed()) {
-                WaitConditions.waitForClickableOfElement(option, driver, 5);
+                WaitConditions.waitForClickableOfElement(option, driver);
                 option.click();
                 matched = true;
             }
