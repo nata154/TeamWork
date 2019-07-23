@@ -24,18 +24,18 @@ public class EditPortfolioForm extends HtmlElement {
     private BaseButton deletePortfolioButton;
 
     public void changePortfolioName(String name) {
-        WaitConditions.waitForVisibilityOfElement(inputPortfolioName, driver, 5);
+        WaitConditions.waitForVisibilityOfElement(inputPortfolioName, driver);
         MyLogger.info("Changing the portfolio name");
         inputPortfolioName.inputText(name);
     }
 
     public void clickUpdatePortfolioButton() {
-        WaitConditions.waitForClickableOfElement(updatePortfolioButton, driver, 5);
+        WaitConditions.waitForClickableOfElement(updatePortfolioButton, driver);
         updatePortfolioButton.click();
     }
 
     public void clickDeletePortfolioButton() {
-        WaitConditions.waitForClickableOfElement(deletePortfolioButton, driver, 5);
+        WaitConditions.waitForClickableOfElement(deletePortfolioButton, driver);
         deletePortfolioButton.click();
     }
 }

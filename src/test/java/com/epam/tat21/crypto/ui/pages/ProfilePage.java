@@ -1,14 +1,16 @@
 package com.epam.tat21.crypto.ui.pages;
 
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProfilePage extends HeaderPage {
+public class ProfilePage extends BasePage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "profile/" + TestDataReader.getProfileName() + "/";
+    private HeaderMenu headerMenu;
 
     @FindBy(xpath = "//a[@href='#/activity']")
     private WebElement activityTabInUserProfile;

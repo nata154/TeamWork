@@ -23,7 +23,7 @@ public class BaseInput extends TypifiedElement {
 
     private void assureInputedText(String expectedText, WebElement element, WebDriver driver) {
         if (getInputedText(element,driver).equals(expectedText)) {
-            MyLogger.info("Inputed text in " + getName() + " is correct and contains all letters.");
+            MyLogger.info("Inputed text in " + getName() + " is correct and contains all symbols.");
         } else {
             MyLogger.info("Wrong inputed text. Trying to reinput it.");
             while (!readValueForElement(element, driver).equals(expectedText)) {
@@ -42,7 +42,7 @@ public class BaseInput extends TypifiedElement {
     }
 
     private String getInputedText(WebElement element, WebDriver driver) {
-        WaitConditions.waitForVisibilityOfElement(element, driver, 5);
+        WaitConditions.waitForVisibilityOfElement(element, driver);
         return readValueForElement(element, driver);
     }
 

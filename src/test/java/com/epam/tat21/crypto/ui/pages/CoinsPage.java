@@ -2,6 +2,7 @@ package com.epam.tat21.crypto.ui.pages;
 
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Currency;
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.CoinInformationParser;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
@@ -15,12 +16,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CoinsPage extends HeaderPage {
+public class CoinsPage extends BasePage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "coins/list/";
-
     private static final String CURRENCY_LINE_XPATH = "//ul[@class='nav nav-tabs nav-coinss']//a[contains(text(), '";
     private static final String COIN_IN_COLUMN_XPATH = "//tr[@class='ng-scope']/td[@data-href='/coins/";
+    private HeaderMenu headerMenu;
 
     @FindBy(xpath = "//span[@class='mobile-name ng-binding' and contains(text(), 'BTC')]/..")
     private WebElement bitcoinLineAtPage;

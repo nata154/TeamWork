@@ -1,11 +1,17 @@
 package com.epam.tat21.crypto.ui.pages;
 
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
+import com.epam.tat21.crypto.ui.service.TestDataReader;
+import com.epam.tat21.crypto.ui.utils.MyLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class UserAccountPage extends HeaderPage {
+public class UserAccountPage extends BasePage {
+
+    private static final String BASE_URL = TestDataReader.getApplicationUrl() + "cryptopian/general";
+    private HeaderMenu headerMenu;
 
     @FindBy(xpath = "//span[contains(text(), 'General')]")
     private WebElement tabGeneral;
@@ -35,6 +41,13 @@ public class UserAccountPage extends HeaderPage {
 
     @FindBy(xpath = "//div[@class='toast-notifications']//div[@ng-bind-html='notification.Message']")
     private WebElement popupWindowAfterSavingUpdates;
+
+    @Override
+    public BasePage openPage() {
+        driver.navigate().to(BASE_URL);
+        MyLogger.info("UserAccountPage was opened");
+        return this;
+    }
 
     public UserAccountPage(WebDriver driver) {
         super(driver);
