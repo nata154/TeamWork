@@ -5,6 +5,7 @@ import com.epam.tat21.crypto.mobile.pages.LoginPageMobile;
 import com.epam.tat21.crypto.mobile.pages.MainCryptoComparePageMobile;
 import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.service.UserCreator;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -24,7 +25,7 @@ public class MobSteps {
         driver = MobileDriverManager.getMobileDriverFactory().getDriver();
     }
 
-    @Then("^Close driver$")
+    @And("^Close driver$")
     public void closeDevice() {
         MobileDriverManager.getMobileDriverFactory().closeDriver();
     }
