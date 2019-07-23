@@ -1,4 +1,4 @@
-package com.epam.tat21.crypto.mobile.tests;
+package com.epam.tat21.crypto.mobile.service;
 
 import com.epam.tat21.crypto.mobile.steps.MobSteps;
 import org.testng.annotations.AfterSuite;
@@ -11,8 +11,6 @@ public class PreConditionsOfMobileTest {
     @BeforeSuite
     public void setUp() {
         mobSteps = new MobSteps();
-        mobSteps.startDevice();
-        mobSteps.previewApp();
     }
 
     @AfterSuite
