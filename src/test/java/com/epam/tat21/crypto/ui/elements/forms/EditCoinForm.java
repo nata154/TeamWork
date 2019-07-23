@@ -29,22 +29,22 @@ public class EditCoinForm extends HtmlElement {
     private BaseButton deleteCoinButton;
 
     public void inputAmountOfCoinInField(String amount) {
-        WaitConditions.waitForClickableOfElement(amountField, driver, 5);
+        WaitConditions.waitForClickableOfElement(amountField, driver);
         amountField.inputText(amount);
     }
 
     public void inputBuyPriceOfCoinInField(String price) {
-        WaitConditions.waitForClickableOfElement(buyPriceField, driver, 5);
+        WaitConditions.waitForClickableOfElement(buyPriceField, driver);
         buyPriceField.inputText(price);
     }
 
     public void clickUpdateCoinButton () {
-        WaitConditions.waitForClickableOfElement(updateCoinButton, driver, 5);
+        WaitConditions.waitForClickableOfElement(updateCoinButton, driver);
         updateCoinButton.click();
     }
 
     public void clickDeleteCoinButton () {
-        WaitConditions.waitForClickableOfElement(deleteCoinButton, driver, 5);
+        WaitConditions.waitForClickableOfElement(deleteCoinButton, driver);
         deleteCoinButton.click();
     }
 }
