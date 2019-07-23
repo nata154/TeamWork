@@ -142,7 +142,7 @@ public class Steps {
     @Then("([^\"]*) is Portfolio present")
     public boolean isPortfolioPresent(String name) {
         return new PortfolioPage(driver).
-                getElementPortfolio(name).
+                getPortfolioItemByName(name).
                 isEnabled();
     }
 

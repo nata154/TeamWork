@@ -35,4 +35,9 @@ public class WaitConditions {
                         .elementToBeClickable(element));
     }
 
+    public static void waitForInvisibilityOfAllElementsByXpath(WebDriver driver, String xPath, int timeoutInSeconds) {
+        new WebDriverWait(driver, timeoutInSeconds)
+                .until(ExpectedConditions
+                        .invisibilityOfElementLocated(By.xpath(xPath)));
+    }
 }

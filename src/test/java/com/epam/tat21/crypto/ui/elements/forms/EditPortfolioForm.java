@@ -1,19 +1,21 @@
 package com.epam.tat21.crypto.ui.elements.forms;
 
+import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
+import com.epam.tat21.crypto.ui.elements.inputs.BaseInput;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
 @FindBy(xpath = "//form[@name='newPortfolioForm']")
 public class EditPortfolioForm extends HtmlElement {
 
+    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+
     @FindBy(xpath = "//input[@ng-model='newPortfolio.Name']")
-    private WebElement inputPortfolioName;
+    private BaseInput inputPortfolioName;
 
     @FindBy(xpath = "//span[contains(text(), 'Update')]")
     private BaseButton updatePortfolioButton;
@@ -21,19 +23,18 @@ public class EditPortfolioForm extends HtmlElement {
     @FindBy(xpath = "//span[contains(text(), 'Delete')]")
     private BaseButton deletePortfolioButton;
 
-    public void changePortfolioName(WebDriver driver, String name) {
+    public void changePortfolioName(String name) {
         WaitConditions.waitForVisibilityOfElement(inputPortfolioName, driver, 5);
         MyLogger.info("Changing the portfolio name");
-        Actions action = new Actions(driver);
-        action.sendKeys(inputPortfolioName, name).build().perform();
+        inputPortfolioName.inputText(name);
     }
 
-    public void clickUpdatePortfolioButton(WebDriver driver) {
+    public void clickUpdatePortfolioButton() {
         WaitConditions.waitForClickableOfElement(updatePortfolioButton, driver, 5);
         updatePortfolioButton.click();
     }
 
-    public void clickDeletePortfolioButton(WebDriver driver) {
+    public void clickDeletePortfolioButton() {
         WaitConditions.waitForClickableOfElement(deletePortfolioButton, driver, 5);
         deletePortfolioButton.click();
     }
