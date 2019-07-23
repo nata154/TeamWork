@@ -29,24 +29,24 @@ public class AddPortfolioForm extends HtmlElement {
 
 
     public void selectCurrency(String currencyAbbreviation) {
-        WaitConditions.waitForClickableOfElement(currencyDropdown, driver, 5);
+        WaitConditions.waitForClickableOfElement(currencyDropdown, driver);
         currencyDropdown.selectByValue(currencyAbbreviation);
     }
 
     public void inputPortfolioName(String name) {
-        WaitConditions.waitForVisibilityOfElement(inputPortfolioName, driver, 5);
+        WaitConditions.waitForVisibilityOfElement(inputPortfolioName, driver);
         MyLogger.info("Input the portfolio name");
         inputPortfolioName.inputText(name);
     }
 
     public void inputDescription(String text) {
-        WaitConditions.waitForVisibilityOfElement(textAreaDescription, driver, 5);
+        WaitConditions.waitForVisibilityOfElement(textAreaDescription, driver);
         MyLogger.info("Input the portfolio description");
         textAreaDescription.inputText(text);
     }
 
     public void clickCreateButton() {
-        WaitConditions.waitForClickableOfElement(createButton, driver, 5);
+        WaitConditions.waitForClickableOfElement(createButton, driver);
         createButton.click();
     }
 

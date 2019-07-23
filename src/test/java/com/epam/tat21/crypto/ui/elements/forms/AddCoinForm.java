@@ -35,24 +35,24 @@ public class AddCoinForm extends HtmlElement {
     }
 
     public void inputCoinInSearchField(Coin coin) {
-        WaitConditions.waitForClickableOfElement(searchCoinField, driver, 5);
+        WaitConditions.waitForClickableOfElement(searchCoinField, driver);
         searchCoinField.inputText(coin.getNameOfCoin());
-        WaitConditions.waitForVisibilityOfElement(coinSuggestionsDropdown, driver, 5);
+        WaitConditions.waitForVisibilityOfElement(coinSuggestionsDropdown, driver);
         selectCoinInDropdownByIndex(0);
     }
 
     public void inputAmountOfCoinInField(String amount) {
-        WaitConditions.waitForClickableOfElement(amountField, driver, 5);
+        WaitConditions.waitForClickableOfElement(amountField, driver);
         amountField.inputText(amount);
     }
 
     public void inputBuyPriceOfCoinInField(String price) {
-        WaitConditions.waitForClickableOfElement(buyPriceField, driver, 5);
+        WaitConditions.waitForClickableOfElement(buyPriceField, driver);
         buyPriceField.inputText(price);
     }
 
     public void clickAddToPortfolioButton() {
-        WaitConditions.waitForClickableOfElement(addToPortfolioButton,driver, 5);
+        WaitConditions.waitForClickableOfElement(addToPortfolioButton, driver);
         addToPortfolioButton.click();
     }
 }

@@ -23,17 +23,17 @@ public class PortfolioToolbar extends HtmlElement {
     private BaseButton editPortfolioButton;
 
     public void selectCurrency(String currencyAbbreviation) {
-        WaitConditions.waitForClickableOfElement(currencyDropdown, driver, 5);
+        WaitConditions.waitForClickableOfElement(currencyDropdown, driver);
         currencyDropdown.selectByValue(currencyAbbreviation);
     }
 
     public void clickAddCoinButton() {
-        WaitConditions.waitForClickableOfElement(addCoinButton, driver, 5);
+        WaitConditions.waitForClickableOfElement(addCoinButton, driver);
         addCoinButton.click();
     }
 
     public void clickEditPortfolioButton() {
-        WaitConditions.waitForClickableOfElement(editPortfolioButton, driver, 10);
+        WaitConditions.waitForClickableOfElement(editPortfolioButton, driver);
         editPortfolioButton.click();
     }
 }

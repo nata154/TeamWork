@@ -1,31 +1,23 @@
 package com.epam.tat21.crypto.ui.steps;
 
-import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
-
-import java.util.List;
-import java.util.stream.IntStream;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.driver.DriverManager;
-import com.epam.tat21.crypto.ui.pages.CoinsPage;
-import com.epam.tat21.crypto.ui.pages.ExchangesPage;
-import com.epam.tat21.crypto.ui.pages.HeaderPage;
-import com.epam.tat21.crypto.ui.pages.MainCryptoComparePage;
-import com.epam.tat21.crypto.ui.pages.NewsPage;
-import com.epam.tat21.crypto.ui.pages.PortfolioPage;
-import com.epam.tat21.crypto.ui.pages.UserAccountPage;
+import com.epam.tat21.crypto.ui.pages.*;
 import com.epam.tat21.crypto.ui.service.UserCreator;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
-
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.stream.IntStream;
+
+import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 
 public class Steps {
 
@@ -52,7 +44,7 @@ public class Steps {
 
     @When("I go to User Account profile")
     public UserAccountPage goToUserAccountProfile() {
-        new HeaderPage(driver).getDropdownUserMenuInHeader().clickAccountLine();
+        new MainCryptoComparePage(driver).getHeaderMenu().clickAccountLineInDropdown();
         return new UserAccountPage(driver).clickTabGeneral();
     }
 
@@ -133,7 +125,8 @@ public class Steps {
 
     @When("Create User Portfolio ([^\"]*) , ([^\"]*) , ([^\"]*)")
     public PortfolioPage createUserPortfolio(String name, String currency, String description) {
-        return portfolioPage = new HeaderPage(driver).
+        return portfolioPage = new MainCryptoComparePage(driver).
+                getHeaderMenu().
                 goToMyPortfolioFromPortfolioTab().
                 getAddPortfolioForm().
                 createNewPortfolio(name, currency, description);

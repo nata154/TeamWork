@@ -7,6 +7,7 @@ import com.epam.tat21.crypto.ui.elements.forms.AddCoinForm;
 import com.epam.tat21.crypto.ui.elements.forms.AddPortfolioForm;
 import com.epam.tat21.crypto.ui.elements.forms.EditCoinForm;
 import com.epam.tat21.crypto.ui.elements.forms.EditPortfolioForm;
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
 import com.epam.tat21.crypto.ui.elements.toolbars.PortfolioToolbar;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
@@ -19,7 +20,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 
-public class PortfolioPage extends HeaderPage {
+public class PortfolioPage extends BasePage {
 
     private static final String BASE_URL = TestDataReader.getApplicationUrl() + "portfolio/";
     private static final String PORTFOLIO_ITEM_LINK_LOCATOR = "//md-tab-item";
@@ -30,6 +31,7 @@ public class PortfolioPage extends HeaderPage {
     private PortfolioToolbar portfolioToolbar;
     private AddCoinForm addCoinForm;
     private EditCoinForm editCoinForm;
+    private HeaderMenu headerMenu;
 
     @FindBy(xpath = "//button[@ng-click='addPortfolioDialog()']")
     private BaseButton addPortfolioButton;
@@ -74,7 +76,7 @@ public class PortfolioPage extends HeaderPage {
 
     public PortfolioPage getAddCoinForm() {
         if (driver.findElements(By.xpath(POPUP_PORTFOLIO_CREATED)).size() == 0) {
-            WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, POPUP_PORTFOLIO_CREATED, 5);
+            WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, POPUP_PORTFOLIO_CREATED);
         }
         portfolioToolbar.clickAddCoinButton();
         MyLogger.info("AddCoinForm was appeared");
@@ -89,31 +91,30 @@ public class PortfolioPage extends HeaderPage {
     }
 
     public List<WebElement> getPortfolioItemLinkList() {
-        WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, PORTFOLIO_ITEM_LINK_LOCATOR, 5);
+        WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, PORTFOLIO_ITEM_LINK_LOCATOR);
         return driver.findElements(By.xpath(PORTFOLIO_ITEM_LINK_LOCATOR));
     }
 
     public PortfolioItem getPortfolioItemByIndex(int index) {
         getPortfolioItemLinkList().get(index).click();
-        return new PortfolioItem(driver);
+        return new PortfolioItem();
     }
 
     public WebElement getPortfolioItemByName(String name) {
-        String xpathForPortfolio = "//span[contains(text(), '" + name + "')]";
-        return getPortfolioItemLinkList().stream().findFirst()
-                .filter(portfolioLink -> portfolioLink.findElements(By.xpath(xpathForPortfolio)).size() != 0).get();
-
+        WaitConditions.waitForInvisibilityOfAllElementsByXpath(driver, DIALOG_CONTAINER_LOCATOR);
+        return getPortfolioItemLinkList().stream().
+                filter(portfolioLink -> portfolioLink.getText().equals(name)).findFirst().get();
     }
 
     public PortfolioPage getEditPortfolioForm() {
-        WaitConditions.waitForInvisibilityOfAllElementsByXpath(driver, DIALOG_CONTAINER_LOCATOR, 5);
+        WaitConditions.waitForInvisibilityOfAllElementsByXpath(driver, DIALOG_CONTAINER_LOCATOR);
         portfolioToolbar.clickEditPortfolioButton();
         MyLogger.info("EditPortfolioForm was appeared");
         return this;
     }
 
     public PortfolioPage getEditCoinForm() {
-        WaitConditions.waitForInvisibilityOfAllElementsByXpath(driver, DIALOG_CONTAINER_LOCATOR, 5);
+        WaitConditions.waitForInvisibilityOfAllElementsByXpath(driver, DIALOG_CONTAINER_LOCATOR);
         waitForElementClickable(buttonEditOrDeleteCoin);
         buttonEditOrDeleteCoin.click();
         MyLogger.info("EditCoinForm was appeared");
