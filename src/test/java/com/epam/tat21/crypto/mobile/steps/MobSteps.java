@@ -18,6 +18,7 @@ public class MobSteps {
 
     public MobSteps() {
         this.driver = MobileDriverManager.getMobileDriverFactory().getDriver();
+//        ServiceHooks sh = new ServiceHooks();
     }
 
     @Given("^Get driver$")
@@ -37,7 +38,7 @@ public class MobSteps {
                 .login(user);
     }
 
-    @When("^I click user account and log out$")
+    @And("^I click user account and log out$")
     public MainCryptoComparePageMobile clickUserAccountAndLogOut() {
         return new MainCryptoComparePageMobile(driver)
                 .clickUserAccountIcon()
