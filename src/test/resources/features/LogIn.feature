@@ -1,8 +1,5 @@
 Feature: LogIn
 
-#  Background:
-#    Given Get driver
-
   Scenario: LogIn with credentials
     When I login user in crypto application
     And I click user account and log out
