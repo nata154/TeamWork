@@ -27,6 +27,7 @@ public class MainCryptoComparePageMobile extends BasePageMobile {
 
     public PortfolioPageMobile clickPortfolioIcon() {
         portfolioIcon.click();
+        MyLogger.info("Portfolio icon was clicked");
         return new PortfolioPageMobile(driver);
     }
 }

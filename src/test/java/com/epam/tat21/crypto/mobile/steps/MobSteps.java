@@ -3,6 +3,7 @@ package com.epam.tat21.crypto.mobile.steps;
 import com.epam.tat21.crypto.mobile.driver.MobileDriverManager;
 import com.epam.tat21.crypto.mobile.pages.LoginPageMobile;
 import com.epam.tat21.crypto.mobile.pages.MainCryptoComparePageMobile;
+import com.epam.tat21.crypto.mobile.pages.PortfolioPageMobile;
 import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.service.UserCreator;
 import cucumber.api.java.en.Given;
@@ -43,5 +44,14 @@ public class MobSteps {
     }
 
     public void createUserPortfolio(String portfolioName, String currency, String description) {
+        new MainCryptoComparePageMobile(driver)
+                .clickPortfolioIcon()
+                .inputNewPortfolioInfo(portfolioName, currency, description)
+                .submitCreatingPortfolio();
+    }
+
+    public String getNameOfPortfolio() {
+        return new PortfolioPageMobile(driver)
+                .getCurrentPortfolioName();
     }
 }

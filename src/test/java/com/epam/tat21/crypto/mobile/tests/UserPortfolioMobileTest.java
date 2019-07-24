@@ -1,9 +1,9 @@
 package com.epam.tat21.crypto.mobile.tests;
 
-import com.epam.jira.JIRATestKey;
 import com.epam.tat21.crypto.mobile.service.PreConditionsOfMobileTest;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.utils.RandomString;
+import com.epam.testng.JIRATestKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -19,21 +19,21 @@ public class UserPortfolioMobileTest extends PreConditionsOfMobileTest {
         String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
         mobSteps.loginUser();
         mobSteps.createUserPortfolio(portfolioName, currency, description);
-        Assert.assertTrue(mobSteps.isPortfolioPresent(portfolioName));
+        Assert.assertEquals(mobSteps.getNameOfPortfolio(), portfolioName, "Wrong name of portfolio!");
     }
-
-    @JIRATestKey(key = "EPMFARMATS-9649")
-    @Test(dependsOnMethods = {"portfolioCreationTest"})
-    public void portfolioEditingTest() {
-        String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
-        mobSteps.changeUserPortfolioName(changedName);
-        Assert.assertTrue(mobSteps.isPortfolioPresent(changedName));
-    }
-
-    @JIRATestKey(key = "EPMFARMATS-9649")
-    @Test(dependsOnMethods = {"portfolioEditingTest"})
-    public void portfolioDeletingTest() {
-        mobSteps.deleteUserPortfolio();
-        Assert.assertTrue(mobSteps.isPortfolioDelete());
-    }
+//
+//    @JIRATestKey(key = "EPMFARMATS-9649")
+//    @Test(dependsOnMethods = {"portfolioCreationTest"})
+//    public void portfolioEditingTest() {
+//        String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+//        mobSteps.changeUserPortfolioName(changedName);
+//        Assert.assertTrue(mobSteps.isPortfolioPresent(changedName));
+//    }
+//
+//    @JIRATestKey(key = "EPMFARMATS-9649")
+//    @Test(dependsOnMethods = {"portfolioEditingTest"})
+//    public void portfolioDeletingTest() {
+//        mobSteps.deleteUserPortfolio();
+//        Assert.assertTrue(mobSteps.isPortfolioDelete());
+//    }
 }
