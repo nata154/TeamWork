@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
@@ -167,18 +168,27 @@ public class Steps {
                 isPortfolioDelete();
     }
 
-    @When("I open Coins page")
+    @And("I open Coins page")
     public CoinsPage openCoinsPage() {
         return new CoinsPage(driver).
                 openPage();
     }
-
+ 
     public PortfolioPage addCoinToUserPortfolio(Coin coin, String amount, String price) {
         return portfolioPage.
                 getAddCoinForm().
                 addCoinInPortfolio(coin, amount, price);
     }
+    
+    @Then("I check updating User Account")
+    public void checkUpdatingUserAccount() {
+    	String infoInPopup = getInfoFromPopupWindowAfterSavingChangesInUserAccount();
+    	String expectedInfoInPopupWhenSuccessfully = "Successfully updated your details";
+    	 Assert.assertEquals(infoInPopup, expectedInfoInPopupWhenSuccessfully,
+                "Wrong text in pop-up after saving changes in user general tab");
+    }
 
+    @Then("([^\"]*) is Coin added")
     public boolean isCoinAdded() {
         return portfolioPage.
                 isCoinAdded();
