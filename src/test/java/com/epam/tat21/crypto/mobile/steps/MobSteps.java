@@ -41,4 +41,7 @@ public class MobSteps {
     public boolean checkLogout() {
         return new LoginPageMobile(driver).isFieldPasswordVisible();
     }
+
+    public void createUserPortfolio(String portfolioName, String currency, String description) {
+    }
 }
