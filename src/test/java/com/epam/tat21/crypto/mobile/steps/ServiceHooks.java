@@ -9,11 +9,13 @@ public class ServiceHooks {
 
     @Before
     public void setUp() {
+        System.out.println("Running device");
         mobSteps = new MobSteps();
    }
 
     @After
     public void stopBrowser() {
+        System.out.println("Close device");
         mobSteps.closeDevice();
     }
 }
