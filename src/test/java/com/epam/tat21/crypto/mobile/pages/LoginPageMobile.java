@@ -12,13 +12,13 @@ import java.util.List;
 
 public class LoginPageMobile extends BasePageMobile {
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Log in']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Log in\")")
     private AndroidElement loginFunction;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text='Your e-mail']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Your e-mail\")")
     private AndroidElement loginFieldName;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text='Password']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Password\")")
     private AndroidElement loginFieldPassword;
 
     public LoginPageMobile(AppiumDriver<MobileElement> driver) {
