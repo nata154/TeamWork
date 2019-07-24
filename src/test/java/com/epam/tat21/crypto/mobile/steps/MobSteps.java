@@ -18,7 +18,6 @@ public class MobSteps {
 
     public MobSteps() {
         this.driver = MobileDriverManager.getMobileDriverFactory().getDriver();
-//        ServiceHooks sh = new ServiceHooks();
     }
 
     @Given("^Get driver$")
