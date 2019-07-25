@@ -19,16 +19,16 @@ public class UserPortfolioMobileTest extends PreConditionsOfMobileTest {
         String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
         mobSteps.loginUser();
         mobSteps.createUserPortfolio(portfolioName, currency, description);
-        Assert.assertEquals(mobSteps.getNameOfPortfolio(), portfolioName, "Wrong name of portfolio!");
+        Assert.assertEquals(mobSteps.getNameOfPortfolio(), portfolioName, "Wrong name of portfolio while creating it!");
     }
-//
-//    @JIRATestKey(key = "EPMFARMATS-9649")
-//    @Test(dependsOnMethods = {"portfolioCreationTest"})
-//    public void portfolioEditingTest() {
-//        String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
-//        mobSteps.changeUserPortfolioName(changedName);
-//        Assert.assertTrue(mobSteps.isPortfolioPresent(changedName));
-//    }
+
+    @JIRATestKey(key = "EPMFARMATS-9649")
+    @Test(dependsOnMethods = {"portfolioCreationTest"})
+    public void portfolioEditingTest() {
+        String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+        mobSteps.changeUserPortfolioName(changedName);
+        Assert.assertEquals(mobSteps.getNameOfPortfolio(), changedName, "Wrong name of portfolio while editing it!");
+    }
 //
 //    @JIRATestKey(key = "EPMFARMATS-9649")
 //    @Test(dependsOnMethods = {"portfolioEditingTest"})
