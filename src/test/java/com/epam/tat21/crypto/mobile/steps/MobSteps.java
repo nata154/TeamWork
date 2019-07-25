@@ -54,4 +54,11 @@ public class MobSteps {
         return new PortfolioPageMobile(driver)
                 .getCurrentPortfolioName();
     }
+
+    public PortfolioPageMobile changeUserPortfolioName(String changedName) {
+        return new PortfolioPageMobile(driver)
+                .clickButtonEdit()
+                .changeNameOfPortfolio(changedName)
+                .submitEditingPortfolio();
+    }
 }
