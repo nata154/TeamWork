@@ -25,7 +25,7 @@ public class UnorderedListDropdown extends TypifiedElement {
     }
 
     public WebElement chooseItemByVisibleText(String text) {
-        return getItems().stream().filter(item -> item.getText().equals(text)).findAny().get();
+        return getItems().stream().filter(item -> item.getText().equals(text)).findAny().orElse(null);
     }
 
 }

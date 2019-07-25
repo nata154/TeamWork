@@ -103,7 +103,7 @@ public class PortfolioPage extends BasePage {
     public WebElement getPortfolioItemByName(String name) {
         WaitConditions.waitForInvisibilityOfAllElementsByXpath(driver, DIALOG_CONTAINER_LOCATOR);
         return getPortfolioItemLinkList().stream().
-                filter(portfolioLink -> portfolioLink.getText().equals(name)).findFirst().get();
+                filter(portfolioLink -> portfolioLink.getText().equals(name)).findFirst().orElse(null);
     }
 
     public PortfolioPage getEditPortfolioForm() {
