@@ -21,7 +21,7 @@ public class MobileLocalDriver implements MobileDriverFactory {
     public MobileLocalDriver() {
         capabilities = MobCapabilitiesProvider.getCapabilities();
         capabilities.setCapability(MobileCapabilityType.APPIUM_VERSION, System.getProperty("appium"));
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "7.1");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, System.getProperty("android"));
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, System.getProperty("device"));
     }
 
