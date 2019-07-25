@@ -8,9 +8,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class UserPortfolioMobileTest extends PreConditionsOfMobileTest {
+
     private static final int COUNT_OF_SYMBOLS = 5;
     private Coin coin = Coin.BTC;
     private String currency = coin.getAbbreviationCoin();
+    String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 
     @JIRATestKey(key = "EPMFARMATS-9649")
     @Test
@@ -25,15 +27,14 @@ public class UserPortfolioMobileTest extends PreConditionsOfMobileTest {
     @JIRATestKey(key = "EPMFARMATS-9649")
     @Test(dependsOnMethods = {"portfolioCreationTest"})
     public void portfolioEditingTest() {
-        String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
         mobSteps.changeUserPortfolioName(changedName);
         Assert.assertEquals(mobSteps.getNameOfPortfolio(), changedName, "Wrong name of portfolio while editing it!");
     }
-//
-//    @JIRATestKey(key = "EPMFARMATS-9649")
-//    @Test(dependsOnMethods = {"portfolioEditingTest"})
-//    public void portfolioDeletingTest() {
-//        mobSteps.deleteUserPortfolio();
-//        Assert.assertTrue(mobSteps.isPortfolioDelete());
-//    }
+
+    @JIRATestKey(key = "EPMFARMATS-9649")
+    @Test(dependsOnMethods = {"portfolioEditingTest"})
+    public void portfolioDeletingTest() {
+        mobSteps.deleteUserPortfolio();
+        Assert.assertTrue(mobSteps.isPortfolioDeleted(changedName), "Issue while deleting portfolio - portfolio with such name still exists.");
+    }
 }
