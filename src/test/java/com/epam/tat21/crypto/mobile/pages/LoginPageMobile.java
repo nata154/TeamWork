@@ -16,10 +16,10 @@ public class LoginPageMobile extends BasePageMobile {
     private AndroidElement loginFunction;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Your e-mail\")")
-    private AndroidElement whileLoginFieldName;
+    private AndroidElement loginFieldName;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Password\")")
-    private AndroidElement whileLoginFieldPassword;
+    private AndroidElement loginFieldPassword;
 
     public LoginPageMobile(AppiumDriver<MobileElement> driver) {
         super(driver);
@@ -39,10 +39,10 @@ public class LoginPageMobile extends BasePageMobile {
     }
 
     public LoginPageMobile fillLoginForm(User user) {
-        whileLoginFieldName.click();
-        whileLoginFieldName.sendKeys(user.getUserName());
-        whileLoginFieldPassword.click();
-        whileLoginFieldPassword.sendKeys(user.getUserPassword());
+        loginFieldName.click();
+        loginFieldName.sendKeys(user.getUserName());
+        loginFieldPassword.click();
+        loginFieldPassword.sendKeys(user.getUserPassword());
         MyLogger.info("User name and password were inputed.");
         return this;
     }
@@ -65,7 +65,7 @@ public class LoginPageMobile extends BasePageMobile {
 
     public boolean isFieldPasswordVisible() {
         boolean fieldPassword = false;
-        if (whileLoginFieldPassword.isDisplayed()) {
+        if (loginFieldPassword.isDisplayed()) {
             fieldPassword = true;
             MyLogger.info("Field 'Password' is visible while checking Log Out");
         }

@@ -5,7 +5,7 @@
         <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
     </listeners>
 
-    <test name="nn" enabled="true">
+    <test name="Mobile BDD" enabled="true">
         <classes>
             <class name="com.epam.tat21.crypto.mobile.TestRunner"></class>
         </classes>

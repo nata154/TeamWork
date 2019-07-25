@@ -7,6 +7,9 @@ public class MobileDriverManager {
 
     private static AppiumDriver<MobileElement> driver;
 
+    private MobileDriverManager() {
+    }
+
     public static  MobileDriverFactory getMobileDriverFactory() {
         if (driver == null) {
             switch (System.getProperty("mobile")) {

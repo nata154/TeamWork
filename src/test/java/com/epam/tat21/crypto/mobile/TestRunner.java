@@ -12,17 +12,5 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 )
 
 public class TestRunner extends AbstractTestNGCucumberTests {
-//
-//        protected MobSteps mobSteps;
-//
-//        @BeforeTest()
-//        public void setUp() {
-//                mobSteps = new MobSteps();
-//        }
-//
-//        @AfterTest
-//        public void stopBrowser() {
-//                mobSteps.closeDevice();
-//        }
 }
 
