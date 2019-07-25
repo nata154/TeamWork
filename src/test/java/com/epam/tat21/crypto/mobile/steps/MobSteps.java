@@ -4,17 +4,28 @@ import com.epam.tat21.crypto.mobile.driver.MobileDriverManager;
 import com.epam.tat21.crypto.mobile.pages.LoginPageMobile;
 import com.epam.tat21.crypto.mobile.pages.MainCryptoComparePageMobile;
 import com.epam.tat21.crypto.mobile.pages.PortfolioPageMobile;
+import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.service.UserCreator;
+import com.epam.tat21.crypto.ui.utils.RandomString;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import org.testng.Assert;
 
 public class MobSteps {
 
     private AppiumDriver<MobileElement> driver;
+
+    private static final int COUNT_OF_SYMBOLS = 5;
+    private Coin coin = Coin.BTC;
+    private String currency = coin.getAbbreviationCoin();
+    String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 
     public MobSteps() {
         this.driver = MobileDriverManager.getMobileDriverFactory().getDriver();
@@ -46,13 +57,16 @@ public class MobSteps {
     public void createUserPortfolio(String portfolioName, String currency, String description) {
         new MainCryptoComparePageMobile(driver)
                 .clickPortfolioIcon()
-                .inputNewPortfolioInfo(portfolioName, currency, description)
+                .inputNewPortfolioValues(portfolioName, currency, description)
                 .submitCreatingPortfolio();
     }
 
-    public String getNameOfPortfolio() {
-        return new PortfolioPageMobile(driver)
-                .getCurrentPortfolioName();
+    @When("^I create new portfolio$")
+    public void createUserPortfolioForBDD() {
+        new MainCryptoComparePageMobile(driver)
+                .clickPortfolioIcon()
+                .inputNewPortfolioValues(portfolioName, currency, description)
+                .submitCreatingPortfolio();
     }
 
     public PortfolioPageMobile changeUserPortfolioName(String changedName) {
@@ -60,5 +74,42 @@ public class MobSteps {
                 .clickButtonEdit()
                 .changeNameOfPortfolio(changedName)
                 .submitEditingPortfolio();
+    }
+
+    @And("^I change portfolio name$")
+    public PortfolioPageMobile changeUserPortfolioNameForBDD() {
+        return new PortfolioPageMobile(driver)
+                .clickButtonEdit()
+                .changeNameOfPortfolio(changedName)
+                .submitEditingPortfolio();
+    }
+
+    public String getNameOfPortfolio() {
+        return new PortfolioPageMobile(driver)
+                .getCurrentPortfolioName();
+    }
+
+    @Then("^I check portfolio name$")
+    public void checkNameOfPortfolioForBDD() {
+        String currentPortfolioName = new PortfolioPageMobile(driver).getCurrentPortfolioName();
+        Assert.assertEquals(currentPortfolioName, changedName);
+    }
+
+    @And("^I delete current portfolio$")
+    public PortfolioPageMobile deleteUserPortfolio() {
+        return new PortfolioPageMobile(driver)
+                .clickButtonEdit()
+                .clickButtonDelete();
+    }
+
+    public boolean isPortfolioDeleted(String changedName) {
+        return new PortfolioPageMobile(driver)
+                .isPortfolioWithSuchNameDeleted(changedName);
+    }
+
+    @Then("^I check deleting of portfolio with such name$")
+    public void isPortfolioDeletedForBDD() {
+        boolean isPortfolioDeleted = new PortfolioPageMobile(driver).isPortfolioWithSuchNameDeleted(changedName);
+        Assert.assertTrue(isPortfolioDeleted, "Issue while deleting portfolio - portfolio with such name still exists.");
     }
 }
