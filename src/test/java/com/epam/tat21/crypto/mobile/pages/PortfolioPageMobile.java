@@ -31,8 +31,14 @@ public class PortfolioPageMobile extends BasePageMobile {
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Submit\")")
     private AndroidElement buttonSubmit;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.TextView\").index(0)")
+    private AndroidElement textViews;
+
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Edit\")")
     private AndroidElement buttonEdit;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.EditText\").index(0)")
+    private AndroidElement portfolioNameEdit;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"\uF1F8 Delete\")")
     private AndroidElement buttonDelete;
@@ -74,8 +80,7 @@ public class PortfolioPageMobile extends BasePageMobile {
     }
 
     public String getCurrentPortfolioName() {
-        List<MobileElement> textViews = driver.findElements(By.className("android.widget.TextView"));
-        return textViews.get(0).getText();
+        return textViews.getText();
     }
 
     public PortfolioPageMobile clickButtonEdit() {
@@ -85,11 +90,9 @@ public class PortfolioPageMobile extends BasePageMobile {
     }
 
     public PortfolioPageMobile changeNameOfPortfolio(String changedName) {
-        //because webelement has text but it is name of portfolio from previous test i can't use its name for UiAutomator
-        List<MobileElement> portfolioNameEdit = driver.findElements(By.className("android.widget.EditText"));
-        portfolioNameEdit.get(0).click();
-        portfolioNameEdit.get(0).clear();
-        portfolioNameEdit.get(0).sendKeys(changedName);
+        portfolioNameEdit.click();
+        portfolioNameEdit.clear();
+        portfolioNameEdit.sendKeys(changedName);
         MyLogger.info("Portfolio name was changed on - " + changedName);
         freeSpace.click();
         return this;

@@ -3,24 +3,26 @@ package com.epam.tat21.crypto.mobile.pages;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class MainCryptoComparePageMobile extends BasePageMobile {
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Portfolio\")")
     private WebElement portfolioIcon;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").index(0)")
+    private AndroidElement userImage;
+
     public MainCryptoComparePageMobile(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
 
     public UserAccountPageMobile clickUserAccountIcon() {
-        List<MobileElement> userImage = driver.findElements(By.className("android.view.ViewGroup"));
-        userImage.get(4).click();
+//        List<MobileElement> userImage = driver.findElements(By.className("android.view.ViewGroup"));
+//        userImage.get(4).click();
+        userImage.click();
         MyLogger.info("Click icon and enter user account.");
         return new UserAccountPageMobile(driver);
     }
