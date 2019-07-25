@@ -11,26 +11,32 @@ import java.util.List;
 
 public class PortfolioPageMobile extends BasePageMobile {
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='\uF140']")
+    // @AndroidFindBy(xpath = "//android.widget.TextView[@text='']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"\uF140\")")
     private AndroidElement submenuArrow;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='ADD PORTFOLIO']")
+    //@AndroidFindBy(xpath = "//android.widget.TextView[@text='ADD PORTFOLIO']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"ADD PORTFOLIO\")")
     private AndroidElement addPortfolioButton;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@text='Portfolio Name']")
+    //@AndroidFindBy(xpath = "//android.widget.EditText[@text='Portfolio Name']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Portfolio Name\")")
     private AndroidElement portfolioNameField;
 
     //private static final String ADDING_COIN_IN_PORTFOLIO_XPATH = "//android.view.ViewGroup[@text='";
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Name']")
+    // @AndroidFindBy(xpath = "//android.widget.TextView[@text='Name']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Currency \")")
     private AndroidElement freeSpace;
 
-    @AndroidFindBy(xpath = "//android.view.ViewGroup[@text='BTC']")
+    //@AndroidFindBy(xpath = "//android.view.ViewGroup[@text='BTC']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"BTC\")")
     private AndroidElement selectAddingCoinInPortfolio;
 
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Add a description or leave this area empty']")
     private AndroidElement portfolioDescriptionField;
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Submit']")
+    //@AndroidFindBy(xpath = "//android.widget.TextView[@text='Submit']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Submit\")")
     private AndroidElement buttonSubmit;
 
     public PortfolioPageMobile(AppiumDriver<MobileElement> driver) {
@@ -46,7 +52,7 @@ public class PortfolioPageMobile extends BasePageMobile {
         MyLogger.info("Portfolio get name - " + name);
         freeSpace.click();
         //WebElement selectAddingCoinInPortfolio = driver.findElement(By.xpath(ADDING_COIN_IN_PORTFOLIO_XPATH + currency + "']"));
-        // selectAddingCoinInPortfolio.click();
+        selectAddingCoinInPortfolio.click();
         portfolioDescriptionField.click();
         portfolioDescriptionField.sendKeys(description);
         freeSpace.click();

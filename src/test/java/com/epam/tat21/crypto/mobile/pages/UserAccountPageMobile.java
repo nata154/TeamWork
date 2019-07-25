@@ -8,7 +8,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class UserAccountPageMobile extends BasePageMobile {
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Log out']")
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Log out\")")
     private AndroidElement logOutButton;
 
     public UserAccountPageMobile(AppiumDriver<MobileElement> driver) {
