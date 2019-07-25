@@ -22,7 +22,7 @@ public class MobileDriverForFarm implements MobileDriverFactory {
     public MobileDriverForFarm() {
         capabilities = MobCapabilitiesProvider.getCapabilities();
         capabilities.setCapability(MobileCapabilityType.UDID, getMobileDeviceUuid());
-        capabilities.setCapability("platformVersion", "8.0.0");
+        capabilities.setCapability("platformVersion", "7.0.0");
     }
 
     @Override
