@@ -4,23 +4,22 @@ import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class LoginPageMobile extends BasePageMobile {
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[@text='Log in']")
-    private WebElement loginFunction;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Log in\")")
+    private AndroidElement loginFunction;
 
-    @FindBy(xpath = "//android.widget.EditText[@text='Your e-mail']")
-    private WebElement whileLoginFieldName;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Your e-mail\")")
+    private AndroidElement whileLoginFieldName;
 
-    @FindBy(xpath = "//android.widget.EditText[@text='Password']")
-    private WebElement whileLoginFieldPassword;
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Password\")")
+    private AndroidElement whileLoginFieldPassword;
 
     public LoginPageMobile(AppiumDriver<MobileElement> driver) {
         super(driver);
