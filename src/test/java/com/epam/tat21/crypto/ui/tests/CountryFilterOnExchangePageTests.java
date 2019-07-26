@@ -1,11 +1,12 @@
 package com.epam.tat21.crypto.ui.tests;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.data.CountriesDataProvider;
 import com.epam.tat21.crypto.ui.service.CommonConditions;
 import com.epam.testng.JIRATestKey;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 public class CountryFilterOnExchangePageTests extends CommonConditions {
 
@@ -28,6 +29,4 @@ public class CountryFilterOnExchangePageTests extends CommonConditions {
         int numberOfAllCountryLabels = steps.getAllCountryLabelsFromFilteredPage();
         Assert.assertEquals(numberOfResultWithCountry, numberOfAllCountryLabels);
     }
-
-
 }
