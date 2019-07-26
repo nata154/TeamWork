@@ -25,6 +25,9 @@ public class PortfolioPageMobile extends BasePageMobile {
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Currency \")")
     private AndroidElement freeSpace;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.HorizontalScrollView\").className(\"android.widget.TextView\")")
+    private List<AndroidElement> currencies;
+
     @AndroidFindBy(xpath = "//android.widget.EditText[@text='Add a description or leave this area empty']")
     private AndroidElement portfolioDescriptionField;
 
@@ -65,8 +68,8 @@ public class PortfolioPageMobile extends BasePageMobile {
         return this;
     }
 
-    private List<MobileElement> getAvailableCurrencies() {
-        return driver.findElements(By.xpath("//android.widget.HorizontalScrollView//android.widget.TextView"));
+    private List<AndroidElement> getAvailableCurrencies() {
+        return currencies;
     }
 
     private WebElement chooseCurrency(String currency) {
@@ -120,6 +123,8 @@ public class PortfolioPageMobile extends BasePageMobile {
     private boolean isPortfolioDeleted(String changedName) {
         MyLogger.info("Trying to find deleted portfolio.");
         boolean portfolioIsDeleted = false;
+        //@AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.TextView\")")
+        //has really worse performance here. difference is 1,5 minutes
         List<MobileElement> allPortfolioList = driver.findElements(By.className("android.widget.TextView"));
         if (!getListOfPortfolios(allPortfolioList).contains(changedName)) {
             portfolioIsDeleted = true;
