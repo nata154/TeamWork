@@ -16,7 +16,6 @@ import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.pages.CoinsPage;
 import com.epam.tat21.crypto.ui.pages.ExchangesPage;
-import com.epam.tat21.crypto.ui.pages.HeaderPage;
 import com.epam.tat21.crypto.ui.pages.MainCryptoComparePage;
 import com.epam.tat21.crypto.ui.pages.NewsPage;
 import com.epam.tat21.crypto.ui.pages.PortfolioPage;
@@ -64,7 +63,7 @@ public class Steps {
 
     @When("I go to User Account profile")
     public UserAccountPage goToUserAccountProfile() {
-        new HeaderPage(driver).getDropdownUserMenuInHeader().clickAccountLine();
+        new MainCryptoComparePage(driver).getHeaderMenu().clickAccountLineInDropdown();
         return new UserAccountPage(driver).clickTabGeneral();
     }
 
@@ -190,15 +189,16 @@ public class Steps {
     }
 
     public PortfolioPage createUserPortfolio(String name, String currency, String description) {
-        return portfolioPage = new HeaderPage(driver).
+        return portfolioPage = new MainCryptoComparePage(driver).
+                getHeaderMenu().
                 goToMyPortfolioFromPortfolioTab().
-                addPortfolioForm().
+                getAddPortfolioForm().
                 createNewPortfolio(name, currency, description);
     }
     
     public boolean isPortfolioPresent(String name) {
         return new PortfolioPage(driver).
-                getElementPortfolio(name).
+                getPortfolioItemByName(name).
                 isEnabled();
     }
     

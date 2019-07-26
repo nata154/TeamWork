@@ -1,42 +1,115 @@
 package com.epam.tat21.crypto.mobile.steps;
 
-import com.epam.tat21.crypto.mobile.driver.MobileDriverFactory;
-import com.epam.tat21.crypto.mobile.driver.MobileDriverForFarm;
-import com.epam.tat21.crypto.mobile.driver.MobileLocalDriver;
+import com.epam.tat21.crypto.mobile.driver.MobileDriverManager;
+import com.epam.tat21.crypto.mobile.pages.LoginPageMobile;
+import com.epam.tat21.crypto.mobile.pages.MainCryptoComparePageMobile;
+import com.epam.tat21.crypto.mobile.pages.PortfolioPageMobile;
+import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.businessObjects.User;
+import com.epam.tat21.crypto.ui.service.UserCreator;
+import com.epam.tat21.crypto.ui.utils.RandomString;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
-
-import java.util.List;
+import org.testng.Assert;
 
 public class MobSteps {
 
     private AppiumDriver<MobileElement> driver;
 
-    public MobileDriverFactory getMobileDriverFactory() {
-        if (driver == null) {
-            switch (System.getProperty("mobile")) {
-                case "local":
-                    return new MobileLocalDriver();
-                case "farm":
-                    return new MobileDriverForFarm();
-                default:
-                    return new MobileLocalDriver();
-            }
-        }
-        return new MobileLocalDriver();
-    }
+    private static final int COUNT_OF_SYMBOLS = 5;
+    private Coin coin = Coin.BTC;
+    private String currency = coin.getAbbreviationCoin();
+    String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 
-    public void startDevice() {
-        driver = getMobileDriverFactory().getDriver();
+    public MobSteps() {
+        this.driver = MobileDriverManager.getMobileDriverFactory().getDriver();
     }
 
     public void closeDevice() {
-        getMobileDriverFactory().closeDriver();
+        MobileDriverManager.getMobileDriverFactory().closeDriver();
     }
 
-    public void previewApp() {
-        List<MobileElement> textViews=driver.findElements(By.className("android.widget.TextView"));
-        textViews.get(1).click();
+    @Given("^I login user in crypto application$")
+    public MainCryptoComparePageMobile loginUser() {
+        User user = UserCreator.withCredentialsFromProperty();
+        return new LoginPageMobile(driver)
+                .login(user);
+    }
+
+    @When("^I click user account and log out$")
+    public MainCryptoComparePageMobile clickUserAccountAndLogOut() {
+        return new MainCryptoComparePageMobile(driver)
+                .clickUserAccountIcon()
+                .clickLogOutButton();
+    }
+
+    @Then("^I check log out - I see password field$")
+    public boolean checkLogout() {
+        return new LoginPageMobile(driver).isFieldPasswordVisible();
+    }
+
+    public void createUserPortfolio(String portfolioName, String currency, String description) {
+        new MainCryptoComparePageMobile(driver)
+                .clickPortfolioIcon()
+                .inputNewPortfolioValues(portfolioName, currency, description)
+                .submitCreatingPortfolio();
+    }
+
+    @When("^I create new portfolio$")
+    public void createUserPortfolioForBDD() {
+        new MainCryptoComparePageMobile(driver)
+                .clickPortfolioIcon()
+                .inputNewPortfolioValues(portfolioName, currency, description)
+                .submitCreatingPortfolio();
+    }
+
+    public PortfolioPageMobile changeUserPortfolioName(String changedName) {
+        return new PortfolioPageMobile(driver)
+                .clickButtonEdit()
+                .changeNameOfPortfolio(changedName)
+                .submitEditingPortfolio();
+    }
+
+    @And("^I change portfolio name$")
+    public PortfolioPageMobile changeUserPortfolioNameForBDD() {
+        return new PortfolioPageMobile(driver)
+                .clickButtonEdit()
+                .changeNameOfPortfolio(changedName)
+                .submitEditingPortfolio();
+    }
+
+    public String getNameOfPortfolio() {
+        return new PortfolioPageMobile(driver)
+                .getCurrentPortfolioName();
+    }
+
+    @Then("^I check portfolio name$")
+    public void checkNameOfPortfolioForBDD() {
+        String currentPortfolioName = new PortfolioPageMobile(driver).getCurrentPortfolioName();
+        Assert.assertEquals(currentPortfolioName, changedName);
+    }
+
+    @And("^I delete current portfolio$")
+    public PortfolioPageMobile deleteUserPortfolio() {
+        return new PortfolioPageMobile(driver)
+                .clickButtonEdit()
+                .clickButtonDelete();
+    }
+
+    public boolean isPortfolioDeleted(String changedName) {
+        return new PortfolioPageMobile(driver)
+                .isPortfolioWithSuchNameDeleted(changedName);
+    }
+
+    @Then("^I check deleting of portfolio with such name$")
+    public void isPortfolioDeletedForBDD() {
+        boolean isPortfolioDeleted = new PortfolioPageMobile(driver).isPortfolioWithSuchNameDeleted(changedName);
+        Assert.assertTrue(isPortfolioDeleted, "Issue while deleting portfolio - portfolio with such name still exists.");
     }
 }

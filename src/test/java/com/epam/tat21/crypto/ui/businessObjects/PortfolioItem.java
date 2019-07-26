@@ -1,6 +1,6 @@
 package com.epam.tat21.crypto.ui.businessObjects;
 
-import com.epam.tat21.crypto.ui.pages.HeaderPage;
+import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.utils.CoinInformationParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,14 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PortfolioItem extends HeaderPage {
+public class PortfolioItem {
 
     private final String COIN_NAME_LINK_LOCATOR = "//div[@class='table-col col-name']//a";
     private final String COIN_VALUE_LOCATOR = "//div[@class='responsive-value']/span";
-
-    public PortfolioItem(WebDriver driver) {
-        super(driver);
-    }
+    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
 
     public List<WebElement> getCoinNamesList() {
         return driver.findElements(By.xpath(COIN_NAME_LINK_LOCATOR));

@@ -9,11 +9,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
+import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 
 
-public class ExchangesPage extends HeaderPage {
+public class ExchangesPage extends BasePage {
 
     private static final String BASE_URL = TestDataReader.getApplicationUrl() + "exchanges/";
     private static final String COUNTRY_LABEL_ON_PAGE_LOCATOR = "//td[@class='table-ranking-Country']";
@@ -21,6 +23,7 @@ public class ExchangesPage extends HeaderPage {
     private static final String COUNTRY_IN_DROPDOWN_LOCATOR = "//span[@class='pull-left ng-binding' and contains(text(), '%s')]";
     private static final String COUNTRY_ON_FILTERED_PAGE_LOCATOR = "//td[@class='table-ranking-Country']/div[contains(text(), '%s')]";
     private int numberOfExchangesInBadge;
+    private HeaderMenu headerMenu;
 
     @FindBy(xpath = "//div[@class='btn-group btn-block dropdown']/button[contains(text(), 'Country')]")
     private WebElement countryDropdownMenuLink;
@@ -29,7 +32,7 @@ public class ExchangesPage extends HeaderPage {
     private WebElement countryDropdownMenu;
 
     @FindBy(xpath = "//span[@class='fa fa-close']")
-    WebElement resetFiltersButton;
+    private BaseButton resetFiltersButton;
 
     public ExchangesPage(WebDriver driver) {
         super(driver);

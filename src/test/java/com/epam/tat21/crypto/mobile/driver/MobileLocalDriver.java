@@ -6,14 +6,11 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-import static com.epam.tat21.crypto.ui.service.TestDataReader.getMobileAppPackage;
 import static com.epam.tat21.crypto.ui.service.TestDataReader.getMobileLocalUrl;
 
 public class MobileLocalDriver implements MobileDriverFactory {
@@ -24,7 +21,7 @@ public class MobileLocalDriver implements MobileDriverFactory {
     public MobileLocalDriver() {
         capabilities = MobCapabilitiesProvider.getCapabilities();
         capabilities.setCapability(MobileCapabilityType.APPIUM_VERSION, System.getProperty("appium"));
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "7.1");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, System.getProperty("android"));
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, System.getProperty("device"));
     }
 
@@ -44,7 +41,7 @@ public class MobileLocalDriver implements MobileDriverFactory {
     @Override
     public void closeDriver() {
         appiumDriver.closeApp();
-        appiumDriver.removeApp(getMobileAppPackage());
-        Optional.ofNullable(appiumDriver).ifPresent(RemoteWebDriver::quit);
+        //appiumDriver.removeApp(getMobileAppPackage());
+        //Optional.ofNullable(appiumDriver).ifPresent(RemoteWebDriver::quit);
     }
 }

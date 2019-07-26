@@ -10,16 +10,18 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 
-public class NewsPage extends HeaderPage {
+public class NewsPage extends BasePage {
 
     private static final String BASE_URL = TestDataReader.getApplicationUrl() + "news/";
     private static final String COINS_NEWS_XPATH = "//a[@href='/news/list/latest/?categories=";
     private static final String ARTICLE_TITLE_LOCATOR = "//a[@rel and @class='ng-binding']";
     private static final String FEED_LINK_LOCATOR = "//button[contains(text(), 'Feeds')]/../ul//a[contains(text()[position() = 2],'%s')]";
     private static int indexCounter = 0;
+    private HeaderMenu headerMenu;
 
     @FindBy(xpath = "//div[@class='col-md-12 list-container ng-isolate-scope']")
     private WebElement containerOfNews;
@@ -39,7 +41,7 @@ public class NewsPage extends HeaderPage {
     }
 
     public NewsPage goToCoinNews(Coin coin) {
-        moveToNewsTab();
+        headerMenu.moveToNewsTab();
         WebElement newsCoin = driver.findElement(By.xpath(COINS_NEWS_XPATH + coin.getAbbreviationCoin() + "']"));
         waitForElementVisible(newsCoin);
         MyLogger.info(coin.getNameOfCoin() + " news was pressed");
