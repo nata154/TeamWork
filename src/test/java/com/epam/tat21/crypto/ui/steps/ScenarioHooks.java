@@ -4,6 +4,7 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 public class ScenarioHooks {
+	
 protected Steps steps;
 	
 	@Before

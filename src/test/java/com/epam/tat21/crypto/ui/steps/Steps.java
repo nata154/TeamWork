@@ -267,7 +267,7 @@ public class Steps {
         return new CoinsPage(driver).
                 openPage();
     }
-    
+
     @Then("I check updating User Account")
     public void checkUpdatingUserAccount() {
     	String infoInPopup = getInfoFromPopupWindowAfterSavingChangesInUserAccount();
@@ -275,7 +275,6 @@ public class Steps {
     	 Assert.assertEquals(infoInPopup, expectedInfoInPopupWhenSuccessfully,
                 "Wrong text in pop-up after saving changes in user general tab");
     }
-
 
     public PortfolioPage addCoinToUserPortfolio(Coin coin, String amount, String price) {
         return portfolioPage.
