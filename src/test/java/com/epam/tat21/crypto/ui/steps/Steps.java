@@ -202,28 +202,29 @@ public class Steps {
                 isEnabled();
     }
     
+    @Then("Is Portfolio present")
+    public void isPortfolioPresent() {
+       boolean portfolioPresence = new PortfolioPage(driver).
+    		   getPortfolioItemByName(portfolioName).
+                isEnabled();
+       assertTrue(portfolioPresence);
+    }
+    
     @When("Create User Portfolio")
     public PortfolioPage createUserPortfolio() {
     	String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 		
-        return portfolioPage = new HeaderPage(driver).
-                goToMyPortfolioFromPortfolioTab().
-                addPortfolioForm().
-                createNewPortfolio(portfolioName, currency, description);
-    }
-    
-    @Then("Is Portfolio present")
-    public void isPortfolioPresent() {
-       boolean portfolioPresence = new PortfolioPage(driver).
-                getElementPortfolio(portfolioName).
-                isEnabled();
-       assertTrue(portfolioPresence);
+    	 return portfolioPage = new MainCryptoComparePage(driver).
+                 getHeaderMenu().
+                 goToMyPortfolioFromPortfolioTab().
+                 getAddPortfolioForm().
+                 createNewPortfolio(portfolioName, currency, description);
     }
     
     @Then("Is Portfolio with changed name present")
     public void isPortfolioWithChangedNamePresent() {
         boolean presenceChangedPortfolio = new PortfolioPage(driver).
-                getElementPortfolio(changedName).
+        		getPortfolioItemByName(changedName).
                 isEnabled();
         assertTrue(presenceChangedPortfolio);
     }

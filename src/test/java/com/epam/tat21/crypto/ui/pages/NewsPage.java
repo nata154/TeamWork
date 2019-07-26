@@ -50,7 +50,7 @@ public class NewsPage extends BasePage {
     }
     
     public NewsPage goToCoinNews(String abbreviationCoin) {
-        moveToNewsTab();
+        headerMenu.moveToNewsTab();
         WebElement newsCoin = driver.findElement(By.xpath(COINS_NEWS_XPATH + abbreviationCoin + "']"));
         waitForElementVisible(newsCoin);
         MyLogger.info(abbreviationCoin + " news was pressed");
