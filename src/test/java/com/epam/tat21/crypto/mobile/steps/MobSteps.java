@@ -1,15 +1,10 @@
 package com.epam.tat21.crypto.mobile.steps;
 
 import com.epam.tat21.crypto.mobile.driver.MobileDriverManager;
-import com.epam.tat21.crypto.mobile.pages.LoginPageMobile;
-import com.epam.tat21.crypto.mobile.pages.MainCryptoComparePageMobile;
-import com.epam.tat21.crypto.mobile.pages.NewsPageMobile;
-import com.epam.tat21.crypto.mobile.pages.SourcesPageMobile;
-import com.epam.tat21.crypto.mobile.pages.PortfolioPageMobile;
+import com.epam.tat21.crypto.mobile.pages.*;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.service.UserCreator;
-import cucumber.api.java.en.And;
 import com.epam.tat21.crypto.ui.utils.RandomString;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -26,9 +21,9 @@ public class MobSteps {
     private static final int COUNT_OF_SYMBOLS = 5;
     private Coin coin = Coin.BTC;
     private String currency = coin.getAbbreviationCoin();
-    String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
-    String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
-    String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    private String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    private String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    private String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 
     public MobSteps() {
         this.driver = MobileDriverManager.getMobileDriverFactory().getDriver();
@@ -76,13 +71,16 @@ public class MobSteps {
                 .goBackToNewsPage();
     }
 
-    @And("^I check how were news filtered by ((\\w+\\s\\w+)|(\\w+))$")
     public boolean areNewsFilteredProperly(String feedName) {
         return new NewsPageMobile(driver)
                 .getFeedLinesInNewsItem()
                 .stream().allMatch(item -> item.getText().equals(feedName));
     }
 
+    @And("^I check how were news filtered by ((\\w+\\s\\w+)|(\\w+))$")
+    public void assertHowWereNewsFiltered(String feedName) {
+        Assert.assertTrue(areNewsFilteredProperly(feedName));
+    }
 
     public void createUserPortfolio(String portfolioName, String currency, String description) {
         new MainCryptoComparePageMobile(driver)
