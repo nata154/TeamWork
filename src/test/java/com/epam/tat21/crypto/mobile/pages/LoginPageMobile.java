@@ -7,6 +7,8 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class LoginPageMobile extends BasePageMobile {
 
     public LoginPageMobile skipPreview() {
         //login button in order to skip preview doesn't have special text
+        new WebDriverWait(driver, 5).
+                until(ExpectedConditions.numberOfElementsToBeMoreThan(By.className("android.widget.TextView"), 1));
         List<MobileElement> textViews = driver.findElements(By.className("android.widget.TextView"));
         textViews.get(1).click();
         return this;
