@@ -9,7 +9,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 import static com.epam.tat21.crypto.ui.service.TestDataReader.getMobileLocalUrl;
 
@@ -34,14 +33,13 @@ public class MobileLocalDriver implements MobileDriverFactory {
                 MyLogger.error(e.getMessage());
             }
         }
-        appiumDriver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         return appiumDriver;
     }
 
     @Override
     public void closeDriver() {
         appiumDriver.closeApp();
-        //appiumDriver.removeApp(getMobileAppPackage());
-        //Optional.ofNullable(appiumDriver).ifPresent(RemoteWebDriver::quit);
+        appiumDriver.quit();
+        appiumDriver = null;
     }
 }

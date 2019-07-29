@@ -1,9 +1,7 @@
 package com.epam.tat21.crypto.mobile.steps;
 
 import com.epam.tat21.crypto.mobile.driver.MobileDriverManager;
-import com.epam.tat21.crypto.mobile.pages.LoginPageMobile;
-import com.epam.tat21.crypto.mobile.pages.MainCryptoComparePageMobile;
-import com.epam.tat21.crypto.mobile.pages.PortfolioPageMobile;
+import com.epam.tat21.crypto.mobile.pages.*;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.service.UserCreator;
@@ -23,9 +21,9 @@ public class MobSteps {
     private static final int COUNT_OF_SYMBOLS = 5;
     private Coin coin = Coin.BTC;
     private String currency = coin.getAbbreviationCoin();
-    String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
-    String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
-    String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    private String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    private String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
+    private String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 
     public MobSteps() {
         this.driver = MobileDriverManager.getMobileDriverFactory().getDriver();
@@ -52,6 +50,36 @@ public class MobSteps {
     @Then("^I check log out - I see password field$")
     public boolean checkLogout() {
         return new LoginPageMobile(driver).isFieldPasswordVisible();
+    }
+
+    @When("^I go to the sources page from the news page$")
+    public SourcesPageMobile goToSourcesPageFromNewsPage() {
+        return new MainCryptoComparePageMobile(driver)
+                .goToNewsPage()
+                .goToSourcesPage();
+    }
+
+    @Then("^I choose a concrete ((\\w+\\s\\w+)|(\\w+)) item and click it$")
+    public SourcesPageMobile chooseFeedItem(String feedName) {
+        return new SourcesPageMobile(driver)
+                .clickOnConcreteFeed(feedName);
+    }
+
+    @Then("^I go to the filtered news page$")
+    public NewsPageMobile goToFilteredNewsPage() {
+        return new SourcesPageMobile(driver)
+                .goBackToNewsPage();
+    }
+
+    public boolean areNewsFilteredProperly(String feedName) {
+        return new NewsPageMobile(driver)
+                .getFeedLinesInNewsItem()
+                .stream().allMatch(item -> item.getText().equals(feedName));
+    }
+
+    @And("^I check how were news filtered by ((\\w+\\s\\w+)|(\\w+))$")
+    public void assertHowWereNewsFiltered(String feedName) {
+        Assert.assertTrue(areNewsFilteredProperly(feedName));
     }
 
     public void createUserPortfolio(String portfolioName, String currency, String description) {

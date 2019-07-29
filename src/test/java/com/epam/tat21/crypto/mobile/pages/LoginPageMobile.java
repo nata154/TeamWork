@@ -6,6 +6,11 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class LoginPageMobile extends BasePageMobile {
 
@@ -18,19 +23,16 @@ public class LoginPageMobile extends BasePageMobile {
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Password\")")
     private AndroidElement loginFieldPassword;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.view.ViewGroup\").index(6)")
-    private AndroidElement loginButton;
-
-    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.TextView\").index(0)")
-    private AndroidElement textViews;
-
     public LoginPageMobile(AppiumDriver<MobileElement> driver) {
         super(driver);
     }
 
     public LoginPageMobile skipPreview() {
-        textViews.click();
-        MyLogger.info("Preview skipped.");
+        //login button in order to skip preview doesn't have special text
+        new WebDriverWait(driver, 5).
+                until(ExpectedConditions.numberOfElementsToBeMoreThan(By.className("android.widget.TextView"), 1));
+        List<MobileElement> textViews = driver.findElements(By.className("android.widget.TextView"));
+        textViews.get(1).click();
         return this;
     }
 
@@ -50,7 +52,9 @@ public class LoginPageMobile extends BasePageMobile {
     }
 
     public LoginPageMobile clickLoginButton() {
-        loginButton.click();
+        //login button doesn't have special text
+        List<MobileElement> loginButton = driver.findElements(By.className("android.view.ViewGroup"));
+        loginButton.get(6).click();
         MyLogger.info("LogIn button was clicked.");
         return this;
     }

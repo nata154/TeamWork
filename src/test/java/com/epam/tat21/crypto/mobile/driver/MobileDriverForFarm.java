@@ -10,7 +10,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import static com.epam.tat21.crypto.ui.service.TestDataReader.*;
 
@@ -22,7 +21,7 @@ public class MobileDriverForFarm implements MobileDriverFactory {
     public MobileDriverForFarm() {
         capabilities = MobCapabilitiesProvider.getCapabilities();
         capabilities.setCapability(MobileCapabilityType.UDID, getMobileDeviceUuid());
-        capabilities.setCapability("platformVersion", "8.0.0");
+        capabilities.setCapability("platformVersion", System.getProperty("android"));
     }
 
     @Override
@@ -33,7 +32,6 @@ public class MobileDriverForFarm implements MobileDriverFactory {
             } catch (MalformedURLException e) {
                 MyLogger.error(e.getMessage());
             }
-        appiumDriver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
         return appiumDriver;
     }
 

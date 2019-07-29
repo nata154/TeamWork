@@ -5,6 +5,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
+
 public abstract class BasePageMobile {
 
     protected AppiumDriver<MobileElement> driver;
