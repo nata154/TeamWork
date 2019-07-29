@@ -26,6 +26,9 @@
                   "ImageUrl":{  
                      "type":"string"
                   },
+                  "ContentCreatedOn":{
+                     "type":"integer"
+                  },
                   "Name":{  
                      "type":"string"
                   },
