@@ -1,17 +1,18 @@
 package com.epam.tat21.crypto.ui.pages;
 
-import com.epam.tat21.crypto.ui.businessObjects.Countries;
-import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
-import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
-import com.epam.tat21.crypto.ui.service.TestDataReader;
-import com.epam.tat21.crypto.ui.utils.MyLogger;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import com.epam.tat21.crypto.ui.businessObjects.Countries;
+import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
+import com.epam.tat21.crypto.ui.service.TestDataReader;
+import com.epam.tat21.crypto.ui.utils.MyLogger;
 
 
 public class ExchangesPage extends BasePage {
@@ -59,6 +60,12 @@ public class ExchangesPage extends BasePage {
                 findElement(By.xpath(String.format(COUNTRY_IN_BADGE_LOCATOR, country.getNameOfCountry())));
         numberOfExchangesInBadge = Integer.parseInt(numberExchangesOnBadgeInDropdown.getText());
     }
+    
+    public void getNumberOfExchangesFromBadge(String country) {
+        WebElement numberExchangesOnBadgeInDropdown = driver.
+                findElement(By.xpath(String.format(COUNTRY_IN_BADGE_LOCATOR, country)));
+        numberOfExchangesInBadge = Integer.parseInt(numberExchangesOnBadgeInDropdown.getText());
+    }
 
     public ExchangesPage scrollPage() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -77,9 +84,25 @@ public class ExchangesPage extends BasePage {
         waitForElementClickable(resetFiltersButton);
         return this;
     }
+    
+    public ExchangesPage selectCountryInDropdown(String country) {
+        WebElement countryLinkInDropdown = driver.
+                findElement(By.xpath(String.format(COUNTRY_IN_DROPDOWN_LOCATOR, country)));
+        waitForElementClickable(countryLinkInDropdown);
+        getNumberOfExchangesFromBadge(country);
+        countryLinkInDropdown.click();
+        MyLogger.info(country + " country was chosen");
+        scrollPage();
+        waitForElementClickable(resetFiltersButton);
+        return this;
+    }
 
     public List<WebElement> getFromFilteredPageAllResultsWith(Countries country) {
         return driver.findElements(By.xpath(String.format(COUNTRY_ON_FILTERED_PAGE_LOCATOR, country.getNameOfCountry())));
+    }
+    
+    public List<WebElement> getFromFilteredPageAllResultsWith(String country) {
+        return driver.findElements(By.xpath(String.format(COUNTRY_ON_FILTERED_PAGE_LOCATOR, country)));
     }
 
     public List<WebElement> getAllCountryLabelsFromFilteredPage() {

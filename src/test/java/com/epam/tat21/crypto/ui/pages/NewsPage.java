@@ -1,9 +1,7 @@
 package com.epam.tat21.crypto.ui.pages;
 
-import com.epam.tat21.crypto.ui.businessObjects.Coin;
-import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
-import com.epam.tat21.crypto.ui.service.TestDataReader;
-import com.epam.tat21.crypto.ui.utils.MyLogger;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +9,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
+import com.epam.tat21.crypto.ui.businessObjects.Coin;
+import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
+import com.epam.tat21.crypto.ui.service.TestDataReader;
+import com.epam.tat21.crypto.ui.utils.MyLogger;
 
 public class NewsPage extends BasePage {
 
@@ -47,6 +48,15 @@ public class NewsPage extends BasePage {
         newsCoin.click();
         return this;
     }
+    
+    public NewsPage goToCoinNews(String abbreviationCoin) {
+        headerMenu.moveToNewsTab();
+        WebElement newsCoin = driver.findElement(By.xpath(COINS_NEWS_XPATH + abbreviationCoin + "']"));
+        waitForElementVisible(newsCoin);
+        MyLogger.info(abbreviationCoin + " news was pressed");
+        newsCoin.click();
+        return this;
+    }
 
     public int getNumberOfNewsForCoin(Coin coin) {
         int currentCountOfNews = 0;
@@ -56,6 +66,20 @@ public class NewsPage extends BasePage {
         for (WebElement item : news) {
             waitForElementVisible(item);
             if (item.findElement(By.xpath(xpathCategoriesOfNews + coin.getAbbreviationCoin() + "')]")).isEnabled()) {
+                currentCountOfNews++;
+            }
+        }
+        return currentCountOfNews;
+    }
+    
+    public int getNumberOfNewsForCoin(String coin) {
+        int currentCountOfNews = 0;
+        waitForNewsVisibility(coin);
+        List<WebElement> news = containerOfNews.findElements(By.id("news_"));
+        String xpathCategoriesOfNews = "//span[contains(text(),'";
+        for (WebElement item : news) {
+            waitForElementVisible(item);
+            if (item.findElement(By.xpath(xpathCategoriesOfNews + coin + "')]")).isEnabled()) {
                 currentCountOfNews++;
             }
         }
