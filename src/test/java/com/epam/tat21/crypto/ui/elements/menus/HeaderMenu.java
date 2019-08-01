@@ -13,7 +13,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//div[contains(@class, 'navbar-main')]")
 public class HeaderMenu extends HtmlElement {
 
-    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+    private WebDriver driver = DriverManager.getDriver();
 
     @FindBy(xpath = "//a[@href='/coins/list/' and @class='uib-dropdown-toggle']")
     private WebElement coinsTabLink;
