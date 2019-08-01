@@ -11,7 +11,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//div[@class='modal-content']")
 public class LoginForm extends HtmlElement {
 
-    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+    private WebDriver driver = DriverManager.getDriver();
 
     @FindBy(xpath = "//input[@name='email']")
     private BaseInput emailField;

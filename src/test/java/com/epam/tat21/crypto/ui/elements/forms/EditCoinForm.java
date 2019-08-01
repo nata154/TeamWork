@@ -11,7 +11,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//div[@class='md-dialog-content']")
 public class EditCoinForm extends HtmlElement {
 
-    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+    private WebDriver driver = DriverManager.getDriver();
 
     @FindBy(xpath = "//input[@type='search']")
     private BaseInput searchCoinField;

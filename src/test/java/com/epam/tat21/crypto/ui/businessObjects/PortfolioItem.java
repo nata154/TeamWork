@@ -14,7 +14,7 @@ public class PortfolioItem {
 
     private final String COIN_NAME_LINK_LOCATOR = "//div[@class='table-col col-name']//a";
     private final String COIN_VALUE_LOCATOR = "//div[@class='responsive-value']/span";
-    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+    private WebDriver driver = DriverManager.getDriver();
 
     public List<WebElement> getCoinNamesList() {
         return driver.findElements(By.xpath(COIN_NAME_LINK_LOCATOR));

@@ -23,5 +23,7 @@ public class CommonConditions {
     @AfterClass
     public void tearDown() {
         steps.closeBrowser();
+        steps = null;
+        apiSteps = null;
     }
 }

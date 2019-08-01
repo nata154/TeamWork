@@ -8,10 +8,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class LocalDriver implements DriverFactory {
 
-    private static WebDriver driver;
+    private WebDriver driver;
 
     @Override
     public WebDriver getDriver() {
+
         if (driver == null) {
             switch (System.getProperty("browser")) {
                 case "firefox": {

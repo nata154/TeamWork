@@ -9,7 +9,7 @@ public class CoinsDataProvider {
     }
 
     @DataProvider(name = "coinsForTests")
-    public static Object[][] coinNameForFilter() {
+    public static synchronized Object[][] coinNameForFilter() {
 
         Object[][] toReturn = new Object[Coin.values().length][];
         int i = 0;

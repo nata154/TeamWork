@@ -29,8 +29,8 @@ public class TestListener extends TestListenerAdapter {
         super.onTestSuccess(iTestResult);
     }
 
-    private void saveScreenshot() {
-        File screenCapture = ((TakesScreenshot) DriverManager.getWebDriverFactory().getDriver()).getScreenshotAs(OutputType.FILE);
+    private synchronized void saveScreenshot() {
+        File screenCapture = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenCapture, new File(
                     TestDataReader.getScreenshotFolderPath()

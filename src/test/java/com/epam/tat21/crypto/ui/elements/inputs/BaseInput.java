@@ -18,7 +18,7 @@ public class BaseInput extends TypifiedElement {
         MyLogger.info("Enter following text: " + text + " in " + getName());
         super.clear();
         super.sendKeys(text);
-        assureInputedText(text, getWrappedElement(), DriverManager.getWebDriverFactory().getDriver());
+        assureInputedText(text, getWrappedElement(), DriverManager.getDriver());
     }
 
     private void assureInputedText(String expectedText, WebElement element, WebDriver driver) {

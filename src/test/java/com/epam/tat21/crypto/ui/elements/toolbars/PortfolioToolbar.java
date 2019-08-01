@@ -11,7 +11,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//div[@class='toolbar-portfolio']")
 public class PortfolioToolbar extends HtmlElement {
 
-    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+    private WebDriver driver = DriverManager.getDriver();
 
     @FindBy(xpath = "//md-select[@ng-model='activePortfolio.Currency']")
     private MdSelectDropdown currencyDropdown;

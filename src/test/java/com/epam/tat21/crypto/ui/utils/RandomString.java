@@ -9,7 +9,7 @@ public class RandomString {
     private RandomString() {
     }
 
-    public static String getRandomString(int stringLength){
+    public static synchronized String getRandomString(int stringLength) {
         StringBuilder stringBuilder = new StringBuilder(stringLength);
         for (int i = 0; i < stringLength; i++)
         {
@@ -17,8 +17,8 @@ public class RandomString {
         }
         return stringBuilder.toString();
     }
-    
-    public static String getRandomNumber(int limit) {
+
+    public static synchronized String getRandomNumber(int limit) {
 		int num = random.nextInt(limit);
 		return String.valueOf(num);
 	}

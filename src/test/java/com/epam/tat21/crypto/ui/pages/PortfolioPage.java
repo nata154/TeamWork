@@ -90,7 +90,7 @@ public class PortfolioPage extends BasePage {
         return this;
     }
 
-    public List<WebElement> getPortfolioItemLinkList() {
+    public synchronized List<WebElement> getPortfolioItemLinkList() {
         WaitConditions.waitForVisibilityOfAllElementsByXpath(driver, PORTFOLIO_ITEM_LINK_LOCATOR);
         return driver.findElements(By.xpath(PORTFOLIO_ITEM_LINK_LOCATOR));
     }
@@ -100,7 +100,7 @@ public class PortfolioPage extends BasePage {
         return new PortfolioItem();
     }
 
-    public WebElement getPortfolioItemByName(String name) {
+    public synchronized WebElement getPortfolioItemByName(String name) {
         WaitConditions.waitForInvisibilityOfAllElementsByXpath(driver, DIALOG_CONTAINER_LOCATOR);
         return getPortfolioItemLinkList().stream().
                 filter(portfolioLink -> portfolioLink.getText().equals(name)).findFirst().orElse(null);

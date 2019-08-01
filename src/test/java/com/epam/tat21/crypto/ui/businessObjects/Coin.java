@@ -24,7 +24,7 @@ public enum Coin {
         return nameCoin;
     }
 
-    public String getAbbreviationCoin() {
+    public synchronized String getAbbreviationCoin() {
         return abbreviationCoin;
     }
 

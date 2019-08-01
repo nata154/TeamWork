@@ -12,7 +12,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//form[@name='newPortfolioForm']")
 public class EditPortfolioForm extends HtmlElement {
 
-    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+    private WebDriver driver = DriverManager.getDriver();
 
     @FindBy(xpath = "//input[@ng-model='newPortfolio.Name']")
     private BaseInput inputPortfolioName;
