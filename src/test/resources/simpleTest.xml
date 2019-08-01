@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="suite01" parallel="false">
+<suite name="suite01" parallel="classes" thread-count="2">
     <listeners>
         <listener class-name="com.epam.reportportal.testng.ReportPortalTestNGListener"/>
     </listeners>
     <test name="CryptoCompareTests" enabled="true">
         <packages>
-            <package name="com.epam.tat21.crypto.ui.tests.*"></package>
-            <package name="com.epam.tat21.crypto.api.tests.*"></package>
+            <package name="com.epam.tat21.crypto.ui.tests.*"/>
+            <package name="com.epam.tat21.crypto.api.tests.*"/>
         </packages>
     </test>
 
     <test name="Mobile CryptoCompareTests" enabled="false">
         <packages>
-            <package name="com.epam.tat21.crypto.mobile.tests.*"></package>
+            <package name="com.epam.tat21.crypto.mobile.tests.*"/>
         </packages>
     </test>
 </suite>
