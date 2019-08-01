@@ -14,7 +14,6 @@ public class LocalDriver implements DriverFactory {
     public WebDriver getDriver() {
 
         if (driver == null) {
-            System.out.println("GET DRIVER " + Thread.currentThread().getName().toUpperCase());
             switch (System.getProperty("browser")) {
                 case "firefox": {
                     WebDriverManager.firefoxdriver().setup();
@@ -37,14 +36,12 @@ public class LocalDriver implements DriverFactory {
                 }
             }
         }
-        System.out.println("RETURNING THE SAME DRIVER " + Thread.currentThread().getName().toUpperCase());
         driver.manage().window().maximize();
         return driver;
     }
 
     @Override
     public void closeDriver() {
-        System.out.println("CLOSE DRIVER " + Thread.currentThread().getName().toUpperCase());
         driver.quit();
         driver = null;
     }
