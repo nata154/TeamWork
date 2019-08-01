@@ -1,5 +1,6 @@
 package com.epam.tat21.crypto.ui.utils;
 
+import com.epam.tat21.crypto.ui.driver.DriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +12,9 @@ public class MyLogger {
     }
 
     public static void info(String message) {
-        LOGGER.info(message);
+        LOGGER.info("THREAD: " + Thread.currentThread().getName() +
+                " DRIVER: " + DriverManager.getDriver().hashCode() +
+                " MESSAGE: " + message);
     }
 
     public static void error(String message) {
