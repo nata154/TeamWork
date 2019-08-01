@@ -19,9 +19,13 @@ public class UnorderedListDropdown extends TypifiedElement {
     }
 
     public void chooseItemByIndex(int index) {
-        WaitConditions.waitForClickableOfElement(getItems().get(index),
-                DriverManager.getWebDriverFactory().getDriver());
-        getItems().get(index).click();
+        List<WebElement> items = getItems();
+        while (items.size() < 2) {
+            items = getItems();
+        }
+        WaitConditions.waitForClickableOfElement(items.get(index),
+                DriverManager.getDriver());
+        items.get(index).click();
     }
 
     public WebElement chooseItemByVisibleText(String text) {
