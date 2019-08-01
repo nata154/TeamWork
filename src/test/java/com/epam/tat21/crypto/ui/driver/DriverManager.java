@@ -4,22 +4,39 @@ import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
 
-    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public static DriverFactory getWebDriverFactory() {
-        if (driver == null) {
-            switch (System.getProperty("driver")) {
-                case "local":
-                    return new LocalDriver();
-                case "remote":
-                    return new RemoteDriver();
-                case "sauce":
-                    return new RemoteDriverSauceLabs();
-                default:
-                    return new LocalDriver();
-            }
+    public static synchronized WebDriver getDriver() {
+        if (driver.get() == null) {
+            setDriver();
         }
-        return new LocalDriver();
+        return driver.get();
     }
+
+    private static void setDriver() {
+        DriverManager.driver.set(getWebDriverFactory().getDriver());
+    }
+
+    public static synchronized void closeDriver() {
+        if (driver.get() != null) {
+            driver.get().quit();
+            driver.remove();
+        }
+    }
+
+    private static DriverFactory getWebDriverFactory() {
+
+        switch (System.getProperty("driver")) {
+            case "local":
+                return new LocalDriver();
+            case "remote":
+                return new RemoteDriver();
+            case "sauce":
+                return new RemoteDriverSauceLabs();
+            default:
+                return new LocalDriver();
+        }
+    }
+
 
 }
