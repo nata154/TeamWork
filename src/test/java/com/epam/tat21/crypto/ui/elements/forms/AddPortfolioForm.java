@@ -7,15 +7,19 @@ import com.epam.tat21.crypto.ui.elements.menus.MdSelectDropdown;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
 @FindBy(xpath = "//form[@name='newPortfolioForm']")
 public class AddPortfolioForm extends HtmlElement {
 
-    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+    private WebDriver driver = DriverManager.getDriver();
 
     @FindBy(xpath = "//md-select[@ng-model='newPortfolio.Currency']")
+    private WebElement currencyForPortfolio;
+
+    @FindBy(xpath = "//md-select-menu[@class='_md md-overflow']")
     private MdSelectDropdown currencyDropdown;
 
     @FindBy(xpath = "//input[@ng-model='newPortfolio.Name']")
@@ -29,7 +33,9 @@ public class AddPortfolioForm extends HtmlElement {
 
 
     public void selectCurrency(String currencyAbbreviation) {
-        WaitConditions.waitForClickableOfElement(currencyDropdown, driver);
+        WaitConditions.waitForClickableOfElement(currencyForPortfolio, driver);
+        currencyForPortfolio.click();
+        WaitConditions.waitForVisibilityOfElement(currencyDropdown, driver);
         currencyDropdown.selectByValue(currencyAbbreviation);
     }
 
