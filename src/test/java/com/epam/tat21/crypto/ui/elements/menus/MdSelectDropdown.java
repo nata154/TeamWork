@@ -17,9 +17,7 @@ public class MdSelectDropdown extends TypifiedElement {
     }
 
     public void selectByValue(String value) {
-        WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
-        WaitConditions.waitForClickableOfElement(getWrappedElement(), driver);
-        getWrappedElement().click();
+        WebDriver driver = DriverManager.getDriver();
         List<WebElement> options = getWrappedElement().findElements(By.xpath(
                 "//md-option[@value = '" + value + "']"));
 
