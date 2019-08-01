@@ -13,7 +13,7 @@ import ru.yandex.qatools.htmlelements.element.HtmlElement;
 @FindBy(xpath = "//div[@class='md-dialog-content']")
 public class AddCoinForm extends HtmlElement {
 
-    private WebDriver driver = DriverManager.getWebDriverFactory().getDriver();
+    private WebDriver driver = DriverManager.getDriver();
 
     @FindBy(xpath = "//input[@type='search']")
     private BaseInput searchCoinField;
@@ -36,7 +36,7 @@ public class AddCoinForm extends HtmlElement {
 
     public void inputCoinInSearchField(Coin coin) {
         WaitConditions.waitForClickableOfElement(searchCoinField, driver);
-        searchCoinField.inputText(coin.getNameOfCoin());
+        searchCoinField.inputText(coin.getNameOfCoin() + " " + coin.getAbbreviationCoin());
         WaitConditions.waitForVisibilityOfElement(coinSuggestionsDropdown, driver);
         selectCoinInDropdownByIndex(0);
     }
