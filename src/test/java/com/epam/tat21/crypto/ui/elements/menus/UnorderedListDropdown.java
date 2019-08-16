@@ -1,19 +1,16 @@
 package com.epam.tat21.crypto.ui.elements.menus;
 
+import com.epam.tat21.crypto.ui.service.WebDriverAware;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 
 import java.util.List;
 
-@Component
-public class UnorderedListDropdown extends TypifiedElement {
+public class UnorderedListDropdown extends TypifiedElement implements WebDriverAware {
 
-    @Autowired
     private WebDriver driver;
 
     public UnorderedListDropdown(WebElement wrappedElement) {
@@ -36,6 +33,11 @@ public class UnorderedListDropdown extends TypifiedElement {
 
     public WebElement chooseItemByVisibleText(String text) {
         return getItems().stream().filter(item -> item.getText().equals(text)).findAny().orElse(null);
+    }
+
+    @Override
+    public void setWebDriver(WebDriver driver) {
+        this.driver = driver;
     }
 
 }

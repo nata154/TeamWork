@@ -4,18 +4,15 @@ import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.elements.inputs.BaseInput;
 import com.epam.tat21.crypto.ui.elements.menus.UnorderedListDropdown;
+import com.epam.tat21.crypto.ui.service.WebDriverAware;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
-@Component
 @FindBy(xpath = "//div[@class='md-dialog-content']")
-public class AddCoinForm extends HtmlElement {
+public class AddCoinForm extends HtmlElement implements WebDriverAware {
 
-    @Autowired
     private WebDriver driver;
 
     @FindBy(xpath = "//input[@type='search']")
@@ -57,5 +54,10 @@ public class AddCoinForm extends HtmlElement {
     public void clickAddToPortfolioButton() {
         WaitConditions.waitForClickableOfElement(addToPortfolioButton, driver);
         addToPortfolioButton.click();
+    }
+
+    @Override
+    public void setWebDriver(WebDriver driver) {
+        this.driver = driver;
     }
 }

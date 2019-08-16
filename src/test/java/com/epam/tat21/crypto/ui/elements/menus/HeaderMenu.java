@@ -1,21 +1,19 @@
 package com.epam.tat21.crypto.ui.elements.menus;
 
 import com.epam.tat21.crypto.ui.pages.*;
+import com.epam.tat21.crypto.ui.service.WebDriverAware;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
-@Component
-@FindBy(xpath = "//div[contains(@class, 'navbar-main')]")
-public class HeaderMenu extends HtmlElement {
 
-    @Autowired
+@FindBy(xpath = "//div[contains(@class, 'navbar-main')]")
+public class HeaderMenu extends HtmlElement implements WebDriverAware {
+
     private WebDriver driver;
 
     @FindBy(xpath = "//a[@href='/coins/list/' and @class='uib-dropdown-toggle']")
@@ -119,5 +117,10 @@ public class HeaderMenu extends HtmlElement {
     public void clickLogInLink() {
         WaitConditions.waitForClickableOfElement(logInLink, driver);
         logInLink.click();
+    }
+
+    @Override
+    public void setWebDriver(WebDriver driver) {
+        this.driver = driver;
     }
 }

@@ -3,20 +3,17 @@ package com.epam.tat21.crypto.ui.elements.forms;
 import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.elements.inputs.BaseInput;
 import com.epam.tat21.crypto.ui.elements.menus.MdSelectDropdown;
+import com.epam.tat21.crypto.ui.service.WebDriverAware;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
-@Component
 @FindBy(xpath = "//form[@name='newPortfolioForm']")
-public class AddPortfolioForm extends HtmlElement {
+public class AddPortfolioForm extends HtmlElement implements WebDriverAware {
 
-    @Autowired
     private WebDriver driver;
 
     @FindBy(xpath = "//md-select[@ng-model='newPortfolio.Currency']")
@@ -57,6 +54,11 @@ public class AddPortfolioForm extends HtmlElement {
     public void clickCreateButton() {
         WaitConditions.waitForClickableOfElement(createButton, driver);
         createButton.click();
+    }
+
+    @Override
+    public void setWebDriver(WebDriver driver) {
+        this.driver = driver;
     }
 
 }

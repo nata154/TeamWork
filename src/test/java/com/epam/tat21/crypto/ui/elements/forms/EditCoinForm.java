@@ -2,18 +2,15 @@ package com.epam.tat21.crypto.ui.elements.forms;
 
 import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.elements.inputs.BaseInput;
+import com.epam.tat21.crypto.ui.service.WebDriverAware;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
-@Component
 @FindBy(xpath = "//div[@class='md-dialog-content']")
-public class EditCoinForm extends HtmlElement {
+public class EditCoinForm extends HtmlElement implements WebDriverAware {
 
-    @Autowired
     private WebDriver driver;
 
     @FindBy(xpath = "//input[@type='search']")
@@ -49,5 +46,10 @@ public class EditCoinForm extends HtmlElement {
     public void clickDeleteCoinButton () {
         WaitConditions.waitForClickableOfElement(deleteCoinButton, driver);
         deleteCoinButton.click();
+    }
+
+    @Override
+    public void setWebDriver(WebDriver driver) {
+        this.driver = driver;
     }
 }
