@@ -7,7 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserAccountPage extends BasePage {
 
     private static final String BASE_URL = TestDataReader.getApplicationUrl() + "cryptopian/general";

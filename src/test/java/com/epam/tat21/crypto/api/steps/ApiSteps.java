@@ -1,25 +1,24 @@
 package com.epam.tat21.crypto.api.steps;
 
-import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
-import com.epam.tat21.crypto.api.model.FeedItem;
-import com.epam.tat21.crypto.api.model.LatestNews;
-import com.epam.tat21.crypto.api.model.MultiPrice;
-import com.epam.tat21.crypto.api.model.NewsItem;
-import com.epam.tat21.crypto.api.model.ResponceCoinWrapper;
+import com.epam.tat21.crypto.api.model.*;
 import com.epam.tat21.crypto.api.utils.ResponseUtils;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.Currency;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
+
+@Component
+@Scope("prototype")
 public class ApiSteps {
 
     private static final String NEWS_RELATIVE_PATH = "v2/news/";

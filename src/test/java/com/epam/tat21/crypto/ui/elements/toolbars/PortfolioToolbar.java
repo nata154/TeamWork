@@ -1,17 +1,20 @@
 package com.epam.tat21.crypto.ui.elements.toolbars;
 
-import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.elements.menus.MdSelectDropdown;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
+@Component
 @FindBy(xpath = "//div[@class='toolbar-portfolio']")
 public class PortfolioToolbar extends HtmlElement {
 
-    private WebDriver driver = DriverManager.getDriver();
+    @Autowired
+    private WebDriver driver;
 
     @FindBy(xpath = "//md-select[@ng-model='activePortfolio.Currency']")
     private MdSelectDropdown currencyDropdown;

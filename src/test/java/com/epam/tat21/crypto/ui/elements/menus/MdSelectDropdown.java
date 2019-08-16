@@ -1,23 +1,27 @@
 package com.epam.tat21.crypto.ui.elements.menus;
 
-import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 
 import java.util.List;
 
+@Component
 public class MdSelectDropdown extends TypifiedElement {
+
+    @Autowired
+    private WebDriver driver;
 
     public MdSelectDropdown(WebElement wrappedElement) {
         super(wrappedElement);
     }
 
     public void selectByValue(String value) {
-        WebDriver driver = DriverManager.getDriver();
         List<WebElement> options = getWrappedElement().findElements(By.xpath(
                 "//md-option[@value = '" + value + "']"));
 

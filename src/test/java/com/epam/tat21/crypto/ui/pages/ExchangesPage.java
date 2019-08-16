@@ -1,20 +1,20 @@
 package com.epam.tat21.crypto.ui.pages;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
 import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.elements.menus.HeaderMenu;
 import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
 
+@Component
 public class ExchangesPage extends BasePage {
 
     private static final String BASE_URL = TestDataReader.getApplicationUrl() + "exchanges/";
@@ -60,7 +60,7 @@ public class ExchangesPage extends BasePage {
                 findElement(By.xpath(String.format(COUNTRY_IN_BADGE_LOCATOR, country.getNameOfCountry())));
         numberOfExchangesInBadge = Integer.parseInt(numberExchangesOnBadgeInDropdown.getText());
     }
-    
+
     public void getNumberOfExchangesFromBadge(String country) {
         WebElement numberExchangesOnBadgeInDropdown = driver.
                 findElement(By.xpath(String.format(COUNTRY_IN_BADGE_LOCATOR, country)));
@@ -84,7 +84,7 @@ public class ExchangesPage extends BasePage {
         waitForElementClickable(resetFiltersButton);
         return this;
     }
-    
+
     public ExchangesPage selectCountryInDropdown(String country) {
         WebElement countryLinkInDropdown = driver.
                 findElement(By.xpath(String.format(COUNTRY_IN_DROPDOWN_LOCATOR, country)));
@@ -100,7 +100,7 @@ public class ExchangesPage extends BasePage {
     public List<WebElement> getFromFilteredPageAllResultsWith(Countries country) {
         return driver.findElements(By.xpath(String.format(COUNTRY_ON_FILTERED_PAGE_LOCATOR, country.getNameOfCountry())));
     }
-    
+
     public List<WebElement> getFromFilteredPageAllResultsWith(String country) {
         return driver.findElements(By.xpath(String.format(COUNTRY_ON_FILTERED_PAGE_LOCATOR, country)));
     }

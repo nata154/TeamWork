@@ -14,6 +14,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import java.util.List;
@@ -22,6 +25,8 @@ import java.util.stream.IntStream;
 import static com.epam.tat21.crypto.ui.service.GlobalConstants.REGEX_FOR_SPACES;
 import static org.testng.Assert.assertTrue;
 
+@Component
+@Scope("prototype")
 public class Steps {
 
     private static final int COUNT_OF_GENERATED_POSTFIX_LETTERS = 3;
@@ -33,14 +38,21 @@ public class Steps {
     private String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
     private String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 
+    @Autowired
     private WebDriver driver;
+    @Autowired
     private ExchangesPage exchangesPage;
+    @Autowired
     private NewsPage newsPage;
+    @Autowired
     private PortfolioPage portfolioPage;
+    @Autowired
+    private MainCryptoComparePage mainCryptoComparePage;
+    @Autowired
+    private CoinsPage coinsPage;
 
     public Steps() {
-        System.out.println("STEPS CREATED + hashcode: " + this.hashCode() + " THREAD: " + Thread.currentThread().getName() + " DRIVER: ");
-        this.driver = DriverManager.getDriver();
+        MyLogger.info("Creating steps: " + this.hashCode());
     }
 
     public void closeBrowser() {
@@ -83,8 +95,7 @@ public class Steps {
 
     @Given("I open Exchange page")
     public ExchangesPage openExchangePage() {
-        return exchangesPage = new ExchangesPage(driver).
-                openPage();
+        return exchangesPage.openPage();
     }
 
     public ExchangesPage filterByCountry(Countries country) {
@@ -135,8 +146,7 @@ public class Steps {
 
     @Given("I open News page")
     public NewsPage openNewsPage() {
-        return newsPage = new NewsPage(driver).
-                openPage();
+        return newsPage.openPage();
     }
 
     public NewsPage filterByCoin(Coin coin) {
@@ -183,21 +193,20 @@ public class Steps {
     }
 
     public PortfolioPage createUserPortfolio(String name, String currency, String description) {
-        portfolioPage = new PortfolioPage(driver);
         return portfolioPage.openPage().
                 getAddPortfolioForm().
                 createNewPortfolio(name, currency, description);
     }
 
     public boolean isPortfolioPresent(String name) {
-        return new PortfolioPage(driver).
+        return portfolioPage.
                 getPortfolioItemByName(name).
                 isEnabled();
     }
 
     @Then("Is Portfolio present")
     public void isPortfolioPresent() {
-        boolean portfolioPresence = new PortfolioPage(driver).
+        boolean portfolioPresence = portfolioPage.
                 getPortfolioItemByName(portfolioName).
                 isEnabled();
         assertTrue(portfolioPresence);
@@ -206,8 +215,7 @@ public class Steps {
     @When("Create User Portfolio")
     public PortfolioPage createUserPortfolio() {
         String description = RandomString.getRandomString(COUNT_OF_SYMBOLS);
-
-        return portfolioPage = new MainCryptoComparePage(driver).
+        return mainCryptoComparePage.
                 getHeaderMenu().
                 goToMyPortfolioFromPortfolioTab().
                 getAddPortfolioForm().
@@ -216,7 +224,7 @@ public class Steps {
 
     @Then("Is Portfolio with changed name present")
     public void isPortfolioWithChangedNamePresent() {
-        boolean presenceChangedPortfolio = new PortfolioPage(driver).
+        boolean presenceChangedPortfolio = portfolioPage.
                 getPortfolioItemByName(changedName).
                 isEnabled();
         assertTrue(presenceChangedPortfolio);
@@ -257,7 +265,7 @@ public class Steps {
 
     @When("I open Coins page")
     public CoinsPage openCoinsPage() {
-        return new CoinsPage(driver).
+        return coinsPage.
                 openPage();
     }
 

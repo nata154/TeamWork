@@ -1,14 +1,19 @@
 package com.epam.tat21.crypto.ui.elements.inputs;
 
-import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 
+@Component
 public class BaseInput extends TypifiedElement {
+
+    @Autowired
+    private WebDriver driver;
 
     public BaseInput(WebElement wrappedElement) {
         super(wrappedElement);
@@ -18,7 +23,7 @@ public class BaseInput extends TypifiedElement {
         MyLogger.info("Enter following text: " + text + " in " + getName());
         super.clear();
         super.sendKeys(text);
-        assureInputedText(text, getWrappedElement(), DriverManager.getDriver());
+        assureInputedText(text, getWrappedElement(), driver);
     }
 
     private void assureInputedText(String expectedText, WebElement element, WebDriver driver) {

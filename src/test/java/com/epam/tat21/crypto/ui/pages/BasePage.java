@@ -19,7 +19,6 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new HtmlElementDecorator(new HtmlElementLocatorFactory(driver)), this);
-
     }
 
     protected void waitForElementVisible(WebElement element) {

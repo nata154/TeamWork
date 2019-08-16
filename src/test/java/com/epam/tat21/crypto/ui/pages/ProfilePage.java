@@ -6,7 +6,9 @@ import com.epam.tat21.crypto.ui.utils.MyLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProfilePage extends BasePage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl() + "profile/" + TestDataReader.getProfileName() + "/";
