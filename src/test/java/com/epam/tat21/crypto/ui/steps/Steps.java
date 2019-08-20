@@ -5,7 +5,6 @@ import com.epam.tat21.crypto.ui.businessObjects.Countries;
 import com.epam.tat21.crypto.ui.businessObjects.User;
 import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.pages.*;
-import com.epam.tat21.crypto.ui.service.UserCreator;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.RandomString;
 import cucumber.api.java.en.And;
@@ -50,6 +49,8 @@ public class Steps {
     private MainCryptoComparePage mainCryptoComparePage;
     @Autowired
     private CoinsPage coinsPage;
+    @Autowired
+    private User user;
 
     public Steps() {
         MyLogger.info("Creating steps: " + this.hashCode());
@@ -61,7 +62,6 @@ public class Steps {
 
     @Given("I login user")
     public MainCryptoComparePage loginUser() {
-        User user = UserCreator.withCredentialsFromProperty();
         return new MainCryptoComparePage(driver)
                 .openPage()
                 .login(user);
