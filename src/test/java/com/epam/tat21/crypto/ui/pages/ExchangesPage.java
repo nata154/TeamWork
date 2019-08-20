@@ -10,11 +10,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@Scope("prototype")
 public class ExchangesPage extends BasePage {
 
     private static final String BASE_URL = TestDataReader.getApplicationUrl() + "exchanges/";
