@@ -1,10 +1,23 @@
 package com.epam.tat21.crypto.ui.businessObjects;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 
+@Component
+@Scope("prototype")
 public class User {
-    private String userName;
-    private String userPassword;
+
+    private @Value("${testdata.user.name}")
+    String userName;
+
+    private @Value("${testdata.user.password}")
+    String userPassword;
+
+    public User() {
+    }
 
     public User(String userName, String userPassword) {
         this.userName = userName;
