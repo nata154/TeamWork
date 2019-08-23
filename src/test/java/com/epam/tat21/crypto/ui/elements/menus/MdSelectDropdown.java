@@ -1,6 +1,6 @@
 package com.epam.tat21.crypto.ui.elements.menus;
 
-import com.epam.tat21.crypto.ui.driver.DriverManager;
+import com.epam.tat21.crypto.ui.service.WebDriverAware;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,14 +10,15 @@ import ru.yandex.qatools.htmlelements.element.TypifiedElement;
 
 import java.util.List;
 
-public class MdSelectDropdown extends TypifiedElement {
+public class MdSelectDropdown extends TypifiedElement implements WebDriverAware {
+
+    private WebDriver driver;
 
     public MdSelectDropdown(WebElement wrappedElement) {
         super(wrappedElement);
     }
 
     public void selectByValue(String value) {
-        WebDriver driver = DriverManager.getDriver();
         List<WebElement> options = getWrappedElement().findElements(By.xpath(
                 "//md-option[@value = '" + value + "']"));
 
@@ -33,6 +34,11 @@ public class MdSelectDropdown extends TypifiedElement {
         if (!matched) {
             throw new NoSuchElementException("Cannot locate option with value: " + value);
         }
+    }
+
+    @Override
+    public void setWebDriver(WebDriver driver) {
+        this.driver = driver;
     }
 
 }

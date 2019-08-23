@@ -1,17 +1,17 @@
 package com.epam.tat21.crypto.ui.elements.toolbars;
 
-import com.epam.tat21.crypto.ui.driver.DriverManager;
 import com.epam.tat21.crypto.ui.elements.buttons.BaseButton;
 import com.epam.tat21.crypto.ui.elements.menus.MdSelectDropdown;
+import com.epam.tat21.crypto.ui.service.WebDriverAware;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
 
 @FindBy(xpath = "//div[@class='toolbar-portfolio']")
-public class PortfolioToolbar extends HtmlElement {
+public class PortfolioToolbar extends HtmlElement implements WebDriverAware {
 
-    private WebDriver driver = DriverManager.getDriver();
+    private WebDriver driver;
 
     @FindBy(xpath = "//md-select[@ng-model='activePortfolio.Currency']")
     private MdSelectDropdown currencyDropdown;
@@ -35,5 +35,10 @@ public class PortfolioToolbar extends HtmlElement {
     public void clickEditPortfolioButton() {
         WaitConditions.waitForClickableOfElement(editPortfolioButton, driver);
         editPortfolioButton.click();
+    }
+
+    @Override
+    public void setWebDriver(WebDriver driver) {
+        this.driver = driver;
     }
 }

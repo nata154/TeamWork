@@ -4,7 +4,6 @@ import com.epam.tat21.crypto.mobile.driver.MobileDriverManager;
 import com.epam.tat21.crypto.mobile.pages.*;
 import com.epam.tat21.crypto.ui.businessObjects.Coin;
 import com.epam.tat21.crypto.ui.businessObjects.User;
-import com.epam.tat21.crypto.ui.service.UserCreator;
 import com.epam.tat21.crypto.ui.utils.RandomString;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -12,8 +11,13 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
+@Component
+@Scope("prototype")
 public class MobSteps {
 
     private AppiumDriver<MobileElement> driver;
@@ -25,6 +29,9 @@ public class MobSteps {
     private String portfolioName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
     private String changedName = RandomString.getRandomString(COUNT_OF_SYMBOLS);
 
+    @Autowired
+    private User user;
+
     public MobSteps() {
         this.driver = MobileDriverManager.getMobileDriverFactory().getDriver();
     }
@@ -35,7 +42,6 @@ public class MobSteps {
 
     @Given("^I login user in crypto application$")
     public MainCryptoComparePageMobile loginUser() {
-        User user = UserCreator.withCredentialsFromProperty();
         return new LoginPageMobile(driver)
                 .login(user);
     }

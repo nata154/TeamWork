@@ -7,7 +7,11 @@ import com.epam.tat21.crypto.ui.service.TestDataReader;
 import com.epam.tat21.crypto.ui.utils.MyLogger;
 import com.epam.tat21.crypto.ui.utils.WaitConditions;
 import org.openqa.selenium.WebDriver;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component
+@Scope("prototype")
 public class MainCryptoComparePage extends BasePage {
 
     private final String BASE_URL = TestDataReader.getApplicationUrl();

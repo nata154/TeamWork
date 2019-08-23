@@ -1,11 +1,17 @@
 package com.epam.tat21.crypto.ui.driver;
 
 import org.openqa.selenium.WebDriver;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DriverManager {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
+    @Bean
+    @Scope("prototype")
     public static synchronized WebDriver getDriver() {
         if (driver.get() == null) {
             setDriver();
@@ -37,6 +43,5 @@ public class DriverManager {
                 return new LocalDriver();
         }
     }
-
 
 }
