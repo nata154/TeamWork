@@ -9,12 +9,11 @@ import java.util.Objects;
 @Component
 @Scope("prototype")
 public class User {
+    @Value("${testdata.user.name}")
+    private String userName;
 
-    private @Value("${testdata.user.name}")
-    String userName;
-
-    private @Value("${testdata.user.password}")
-    String userPassword;
+    @Value("${testdata.user.password}")
+    private String userPassword;
 
     public User() {
     }
